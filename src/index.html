@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Schadensabschätzung</title>
+</head>
+
+<body>
+    <div class="menu">
+        <a href="#" class="btn btn-primary btn-sm select-button" role="button" data-id=1>1</a>
+        <a href="#" class="btn btn-primary btn-sm select-button" role="button" data-id=2>2</a>
+        <a href="http://localhost:8000/pdf" target="_blank" class="btn btn-primary btn-sm select-button"
+            role="button">pdf</a>
+    </div>
+    <div class="container">
+        <div class="row g-2 mb-5 header">
+            <div class="col-12 col-md-6">
+            </div>
+            <div class="col-12 col-md-6">
+                <img id="logoSED" class="header__logo" src="">
+                <img id="logoETH" class="header__logo" src="">
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <h1 id="title"></h1>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4 header__box">
+                    <h4 id="subtitle"></h4>
+                    <p id="datetime"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 body">
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <h2 id="magnitude">...</h2>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="row p-4">
+                    <div class="col-6">
+                        <h2>Gefahrenstufe</h2>
+                    </div>
+                    <div class="col-6 body__stufe">
+                        <h2 id="gefahrenstufe">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="body__left">
+                    <h2>Überblick</h2>
+                </div>
+                <div class="p-4">
+                    <p>
+                        Der Schweizerische Erdbebendienst an der ETH Zürich hat im Kanton Basel-Stadt ungefähr 2 km
+                        südwestlich von Basel ein Erdbeben registriert. Dieses Erdbeben ist in der ganzen Schweiz
+                        verspürt worden. Mittlere bis schwere Schäden sind bei einem Erdbeben dieser Stärke in weiten
+                        Gebieten im Umkreis des Epizentrums zu erwarten.
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <table class="table table-sm body__table">
+                        <tbody>
+                            <tr>
+                                <td>Lokalzeit</td>
+                                <td id="time">...</td>
+                            </tr>
+                            <tr>
+                                <td>Datum</td>
+                                <td id="date">...</td>
+                            </tr>
+                            <tr>
+                                <td>Herdtiefe [km]</td>
+                                <td id="depth">...</td>
+                            </tr>
+                            <tr>
+                                <td>Intensität (max.)</td>
+                                <td id="intensity">...</td>
+                            </tr>
+                            <tr>
+                                <td>Breite/Länge</td>
+                                <td id="lonlat">... / ...</td>
+                            </tr>
+                            <tr>
+                                <td>Schweizer Koordinaten</td>
+                                <td id="swiss">...</td>
+                            </tr>
+                            <tr>
+                                <td>Origin ID & Metadaten</td>
+                                <td id="meta">...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="body__left">
+                    <h2>National</h2>
+                </div>
+                <div class="p-4">
+                    <img class="body__shakemap" src="images/shakemap.png">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <h3>Geschätzte Anzahl Todesopfer CH</h3>
+                    <div class="loss">
+                        <div class="loss__icons-box">
+                            <div class="loss__icons" id="loss-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <g>
+                                        <path
+                                            d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="loss__icons" id="loss-2">
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="loss__icons" id="loss-3">
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="loss__icons" id="loss-4">
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="loss__icons" id="loss-5">
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="loss__icons-description">
+                            <div class="loss__legend">
+                                0-50
+                            </div>
+                            <div class="loss__legend">
+                                51-100
+                            </div>
+                            <div class="loss__legend">
+                                101-500
+                            </div>
+                            <div class="loss__legend">
+                                501-1'000
+                            </div>
+                            <div class="loss__legend">
+                                >1'000
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="body__left">
+                    <h2>Kantonal</h2>
+                </div>
+                <div class="p-4">
+                    <h3>
+                        Geschätzte Anzahl Verletzter
+                    </h3>
+                    <p>
+                        Geschätzte Anzahl verletzter Personen in der Schweiz und dem Fürstentum Liechtenstein.
+                    </p>
+                    <div>
+                        <img style="max-width:90%" src="images/graph_verletzte.png">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <h3>Geschätzter Gebäudeschaden</h3>
+                    <p>
+                        Geschätztes Ausmass mässiger bis sehr schwerer Schäden an Wohn- und Geschäftsgebäuden in der
+                        Schweiz und dem Fürstentum Liechtenstein
+                    </p>
+
+
+                    <div class="body__graph" id=graph_verletzte></div>
+                </div>
+            </div>
+        </div>
+        <div class="row g2 footer">
+            <div class="col-12 col-md-6">
+                <div class="p-4">
+                    <p>Alle Angaben ohne Gewähr und vorbehaltlich Änderungen</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="p-4 footer__support">
+                    <p>Mit der Unterstützung von:</p>
+                    <img src="images/logo_se.svg" alt="">
+                    <p class="footer__bundesamt">
+                        Bundesamt für Umwelt (BAFU)<br>
+                        Bundesamt für Bevölkerungsschutz (BABS)
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-p-12">
+                <div class="pt-4 pb-4">
+                    <div class="footer__info">
+                        Weitere Informationen unter www.seismo.ethz.ch und https://lage.naz.ch/eld2/login
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

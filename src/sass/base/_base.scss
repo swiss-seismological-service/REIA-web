@@ -1,0 +1,52 @@
+html {
+    // defines 1rem as 10px
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.body > .col-12 {
+    border: 1px solid black;
+}
+
+@media print {
+    .select-button {
+        display: none;
+    }
+}
+@page {
+    size: A4 portrait;
+    margin: 50px 0;
+    padding: 0;
+}
+@media print {
+    html,
+    body {
+        font-size: 31.25%;
+        page-break-inside: avoid;
+    }
+    .container {
+        max-height: 100%;
+        width: 100%;
+        max-width: 85%;
+        margin: 0 5% 0 10%;
+    }
+    /* ... the rest of the rules ... */
+    .col-12 {
+        width: 50%;
+    }
+    .col-p-12 {
+        width: 100% !important;
+    }
+    #graph_verletzte {
+        max-height: 300px;
+        max-width: 100%;
+    }
+}

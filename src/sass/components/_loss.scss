@@ -1,0 +1,59 @@
+.loss {
+    &__icons-box,
+    &__icons-description {
+        display: flex;
+    }
+
+    &__legend {
+        width: 18%;
+        margin-left: 2%;
+        font-size: 1.3rem;
+        text-align: center;
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        margin: 0;
+        width: 18%;
+        margin-left: 2%;
+        align-items: center;
+
+        &:first-of-type {
+            margin-left: 0;
+            svg {
+                margin-top: 20%;
+                max-width: 70%;
+            }
+        }
+
+        svg {
+            margin-right: -30%;
+            width: 100%;
+            fill: rgb(218, 218, 218);
+
+            path {
+                stroke: white;
+                stroke-width: 10px;
+            }
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+            &:nth-child(odd) {
+                margin-bottom: 20%;
+            }
+            &:nth-child(even) {
+                margin-top: 20%;
+            }
+        }
+        &.active {
+            svg {
+                fill: $color-red;
+            }
+        }
+    }
+}
