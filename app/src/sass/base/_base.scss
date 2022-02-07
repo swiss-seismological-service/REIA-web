@@ -1,0 +1,23 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // defines 1rem as 10px
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.background {
+    background-image: url("../images/image.png");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
