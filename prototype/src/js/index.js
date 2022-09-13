@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { getEarthquake, getHeaderContent } from './utils/api';
 import App from './components/App';
 import Graph from './components/Graph';
