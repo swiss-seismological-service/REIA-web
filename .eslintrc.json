@@ -14,13 +14,15 @@
     },
     "plugins": ["prettier"],
     "rules": {
+        "prefer-promise-reject-errors": ["off"],
         "max-len": [
             "error",
             {
-                "code": 100
+                "code": 100,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
             }
         ],
-        "prefer-promise-reject-errors": ["off"],
         "no-plusplus": ["off"],
         "no-return-assign": ["off"],
         "no-unused-expressions": ["error", { "allowTernary": true }],
