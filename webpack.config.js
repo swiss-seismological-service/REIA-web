@@ -25,6 +25,23 @@ const htmlPluginEntries = templateFiles.map(
         })
 );
 
+// postcss config
+const postCSSLoader = {
+    loader: 'postcss-loader', // postprocessing css
+    options: {
+        postcssOptions: {
+            plugins: [
+                [
+                    'autoprefixer',
+                    {
+                        // Options
+                    },
+                ],
+            ],
+        },
+    },
+};
+
 module.exports = {
     entry: {
         index: [
@@ -50,9 +67,10 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-            // loader for SASS
+            // loader for page SASS
             {
                 test: /\.((c|sa|sc)ss)$/i,
+                exclude: [/\.wc.scss$/, /node_modules/],
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader, // extracts css into separate file
@@ -61,29 +79,39 @@ module.exports = {
                         },
                     },
                     'css-loader', // css loader
-                    {
-                        loader: 'postcss-loader', // postprocessing css
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        'autoprefixer',
-                                        {
-                                            // Options
-                                        },
-                                    ],
-                                ],
-                            },
-                        },
-                    },
+                    postCSSLoader,
                     { loader: 'sass-loader', options: { sourceMap: true } }, // sass files loader
                 ],
             },
+            // loader for WebComponents SASS
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.wc.scss$/,
+                type: 'asset/source',
+                use: [
+                    postCSSLoader,
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'node_modules')],
+                                outputStyle: 'compressed',
+                            },
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    // emit: false,
+                    emit: true,
+                    filename: 'images/[name][ext][query]',
+                },
+            },
+            {
+                test: /\.(svg)$/i,
+                type: 'asset',
+                generator: {
                     filename: 'images/[name][ext][query]',
                 },
             },

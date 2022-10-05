@@ -1,10 +1,23 @@
 import { html, render } from 'lit-html';
+import styles from '../../sass/mycounter.wc.scss';
 
 class MyCounter extends HTMLElement {
     constructor() {
         super();
         this.count = 0;
+        this.name = 'World';
         this.attachShadow({ mode: 'open' });
+    }
+
+    // component attributes
+    static get observedAttributes() {
+        return ['name'];
+    }
+
+    // attribute change
+    attributeChangedCallback(property, oldValue, newValue) {
+        if (oldValue === newValue) return;
+        this[property] = newValue;
     }
 
     connectedCallback() {
@@ -21,32 +34,11 @@ class MyCounter extends HTMLElement {
         this.update();
     };
 
-    static style = () => `
-      * {
-        font-size: 200%;
-      }
-
-      span {
-        width: 4rem;
-        display: inline-block;
-        text-align: center;
-      }
-
-      button {
-        width: 64px;
-        height: 64px;
-        border: none;
-        border-radius: 10px;
-        background-color: seagreen;
-        color: white;
-      }
-    `;
-
     template = () => html`
         <style>
-            ${MyCounter.style()}
-            @import style.css;
+            ${styles}
         </style>
+        <h3>Hello ${this.name}!</h3>
         <button @click="${this.dec}">-</button>
         <span>${this.count}</span>
         <button @click="${this.inc}">+</button>
