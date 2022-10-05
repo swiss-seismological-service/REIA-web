@@ -8,11 +8,11 @@
     "parserOptions": {
         "ecmaVersion": 2021,
         "babelOptions": {
-            "root": "./app"
+            "root": "."
         },
         "sourceType": "module"
     },
-    "plugins": ["react", "react-hooks", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
         "max-len": [
             "error",
@@ -20,12 +20,8 @@
                 "code": 100
             }
         ],
-        "react/destructuring-assignment": [0, "never"],
-        "react/state-in-constructor": [2, "never"],
-        "react/jsx-filename-extension": ["off"],
-        "react/jsx-closing-bracket-location": [1, "tag-aligned"],
-        "react/prop-types": ["off"],
         "prefer-promise-reject-errors": ["off"],
+        "no-plusplus": ["off"],
         "no-return-assign": ["off"],
         "no-unused-expressions": ["error", { "allowTernary": true }],
         "no-param-reassign": ["off"],

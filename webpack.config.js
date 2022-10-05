@@ -1,10 +1,10 @@
 const path = require('path');
 const fs = require('fs');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -115,6 +115,16 @@ module.exports = {
         hot: false,
         host: '127.0.0.1',
         port: 5000,
+        // proxy: {
+        //     '/api': {
+        //         target: 'http://localhost:8000',
+        //         pathRewrite: { '^/api': '' }, // In this case we don't pass `api` path
+        //     },
+        //     '/ocmsApi': {
+        //         target: 'http://localhost:80',
+        //         pathRewrite: { '^/ocmsApi': '' }, // In this case we don't pass `api` path
+        //     },
+        // },
     },
 
     /* File watcher options */

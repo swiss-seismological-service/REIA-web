@@ -45,6 +45,7 @@ class MyCounter extends HTMLElement {
     template = () => html`
         <style>
             ${MyCounter.style()}
+            @import style.css;
         </style>
         <button @click="${this.dec}">-</button>
         <span>${this.count}</span>
