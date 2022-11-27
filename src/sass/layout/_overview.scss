@@ -1,0 +1,43 @@
+.overview {
+    &__table {
+        width: 100%;
+        tr {
+            td {
+                padding-left: 1.7rem;
+            }
+            
+            border-bottom: 1px solid black;
+
+            &:first-of-type td {
+                padding-top: 1.5rem;
+            }
+
+            &:last-of-type {
+                border-bottom-style: hidden;
+            }
+        }
+    }
+
+    // &__stufe {
+    //     background-color: $color-red;
+    //     h2 {
+    //         color: white;
+    //         font-weight: 800;
+    //         text-align: center;
+    //     }
+    // }
+    &__stufe {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__number {
+            max-width: 30%;
+            flex-grow: 1;
+            color: white;
+            font-weight: 800;
+            background-color: $color-red;
+            text-align: center;
+        }
+    }
+}

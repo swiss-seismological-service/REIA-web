@@ -2,19 +2,21 @@ body,
 p {
     font-family: Verdana, Arial, sans-serif;
     font-weight: 400;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1.5;
 }
 
 h1 {
     color: $color-blue;
     font-size: 4rem;
+    margin: 0;
 }
 h2 {
     font-size: 3rem;
 }
 h3 {
     font-size: 2.2rem;
+    font-weight: 500;
 }
 h4 {
     font-size: 2rem;

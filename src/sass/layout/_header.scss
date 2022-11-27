@@ -1,15 +1,55 @@
 .header {
     &__logo {
-        width: 45%;
-        padding-right: 5%;
+        max-height: 100px;
+        width: 80%;
+        float: right;
+    }
+
+    &__flag {
+        position:relative;
+        left: -50px;
+        svg {
+            max-height: 100px;
+            height: 80%;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            fill: #fc0019
+        }
+        img {
+            height: 65%;
+            border: white 3px solid;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 4%;
+        }
+        div {
+            position:absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 17%;
+            line-height:4.5rem;
+            font-size: 4.5rem;
+            font-weight:600;
+            color:white;
+        }
     }
 
     &__box {
+        margin-left:-50px;
         background-color: $color-blue;
         color: white;
+        padding: 1.2rem;
 
-        .p {
+        h4 {
+            display: inline;
+        }
+
+        p {
             font-weight: 500;
+            font-size: 1.8rem;
+            display: inline;
         }
     }
 }

@@ -1,0 +1,12 @@
+.losscharts {
+    padding: 0;
+
+    &__container {
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid black;
+
+        &:last-of-type {
+            border-bottom-style: none;
+        }
+    }
+}
