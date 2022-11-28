@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import styles from '../../sass/loss_people.wc.scss';
+import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
 
 class LossPeople extends HTMLElement {
     constructor() {
@@ -9,6 +10,7 @@ class LossPeople extends HTMLElement {
         this.q90 = 0;
         this.thresholds = [0, 5, 50, 100, 500, 5000];
         this.attachShadow({ mode: 'open' });
+        this.iconColor = '#d3d3d3';
     }
 
     // component attributes
@@ -30,27 +32,31 @@ class LossPeople extends HTMLElement {
 
     selectIcon = (lossID) => {
         const isTrue =
-            this.thresholds[lossID - 1] <= this.mean &&
-            (this.thresholds[lossID] || this.mean + 1) > this.mean;
+            (this.thresholds[lossID - 1] <= this.mean &&
+                (this.thresholds[lossID] || this.mean + 1) > this.mean) ||
+            (lossID === this.thresholds.length - 1 &&
+                this.mean >= this.thresholds[this.thresholds.length - 1]);
         return isTrue ? 'active' : '';
     };
 
-    getPercentage = (value) => {
-        let index = this.thresholds.findIndex((el) => el < value);
-        let [smaller, bigger] = this.thresholds.slice(index, index + 1);
-
-        return ((value - smaller) / (bigger - smaller)) * 100;
-    };
-
     calculateLevel = () => {
-        console.log(this.mean);
-        console.log(this.q10);
-        console.log(this.q90);
+        let [meanPc, q10Pc, q90Pc] = [this.mean, this.q10, this.q90].map((v) =>
+            getPercentage(v, this.thresholds)
+        );
+        let colorscale = this.shadowRoot.getElementById('colorscale');
+        let markerscale = this.shadowRoot.getElementById('markerscale');
+        const { width, height } = colorscale;
 
         let rootStyleSelector = document.querySelector(':root').style;
-        rootStyleSelector.setProperty('--q10', '10%');
 
-        return true;
+        ColorScaleMarker(q10Pc, meanPc, q90Pc, markerscale);
+
+        const context = ColorScale(width, height, colorscale);
+        let rgba = context.getImageData(width * Math.min(meanPc, 0.99), 0, 1, 1).data;
+
+        let color = `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`;
+
+        rootStyleSelector.setProperty('--activeColor', `${color}`);
     };
 
     template = () => html` <style>
@@ -397,14 +403,15 @@ class LossPeople extends HTMLElement {
             </div>
             <div class="loss__icons-description">
                 <div class="loss__legend">keine</div>
-                <div class="loss__legend">5</div>
-                <div class="loss__legend">50</div>
-                <div class="loss__legend">100</div>
-                <div class="loss__legend">500</div>
-                <div class="loss__legend"></div>
+                ${this.thresholds
+                    .slice(1, 5)
+                    .map((step) => html`<div class="loss__legend">${step}</div>`)}
+                <div class="loss__legend">all</div>
             </div>
             <div class="loss__colorscale">
-                <div class="loss__colorscale__marker"></div>
+                <canvas id="colorscale"></canvas>
+                <canvas id="markerscale"></canvas>
+            </div>
             </div>
         </div>`;
 

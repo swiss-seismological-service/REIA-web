@@ -43,7 +43,9 @@
 
         &.active {
             svg {
-                fill: $color-red;
+                path {
+                    fill: var(--activeColor);
+                }
             }
         }
     }
@@ -75,28 +77,17 @@
             content: none;
         }
     }
-    
-    &__colorscale {
-        width: 96%;
-        height: 14px;
-        background-image: linear-gradient(
-            to right, 
-            rgba(204, 255, 102, 1) 10%, 
-            rgba(255, 255, 0, 1), 
-            rgba(255, 153, 0, 1), 
-            rgba(255, 0, 0, 1), 
-            rgba(128, 0, 0, 1));
-        margin: 1% 2%;
 
-        &__marker {
-            height: 100%;
-            background-image: linear-gradient(
-                to right,
-                lightgrey var(--q10, 33%),
-                transparent var(--mean, 40%),
-                lightgrey var(--q90, 45%)
-            );
-            width: 100%;
+    &__colorscale {
+        position: relative;
+
+        >* {
+            position: absolute;
+            width: 96%;
+            height: 14px;
+            z-index: 1;
+            width: 96%;
+            margin: 1% 2%;
         }
     }
 }
