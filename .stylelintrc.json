@@ -1,0 +1,14 @@
+{
+    "extends": "stylelint-config-sass-guidelines",
+    "rules": {
+        "max-nesting-depth": 4,
+        "color-named": null,
+        "indentation": 4,
+        "order/properties-alphabetical-order": null,
+        "string-quotes": "double",
+        "function-parentheses-space-inside": "never-single-line",
+        "selector-class-pattern": null,
+        "order/order": null,
+        "selector-max-id": 2
+    }
+}
