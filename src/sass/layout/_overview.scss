@@ -1,6 +1,7 @@
 .overview {
     &__table {
         width: 100%;
+
         tr {
             td {
                 padding-left: 1.7rem;
@@ -18,14 +19,6 @@
         }
     }
 
-    // &__stufe {
-    //     background-color: $color-red;
-    //     h2 {
-    //         color: white;
-    //         font-weight: 800;
-    //         text-align: center;
-    //     }
-    // }
     &__stufe {
         display: flex;
         justify-content: space-between;

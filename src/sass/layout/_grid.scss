@@ -1,30 +1,32 @@
 .grid {
-
-    & > .col-6 {
+    > .col-6 {
         /*** GRID BORDERS ***/
         border: 0.1rem solid black;
         border-right-style: none;
         border-bottom-style: none;
 
-        &:nth-last-of-type(2), &:last-of-type{
+        &:nth-last-of-type(2),
+        &:last-of-type {
             border-bottom-style: solid;
         }
 
         /*** left protruding borders ***/
         &:nth-of-type(odd) {
             position: relative;
-            &:after {
-                content:"";
+
+            &::after {
+                content: "";
                 height: 0.1rem;
                 width: 50px;
-                background-color:black;
-                position:absolute;
+                background-color: black;
+                position: absolute;
                 bottom: -1px;
                 left: -45px;
             }
         }
+
         &:first-of-type {
-            &:after {
+            &::after {
                 bottom: auto;
                 top: -1px;
             }

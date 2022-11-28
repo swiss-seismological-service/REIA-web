@@ -10,6 +10,7 @@
         font-size: 31.25%;
         page-break-inside: avoid;
     }
+
     .container {
         max-height: 100%;
         width: 100%;
@@ -20,9 +21,11 @@
     .col-12 {
         width: 50%;
     }
+
     .col-p-12 {
         width: 100% !important;
     }
+
     #graph_verletzte {
         max-height: 300px;
         max-width: 100%;
