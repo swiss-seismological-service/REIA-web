@@ -6,12 +6,14 @@
     &__title {
         margin: 0;
     }
+
     &__text {
         margin-top: 0;
         margin-bottom: 0.2rem;
     }
-    &__icons-box{
-        display:flex;
+
+    &__icons-box {
+        display: flex;
         justify-content: center;
         align-items: center;
     }
@@ -32,14 +34,13 @@
             fill: rgb(218, 218, 218);
             
             path {
-                &.cls-1 {
-                    fill: #d3d3d3;
-                    stroke: #fff;
-                    stroke-miterlimit: 10;
-                    stroke-width: 0.25px;
-                }
+                fill: #d3d3d3;
+                stroke: #fff;
+                stroke-miterlimit: 10;
+                stroke-width: 0.25px;
             }
         }
+
         &.active {
             svg {
                 fill: $color-red;
@@ -48,7 +49,7 @@
     }
 
     &__legend {
-        position:relative;
+        position: relative;
         width: 18%;
         margin-left: 2%;
         font-size: 1.2rem;
@@ -57,16 +58,20 @@
         &:first-of-type {
             margin-left: -5%;
         }
-        &:after {
+
+        &::after {
             position: absolute;
+            z-index: -1;
             left: 48%;
             bottom: -50%;
             width: 5px;
             height: 10px;
             background-color: lightgrey;
-            content:'';
+            content: "";
         }
-        &:first-of-type:after, &:last-of-type:after {
+
+        &:first-of-type::after,
+        &:last-of-type::after {
             content: none;
         }
     }
@@ -74,7 +79,24 @@
     &__colorscale {
         width: 96%;
         height: 14px;
-        background-color:lightgrey;
+        background-image: linear-gradient(
+            to right, 
+            rgba(204, 255, 102, 1) 10%, 
+            rgba(255, 255, 0, 1), 
+            rgba(255, 153, 0, 1), 
+            rgba(255, 0, 0, 1), 
+            rgba(128, 0, 0, 1));
         margin: 1% 2%;
+
+        &__marker {
+            height: 100%;
+            background-image: linear-gradient(
+                to right,
+                lightgrey var(--q10, 33%),
+                transparent var(--mean, 40%),
+                lightgrey var(--q90, 45%)
+            );
+            width: 100%;
+        }
     }
 }
