@@ -40,10 +40,26 @@
             }
         }
 
-        &.active {
+        &.active-people {
             svg {
                 path {
-                    fill: var(--activeColor);
+                    fill: var(--activeColorPeople);
+                }
+            }
+        }
+
+        &.active-displaced {
+            svg {
+                path {
+                    fill: var(--activeColorDisplaced);
+                }
+            }
+        }
+
+        &.active-buildings {
+            svg {
+                path {
+                    fill: var(--activeColorBuildings);
                 }
             }
         }

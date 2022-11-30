@@ -116,19 +116,23 @@
                         die Stärke eines Erdbebens basierend auf dem Ausmass der
                         Zerstörung (Gebäude, Landschaft) und der subjektiven Wahrnehmung
                         eines Beobachters.</p>
-                    <img class="shakemap__image" src="images/shakemap.png">
+                    <img class="shakemap__image"
+                        src="http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,lakes_white,groundmotion_ch,cities_ch,event_ch_marker&LOCID=c21pOmNoLmV0aHouc2VkL3NjZW5hcmlvL2FhcmF1NV84&SRS=EPSG:21781&BBOX=484748.79762324126,69964.73833242332,837297.2806067152,304997.060321406&WIDTH=600&HEIGHT=400&FORMAT=aggpng24">
+                    <div class="shakemap__legend">
+                        <img src="images/LEGENDE_shake_map.png">
+                    </div>
                 </div>
             </div>
             <div class="col-6 losscharts">
-                <div class="col-12 losscharts__container">
-                    <loss-people q10="90" mean="95" q90="99"></loss-people>
+                <div class="losscharts__container">
+                    <loss-people mean="30" q10="15" q90="50"></loss-people>
                 </div>
-                <!-- <div class="col-12 losscharts__container">
-                    <loss-people loss="501"></loss-people>
+                <div class="losscharts__container">
+                    <loss-displaced mean="650" q10="324" q90="978"></loss-displaced>
                 </div>
-                <div class="col-12 losscharts__container">
-                    <loss-people loss="501"></loss-people>
-                </div> -->
+                <div class="losscharts__container">
+                    <loss-buildings mean="1000000000" q10="900000000" q90="3000000000"></loss-buildings>
+                </div>
             </div>
             <div class="col-6">
                 <div class="grid__vertical-text">
@@ -159,6 +163,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row footer">
             <div class="footer__support">
                 <p>Alle Angaben ohne Gewähr und vorbehaltlich Änderungen</p>
@@ -166,7 +171,8 @@
                 <img src="images/logos/logo_BAFU_BABS.png" alt="">
             </div>
         </div>
-        <div class="col-12">
+
+        <div class="row">
             <div class="footer__info">
 
                 <img class="footer__info__icon" src="images/icons/was_tun.png">

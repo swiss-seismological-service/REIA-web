@@ -2,13 +2,13 @@ import { html, render } from 'lit-html';
 import styles from '../../sass/loss_people.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
 
-class LossPeople extends HTMLElement {
+class LossBuildings extends HTMLElement {
     constructor() {
         super();
         this.mean = 0;
         this.q10 = 0;
         this.q90 = 0;
-        this.thresholds = [0, 5, 50, 100, 500, 5000];
+        this.thresholds = [0, 10000000, 100000000, 1000000000, 10000000000, 100000000000];
         this.attachShadow({ mode: 'open' });
     }
 
@@ -35,7 +35,7 @@ class LossPeople extends HTMLElement {
                 (this.thresholds[lossID] || this.mean + 1) > this.mean) ||
             (lossID === this.thresholds.length - 1 &&
                 this.mean >= this.thresholds[this.thresholds.length - 1]);
-        return isTrue ? 'active-people' : '';
+        return isTrue ? 'active-buildings' : '';
     };
 
     calculateLevel = () => {
@@ -55,16 +55,17 @@ class LossPeople extends HTMLElement {
 
         let color = `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`;
 
-        rootStyleSelector.setProperty('--activeColorPeople', `${color}`);
+        rootStyleSelector.setProperty('--activeColorBuildings', `${color}`);
     };
 
     template = () => html` <style>
             ${styles}
         </style>
         <div class="loss">
-            <h3 class="loss__title">Anzahl Todesopfer in der Schweiz</h3>
+            <h3 class="loss__title">Kosten Gebäudeschäden in der Schweiz</h3>
             <p class="loss__text">
-                Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
+                Die Kosten für Gebäudeschäden liegen mit grosser Wahrscheinlichkeit im eingefärbten
+                Bereich.
             </p>
             <div class="loss__display">
                 <div class="loss__icons-box">
@@ -403,9 +404,10 @@ class LossPeople extends HTMLElement {
                 </div>
                 <div class="loss__icons-description">
                     <div class="loss__legend">keine</div>
-                    ${this.thresholds
-                        .slice(1, 5)
-                        .map((step) => html`<div class="loss__legend">${step}</div>`)}
+                    <div class="loss__legend">10 Mio.</div>
+                    <div class="loss__legend">100 Mio.</div>
+                    <div class="loss__legend">1 Mia.</div>
+                    <div class="loss__legend">10 Mia.</div>
                     <div class="loss__legend"></div>
                 </div>
                 <div class="loss__colorscale">
@@ -420,4 +422,4 @@ class LossPeople extends HTMLElement {
     };
 }
 
-customElements.define('loss-people', LossPeople);
+customElements.define('loss-buildings', LossBuildings);
