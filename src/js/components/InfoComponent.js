@@ -1,11 +1,9 @@
 import moment from 'moment';
 import proj4 from 'proj4';
-import { getEarthquake } from '../utils/api';
 import round from '../utils/round';
 
 class RIAInfo {
-    constructor(originid) {
-        const earthquakeInfo = getEarthquake(originid);
+    constructor(earthquakeInfo, sheetType) {
         this.infoTime = document.getElementById('info-time');
         this.infoDate = document.getElementById('info-date');
         this.infoDepth = document.getElementById('info-depth');
@@ -16,15 +14,19 @@ class RIAInfo {
 
         this.overviewMagnitude = document.getElementById('overview-magnitude');
         this.overviewText = document.getElementById('overview-text');
+        this.overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
 
         this.headerDatetime = document.getElementById('header-datetime');
         this.headerTitle = document.getElementById('header-title');
-
-        this.overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
+        this.headerWappen = document.getElementById('header-wappen');
+        this.headerKuerzel = document.getElementById('header-kuerzel');
 
         earthquakeInfo.then((info) => this.replaceInfoTable(info));
         earthquakeInfo.then((info) => this.replaceOverviewText(info));
         earthquakeInfo.then((info) => this.replaceHeaderText(info));
+
+        this.sheetType = sheetType;
+
         proj4.defs(
             'EPSG:2056',
             '+proj=somerc +lat_0=46.9524055555556 +lon_0=7.43958333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs +type=crs'
@@ -58,6 +60,8 @@ class RIAInfo {
 
         this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
         this.headerTitle.innerHTML = info.event_text;
+        this.headerKuerzel.innerHTML = this.sheetType;
+        this.headerWappen.src = `images/wappen/${this.sheetType || 'CH'}.png`;
     }
 }
 
