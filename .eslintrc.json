@@ -24,11 +24,23 @@
                 "ignoreTemplateLiterals": true
             }
         ],
+        "no-console": ["warn", { "allow": ["error"] }],
         "no-plusplus": ["off"],
         "no-return-assign": ["off"],
         "no-unused-expressions": ["error", { "allowTernary": true }],
         "no-param-reassign": ["off"],
+        "no-underscore-dangle": ["off"],
         "prefer-const": ["off"],
+        // "prefer-destructuring": [
+        //     "error",
+        //     {
+        //         "array": false,
+        //         "object": true
+        //     },
+        //     {
+        //         "enforceForRenamedProperties": false
+        //     }
+        // ],
         "prettier/prettier": [
             "error",
             {

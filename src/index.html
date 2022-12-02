@@ -25,13 +25,13 @@
             <div class="col-12">
                 <div class="header__box">
                     <h4 id="subtitle">Erste schnelle Schadensabschätzung – Ausgabedatum:</h4>
-                    <p id="datetime">08.09.2022, 21:00</p>
+                    <p id="header-datetime">...</p>
                 </div>
             </div>
 
             <div class="row mb-3 mt-3">
                 <div class="col-12">
-                    <h1>Erdbeben bei Sion (VS)</h1>
+                    <h1>Erdbeben bei <span id="header-title">...</span></h1>
                 </div>
             </div>
         </div>
@@ -40,12 +40,18 @@
         <div class="row grid">
             <div class="col-6">
                 <div class="p-2">
-                    <h2 id="magnitude">Magnitude X [Mw]</h2>
+                    <h2>Magnitude <span id="overview-magnitude">...</span> [Mw]</h2>
                 </div>
             </div>
             <div class="col-6 overview__stufe">
                 <h2>Gefahrenstufe</h2>
-                <h2 class="overview__stufe__number">5</h2>
+
+                <h2 class="overview__stufe__number overview__stufe__number-1">1</h2>
+                <h2 class="overview__stufe__number overview__stufe__number-2">2</h2>
+                <h2 class="overview__stufe__number overview__stufe__number-3">3</h2>
+                <h2 class="overview__stufe__number overview__stufe__number-4">4</h2>
+                <h2 class="overview__stufe__number overview__stufe__number-5">5</h2>
+
             </div>
             <div class="col-6">
                 <div class="grid__vertical-text">
@@ -53,11 +59,9 @@
                 </div>
                 <div class="p-2">
                     <p>
-                        Der Schweizerische Erdbebendienst an der ETH Zürich hat im Kanton
-                        X, ungefähr X km Himmelsrichtung von X.
-                        Dieses Erdbeben ist in der ganzen Schweiz verspürt worden. Mittlere
-                        bis schwere Schäden sind bei einem Erdbeben dieser Stärke in weiten
-                        Gebieten im Umkreis des Epizentrums zu erwarten.
+                        <span id="overview-text">
+                            ...
+                        </span><br />
                         Es ist zu erwarten, dass in den nächsten Tagen und Wochen Nachbeben
                         auftreten werden, die möglicherweise spürbar sind oder weitere
                         Schäden anrichten. Der Auftritt eines ähnlich grossen oder grösseren
@@ -71,35 +75,31 @@
                     <tbody>
                         <tr>
                             <td>Lokalzeit</td>
-                            <td id="time">...</td>
+                            <td id="info-time">...</td>
                         </tr>
                         <tr>
                             <td>Datum</td>
-                            <td id="date">...</td>
+                            <td id="info-date">...</td>
                         </tr>
                         <tr>
                             <td>Herdtiefe [km]</td>
-                            <td id="depth">...</td>
+                            <td id="info-depth">...</td>
                         </tr>
                         <tr>
                             <td>Magnitude [Mw]</td>
-                            <td id="intensity">...</td>
+                            <td id="info-intensity">...</td>
                         </tr>
                         <tr>
                             <td>Auswertung</td>
-                            <td id="auswertung">...</td>
-                        </tr>
-                        <tr>
-                            <td>Breite/Länge</td>
-                            <td id="lonlat">... / ...</td>
+                            <td id="info-auswertung">...</td>
                         </tr>
                         <tr>
                             <td>Schweizer Koordinaten</td>
-                            <td id="swiss">...</td>
+                            <td id="info-swiss">...</td>
                         </tr>
                         <tr>
                             <td>Weitere Ereignisdaten</td>
-                            <td id="meta">Link</td>
+                            <td><a id="info-meta" href="">Link</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,7 +117,7 @@
                         Zerstörung (Gebäude, Landschaft) und der subjektiven Wahrnehmung
                         eines Beobachters.</p>
                     <img class="shakemap__image"
-                        src="http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,lakes_white,groundmotion_ch,cities_ch,event_ch_marker&LOCID=c21pOmNoLmV0aHouc2VkL3NjZW5hcmlvL2FhcmF1NV84&SRS=EPSG:21781&BBOX=484748.79762324126,69964.73833242332,837297.2806067152,304997.060321406&WIDTH=600&HEIGHT=400&FORMAT=aggpng24">
+                        src="http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,lakes_white,groundmotion_ch,cities_ch,scenario_marker&LOCID='c21pOmNoLmV0aHouc2VkL3NjZW5hcmlvL09yaWdpbi9BYXJhdV9NNl8w'&SRS=EPSG:21781&BBOX=484748.79762324126,69964.73833242332,837297.2806067152,304997.060321406&WIDTH=600&HEIGHT=400&FORMAT=aggpng24">
                     <div class="shakemap__legend">
                         <img src="images/LEGENDE_shake_map.png">
                     </div>

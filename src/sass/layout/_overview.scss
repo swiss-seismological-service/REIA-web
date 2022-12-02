@@ -27,10 +27,38 @@
         &__number {
             max-width: 30%;
             flex-grow: 1;
-            color: white;
             font-weight: 800;
-            background-color: $color-red;
             text-align: center;
+            display: none;
+
+            &-1 {
+                background-color: $color-level1;
+                color: black;
+            }
+
+            &-2 {
+                background-color: $color-level2;
+                color: black;
+            }
+
+            &-3 {
+                background-color: $color-level3;
+                color: black;
+            }
+
+            &-4 {
+                background-color: $color-level4;
+                color: white;
+            }
+
+            &-5 {
+                background-color: $color-level5;
+                color: white;
+            }
+
+            &.active {
+                display: block;
+            }
         }
     }
 }
