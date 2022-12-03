@@ -24,20 +24,17 @@ export function getEarthquake(originid) {
 export function getCasualties(oid, tag) {
     let base = `http://ermd.ethz.ch/v1/loss/${oid}/occupants`;
     if (tag === 'CH') return getData(`${base}/Country`);
-    console.log('Casualties request finished.');
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getDisplaced(oid, tag) {
     let base = `http://ermd.ethz.ch/v1/loss/${oid}/businessinterruption`;
     if (tag === 'CH') return getData(`${base}/Country`);
-    console.log('Displaced request finished.');
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getBuildingCosts(oid, tag) {
     let base = `http://ermd.ethz.ch/v1/loss/${oid}/structural`;
     if (tag === 'CH') return getData(`${base}/Country`);
-    console.log('Building costs request finished.');
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }

@@ -87,10 +87,6 @@ class LossComponent extends HTMLElement {
             ${styles}
         </style>
         <div class="loss">
-            <!-- <h3 class="loss__title">Anzahl Todesopfer in der Schweiz</h3>
-            <p class="loss__text">
-                Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
-            </p> -->
             <slot name="titleslot"></slot>
             <div class="loss__display">
                 <div class="loss__icons-box">

@@ -15,6 +15,7 @@ class RIAInfo {
         this.overviewMagnitude = document.getElementById('overview-magnitude');
         this.overviewText = document.getElementById('overview-text');
         this.overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
+        this.overviewPlaces = document.getElementsByClassName('overview-place');
 
         this.headerDatetime = document.getElementById('header-datetime');
         this.headerTitle = document.getElementById('header-title');
@@ -22,7 +23,7 @@ class RIAInfo {
         this.headerKuerzel = document.getElementById('header-kuerzel');
 
         earthquakeInfo.then((info) => this.replaceInfoTable(info));
-        earthquakeInfo.then((info) => this.replaceOverviewText(info));
+        earthquakeInfo.then((info) => this.replaceOverviewText(info, sheetType));
         earthquakeInfo.then((info) => this.replaceHeaderText(info, sheetType));
 
         proj4.defs(
@@ -46,11 +47,15 @@ class RIAInfo {
         this.infoMeta.href = 'http://seismo.ethz.ch';
     }
 
-    replaceOverviewText(info) {
+    replaceOverviewText(info, sheetType) {
         this.overviewMagnitude.innerHTML = info.magnitude_value;
         this.overviewText.innerHTML = info.description_de;
         let warnlevel = 5;
         this.overviewWarnlevels[warnlevel - 1].classList.add('active');
+        let text = sheetType === 'CH' ? 'in der Schweiz' : `im ${sheetType}`;
+        Array.from(this.overviewPlaces).forEach((el) => {
+            el.innerHTML = text;
+        });
     }
 
     replaceHeaderText(info, sheetType) {
