@@ -10,6 +10,12 @@ class LossPeople extends HTMLElement {
         this.q90 = 0;
         this.thresholds = [0, 5, 50, 100, 500, 5000];
         this.attachShadow({ mode: 'open' });
+
+        this.update();
+
+        this.colorscale = this.shadowRoot.getElementById('colorscale');
+        this.colorScaleContext = ColorScale(this.colorscale);
+        this.markerscale = this.shadowRoot.getElementById('markerscale');
     }
 
     // component attributes
@@ -21,13 +27,14 @@ class LossPeople extends HTMLElement {
     attributeChangedCallback(property, oldValue, newValue) {
         if (oldValue === newValue) return;
         this[property] = newValue;
-    }
 
-    connectedCallback() {
         this.selectIcon();
         this.update();
         this.calculateLevel();
     }
+
+    // called once at the beginning
+    connectedCallback() {}
 
     selectIcon = (lossID) => {
         const isTrue =
@@ -42,16 +49,17 @@ class LossPeople extends HTMLElement {
         let [meanPc, q10Pc, q90Pc] = [this.mean, this.q10, this.q90].map((v) =>
             getPercentage(v, this.thresholds)
         );
-        let colorscale = this.shadowRoot.getElementById('colorscale');
-        let markerscale = this.shadowRoot.getElementById('markerscale');
-        const { width, height } = colorscale;
 
         let rootStyleSelector = document.querySelector(':root').style;
 
-        ColorScaleMarker(q10Pc, meanPc, q90Pc, markerscale);
+        ColorScaleMarker(q10Pc, meanPc, q90Pc, this.markerscale);
 
-        const context = ColorScale(width, height, colorscale);
-        let rgba = context.getImageData(width * Math.min(meanPc, 0.99), 0, 1, 1).data;
+        let rgba = this.colorScaleContext.getImageData(
+            this.colorscale.width * Math.min(meanPc, 0.99),
+            0,
+            1,
+            1
+        ).data;
 
         let color = `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`;
 

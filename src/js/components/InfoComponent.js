@@ -23,9 +23,7 @@ class RIAInfo {
 
         earthquakeInfo.then((info) => this.replaceInfoTable(info));
         earthquakeInfo.then((info) => this.replaceOverviewText(info));
-        earthquakeInfo.then((info) => this.replaceHeaderText(info));
-
-        this.sheetType = sheetType;
+        earthquakeInfo.then((info) => this.replaceHeaderText(info, sheetType));
 
         proj4.defs(
             'EPSG:2056',
@@ -55,13 +53,13 @@ class RIAInfo {
         this.overviewWarnlevels[warnlevel - 1].classList.add('active');
     }
 
-    replaceHeaderText(info) {
+    replaceHeaderText(info, sheetType) {
         let date = moment(info.calculation[0].creationinfo.creationtime);
 
         this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
         this.headerTitle.innerHTML = info.event_text;
-        this.headerKuerzel.innerHTML = this.sheetType;
-        this.headerWappen.src = `images/wappen/${this.sheetType || 'CH'}.png`;
+        this.headerKuerzel.innerHTML = sheetType;
+        this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
     }
 }
 

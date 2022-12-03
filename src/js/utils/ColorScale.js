@@ -1,12 +1,15 @@
-export function ColorScale(width, height, canvasElement = null) {
+export function ColorScale(canvasElement = null, width = null, height = null) {
     if (!canvasElement) {
         canvasElement = document.createElement('CANVAS');
         canvasElement.width = width;
         canvasElement.height = height;
+    } else {
+        width = canvasElement.width;
+        height = canvasElement.height;
     }
 
     let context = canvasElement.getContext('2d');
-
+    context.clearRect(0, 0, width, height);
     const gradient = context.createLinearGradient(0, 0, width, 0);
 
     gradient.addColorStop(0.1, 'rgba(204, 255, 102, 1)');
@@ -26,7 +29,7 @@ export function ColorScaleMarker(start, center, end, canvasElement) {
     let { width, height } = canvasElement;
 
     let context = canvasElement.getContext('2d');
-
+    context.clearRect(0, 0, width, height);
     const gradient = context.createLinearGradient(0, 0, width, 0);
 
     if (start >= 0.01) {
