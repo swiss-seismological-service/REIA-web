@@ -1,5 +1,4 @@
 import { getEarthquake } from './utils/api';
-import MyCounter from './webcomponents/MyCounter';
 import LossComponent from './webcomponents/LossComponent';
 import RIAInfo from './components/InfoComponent';
 import RIAScale from './components/ScaleComponent';
