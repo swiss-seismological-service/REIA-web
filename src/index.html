@@ -125,14 +125,39 @@
             </div>
             <div class="col-6 losscharts">
                 <div class="losscharts__container">
-                    <loss-people id="loss-casualties" mean="0" q10="0" q90="0"></loss-people>
+                    <loss-component id="loss-casualties" type="casualties" mean="0" q10="0" q90="0"
+                        thresholds="0,5,50,100,500,5000">
+                        <div slot="titleslot">
+                            <h3 class="loss__title">Anzahl Todesopfer in der Schweiz</h3>
+                            <p class="loss__text">
+                                Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
+                            </p>
+                        </div>
+                    </loss-component>
                 </div>
                 <div class="losscharts__container">
-                    <loss-displaced id="loss-displaced" mean="0" q10="0" q90="0"></loss-displaced>
+                    <loss-component id="loss-displaced" type="displaced" mean="0" q10="0" q90="0"
+                        thresholds="0,50,500,5000,50000,500000">
+                        <div slot="titleslot">
+                            <h3 class="loss__title">Anzahl Schutzsuchender in der Schweiz</h3>
+                            <p class="loss__text">
+                                Die Anzahl Schutzsuchender liegt mit grosser Wahrscheinlichkeit im eingefärbten
+                                Bereich.
+                            </p>
+                        </div>
+                    </loss-component>
                 </div>
                 <div class="losscharts__container">
-                    <loss-buildings id="loss-buildingcosts" mean="0" q10="0" q90="0">
-                    </loss-buildings>
+                    <loss-component id="loss-buildingcosts" type="buildingCosts" mean="0" q10="0" q90="0"
+                        thresholds="0,10000000,100000000,1000000000,10000000000,100000000000">
+                        <div slot="titleslot">
+                            <h3 class="loss__title">Anzahl Todesopfer in der Schweiz</h3>
+                            <p class="loss__text">
+                                Die Kosten für Gebäudeschäden liegen mit grosser Wahrscheinlichkeit im eingefärbten
+                                Bereich.
+                            </p>
+                        </div>
+                    </loss-component>
                 </div>
             </div>
             <div class="col-6">

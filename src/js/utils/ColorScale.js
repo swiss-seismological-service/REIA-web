@@ -8,7 +8,7 @@ export function ColorScale(canvasElement = null, width = null, height = null) {
         height = canvasElement.height;
     }
 
-    let context = canvasElement.getContext('2d');
+    let context = canvasElement.getContext('2d', { willReadFrequently: true });
     context.clearRect(0, 0, width, height);
     const gradient = context.createLinearGradient(0, 0, width, 0);
 

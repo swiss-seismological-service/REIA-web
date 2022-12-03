@@ -1,4 +1,4 @@
-export default function round(value, precision) {
+export function round(value, precision) {
     let multiplier = 10 ** (precision || 0);
     let rounded = Math.round(value * multiplier) / multiplier;
 
@@ -10,4 +10,10 @@ export default function round(value, precision) {
     }
 
     return rounded;
+}
+
+export function numberToString(number) {
+    if (number < 1000000) return number;
+    if (number < 1000000000) return `${number / 1000000} Mio.`;
+    return `${number / 1000000000} Mia.`;
 }

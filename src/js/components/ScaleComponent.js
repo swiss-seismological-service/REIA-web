@@ -5,8 +5,6 @@ class RIAScale {
         this.casualties = document.getElementById('loss-casualties');
         this.displaced = document.getElementById('loss-displaced');
         this.buildingCosts = document.getElementById('loss-buildingcosts');
-        this.casualties.setAttribute('q90', 100);
-        this.casualties.setAttribute('mean', 55);
         earthquakeInfo.then((info) => {
             let lossId = info.calculation.find((calc) => calc._type === 'losscalculation');
             this.addScaleData(lossId._oid, sheetType);

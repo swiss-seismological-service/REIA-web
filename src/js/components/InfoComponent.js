@@ -1,6 +1,6 @@
 import moment from 'moment';
 import proj4 from 'proj4';
-import round from '../utils/round';
+import { round } from '../utils/numbers';
 
 class RIAInfo {
     constructor(earthquakeInfo, sheetType) {

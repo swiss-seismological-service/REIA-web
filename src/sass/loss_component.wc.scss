@@ -40,10 +40,10 @@
             }
         }
 
-        &.active-people {
+        &.active-casualties {
             svg {
                 path {
-                    fill: var(--activeColorPeople);
+                    fill: var(--activeColorcasualties);
                 }
             }
         }
@@ -51,15 +51,15 @@
         &.active-displaced {
             svg {
                 path {
-                    fill: var(--activeColorDisplaced);
+                    fill: var(--activeColordisplaced);
                 }
             }
         }
 
-        &.active-buildings {
+        &.active-buildingCosts {
             svg {
                 path {
-                    fill: var(--activeColorBuildings);
+                    fill: var(--activeColorbuildingCosts);
                 }
             }
         }
