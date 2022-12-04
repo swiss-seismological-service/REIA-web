@@ -36,10 +36,17 @@ class LossComponent extends HTMLElement {
 
         if (property === 'type' && newValue != null) this.setSVGs();
 
+        if (property === 'mean' && newValue > 0) this.showScale();
         this.selectIcon();
         this.update();
         this.calculateLevel();
     }
+
+    showScale = () => {
+        this.shadowRoot.getElementById(`spinner${this.type}`).style.display = 'none';
+        this.shadowRoot.getElementById(`lossdisplay${this.type}`).style.display = 'block';
+        console.log('executing');
+    };
 
     setSVGs = () => {
         for (let i = 1; i <= 5; i++) {
@@ -89,7 +96,13 @@ class LossComponent extends HTMLElement {
         </style>
         <div class="loss">
             <slot name="titleslot"></slot>
-            <div class="loss__display">
+            <div id="spinner${this.type}" class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="lossdisplay${this.type}" class="loss__display">
                 <div class="loss__icons-box">
                     <div class="loss__icons ${this.selectIcon(1)}" id="loss-1"></div>
                     <div class="loss__icons ${this.selectIcon(2)}" id="loss-2"></div>
