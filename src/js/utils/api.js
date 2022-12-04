@@ -20,27 +20,27 @@ function getData(url) {
 }
 
 export function getEarthquake(originid) {
-    return getData(`http://ermd.ethz.ch/v1/earthquake/${originid}`);
+    return getData(`http://ermd.ethz.ch/riaws/v1/earthquake/${originid}`);
 }
 
 export function getAllEarthquakes() {
-    return getData(`http://ermd.ethz.ch/v1/earthquakes`);
+    return getData(`http://ermd.ethz.ch/riaws/v1/earthquakes`);
 }
 
 export function getCasualties(oid, tag) {
-    let base = `http://ermd.ethz.ch/v1/loss/${oid}/occupants`;
+    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/occupants`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getDisplaced(oid, tag) {
-    let base = `http://ermd.ethz.ch/v1/loss/${oid}/businessinterruption`;
+    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/businessinterruption`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getBuildingCosts(oid, tag) {
-    let base = `http://ermd.ethz.ch/v1/loss/${oid}/structural`;
+    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/structural`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
