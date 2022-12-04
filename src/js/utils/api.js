@@ -3,7 +3,9 @@ function getData(url) {
         method: 'GET',
         headers: {
             Accept: 'application/json',
+            'Cache-Control': 'public',
         },
+        cache: 'no-store',
     })
         .then((response) => {
             if (!response.ok) {
@@ -19,6 +21,10 @@ function getData(url) {
 
 export function getEarthquake(originid) {
     return getData(`http://ermd.ethz.ch/v1/earthquake/${originid}`);
+}
+
+export function getAllEarthquakes() {
+    return getData(`http://ermd.ethz.ch/v1/earthquakes`);
 }
 
 export function getCasualties(oid, tag) {

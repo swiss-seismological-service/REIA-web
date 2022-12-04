@@ -122,6 +122,10 @@ module.exports = {
                     filename: 'fonts/[name][ext][query]',
                 },
             },
+            {
+                test: /\.(csv)$/i,
+                use: ['csv-loader'],
+            },
         ],
     },
 

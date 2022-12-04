@@ -59,6 +59,7 @@ class LossComponent extends HTMLElement {
                 (this.thresholds[lossID] || this.mean + 1) > this.mean) ||
             (lossID === this.thresholds.length - 1 &&
                 this.mean >= this.thresholds[this.thresholds.length - 1]);
+
         return isTrue ? `active-${this.type}` : '';
     };
 

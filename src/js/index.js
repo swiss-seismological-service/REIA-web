@@ -1,9 +1,20 @@
 import { getEarthquake } from './utils/api';
 import LossComponent from './webcomponents/LossComponent';
+import OverviewComponent from './webcomponents/OverviewComponent';
 import RIAInfo from './components/InfoComponent';
 import RIAScale from './components/ScaleComponent';
 
-const earthquakeInfo = getEarthquake('c21pOmNoLmV0aHouc2VkL3NjZW5hcmlvL09yaWdpbi9BYXJhdV9NNl8w');
+if (window.location.pathname !== '/overview.html') {
+    const params = new URLSearchParams(window.location.search);
+    const originid = params.get('originid');
+    const canton = params.get('canton');
 
-const info = new RIAInfo(earthquakeInfo, 'CH');
-const scales = new RIAScale(earthquakeInfo, 'CH');
+    if (!originid) {
+        window.location.replace('/overview.html');
+    }
+
+    const earthquakeInfo = getEarthquake(originid);
+
+    const info = new RIAInfo(earthquakeInfo, canton || 'CH');
+    const scales = new RIAScale(earthquakeInfo, canton || 'CH');
+}
