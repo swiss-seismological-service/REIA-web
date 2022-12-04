@@ -1,8 +1,10 @@
 import { getEarthquake } from './utils/api';
 import LossComponent from './webcomponents/LossComponent';
 import OverviewComponent from './webcomponents/OverviewComponent';
+import RIMaps from './components/MapComponent';
 import RIAInfo from './components/InfoComponent';
 import RIAScale from './components/ScaleComponent';
+import RIAMaps from './components/MapComponent';
 
 if (window.location.pathname !== '/overview.html') {
     const params = new URLSearchParams(window.location.search);
@@ -17,4 +19,5 @@ if (window.location.pathname !== '/overview.html') {
 
     const info = new RIAInfo(earthquakeInfo, canton || 'CH');
     const scales = new RIAScale(earthquakeInfo, canton || 'CH');
+    const maps = new RIAMaps(earthquakeInfo, canton || 'CH');
 }

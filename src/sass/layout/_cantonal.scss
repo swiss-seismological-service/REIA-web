@@ -1,0 +1,22 @@
+.cantonal {
+    &__cols {
+        display: none;
+        height: 100%;
+    }
+
+    &__maps {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__legende {
+            height: 60px;
+        }
+    }
+
+    &__graphs {
+        display: flex;
+    }
+
+}
