@@ -10,6 +10,10 @@
         flex-direction: column;
         justify-content: space-between;
 
+        img {
+            width: 100%;
+        }
+
         &__legende {
             height: 60px;
         }
