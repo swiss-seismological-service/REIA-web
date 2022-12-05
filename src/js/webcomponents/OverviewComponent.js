@@ -6,13 +6,17 @@ import { b64encode } from '../utils/b64';
 class OverviewComponent extends HTMLElement {
     constructor() {
         super();
+        this.pdf = 'yes';
+        console.log(this.pdf);
         this.attachShadow({ mode: 'open' });
         this.earthquakes = null;
+        this.pdfUrl = 'http://scforge.ethz.ch:8000/pdf?ready_status=ready_to_print&url=';
+        this.cantons = Object.fromEntries(cantons);
 
-        this.cantons = cantons.reduce((acc, curr) => {
-            acc[curr[0]] = { params: curr[1] };
-            return acc;
-        }, {});
+        // this.cantons = cantons.reduce((acc, curr) => {
+        //     acc[curr[0]] = { params: curr[1] };
+        //     return acc;
+        // }, {});
 
         this.injuredmap =
             'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,injured_municipalities_canton,lakes_white,cities_ch&FORMAT=aggpng24';
@@ -22,7 +26,7 @@ class OverviewComponent extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return [];
+        return ['pdf'];
     }
 
     attributeChangedCallback(property, oldValue, newValue) {
@@ -40,6 +44,12 @@ class OverviewComponent extends HTMLElement {
     renderEarthquakes() {
         getAllEarthquakes().then((response) => {
             this.earthquakes = response;
+
+            this.earthquakes = this.earthquakes.map((eq) => {
+                eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}`;
+                return eq;
+            });
+            console.log(this.earthquakes);
             this.update();
         });
     }
@@ -65,8 +75,8 @@ class OverviewComponent extends HTMLElement {
                             <th scope="col">#</th>
                             <th scope="col">Origin ID</th>
                             <th scope="col">Cantonal Sheet</th>
-                            <th scope="col">Injured Map</th>
-                            <th scope="col">Damage Map</th>
+                            <!-- <th scope="col">Injured Map</th>
+                            <th scope="col">Damage Map</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -76,58 +86,47 @@ class OverviewComponent extends HTMLElement {
                                       html`
                                           <tr>
                                               <th scope="row">${idx + 1}</th>
-                                              <td>
-                                                  <a
-                                                      href="/?originid=${b64encode(e.originid)}"
-                                                      target="_blank"
-                                                  >
-                                                      ${e.event_text} ${e.magnitude_value}
-                                                  </a>
-                                              </td>
-                                              <td>
-                                                  ${Object.entries(this.cantons).map(
-                                                      (c) => html`
-                                                          <a
-                                                              href="/?originid=${b64encode(
-                                                                  e.originid
-                                                              )}&canton=${c[0]}"
-                                                              target="_blank"
-                                                          >
-                                                              ${c[0]}
-                                                          </a>
-                                                      `
-                                                  )}
-                                              </td>
-                                              <td>
-                                                  ${Object.entries(this.cantons).map(
-                                                      (c) => html`
-                                                          <a
-                                                              href="${this
-                                                                  .injuredmap}&LOCID='${b64encode(
-                                                                  e.originid
-                                                              )}'&CANTON='${c[0]}'${c[1].params}"
-                                                              target="_blank"
-                                                          >
-                                                              ${c[0]}
-                                                          </a>
-                                                      `
-                                                  )}
-                                              </td>
-                                              <td>
-                                                  ${Object.entries(this.cantons).map(
-                                                      (c) => html`
-                                                          <a
-                                                              href="${this
-                                                                  .damagemap}&LOCID='${b64encode(
-                                                                  e.originid
-                                                              )}'&CANTON='${c[0]}'${c[1].params}"
-                                                              target="_blank"
-                                                          >
-                                                              ${c[0]}
-                                                          </a>
-                                                      `
-                                                  )}
-                                              </td>
+                                              ${this.pdf === 'yes'
+                                                  ? html`<td>
+                                                            <a
+                                                                href="${this.pdfUrl}${e.url}"
+                                                                target="_blank"
+                                                            >
+                                                                ${e.event_text} ${e.magnitude_value}
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            ${Object.entries(this.cantons).map(
+                                                                (c) => html`
+                                                                    <a
+                                                                        href="${this
+                                                                            .pdfUrl}${b64encode(
+                                                                            `${e.url}&canton=${c[0]}`
+                                                                        )}"
+                                                                        target="_blank"
+                                                                    >
+                                                                        ${c[0]}
+                                                                    </a>
+                                                                `
+                                                            )}
+                                                        </td>`
+                                                  : html`<td>
+                                                            <a href="${e.url}" target="_blank">
+                                                                ${e.event_text} ${e.magnitude_value}
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            ${Object.entries(this.cantons).map(
+                                                                (c) => html`
+                                                                    <a
+                                                                        href="${e.url}&canton=${c[0]}"
+                                                                        target="_blank"
+                                                                    >
+                                                                        ${c[0]}
+                                                                    </a>
+                                                                `
+                                                            )}
+                                                        </td>`}
                                           </tr>
                                       `
                               )

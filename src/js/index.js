@@ -6,7 +6,10 @@ import RIAInfo from './components/InfoComponent';
 import RIAScale from './components/ScaleComponent';
 import RIAMaps from './components/MapComponent';
 
-if (window.location.pathname !== '/overview.html') {
+if (
+    window.location.pathname !== '/overview.html' &&
+    window.location.pathname !== '/overview_web.html'
+) {
     const params = new URLSearchParams(window.location.search);
     const originid = params.get('originid');
     const canton = params.get('canton');
