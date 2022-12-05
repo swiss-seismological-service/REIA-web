@@ -45,7 +45,6 @@ class LossComponent extends HTMLElement {
     showScale = () => {
         this.shadowRoot.getElementById(`spinner${this.type}`).style.display = 'none';
         this.shadowRoot.getElementById(`lossdisplay${this.type}`).style.display = 'block';
-        console.log('executing');
     };
 
     setSVGs = () => {

@@ -20,4 +20,11 @@ if (window.location.pathname !== '/overview.html') {
     const info = new RIAInfo(earthquakeInfo, canton || 'CH');
     const scales = new RIAScale(earthquakeInfo, canton || 'CH');
     const maps = new RIAMaps(earthquakeInfo, canton || 'CH');
+
+    earthquakeInfo.then(() => {
+        let promises = scales.returnPromises().concat(maps.returnPromises());
+        Promise.all(promises).then(() => {
+            window.status = 'ready_to_print';
+        });
+    });
 }

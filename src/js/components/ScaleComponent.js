@@ -5,26 +5,33 @@ class RIAScale {
         this.casualties = document.getElementById('loss-casualties');
         this.displaced = document.getElementById('loss-displaced');
         this.buildingCosts = document.getElementById('loss-buildingcosts');
+
+        this.casualtiesPromise = null;
+        this.displacedPromise = null;
+        this.buildingsPromise = null;
+
         earthquakeInfo.then((info) => {
             let lossId = info.calculation.find((calc) => calc._type === 'losscalculation');
             this.addScaleData(lossId._oid, sheetType);
         });
     }
 
+    returnPromises = () => [this.casualtiesPromise, this.displacedPromise, this.buildingsPromise];
+
     addScaleData(lossId, sheetType) {
-        getCasualties(lossId, sheetType).then((data) => {
+        this.casualtiesPromise = getCasualties(lossId, sheetType).then((data) => {
             if (sheetType !== 'CH') [data] = data;
             this.casualties.setAttribute('mean', data.mean);
             this.casualties.setAttribute('q10', data.quantile10);
             this.casualties.setAttribute('q90', data.quantile90);
         });
-        getDisplaced(lossId, sheetType).then((data) => {
+        this.displacedPromise = getDisplaced(lossId, sheetType).then((data) => {
             if (sheetType !== 'CH') [data] = data;
             this.displaced.setAttribute('mean', data.mean);
             this.displaced.setAttribute('q10', data.quantile10);
             this.displaced.setAttribute('q90', data.quantile90);
         });
-        getBuildingCosts(lossId, sheetType).then((data) => {
+        this.buildingsPromise = getBuildingCosts(lossId, sheetType).then((data) => {
             if (sheetType !== 'CH') [data] = data;
             this.buildingCosts.setAttribute('mean', data.mean);
             this.buildingCosts.setAttribute('q10', data.quantile10);
