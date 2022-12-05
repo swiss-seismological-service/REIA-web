@@ -16,9 +16,11 @@ class RIAGraphs {
 
     insertGraphs() {
         this.injuredElement.style.display = 'block';
-        this.injuredPromise = loadImage('images/graph_verletzte.png', this.injuredElement);
+        let injuredMapElement = this.injuredElement.getElementsByTagName('img')[0];
+        this.injuredPromise = loadImage('images/graph_verletzte.png', injuredMapElement);
         this.damagesElement.style.display = 'block';
-        this.damagesPromise = loadImage('images/graph_schaden.png', this.damagesElement);
+        let damagesMapElement = this.damagesElement.getElementsByTagName('img')[0];
+        this.damagesPromise = loadImage('images/graph_schaden.png', damagesMapElement);
     }
 }
 
