@@ -17,13 +17,22 @@
         max-width: 85%;
         margin: 0 5% 0 10%;
     }
+
+    .parent-container {
+        border-style: none;
+    }
+
     /* ... the rest of the rules ... */
-    .col-12 {
+    .col-6 {
         width: 50%;
     }
 
     .col-p-12 {
         width: 100% !important;
+    }
+
+    .col-12 {
+        width: 100%;;
     }
 
     #graph_verletzte {

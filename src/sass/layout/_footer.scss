@@ -1,6 +1,10 @@
 .footer {
     margin-top: 1.5rem;
 
+    .col-12 {
+        padding-right: 0;
+    }
+
     &__support {
         display: flex;
         justify-content: space-around;
@@ -23,6 +27,7 @@
     &__info {
         position: relative;
         margin-left: -50px;
+        padding-left: -50px;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -23,8 +23,10 @@ if (window.location.pathname !== '/overview.html') {
 
     earthquakeInfo.then(() => {
         let promises = scales.returnPromises().concat(maps.returnPromises());
+
         Promise.all(promises).then(() => {
             window.status = 'ready_to_print';
+            console.log('ready_to_print');
         });
     });
 }
