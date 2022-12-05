@@ -1,10 +1,20 @@
 .losscharts {
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
 
 
     &__container {
-        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: $padding-containers;
         border-bottom: 1px solid black;
+
+        >* {
+            width: 100%;
+        }
 
         &:last-of-type {
             border-bottom-style: none;

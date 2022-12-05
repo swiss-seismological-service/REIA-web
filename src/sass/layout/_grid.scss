@@ -35,7 +35,7 @@
 
     /*** vertical headers ***/
     &__vertical-text {
-        position: relative;
+        position: absolute;
         height: 0;
         transform-origin: top left;
         transform: rotate(-90deg);

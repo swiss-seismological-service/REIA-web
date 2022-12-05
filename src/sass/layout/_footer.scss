@@ -18,7 +18,7 @@
         }
 
         img {
-            max-height: 80px;
+            max-height: 8rem;
             width: 35%;
             align-self: center;
         }
@@ -33,7 +33,7 @@
         align-items: center;
 
         background-color: $color-blue;
-        height: 70px;
+        height: 7rem;
 
         color: white;
         font-weight: 500;
@@ -57,7 +57,7 @@
         }
 
         &__icon {
-            height: 50px;
+            height: 5rem;
             position: absolute;
             left: 10px;
             top: 50%;

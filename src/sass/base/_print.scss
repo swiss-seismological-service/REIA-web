@@ -7,36 +7,27 @@
 @media print {
     html,
     body {
-        font-size: 31.25%;
+        font-size: 37.5%;
         page-break-inside: avoid;
     }
 
     .container {
         max-height: 100%;
         width: 100%;
-        max-width: 85%;
-        margin: 0 5% 0 10%;
+        max-width: 100%;
+        margin: 0 !important;
     }
 
     .parent-container {
         border-style: none;
+        margin: 0;
     }
 
-    /* ... the rest of the rules ... */
     .col-6 {
         width: 50%;
     }
 
-    .col-p-12 {
-        width: 100% !important;
-    }
-
     .col-12 {
         width: 100%;;
-    }
-
-    #graph_verletzte {
-        max-height: 300px;
-        max-width: 100%;
     }
 }

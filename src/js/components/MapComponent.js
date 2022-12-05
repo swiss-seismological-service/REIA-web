@@ -32,7 +32,7 @@ class RIAMaps {
         );
         if (sheetType !== 'CH') {
             // insert cantonal maps
-            this.injuredElement.style.display = 'block';
+            this.injuredElement.style.display = 'flex';
             let injuredMapElement = this.injuredElement.getElementsByTagName('img')[0];
             this.injuredPromise = loadImage(
                 `${this.injuredmap}&LOCID='${b64encode(info.originid)}'&CANTON='${sheetType}'${
@@ -41,7 +41,7 @@ class RIAMaps {
                 injuredMapElement
             );
 
-            this.damagesElement.style.display = 'block';
+            this.damagesElement.style.display = 'flex';
             let damagesMapElement = this.damagesElement.getElementsByTagName('img')[0];
             this.damagesPromise = loadImage(
                 `${this.damagemap}&LOCID='${b64encode(info.originid)}'&CANTON='${sheetType}'${

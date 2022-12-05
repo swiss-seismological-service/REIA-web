@@ -1,16 +1,21 @@
 .header {
     &__logo {
-        max-height: 100px;
-        width: 80%;
-        float: right;
+        margin-bottom: $padding-containers;
+
+        img {
+            max-height: 10rem;
+            width: 80%;
+            float: right;
+        }
     }
 
     &__flag {
         position: relative;
         left: -50px;
+        margin-bottom: $padding-containers;
 
         svg {
-            max-height: 100px;
+            max-height: 10rem;
             width: 40%;
             position: relative;
             top: 50%;
@@ -45,7 +50,7 @@
         padding-left: -50px;
         background-color: $color-blue;
         color: white;
-        padding: 1.2rem;
+        padding: $padding-containers;
         
 
         h4 {
@@ -57,6 +62,15 @@
             font-size: 1.8rem;
             display: inline;
         }
+    }
+
+    &__erdbeben {
+        padding: $padding-containers;
+
+        h1 {
+            line-height: 4rem;  
+        }
+        
     }
 
     .col-12 {
