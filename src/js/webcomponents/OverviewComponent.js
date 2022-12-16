@@ -7,7 +7,7 @@ class OverviewComponent extends HTMLElement {
     constructor() {
         super();
         this.pdf = 'yes';
-        console.log(this.pdf);
+
         this.attachShadow({ mode: 'open' });
         this.earthquakes = null;
         this.pdfUrl = 'http://scforge.ethz.ch:8000/pdf?ready_status=ready_to_print&url=';
@@ -19,10 +19,10 @@ class OverviewComponent extends HTMLElement {
         // }, {});
 
         this.injuredmap =
-            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,injured_municipalities_canton,lakes_white,cities_ch&FORMAT=aggpng24';
+            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,injured_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
 
         this.damagemap =
-            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,damage_municipalities_canton,lakes_white,cities_ch&FORMAT=aggpng24';
+            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,damage_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
     }
 
     static get observedAttributes() {
@@ -46,10 +46,9 @@ class OverviewComponent extends HTMLElement {
             this.earthquakes = response;
 
             this.earthquakes = this.earthquakes.map((eq) => {
-                eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}`;
+                eq.url = `/?originid=${b64encode(eq.originid)}`;
                 return eq;
             });
-            console.log(this.earthquakes);
             this.update();
         });
     }

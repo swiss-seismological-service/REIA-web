@@ -1,4 +1,5 @@
 import { getBuildingCosts, getCasualties, getDisplaced } from '../utils/api';
+import getLatestCalculation from '../utils/data';
 
 class RIAScale {
     constructor(earthquakeInfo, sheetType) {
@@ -11,8 +12,8 @@ class RIAScale {
         this.buildingsPromise = null;
 
         earthquakeInfo.then((info) => {
-            let lossId = info.calculation.find((calc) => calc._type === 'losscalculation');
-            this.addScaleData(lossId._oid, sheetType);
+            let loss = getLatestCalculation(info, 'loss');
+            this.addScaleData(loss._oid, sheetType);
         });
     }
 
