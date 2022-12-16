@@ -10,7 +10,7 @@ class OverviewComponent extends HTMLElement {
 
         this.attachShadow({ mode: 'open' });
         this.earthquakes = null;
-        this.pdfUrl = 'http://scforge.ethz.ch:8000/pdf?ready_status=ready_to_print&url=';
+        this.pdfUrl = 'http://ermd.ethz.ch/pdf/?ready_status=ready_to_print&url=';
         this.cantons = Object.fromEntries(cantons);
 
         // this.cantons = cantons.reduce((acc, curr) => {
@@ -46,7 +46,11 @@ class OverviewComponent extends HTMLElement {
             this.earthquakes = response;
 
             this.earthquakes = this.earthquakes.map((eq) => {
-                eq.url = `/?originid=${b64encode(eq.originid)}`;
+                if (this.pdf === 'yes') {
+                    eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}`;
+                } else {
+                    eq.url = `/?originid=${b64encode(eq.originid)}`;
+                }
                 return eq;
             });
             this.update();
