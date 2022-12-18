@@ -8,7 +8,7 @@ class RIAMaps {
         this.shakemapElement = document.getElementById('map-shakemap');
         this.injuredElement = document.getElementById('map-injured');
         this.damagesElement = document.getElementById('map-damages');
-
+        this.cantonElements = document.querySelectorAll('.info-cant-maps');
         this.shakemapPromise = null;
         this.injuredPromise = null;
         this.damagesPromise = null;
@@ -34,6 +34,10 @@ class RIAMaps {
         );
         let damage = getLatestCalculation(info, 'damage');
         let loss = getLatestCalculation(info, 'loss');
+
+        this.cantonElements.forEach((span) => {
+            span.innerHTML = sheetType;
+        });
 
         if (sheetType !== 'CH') {
             // insert cantonal maps

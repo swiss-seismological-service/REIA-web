@@ -43,7 +43,7 @@ class RIAInfo {
         this.infoDepth.innerHTML = info.depth_value;
         this.infoIntensity.innerHTML = round(info.magnitude_value, 1);
         this.infoAuswertung.innerHTML = 'automatisch';
-        this.infoSwiss.innerHTML = `${round(l, 1)} / ${round(b, 1)}`;
+        this.infoSwiss.innerHTML = `${round(l)} / ${round(b)}`;
         this.infoMeta.href = 'http://seismo.ethz.ch';
     }
 

@@ -56,11 +56,6 @@
                         <span id="overview-text">
                             ...
                         </span><br />
-                        Es ist zu erwarten, dass in den nächsten Tagen und Wochen Nachbeben
-                        auftreten werden, die möglicherweise spürbar sind oder weitere
-                        Schäden anrichten. Der Auftritt eines ähnlich grossen oder grösseren
-                        Bebens in den nächsten Tagen oder Wochen ist sehr unwahrscheinlich,
-                        kann allerdings nicht ausgeschlossen werden.
                     </p>
                 </div>
             </div>
@@ -106,9 +101,9 @@
                     <h3>Geschätzte Auswirkungen</h3>
                     <p>
                         Die geschätzten Auswirkungen werden in Intensitätsbereichen beschrieben,
-                        die in fünf Stufen kategorisiert sind. Die Intensität beschreibt
+                        die in acht Stufen kategorisiert sind. Die Intensität beschreibt
                         die Stärke eines Erdbebens basierend auf dem Ausmass der
-                        Zerstörung (Gebäude, Landschaft) und der subjektiven Wahrnehmung
+                        Auswirkungen und der subjektiven Wahrnehmung
                         eines Beobachters.</p>
                     <img id="map-shakemap" class="shakemap__image" src="">
                     <div class="shakemap__legend">
@@ -118,8 +113,7 @@
             </div>
             <div class="col-6 losscharts">
                 <div class="losscharts__container">
-                    <loss-component id="loss-casualties" type="casualties" mean="0" q10="0" q90="0"
-                        thresholds="0,5,50,100,500,5000">
+                    <loss-component id="loss-casualties" type="casualties" thresholds="0,5,50,100,500,5000">
                         <div slot="titleslot">
                             <h3 class="loss__title">Anzahl Todesopfer <span class="overview-place"></span></h3>
                             <p class="loss__text">
@@ -129,8 +123,7 @@
                     </loss-component>
                 </div>
                 <div class="losscharts__container">
-                    <loss-component id="loss-displaced" type="displaced" mean="0" q10="0" q90="0"
-                        thresholds="0,50,500,5000,50000,500000">
+                    <loss-component id="loss-displaced" type="displaced" thresholds="0,50,500,5000,50000,500000">
                         <div slot="titleslot">
                             <h3 class="loss__title">Anzahl Schutzsuchender <span class="overview-place"></span></h3>
                             <p class="loss__text">
@@ -141,10 +134,10 @@
                     </loss-component>
                 </div>
                 <div class="losscharts__container">
-                    <loss-component id="loss-buildingcosts" type="buildingCosts" mean="0" q10="0" q90="0"
+                    <loss-component id="loss-buildingcosts" type="buildingCosts"
                         thresholds="0,10000000,100000000,1000000000,10000000000,100000000000">
                         <div slot="titleslot">
-                            <h3 class="loss__title">Anzahl Todesopfer <span class="overview-place"></span></h3>
+                            <h3 class="loss__title">Kosten Gebäudeschäden <span class="overview-place"></span></h3>
                             <p class="loss__text">
                                 Die Kosten für Gebäudeschäden liegen mit grosser Wahrscheinlichkeit im eingefärbten
                                 Bereich.
@@ -164,7 +157,9 @@
                                 Anzahl Verletzte
                             </h3>
                             <p>
-                                Le nombre de blessés dans les communes du canton de VD.
+                                Die Anzahl verletzter Personen in den Gemeinden des Kantons <span
+                                    class="info-cant-maps">
+                                    liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
                             </p>
                         </div>
                         <div>
@@ -181,7 +176,7 @@
                             </h3>
                             <p>
                                 Die Zahl der Verletzten pro Kanton und im Fürstentum Liechtenstein liegt mit grosser
-                                Wahrscheinlichkeit im eingefärbten Bereich.
+                                Wahrscheinlichkeit im eingeärbten Bereich.
                             </p>
                         </div>
                         <div>
@@ -196,10 +191,10 @@
                         <div>
                             <h3>Gebäudeschäden</h3>
                             <p>
-                                Le pourcentage de bâtiments résidentiels et commerciaux présentant
-                                des dommages modérés à très graves dans les communes du
-                                canton du VD indiqué correspond à la fraction moyenne de bâtiments
-                                endommagés.
+                                Das Ausmass mässiger bis sehr starke Schäden an Gebäuden in den Gemeinden des Kantons
+                                <span class="info-cant-maps"></span>
+                                liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich. Die Prozentangabe
+                                entspricht dem mittleren Anteil der beschädigten Gebäude.
                             </p>
                         </div>
                         <div>
@@ -213,9 +208,9 @@
                         <div>
                             <h3>Gebäudeschäden</h3>
                             <p>
-                                Das Ausmass mässiger bis sehr starken Schäden an Wohn- und Geschäftsgebäuden pro
-                                Kanton und im Fürstentum Liechtenstein liegt mit grosser Wahrscheinlichkeit im
-                                eingefärbten Bereich.<br />
+                                Das Ausmass mässiger bis sehr starker Schäden an Gebäuden pro Kanton und im Fürstentum
+                                Liechtenstein
+                                liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.<br />
 
                                 Der Prozentsatz entspricht dem durchschnittlichen Anteil der beschädigten Gebäude
                                 pro Kanton.

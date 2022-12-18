@@ -8,9 +8,9 @@ class LossComponent extends HTMLElement {
     constructor() {
         super();
 
-        this.mean = 0;
-        this.q10 = 0;
-        this.q90 = 0;
+        this.mean = null;
+        this.q10 = null;
+        this.q90 = null;
         this.type = null;
         this.thresholds = [0, 0, 0, 0, 0, 0];
 
@@ -36,7 +36,7 @@ class LossComponent extends HTMLElement {
 
         if (property === 'type' && newValue != null) this.setSVGs();
 
-        if (property === 'mean' && newValue > 0) this.showScale();
+        if (property === 'mean' && !Number.isNaN(newValue)) this.showScale();
         this.selectIcon();
         this.update();
         this.calculateLevel();
