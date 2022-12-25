@@ -44,3 +44,16 @@ export function getBuildingCosts(oid, tag) {
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
+
+export function getInjured(oid, tag) {
+    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/nonstructural`;
+    if (tag === 'CH') return getData(`${base}/Country`);
+    return getData(`${base}/Canton?aggregation_tag=${tag}`);
+}
+
+export function getCantonalInjuries(oid) {
+    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/nonstructural/Canton`;
+    let cantonal = getData(base);
+    let country = getInjured(oid, 'CH');
+    return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));
+}

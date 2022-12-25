@@ -1,0 +1,248 @@
+[
+    {
+        "mean": 19109.7381183353,
+        "quantile10": 1374.2235744666439,
+        "quantile90": 47335.73676663914,
+        "losscategory": "structural",
+        "tag": "AG",
+        "percentage": 10.143173098904086
+    },
+    {
+        "mean": 0.9210186642009718,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 3.072746690817463,
+        "losscategory": "structural",
+        "tag": "AI",
+        "percentage": 0.012800815346782096
+    },
+    {
+        "mean": 2.9516971364800715,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 9.916156049152793,
+        "losscategory": "structural",
+        "tag": "AR",
+        "percentage": 0.013965258972748256
+    },
+    {
+        "mean": 853.8009814437908,
+        "quantile10": 0.8751305421407343,
+        "quantile90": 2647.8158379860934,
+        "losscategory": "structural",
+        "tag": "BE",
+        "percentage": 0.27643803347939533
+    },
+    {
+        "mean": 478.951165155359,
+        "quantile10": 0.6204073886524784,
+        "quantile90": 1390.1288051009258,
+        "losscategory": "structural",
+        "tag": "BL",
+        "percentage": 0.6342379961271241
+    },
+    {
+        "mean": 344.6682594118611,
+        "quantile10": 0.08765659953864718,
+        "quantile90": 1161.4723926946251,
+        "losscategory": "structural",
+        "tag": "BS",
+        "percentage": 1.2894435443765846
+    },
+    {
+        "mean": 4.876946908250817,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 14.70273499229681,
+        "losscategory": "structural",
+        "tag": "FL",
+        "percentage": 0.03651229249270657
+    },
+    {
+        "mean": 16.27298694191877,
+        "quantile10": 0.0026829222595743996,
+        "quantile90": 50.104569103847204,
+        "losscategory": "structural",
+        "tag": "FR",
+        "percentage": 0.018164248495243524
+    },
+    {
+        "mean": 4.921730164355255,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 31.811382861699386,
+        "losscategory": "structural",
+        "tag": "GE",
+        "percentage": 0.008486619588845837
+    },
+    {
+        "mean": 25.90817360496744,
+        "quantile10": 0.0011910062973333232,
+        "quantile90": 87.00998992289145,
+        "losscategory": "structural",
+        "tag": "GL",
+        "percentage": 0.13726911944986459
+    },
+    {
+        "mean": 20.048108689700953,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 68.72863599335149,
+        "losscategory": "structural",
+        "tag": "GR",
+        "percentage": 0.017811516555790358
+    },
+    {
+        "mean": 30.115516789265634,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 92.69510770756811,
+        "losscategory": "structural",
+        "tag": "JU",
+        "percentage": 0.10075448909088536
+    },
+    {
+        "mean": 2715.832584701239,
+        "quantile10": 24.660298889263117,
+        "quantile90": 6588.232054997879,
+        "losscategory": "structural",
+        "tag": "LU",
+        "percentage": 2.675143649787964
+    },
+    {
+        "mean": 12.791203155904903,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 41.54668483343689,
+        "losscategory": "structural",
+        "tag": "NE",
+        "percentage": 0.03128427900287354
+    },
+    {
+        "mean": 55.2579516026153,
+        "quantile10": 0.08092929584285616,
+        "quantile90": 169.56281156779713,
+        "losscategory": "structural",
+        "tag": "NW",
+        "percentage": 0.4839547346524374
+    },
+    {
+        "mean": 37.92726301346607,
+        "quantile10": 0.024565163138888305,
+        "quantile90": 123.94541455000432,
+        "losscategory": "structural",
+        "tag": "OW",
+        "percentage": 0.265764578610231
+    },
+    {
+        "mean": 119.3964019599064,
+        "quantile10": 0.09070239870660503,
+        "quantile90": 372.50544204476563,
+        "losscategory": "structural",
+        "tag": "SG",
+        "percentage": 0.0804552543176302
+    },
+    {
+        "mean": 62.34424438608734,
+        "quantile10": 0.026258109452631274,
+        "quantile90": 193.52750516448486,
+        "losscategory": "structural",
+        "tag": "SH",
+        "percentage": 0.26617814185845506
+    },
+    {
+        "mean": 1860.2839595277444,
+        "quantile10": 20.729382727626277,
+        "quantile90": 4865.332960356376,
+        "losscategory": "structural",
+        "tag": "SO",
+        "percentage": 2.2426299375869423
+    },
+    {
+        "mean": 121.94069896877758,
+        "quantile10": 0.15293018822220816,
+        "quantile90": 379.5406824876512,
+        "losscategory": "structural",
+        "tag": "SZ",
+        "percentage": 0.279296149722349
+    },
+    {
+        "mean": 104.0690418745938,
+        "quantile10": 0.04243302989130427,
+        "quantile90": 324.9555562815869,
+        "losscategory": "structural",
+        "tag": "TG",
+        "percentage": 0.1228127190570863
+    },
+    {
+        "mean": 11.341564533734246,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 38.973652992276314,
+        "losscategory": "structural",
+        "tag": "TI",
+        "percentage": 0.008064653768129988
+    },
+    {
+        "mean": 22.494938642955162,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 80.01620765669807,
+        "losscategory": "structural",
+        "tag": "UR",
+        "percentage": 0.1436458406318976
+    },
+    {
+        "mean": 24.744280369758542,
+        "quantile10": 0.0001346379089247195,
+        "quantile90": 73.30829845858109,
+        "losscategory": "structural",
+        "tag": "VD",
+        "percentage": 0.014761776577195714
+    },
+    {
+        "mean": 21.9203431689337,
+        "quantile10": {
+            "value": "0.0n",
+            "type": "Big Number"
+        },
+        "quantile90": 70.42254545738285,
+        "losscategory": "structural",
+        "tag": "VS",
+        "percentage": 0.015005711369751987
+    },
+    {
+        "mean": 505.17564279067767,
+        "quantile10": 4.2795418000466965,
+        "quantile90": 1280.8085217137043,
+        "losscategory": "structural",
+        "tag": "ZG",
+        "percentage": 2.389780229862707
+    },
+    {
+        "mean": 3664.515684963843,
+        "quantile10": 22.321116783221967,
+        "quantile90": 9434.045538349035,
+        "losscategory": "structural",
+        "tag": "ZH",
+        "percentage": 1.4156853498591246
+    }
+]
