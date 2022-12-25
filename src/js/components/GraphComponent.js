@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
-import loadImage from '../utils/images';
-import { getCantonalInjuries } from '../utils/api';
+import { getCantonalInjuries, getCantonalStructuralDamage } from '../utils/api';
 import getLatestCalculation from '../utils/data';
 import CantonalGraph from '../utils/CantonalGraph';
 
@@ -30,7 +29,7 @@ class RIAGraphs {
                 marginRight: 20,
                 widthDamage: 0,
                 gutter: 60,
-                x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
+                x: (d) => [d.quantile10, d.mean, d.quantile90],
                 y: (d) => d.tag,
                 xType: d3.scaleLog,
                 xTickFormat: (d) =>
@@ -47,8 +46,28 @@ class RIAGraphs {
         });
 
         this.damagesElement.style.display = 'block';
-        let damagesGraphElement = this.damagesElement.getElementsByTagName('img')[0];
-        this.damagesPromise = loadImage('images/graph_schaden.png', damagesGraphElement);
+        let damagesGraphElement = this.damagesElement.querySelector('div:last-of-type');
+        this.damagesPromise = getCantonalStructuralDamage(damage._oid).then((data) => {
+            const thegraph2 = CantonalGraph(data, {
+                // marginLeft: 30,
+                // marginRight: 20,
+                // widthDamage: 0,
+                gutter: 40,
+                x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
+                y: (d) => d.tag,
+                xType: d3.scaleLog,
+                xTickFormat: (d) =>
+                    d === 1
+                        ? '0'
+                        : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+                xDomain: [1, 500000],
+                xTickValues: [0, 50, 500, 5000, 50000],
+                width: 600,
+                height: 350,
+                displayValue: true,
+            });
+            damagesGraphElement.append(thegraph2);
+        });
     }
 }
 

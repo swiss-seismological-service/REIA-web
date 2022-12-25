@@ -33,8 +33,7 @@ export default function CantonalGraph(
 
     let defs = svg.append('defs');
 
-    let colorscale = defs
-        .append('linearGradient')
+    defs.append('linearGradient')
         .attr('id', 'colorscale-gradient')
         .call((gradient) => {
             gradient
@@ -129,29 +128,18 @@ export default function CantonalGraph(
         const iconHeight = height * 0.05;
 
         // HOUSE SVG
-        // d3.svg("haus.svg").then(function(xml) {
-        //   svg.node().appendChild(xml.documentElement);
-        // });
-
         // LEFT
-        const prom1 = d3
-            .svg('images/icons/haus.svg')
-            // .text()
-            .then((txt) => {
-                const document = new DOMParser().parseFromString(txt, 'image/svg+xml');
-                const icon = d3.select(document.documentElement).remove();
-                const child = svg.node().appendChild(icon.node());
-            });
+        const prom1 = d3.svg('images/icons/haus.svg').then((icon) => {
+            const iconNode = d3.select(icon.documentElement).remove();
+            svg.node().appendChild(iconNode.node());
+        });
 
         // RIGHT
-        const prom2 = d3
-            .svg('images/icons/haus.svg')
-            // .text()
-            .then((txt) => {
-                const document = new DOMParser().parseFromString(txt, 'image/svg+xml');
-                const icon = d3.select(document.documentElement).remove();
-                const child = svg.node().appendChild(icon.node());
-            });
+        const prom2 = d3.svg('images/icons/haus.svg').then((icon) => {
+            const iconNode = d3.select(icon.documentElement).remove();
+            svg.node().appendChild(iconNode.node());
+        });
+
         // POSITION
         Promise.all([prom1, prom2]).then(() => {
             svg.selectAll('svg svg')
@@ -175,7 +163,7 @@ export default function CantonalGraph(
         svg.append('g')
             .attr('font-family', 'Verdana, Arial, sans-serif')
             .attr('text-anchor', 'end')
-            .attr('font-size', 8)
+            .attr('font-size', '8')
             .attr('font-weight', 100)
             .selectAll('text')
             .data(I)
@@ -232,35 +220,6 @@ export default function CantonalGraph(
         .attr('width', dataWidth)
         .attr('height', yScale.bandwidth());
 
-    // X-AXIS AND STROKES
-    // LEFT
-    svg.append('g')
-        .attr('transform', `translate(0,${marginTop})`)
-        .attr('stroke-width', '0.5')
-        .call(xAxis)
-        .call((g) =>
-            g
-                .selectAll('.tick line')
-                .clone()
-                .attr('y2', height - marginTop - marginBottom)
-        )
-        .call((g) => g.selectAll('.domain').remove())
-        .call((g) => g.selectAll('.tick text').attr('font-size', '11px'));
-
-    // RIGHT
-    svg.append('g')
-        .attr('transform', `translate(${rightColumnStart},${marginTop})`)
-        .attr('stroke-width', '0.5')
-        .call(xAxis)
-        .call((g) =>
-            g
-                .selectAll('.tick line')
-                .clone()
-                .attr('y2', height - marginTop - marginBottom)
-        )
-        .call((g) => g.selectAll('.domain').remove())
-        .call((g) => g.selectAll('.tick text').attr('font-size', '11px'));
-
     // DATA BARS
     defs.append('mask')
         .attr('id', 'data-mask')
@@ -313,6 +272,35 @@ export default function CantonalGraph(
                 .attr('font-size', '12px')
                 .attr('font-family', 'Verdana, Arial, sans-serif')
         );
+
+    // X-AXIS AND STROKES
+    // LEFT
+    svg.append('g')
+        .attr('transform', `translate(0,${marginTop})`)
+        .attr('stroke-width', '0.5')
+        .call(xAxis)
+        .call((g) =>
+            g
+                .selectAll('.tick line')
+                .clone()
+                .attr('y2', height - marginTop - marginBottom)
+        )
+        .call((g) => g.selectAll('.domain').remove())
+        .call((g) => g.selectAll('.tick text').attr('font-size', '11px'));
+
+    // RIGHT
+    svg.append('g')
+        .attr('transform', `translate(${rightColumnStart},${marginTop})`)
+        .attr('stroke-width', '0.5')
+        .call(xAxis)
+        .call((g) =>
+            g
+                .selectAll('.tick line')
+                .clone()
+                .attr('y2', height - marginTop - marginBottom)
+        )
+        .call((g) => g.selectAll('.domain').remove())
+        .call((g) => g.selectAll('.tick text').attr('font-size', '11px'));
 
     return svg.node();
 }
