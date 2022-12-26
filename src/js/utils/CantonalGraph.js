@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 
 export default function CantonalGraph(
     data,
+    unique,
     {
         x = (d) => d, // given d in data, returns the (quantitative) x-value
         y = (d, i) => i, // given d in data, returns the (ordinal) y-value
@@ -29,12 +30,12 @@ export default function CantonalGraph(
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
-        .attr('style', 'max-width: 100%; height: auto; height: intrinsic;');
+        .attr('style', `width: ${width}px!important; height: ${height}px!important`);
 
     let defs = svg.append('defs');
 
     defs.append('linearGradient')
-        .attr('id', 'colorscale-gradient')
+        .attr('id', `colorscale-gradient-${unique}`)
         .call((gradient) => {
             gradient
                 .append('stop')
@@ -190,21 +191,30 @@ export default function CantonalGraph(
     defs.selectAll('foo')
         .data(I)
         .join('linearGradient')
-        .attr('id', (i) => `mask-gradient-${Y[i]}`)
+        .attr('id', (i) => `mask-gradient-${unique}-${Y[i]}`)
         .call((gradient) => {
             gradient
                 .append('stop')
-                .attr('offset', (i) => (xScale(X[i][0]) - xScale(0)) / xScale(xDomain[1]))
+                .attr(
+                    'offset',
+                    (i) => (xScale(X[i][0]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
             gradient
                 .append('stop')
-                .attr('offset', (i) => (xScale(X[i][1]) - xScale(0)) / xScale(xDomain[1]))
+                .attr(
+                    'offset',
+                    (i) => (xScale(X[i][1]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '1');
             gradient
                 .append('stop')
-                .attr('offset', (i) => (xScale(X[i][2]) - xScale(0)) / xScale(xDomain[1]))
+                .attr(
+                    'offset',
+                    (i) => (xScale(X[i][2]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
         });
@@ -222,7 +232,7 @@ export default function CantonalGraph(
 
     // DATA BARS
     defs.append('mask')
-        .attr('id', 'data-mask')
+        .attr('id', `data-mask-${unique}`)
         .selectAll('foo')
         .data(I)
         .join('rect')
@@ -230,23 +240,23 @@ export default function CantonalGraph(
         .attr('y', (i) => yScale(Y[i - getHalf(i) * half]))
         .attr('width', dataWidth)
         .attr('height', yScale.bandwidth())
-        .attr('fill', (i) => `url(#mask-gradient-${Y[i]})`);
+        .attr('fill', (i) => `url(#mask-gradient-${unique}-${Y[i]})`);
 
     svg.append('rect')
         .attr('x', xScale(0))
         .attr('y', yScale(0))
         .attr('width', dataWidth)
         .attr('height', height)
-        .style('fill', 'url(#colorscale-gradient)')
-        .attr('mask', 'url(#data-mask)');
+        .style('fill', `url(#colorscale-gradient-${unique})`)
+        .attr('mask', `url(#data-mask-${unique})`);
 
     svg.append('rect')
         .attr('x', xScale(0) + rightColumnStart)
         .attr('y', yScale(0))
         .attr('width', dataWidth)
         .attr('height', height)
-        .style('fill', 'url(#colorscale-gradient)')
-        .attr('mask', 'url(#data-mask)');
+        .style('fill', `url(#colorscale-gradient-${unique})`)
+        .attr('mask', `url(#data-mask-${unique})`);
 
     // Y AXIS LABELS
     //   LEFT

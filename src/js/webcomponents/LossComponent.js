@@ -31,15 +31,20 @@ class LossComponent extends HTMLElement {
     // attribute change
     attributeChangedCallback(property, oldValue, newValue) {
         if (oldValue === newValue) return;
+
         if (property === 'thresholds') newValue = newValue.split(',').map((n) => parseFloat(n));
+
         this[property] = newValue;
 
         if (property === 'type' && newValue != null) this.setSVGs();
 
         if (property === 'mean' && !Number.isNaN(newValue)) this.showScale();
+
         this.selectIcon();
+
+        if (this.mean != null && this.q10 != null && this.q90 != null) this.calculateLevel();
+
         this.update();
-        this.calculateLevel();
     }
 
     showScale = () => {

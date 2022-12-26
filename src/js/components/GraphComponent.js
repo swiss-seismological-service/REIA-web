@@ -24,7 +24,7 @@ class RIAGraphs {
         this.injuredElement.style.display = 'block';
         let injuredGraphElement = this.injuredElement.querySelector('div:last-of-type');
         this.injuredPromise = getCantonalInjuries(loss._oid).then((data) => {
-            const thegraph = CantonalGraph(data, {
+            const thegraph = CantonalGraph(data, 1, {
                 marginLeft: 30,
                 marginRight: 20,
                 widthDamage: 0,
@@ -48,10 +48,9 @@ class RIAGraphs {
         this.damagesElement.style.display = 'block';
         let damagesGraphElement = this.damagesElement.querySelector('div:last-of-type');
         this.damagesPromise = getCantonalStructuralDamage(damage._oid).then((data) => {
-            const thegraph2 = CantonalGraph(data, {
-                // marginLeft: 30,
-                // marginRight: 20,
-                // widthDamage: 0,
+            const thegraph2 = CantonalGraph(data, 2, {
+                marginLeft: 30,
+                marginRight: 20,
                 gutter: 40,
                 x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
                 y: (d) => d.tag,

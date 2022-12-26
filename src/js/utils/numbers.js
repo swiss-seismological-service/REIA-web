@@ -17,3 +17,7 @@ export function numberToString(number) {
     if (number < 1000000000) return `${number / 1000000} Mio.`;
     return `${number / 1000000000} Mia.`;
 }
+
+export function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+}

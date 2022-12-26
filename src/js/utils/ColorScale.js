@@ -1,3 +1,5 @@
+import { clamp } from './numbers';
+
 export function ColorScale(canvasElement = null, width = null, height = null) {
     if (!canvasElement) {
         canvasElement = document.createElement('CANVAS');
@@ -49,5 +51,10 @@ export function getPercentage(value, thresholds) {
     let index = thresholds.findIndex((el) => el > value);
     if (index < 0) return 1;
     let [smaller, bigger] = thresholds.slice(index - 1, index + 1);
-    return ((value - smaller) / (bigger - smaller)) * 0.2 + (index - 1) * 0.2;
+    let minLog = Math.log10(Math.max(smaller, 1));
+    let maxLog = Math.log10(bigger);
+    return (
+        ((Math.log10(clamp(value, 1, bigger)) - minLog) / (maxLog - minLog)) * 0.2 +
+        (index - 1) * 0.2
+    );
 }
