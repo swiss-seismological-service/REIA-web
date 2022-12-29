@@ -30,7 +30,8 @@ export default function CantonalGraph(
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
-        .attr('style', `width: ${width}px!important; height: ${height}px!important`);
+        // .attr('style', `width: ${width}px!important; height: ${height}px!important`);
+        .attr('style', 'max-width: 100%; height: auto; height: intrinsic;');
 
     let defs = svg.append('defs');
 
