@@ -16,7 +16,45 @@
         }
 
         &__legende {
-            height: 6rem;
+            margin: 1rem 0.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+
+            &__icon {
+                display: flex;
+                flex-direction: column;
+                font-size: 1rem;
+
+                svg {
+                    height: 5rem;
+                }
+
+                &:first-of-type {
+                    .cls-4,
+                    .cls-3 {fill: $color-level1;}
+                }
+
+                &:nth-of-type(2) {
+                    .cls-4,
+                    .cls-3 {fill: $color-level2;}
+                }
+
+                &:nth-of-type(3) {
+                    .cls-4,
+                    .cls-3 {fill: $color-level3;}
+                }
+
+                &:nth-of-type(4) {
+                    .cls-4,
+                    .cls-3 {fill: $color-level4;}
+                }
+
+                &:nth-of-type(5) {
+                    .cls-4,
+                    .cls-3 {fill: $color-level5;}
+                }
+            }
         }
     }
 
