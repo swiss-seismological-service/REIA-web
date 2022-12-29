@@ -245,17 +245,17 @@ export default function CantonalGraph(
 
     svg.append('rect')
         .attr('x', xScale(0))
-        .attr('y', yScale(0) - innerPadding / 2)
+        .attr('y', yScale(Y[0]) - outerPadding)
         .attr('width', dataWidth)
-        .attr('height', height)
+        .attr('height', height - yScale(Y[0]) - outerPadding)
         .style('fill', `url(#colorscale-gradient-${unique})`)
         .attr('mask', `url(#data-mask-${unique})`);
 
     svg.append('rect')
         .attr('x', xScale(0) + rightColumnStart)
-        .attr('y', yScale(0) - innerPadding / 2)
+        .attr('y', yScale(Y[0]) - outerPadding)
         .attr('width', dataWidth)
-        .attr('height', height - innerPadding)
+        .attr('height', height - yScale(Y[0]) - outerPadding)
         .style('fill', `url(#colorscale-gradient-${unique})`)
         .attr('mask', `url(#data-mask-${unique})`);
 
