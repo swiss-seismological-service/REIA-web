@@ -245,7 +245,7 @@ export default function CantonalGraph(
 
     svg.append('rect')
         .attr('x', xScale(0))
-        .attr('y', yScale(0))
+        .attr('y', yScale(0) - innerPadding / 2)
         .attr('width', dataWidth)
         .attr('height', height)
         .style('fill', `url(#colorscale-gradient-${unique})`)
@@ -253,9 +253,9 @@ export default function CantonalGraph(
 
     svg.append('rect')
         .attr('x', xScale(0) + rightColumnStart)
-        .attr('y', yScale(0))
+        .attr('y', yScale(0) - innerPadding / 2)
         .attr('width', dataWidth)
-        .attr('height', height)
+        .attr('height', height - innerPadding)
         .style('fill', `url(#colorscale-gradient-${unique})`)
         .attr('mask', `url(#data-mask-${unique})`);
 
