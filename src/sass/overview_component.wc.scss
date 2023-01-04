@@ -4,27 +4,13 @@
 @import "node_modules/bootstrap/scss/mixins";
 @import "node_modules/bootstrap/scss/utilities";
 
+
 @import "node_modules/bootstrap/scss/root";
 @import "node_modules/bootstrap/scss/reboot";
 @import "node_modules/bootstrap/scss/containers";
 @import "node_modules/bootstrap/scss/grid";
 @import "node_modules/bootstrap/scss/tables";
-@import "node_modules/bootstrap/scss/forms";
 
-@import "abstracts/functions";
-@import "abstracts/mixins";
-@import "abstracts/variables";
-
-@import "base/animations";
-@import "base/base";
-@import "base/print";
-@import "base/typography";
-@import "base/utilities";
-
-@import "layout/cantonal";
-@import "layout/footer";
-@import "layout/grid";
-@import "layout/header";
-@import "layout/losscharts";
-@import "layout/overview";
-@import "layout/shakemap";
+* {
+    font-size: 1.2rem;
+}

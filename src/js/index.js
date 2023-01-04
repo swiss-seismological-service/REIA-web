@@ -1,15 +1,12 @@
 import { getEarthquake } from './utils/api';
-import LossComponent from './webcomponents/LossComponent';
-import OverviewComponent from './webcomponents/OverviewComponent';
+import { initI18next, translatePageElements } from './components/i18nComponent';
+import LossComponent from './webcomponents/LossComponent'; // eslint-disable-line
 import RIAGraphs from './components/GraphComponent';
 import RIAInfo from './components/InfoComponent';
 import RIAScale from './components/ScaleComponent';
 import RIAMaps from './components/MapComponent';
 
-if (
-    window.location.pathname !== '/overview.html' &&
-    window.location.pathname !== '/overview_web.html'
-) {
+(async function () { // eslint-disable-line
     const params = new URLSearchParams(window.location.search);
     const originid = params.get('originid');
     const canton = params.get('canton');
@@ -20,7 +17,7 @@ if (
 
     const earthquakeInfo = getEarthquake(originid);
 
-    const info = new RIAInfo(earthquakeInfo, canton || 'CH');
+    const info = new RIAInfo(earthquakeInfo, canton || 'CH'); // eslint-disable-line
     const scales = new RIAScale(earthquakeInfo, canton || 'CH');
     const maps = new RIAMaps(earthquakeInfo, canton || 'CH');
 
@@ -33,7 +30,11 @@ if (
 
         Promise.all(promises).then(() => {
             window.status = 'ready_to_print';
-            console.log('ready_to_print');
+            console.log('ready_to_print'); // eslint-disable-line
         });
     });
-}
+
+    // Init
+    await initI18next();
+    translatePageElements();
+})();

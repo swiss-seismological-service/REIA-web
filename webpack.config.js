@@ -19,6 +19,7 @@ const htmlPluginEntries = templateFiles.map(
         new HTMLWebpackPlugin({
             inject: 'body',
             hash: true,
+            chunks: [path.parse(template).name],
             scriptLoading: 'blocking',
             filename: template,
             template: path.resolve(__dirname, 'src/', template),
@@ -48,11 +49,15 @@ module.exports = {
             path.resolve(__dirname, 'src/js', 'index.js'),
             path.resolve(__dirname, 'src/sass', 'main.scss'),
         ],
+        overview: [
+            path.resolve(__dirname, 'src/js', 'overview.js'),
+            path.resolve(__dirname, 'src/sass', 'minimal.scss'),
+        ],
     },
 
     mode: process.env.NODE_ENV,
 
-    // default output folder. Possibly overwritten in subconfig
+    // default output folder.
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
@@ -147,16 +152,6 @@ module.exports = {
         hot: false,
         host: '127.0.0.1',
         port: 5000,
-        // proxy: {
-        //     '/api': {
-        //         target: 'http://localhost:8000',
-        //         pathRewrite: { '^/api': '' }, // In this case we don't pass `api` path
-        //     },
-        //     '/ocmsApi': {
-        //         target: 'http://localhost:80',
-        //         pathRewrite: { '^/ocmsApi': '' }, // In this case we don't pass `api` path
-        //     },
-        // },
     },
 
     /* File watcher options */
@@ -186,13 +181,22 @@ module.exports = {
     plugins: [
         new WebpackBundleAnalyzer(),
         new MiniCssExtractPlugin({
-            filename: 'css/style.css',
+            // filename: 'css/style.css',
+            filename: 'css/[name].css',
         }),
         new CopyWebpackPlugin({
             patterns: [
                 {
                     from: path.resolve('src', 'images'),
                     to: path.resolve('dist', 'images'),
+                    toType: 'dir',
+                    globOptions: {
+                        ignore: ['*.DS_Store', 'Thumbs.db'],
+                    },
+                },
+                {
+                    from: path.resolve('src', 'data', 'lang'),
+                    to: path.resolve('dist', 'lang'),
                     toType: 'dir',
                     globOptions: {
                         ignore: ['*.DS_Store', 'Thumbs.db'],
