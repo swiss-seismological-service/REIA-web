@@ -18,10 +18,11 @@ export default function CantonalGraph(
         xType = d3.scaleLinear, // type of x-scale
         xDomain, // [xmin, xmax]
         xTickFormat,
-        xTickValues = [0, 1, 100, 1000, 10000],
+        xTickValues = [1, 100, 1000, 10000],
         yPaddingInner = 0.4, // amount of y-range to reserve to separate bars
         yPaddingOuter = 0.2,
         displayValue = true,
+        symlogConstant = 1,
     } = {}
 ) {
     // SVG
@@ -96,6 +97,7 @@ export default function CantonalGraph(
 
     // Construct scales and axes.
     const xScale = xType(xDomain, xRange);
+    if (xType === d3.scaleSymlog) xScale.constant(symlogConstant);
     if (xType === d3.scaleLog) xScale.clamp(true);
 
     const yScale = d3.scaleBand(yDomain, yRangeFull).paddingInner(yPaddingInner).paddingOuter(0.2);
