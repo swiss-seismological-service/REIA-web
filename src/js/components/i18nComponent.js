@@ -10,9 +10,10 @@ export async function initI18next() {
             //   lng: "de",
             supportedLngs: ['en', 'de', 'fr', 'it'],
             fallbackLng: 'de',
-            debug: true,
+            // debug: true,
+            ns: ['report', 'explanation'],
             backend: {
-                loadPath: '/lang/{{lng}}.json',
+                loadPath: '/lang/{{lng}}-{{ns}}.json',
             },
             detection: {
                 caches: ['localStorage', 'cookie'],

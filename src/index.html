@@ -21,22 +21,23 @@
             </div>
             <div class="col-12">
                 <div class="header__box">
-                    <h4 id="subtitle" data-i18n-key="headerbar">Erste schnelle Schadensabschätzung – Ausgabedatum: </h4>
+                    <h4 id="subtitle" data-i18n-key="report:headerbar">Erste schnelle Schadensabschätzung –
+                        Ausgabedatum: </h4>
                     <p id="header-datetime">...</p>
                 </div>
             </div>
             <div class="col-12 header__erdbeben">
-                <h1><span data-i18n-key="title">Erdbeben bei</span> <span id="header-title">...</span></h1>
+                <h1><span data-i18n-key="report:title">Erdbeben bei</span> <span id="header-title">...</span></h1>
             </div>
         </div>
 
 
         <div class="row grid">
             <div class="col-6 overview__magnitude">
-                <h2><span data-i18n-key="mag">Magnitude</span> <span id="overview-magnitude">...</span> [Mw]</h2>
+                <h2><span data-i18n-key="report:mag">Magnitude</span> <span id="overview-magnitude">...</span> [Mw]</h2>
             </div>
             <div class="col-6 overview__stufe">
-                <h2 data-i18n-key="ueberblick-stufe">Gefahrenstufe</h2>
+                <h2 data-i18n-key="report:ueberblick-stufe">Gefahrenstufe</h2>
 
                 <h2 class="overview__stufe__number overview__stufe__number-1">1</h2>
                 <h2 class="overview__stufe__number overview__stufe__number-2">2</h2>
@@ -47,7 +48,7 @@
             </div>
             <div class="col-6">
                 <div class="grid__vertical-text">
-                    <h2 data-i18n-key="ueberblick">Überblick</h2>
+                    <h2 data-i18n-key="report:ueberblick">Überblick</h2>
                 </div>
                 <div>
                     <p>
@@ -61,31 +62,31 @@
                 <table class="table table-sm overview__table">
                     <tbody>
                         <tr>
-                            <td data-i18n-key="ueberblick-zeit">Lokalzeit</td>
+                            <td data-i18n-key="report:ueberblick-zeit">Lokalzeit</td>
                             <td id="info-time">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="ueberblick-datum">Datum</td>
+                            <td data-i18n-key="report:ueberblick-datum">Datum</td>
                             <td id="info-date">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="ueberblick-tiefe">Herdtiefe [km]</td>
+                            <td data-i18n-key="report:ueberblick-tiefe">Herdtiefe [km]</td>
                             <td id="info-depth">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="mag">Magnitude [Mw]</td>
+                            <td data-i18n-key="report:mag">Magnitude [Mw]</td>
                             <td id="info-intensity">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="ueberblick-auswertung">Auswertung</td>
-                            <td id="info-auswertung" data-i18n-key="ueberblick-auswertung-val">...</td>
+                            <td data-i18n-key="report:ueberblick-auswertung">Auswertung</td>
+                            <td id="info-auswertung" data-i18n-key="report:ueberblick-auswertung-val">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="ueberblick-koord">Schweizer Koordinaten</td>
+                            <td data-i18n-key="report:ueberblick-koord">Schweizer Koordinaten</td>
                             <td id="info-swiss">...</td>
                         </tr>
                         <tr>
-                            <td data-i18n-key="ueberblick-weiter">Weitere Ereignisdaten</td>
+                            <td data-i18n-key="report:ueberblick-weiter">Weitere Ereignisdaten</td>
                             <td><a id="info-meta" href="">Link</a></td>
                         </tr>
                     </tbody>
@@ -93,11 +94,11 @@
             </div>
             <div class="col-6 shakemap">
                 <div class="grid__vertical-text">
-                    <h2 data-i18n-key="national">National</h2>
+                    <h2 data-i18n-key="report:national">National</h2>
                 </div>
                 <div>
-                    <h3 data-i18n-key="auswirkungen-title">Geschätzte Auswirkungen</h3>
-                    <p data-i18n-key="auswirkungen-text">
+                    <h3 data-i18n-key="report:auswirkungen-title">Geschätzte Auswirkungen</h3>
+                    <p data-i18n-key="report:auswirkungen-text">
                         Die geschätzten Auswirkungen werden in Intensitätsbereichen beschrieben,
                         die in acht Stufen kategorisiert sind. Die Intensität beschreibt
                         die Stärke eines Erdbebens basierend auf dem Ausmass der
@@ -105,7 +106,7 @@
                         eines Beobachters.</p>
                     <img id="map-shakemap" class="shakemap__image" src="">
                     <div class="shakemap__legend">
-                        <img src="images/legende_shakemap.svg">
+                        <img src="images/legende_shakemap_de.svg">
                     </div>
                 </div>
             </div>
@@ -113,10 +114,11 @@
                 <div class="losscharts__container">
                     <loss-component id="loss-casualties" type="casualties" thresholds="0,5,50,500,5000,50000">
                         <div slot="titleslot">
-                            <h3 class="loss__title"><span data-i18n-key="national-tote-title">Anzahl Todesopfer</span>
+                            <h3 class="loss__title"><span data-i18n-key="report:national-tote-title">Anzahl
+                                    Todesopfer</span>
                                 <span class="overview-place"></span>
                             </h3>
-                            <p data-i18n-key="national-tote-text" class="loss__text">
+                            <p data-i18n-key="report:national-tote-text" class="loss__text">
                                 Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
                             </p>
                         </div>
@@ -125,9 +127,9 @@
                 <div class="losscharts__container">
                     <loss-component id="loss-displaced" type="displaced" thresholds="0,50,500,5000,50000,500000">
                         <div slot="titleslot">
-                            <h3 class="loss__title"><span data-i18n-key="national-schutz-title">Anzahl
+                            <h3 class="loss__title"><span data-i18n-key="report:national-schutz-title">Anzahl
                                     Schutzsuchender</span> <span class="overview-place"></span></h3>
-                            <p class="loss__text" data-i18n-key="national-schutz-text">
+                            <p class="loss__text" data-i18n-key="report:national-schutz-text">
                                 Die Anzahl Schutzsuchender liegt mit grosser Wahrscheinlichkeit im eingefärbten
                                 Bereich.
                             </p>
@@ -138,9 +140,9 @@
                     <loss-component id="loss-buildingcosts" type="buildingCosts"
                         thresholds="0,10000000,100000000,1000000000,10000000000,100000000000">
                         <div slot="titleslot">
-                            <h3 class="loss__title"><span data-i18n-key="national-gebaeude-title">Kosten
+                            <h3 class="loss__title"><span data-i18n-key="report:national-gebaeude-title">Kosten
                                     Gebäudeschäden</span> <span class="overview-place"></span></h3>
-                            <p class="loss__text" data-i18n-key="national-gebaeude-text">
+                            <p class="loss__text" data-i18n-key="report:national-gebaeude-text">
                                 Die Kosten für Gebäudeschäden liegen mit grosser Wahrscheinlichkeit im eingefärbten
                                 Bereich.
                             </p>
@@ -150,19 +152,21 @@
             </div>
             <div class="col-6 cantonal">
                 <div class="grid__vertical-text">
-                    <h2 data-i18n-key="kantonal">Kantonal</h2>
+                    <h2 data-i18n-key="report:kantonal">Kantonal</h2>
                 </div>
                 <div id="map-injured" class="cantonal__cols">
                     <div class="cantonal__maps">
                         <div>
-                            <h3 data-i18n-key="kantonal-verletzte-title">
+                            <h3 data-i18n-key="report:kantonal-verletzte-title">
                                 Anzahl Verletzte
                             </h3>
                             <p>
-                                <span data-i18n-key="kantonal-verletzte-text-1">Die Anzahl verletzter Personen in den
+                                <span data-i18n-key="report:kantonal-verletzte-text-1">Die Anzahl verletzter Personen in
+                                    den
                                     Gemeinden des Kantons</span>
                                 <span class="info-cant-maps">...</span>
-                                <span data-i18n-key="kantonal-verletzte-text-2">liegt mit grosser Wahrscheinlichkeit
+                                <span data-i18n-key="report:kantonal-verletzte-text-2">liegt mit grosser
+                                    Wahrscheinlichkeit
                                     im eingefärbten Bereich.</span>
                             </p>
                         </div>
@@ -825,10 +829,10 @@
                 <div id="graph-injured" class="cantonal__cols">
                     <div class="cantonal__graphs">
                         <div>
-                            <h3 data-i18n-key="kantonal-verletzte-title">
+                            <h3 data-i18n-key="report:kantonal-verletzte-title">
                                 Anzahl Verletzte
                             </h3>
-                            <p data-i18n-key="kantonal-verletzte-ch-text">
+                            <p data-i18n-key="report:kantonal-verletzte-ch-text">
                                 Die Zahl der Verletzten pro Kanton und im Fürstentum Liechtenstein liegt mit grosser
                                 Wahrscheinlichkeit im eingeärbten Bereich.
                             </p>
@@ -840,12 +844,14 @@
                 <div id="map-damages" class="cantonal__cols">
                     <div class="cantonal__maps">
                         <div>
-                            <h3 data-i18n-key="kantonal-schaeden-title">Gebäudeschäden</h3>
+                            <h3 data-i18n-key="report:kantonal-schaeden-title">Gebäudeschäden</h3>
                             <p>
-                                <span data-i18n-key="kantonal-schaeden-text-1">Das Ausmass mässiger bis sehr starke
+                                <span data-i18n-key="report:kantonal-schaeden-text-1">Das Ausmass mässiger bis sehr
+                                    starke
                                     Schäden an Gebäuden in den Gemeinden des Kantons</span>
                                 <span class="info-cant-maps"></span>
-                                <span data-i18n-key="kantonal-schaeden-text-2">liegt mit grosser Wahrscheinlichkeit im
+                                <span data-i18n-key="report:kantonal-schaeden-text-2">liegt mit grosser
+                                    Wahrscheinlichkeit im
                                     eingefärbten Bereich. Die Prozentangabe
                                     entspricht dem mittleren Anteil der beschädigten Gebäude.</span>
                             </p>
@@ -1273,13 +1279,14 @@
                 <div id="graph-damages" class="cantonal__cols">
                     <div class="cantonal__graphs">
                         <div>
-                            <h3 data-i18n-key="kantonal-schaeden-title">Gebäudeschäden</h3>
+                            <h3 data-i18n-key="report:kantonal-schaeden-title">Gebäudeschäden</h3>
                             <p>
-                                <span data-i18n-key="kantonal-schaeden-ch-text-1">Das Ausmass mässiger bis sehr starker
+                                <span data-i18n-key="report:kantonal-schaeden-ch-text-1">Das Ausmass mässiger bis sehr
+                                    starker
                                     Schäden an Gebäuden pro Kanton und im Fürstentum Liechtenstein liegt mit grosser
                                     Wahrscheinlichkeit im eingefärbten Bereich.</span>
                                 <br />
-                                <span data-i18n-key="kantonal-schaeden-ch-text-2">Der Prozentsatz entspricht dem
+                                <span data-i18n-key="report:kantonal-schaeden-ch-text-2">Der Prozentsatz entspricht dem
                                     durchschnittlichen Anteil der beschädigten Gebäude pro Kanton.</span>
                             </p>
                         </div>
@@ -1290,8 +1297,8 @@
 
         <div class="row footer">
             <div class="col-12 footer__support">
-                <p data-i18n-key="footer-angaben">Alle Angaben ohne Gewähr und vorbehaltlich Änderungen</p>
-                <p data-i18n-key="footer-unterstuetzung">Mit der Unterstützung von:</p>
+                <p data-i18n-key="report:footer-angaben">Alle Angaben ohne Gewähr und vorbehaltlich Änderungen</p>
+                <p data-i18n-key="report:footer-unterstuetzung">Mit der Unterstützung von:</p>
                 <img src="images/logos/logo_BAFU_BABS.png" alt="">
             </div>
             <div class="col-12 ">
@@ -1299,15 +1306,15 @@
                     <img class="footer__info__icon" src="images/icons/was_tun.png">
                     <div>
                         <p class="footer__info__whattodo">
-                            <span data-i18n-key="footer-dowhat">Was tun nach einem Erdbeben?</span>
+                            <span data-i18n-key="report:footer-dowhat">Was tun nach einem Erdbeben?</span>
                             <a href="www.seismo.ethz.ch/de/earthquakes/what-to-do/" target="_blank"
                                 rel="noopener noreferrer">www.seismo.ethz.ch/de/earthquakes/what-to-do/</a>
                         </p>
                         <p class="footer__info__further">
-                            <span data-i18n-key="footer-info">Weitere Informationen unter</span>
+                            <span data-i18n-key="report:footer-info">Weitere Informationen unter</span>
                             <a href="www.seismo.ethz.ch" target="_blank"
                                 rel="noopener noreferrer">www.seismo.ethz.ch</a>
-                            <span data-i18n-key="footer-und">und</span>
+                            <span data-i18n-key="report:footer-und">und</span>
                             <a href="https://lage.naz.ch/eld2/login" target="_blank"
                                 rel="noopener noreferrer">https://lage.naz.ch/eld2/login</a>
 

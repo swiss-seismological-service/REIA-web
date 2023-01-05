@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 359.7 61.06">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none;}.cls-3{letter-spacing:0em;}.cls-4{fill:url(#linear-gradient);}.cls-5{clip-path:url(#clippath);}.cls-6{letter-spacing:0em;}.cls-7{fill:#d3d3d3;}.cls-8{fill:#231f20;font-family:Verdana,
+            Verdana;font-size:6px;}.cls-9{letter-spacing:0em;}.cls-10{letter-spacing:0em;}.cls-2{stroke:#fff;stroke-miterlimit:10;stroke-width:.5px;}</style>
+        <clipPath id="clippath">
+            <rect class="cls-1" x="44.56" width="315.15" height="18.61" />
+        </clipPath>
+        <linearGradient id="linear-gradient" x1="791.18" y1="547.55" x2="2012.39" y2="547.55"
+            gradientTransform="translate(-159.61 -602.58) scale(.26 1.12)"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#b2b1d8" />
+            <stop offset=".12" stop-color="#b2b1d8" />
+            <stop offset=".16" stop-color="#6dcad2" />
+            <stop offset=".21" stop-color="#7dc46a" />
+            <stop offset=".29" stop-color="#aacb3b" />
+            <stop offset=".34" stop-color="#d3de28" />
+            <stop offset=".41" stop-color="#f5eb10" />
+            <stop offset=".47" stop-color="#ffcd2b" />
+            <stop offset=".54" stop-color="#f2882d" />
+            <stop offset=".59" stop-color="#f58020" />
+            <stop offset=".67" stop-color="#ea4624" />
+            <stop offset=".72" stop-color="#e01f26" />
+            <stop offset=".79" stop-color="#e01f26" />
+            <stop offset=".84" stop-color="#6f0f10" />
+            <stop offset=".89" stop-color="#431211" />
+        </linearGradient>
+    </defs>
+    <g id="Layer_1-2">
+        <text class="cls-8" transform="translate(13.2 28.1)">
+            <tspan x="0" y="0">Intensität</tspan>
+        </text>
+        <text class="cls-8" transform="translate(0 48.69)">
+            <tspan class="cls-9" x="0" y="0">Auswirkungen</tspan>
+        </text>
+        <g class="cls-5">
+            <rect class="cls-4" x="44.56" width="315.15" height="18.61" />
+        </g>
+        <rect class="cls-7" x="44.59" y="18.61" width="315.11" height="15.77" />
+        <g>
+            <line class="cls-2" x1="323.04" y1="0" x2="323.04" y2="18.61" />
+            <line class="cls-2" x1="83.37" y1="0" x2="83.37" y2="18.61" />
+            <line class="cls-2" x1="123.32" y1="0" x2="123.32" y2="18.61" />
+            <line class="cls-2" x1="163.26" y1="0" x2="163.26" y2="18.61" />
+            <line class="cls-2" x1="243.15" y1="0" x2="243.15" y2="18.61" />
+            <line class="cls-2" x1="283.09" y1="0" x2="283.09" y2="18.61" />
+            <line class="cls-2" x1="203.21" y1="0" x2="203.21" y2="18.61" />
+        </g>
+        <rect class="cls-7" x="44.56" y="34.38" width="315.15" height="26.68" />
+        <text class="cls-8" transform="translate(54.58 45.88)">
+            <tspan x="0" y="0">kaum</tspan>
+            <tspan x="-7.97" y="7.2">bemerkbar</tspan>
+        </text>
+        <text class="cls-8" transform="translate(90.71 45.88)">
+            <tspan x="0" y="0">schwach</tspan>
+            <tspan class="cls-6" x=".09" y="7.2">verspürt</tspan>
+        </text>
+        <text class="cls-8" transform="translate(131.69 45.88)">
+            <tspan x="0" y="0">deutlich</tspan>
+            <tspan class="cls-6" x="-.76" y="7.2">verspürt</tspan>
+        </text>
+        <text class="cls-8" transform="translate(175.52 45.88)">
+            <tspan x="0" y="0">stark</tspan>
+            <tspan class="cls-6" x="-5.01" y="7.2">verspürt</tspan>
+        </text>
+        <text class="cls-8" transform="translate(213.83 42.28)">
+            <tspan x="0" y="0">leichte</tspan>
+            <tspan x="-4.84" y="7.2">Gebäude-</tspan>
+            <tspan x="-2.52" y="14.4">schäden</tspan>
+        </text>
+        <text class="cls-8" transform="translate(249.02 45.88)">
+            <tspan x="0" y="0">Gebäude-</tspan>
+            <tspan x="2.32" y="7.2">schäden</tspan>
+        </text>
+        <text class="cls-8" transform="translate(290.98 42.28)">
+            <tspan x="0" y="0">schwere</tspan>
+            <tspan x="-2.38" y="7.2">Gebäude-</tspan>
+            <tspan x="-.06" y="14.4">schäden</tspan>
+        </text>
+        <text class="cls-8" transform="translate(326.33 49.48)">
+            <tspan class="cls-3" x="0" y="0">zerstörend</tspan>
+        </text>
+        <text class="cls-8" transform="translate(60.58 28.1)">
+            <tspan x="0" y="0">II</tspan>
+        </text>
+        <text class="cls-8" transform="translate(99.37 28.1)">
+            <tspan x="0" y="0">III</tspan>
+        </text>
+        <text class="cls-8" transform="translate(139.55 28.1)">
+            <tspan x="0" y="0">IV</tspan>
+        </text>
+        <text class="cls-8" transform="translate(181.07 28.1)">
+            <tspan x="0" y="0">V</tspan>
+        </text>
+        <text class="cls-8" transform="translate(219.07 28.1)">
+            <tspan x="0" y="0">VI</tspan>
+        </text>
+        <text class="cls-8" transform="translate(258.17 28.1)">
+            <tspan x="0" y="0">VII</tspan>
+        </text>
+        <text class="cls-8" transform="translate(296.37 28.1)">
+            <tspan x="0" y="0">VIII</tspan>
+        </text>
+        <text class="cls-8" transform="translate(339.31 28.1)">
+            <tspan x="0" y="0">IX</tspan>
+        </text>
+        <g>
+            <line class="cls-2" x1="323.04" y1="18.61" x2="323.04" y2="61.06" />
+            <line class="cls-2" x1="83.37" y1="18.61" x2="83.37" y2="61.06" />
+            <line class="cls-2" x1="123.31" y1="18.61" x2="123.31" y2="61.06" />
+            <line class="cls-2" x1="163.26" y1="18.61" x2="163.26" y2="61.06" />
+            <line class="cls-2" x1="243.15" y1="18.61" x2="243.15" y2="61.06" />
+            <line class="cls-2" x1="283.09" y1="18.61" x2="283.09" y2="61.06" />
+            <line class="cls-2" x1="203.2" y1="18.61" x2="203.2" y2="61.06" />
+        </g>
+        <line class="cls-2" x1="359.7" y1="18.61" x2="44.56" y2="18.61" />
+        <line class="cls-2" x1="359.7" y1="34.38" x2="44.57" y2="34.38" />
+    </g>
+</svg>
