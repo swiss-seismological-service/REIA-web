@@ -203,6 +203,10 @@ export default function CantonalGraph(
         .join('linearGradient')
         .attr('id', (i) => `mask-gradient-${unique}-${Y[i]}`)
         .call((gradient) => {
+            const range1 = (i) => xScale(X[i][1]) - xScale(X[i][0]);
+            const range2 = (i) => xScale(X[i][2]) - xScale(X[i][1]);
+
+            // Q10 @ 0
             gradient
                 .append('stop')
                 .attr(
@@ -211,6 +215,29 @@ export default function CantonalGraph(
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
+            // Q10 + stop @ x
+            gradient
+                .append('stop')
+                .attr(
+                    'offset',
+                    (i) =>
+                        (xScale(X[i][0]) - xScale(0) + 0.85 * range1(i)) /
+                        (xScale(xDomain[1]) - xScale(0))
+                )
+                .attr('stop-color', 'white')
+                .attr('stop-opacity', '0.8');
+            // Q10 + stop2 @ 1
+            gradient
+                .append('stop')
+                .attr(
+                    'offset',
+                    (i) =>
+                        (xScale(X[i][0]) - xScale(0) + 0.95 * range1(i)) /
+                        (xScale(xDomain[1]) - xScale(0))
+                )
+                .attr('stop-color', 'white')
+                .attr('stop-opacity', '0.98');
+            // mean @ 0
             gradient
                 .append('stop')
                 .attr(
@@ -218,7 +245,30 @@ export default function CantonalGraph(
                     (i) => (xScale(X[i][1]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
                 )
                 .attr('stop-color', 'white')
-                .attr('stop-opacity', '1');
+                .attr('stop-opacity', '0.98');
+            // Q90 + stop2 @ 0
+            gradient
+                .append('stop')
+                .attr(
+                    'offset',
+                    (i) =>
+                        (xScale(X[i][2]) - xScale(0) - 0.95 * range2(i)) /
+                        (xScale(xDomain[1]) - xScale(0))
+                )
+                .attr('stop-color', 'white')
+                .attr('stop-opacity', '0.98');
+            // Q90 + stop2 @ x
+            gradient
+                .append('stop')
+                .attr(
+                    'offset',
+                    (i) =>
+                        (xScale(X[i][2]) - xScale(0) - 0.85 * range2(i)) /
+                        (xScale(xDomain[1]) - xScale(0))
+                )
+                .attr('stop-color', 'white')
+                .attr('stop-opacity', '0.8');
+            // Q90 @ 1
             gradient
                 .append('stop')
                 .attr(
@@ -234,7 +284,7 @@ export default function CantonalGraph(
         .selectAll('rect')
         .data(I)
         .join('rect')
-        .attr('fill', (i) => (Y[i] === 'CH' ? '#c6c5c4' : '#e6e7e9'))
+        .attr('fill', (i) => (Y[i] === 'CH' ? '#cbcbcb' : '#d3d3d3'))
         .attr('x', (i) => xScale(0) + getHalf(i) * rightColumnStart)
         .attr('y', (i) => yScale(Y[i - getHalf(i) * half]))
         .attr('width', dataWidth)

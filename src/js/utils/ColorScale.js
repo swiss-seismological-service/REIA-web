@@ -34,12 +34,17 @@ export function ColorScaleMarker(start, center, end, canvasElement) {
     context.clearRect(0, 0, width, height);
     const gradient = context.createLinearGradient(0, 0, width, 0);
 
-    start = clamp(start, 0, 0.95);
-    end = clamp(end, 0.05, 1);
-    center = clamp(center, start, end);
+    start = clamp(start, 0, center - 10 ** -2);
+    end = clamp(end, center + 10 ** -2, 1);
+    const range1 = center - start;
+    const range2 = end - center;
 
     gradient.addColorStop(start, 'rgba(211, 211, 211, 1)');
+    gradient.addColorStop(start + 0.85 * range1, 'rgba(211, 211, 211, 0.2)');
+    gradient.addColorStop(start + 0.95 * range1, 'rgba(211, 211, 211, 0)');
     gradient.addColorStop(center, 'rgba(211, 211, 211, 0)');
+    gradient.addColorStop(end - 0.95 * range2, 'rgba(211, 211, 211, 0)');
+    gradient.addColorStop(end - 0.85 * range2, 'rgba(211, 211, 211, 0.2)');
     gradient.addColorStop(end, 'rgba(211, 211, 211, 1)');
 
     context.fillStyle = gradient;
