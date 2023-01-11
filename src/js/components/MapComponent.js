@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import cantons from '../../data/pictureParamByCanton.csv';
 import { b64encode } from '../utils/b64';
 import getLatestCalculation from '../utils/data';
@@ -8,10 +9,12 @@ class RIAMaps {
         this.shakemapElement = document.getElementById('map-shakemap');
         this.injuredElement = document.getElementById('map-injured');
         this.damagesElement = document.getElementById('map-damages');
+        this.shakemapLegend = document.getElementById('legende-shakemap');
         this.cantonElements = document.querySelectorAll('.info-cant-maps');
         this.shakemapPromise = null;
         this.injuredPromise = null;
         this.damagesPromise = null;
+        this.legendPromise = null;
 
         this.cantons = Object.fromEntries(cantons);
 
@@ -22,10 +25,18 @@ class RIAMaps {
         this.damagemap =
             'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,damage_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
 
+        this.addLegend();
         earthquakeInfo.then((info) => this.insertMaps(info, sheetType));
     }
 
     returnPromises = () => [this.shakemapPromise, this.injuredPromise, this.damagesPromise];
+
+    addLegend() {
+        this.legendPromise = loadImage(
+            `images/legende_shakemap_${i18next.resolvedLanguage}.svg`,
+            this.shakemapLegend
+        );
+    }
 
     insertMaps(info, sheetType) {
         this.shakemapPromise = loadImage(

@@ -1,3 +1,6 @@
+const SERVER = 'http://ermd.ethz.ch/riaws/';
+// const SERVER = 'http://localhost:8000/';
+
 function getData(url) {
     return fetch(url, {
         method: 'GET',
@@ -20,52 +23,52 @@ function getData(url) {
 }
 
 export function getEarthquake(originid) {
-    return getData(`http://ermd.ethz.ch/riaws/v1/earthquake/${originid}`);
+    return getData(`${SERVER}v1/earthquake/${originid}`);
 }
 
 export function getAllEarthquakes() {
-    return getData(`http://ermd.ethz.ch/riaws/v1/earthquakes`);
+    return getData(`${SERVER}v1/earthquakes`);
 }
 
 export function getCasualties(oid, tag) {
-    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/occupants`;
+    let base = `${SERVER}v1/loss/${oid}/occupants`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getDisplaced(oid, tag) {
-    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/businessinterruption`;
+    let base = `${SERVER}v1/loss/${oid}/businessinterruption`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getBuildingCosts(oid, tag) {
-    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/structural`;
+    let base = `${SERVER}v1/loss/${oid}/structural`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getInjured(oid, tag) {
-    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/nonstructural`;
+    let base = `${SERVER}v1/loss/${oid}/nonstructural`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getStructuralDamage(oid, tag) {
-    let base = `http://ermd.ethz.ch/riaws/v1/damage/${oid}/structural`;
+    let base = `${SERVER}v1/damage/${oid}/structural`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
 export function getCantonalInjuries(oid) {
-    let base = `http://ermd.ethz.ch/riaws/v1/loss/${oid}/nonstructural/Canton`;
+    let base = `${SERVER}v1/loss/${oid}/nonstructural/Canton`;
     let cantonal = getData(base);
     let country = getInjured(oid, 'CH');
     return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));
 }
 
 export function getCantonalStructuralDamage(oid) {
-    let base = `http://ermd.ethz.ch/riaws/v1/damage/${oid}/structural/Canton`;
+    let base = `${SERVER}v1/damage/${oid}/structural/Canton`;
     let cantonal = getData(base);
     let country = getStructuralDamage(oid, 'CH');
     return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));

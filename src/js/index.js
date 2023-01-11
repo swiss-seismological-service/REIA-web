@@ -7,6 +7,9 @@ import RIAScale from './components/ScaleComponent';
 import RIAMaps from './components/MapComponent';
 
 (async function () { // eslint-disable-line
+    // Init
+    await initI18next();
+
     const params = new URLSearchParams(window.location.search);
     const originid = params.get('originid');
     const canton = params.get('canton');
@@ -34,7 +37,5 @@ import RIAMaps from './components/MapComponent';
         });
     });
 
-    // Init
-    await initI18next();
     translatePageElements();
 })();

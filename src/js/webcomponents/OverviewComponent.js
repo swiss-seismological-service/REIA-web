@@ -70,7 +70,9 @@ class OverviewComponent extends HTMLElement {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col"><h2>Origin ID</h2></th>
-                            <th scope="col">Cantonal Sheet</th>
+                            <th scope="col" data-i18n-key="report:overview-cantonal">
+                                Cantonal Sheet
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

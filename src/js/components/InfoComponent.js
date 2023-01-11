@@ -1,5 +1,6 @@
 import moment from 'moment';
 import proj4 from 'proj4';
+import i18next from 'i18next';
 import { round } from '../utils/numbers';
 
 class RIAInfo {
@@ -42,17 +43,20 @@ class RIAInfo {
 
         this.infoDepth.innerHTML = info.depth_value;
         this.infoIntensity.innerHTML = round(info.magnitude_value, 1);
-        this.infoAuswertung.innerHTML = 'automatisch';
+        this.infoAuswertung.innerHTML = i18next.t('ueberblick-auswertung-val');
         this.infoSwiss.innerHTML = `${round(l)} / ${round(b)}`;
         this.infoMeta.href = 'http://seismo.ethz.ch';
     }
 
     replaceOverviewText(info, sheetType) {
         this.overviewMagnitude.innerHTML = info.magnitude_value;
-        this.overviewText.innerHTML = info.description_de;
+        this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`];
         let warnlevel = 5;
         this.overviewWarnlevels[warnlevel - 1].classList.add('active');
-        let text = sheetType === 'CH' ? 'in der Schweiz' : `im ${sheetType}`;
+        let text =
+            sheetType === 'CH'
+                ? i18next.t('national-schweiz')
+                : `${i18next.t('national-kanton')} ${sheetType}`;
         Array.from(this.overviewPlaces).forEach((el) => {
             el.innerHTML = text;
         });

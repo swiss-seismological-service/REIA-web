@@ -4,7 +4,6 @@ import { initI18next, translatePageElements, bindLocaleSwitcher } from './compon
 // Init
 (async function () { // eslint-disable-line
     await initI18next();
-    translatePageElements();
     const switcher = document.querySelector('[data-i18n-switcher]');
     const overview = document.querySelector('overview-component');
 
@@ -12,4 +11,6 @@ import { initI18next, translatePageElements, bindLocaleSwitcher } from './compon
         bindLocaleSwitcher(switcher, (l) => {
             overview.setAttribute('lang', l);
         });
+
+    translatePageElements();
 })();

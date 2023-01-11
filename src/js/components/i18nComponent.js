@@ -30,6 +30,7 @@ export function translatePageElements() {
 }
 export function bindLocaleSwitcher(switcher, update) {
     const initialValue = i18next.resolvedLanguage;
+
     switcher.value = initialValue;
     update(initialValue);
     switcher.onchange = (e) => {
