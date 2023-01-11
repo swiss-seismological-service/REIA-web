@@ -23,6 +23,7 @@ export default function CantonalGraph(
         yPaddingOuter = 0.2,
         displayValue = true,
         symlogConstant = 1,
+        xScaleClamp = false,
     } = {}
 ) {
     // SVG
@@ -85,6 +86,12 @@ export default function CantonalGraph(
     const X = d3.map(data, x);
     const Y = d3.map(data, y);
 
+    // make sure quantiles work
+    X.forEach((el, i, arr) => {
+        // eslint-disable-next-line prefer-destructuring
+        if (el[2] < el[1]) arr[i][2] = el[1] + 10 ** -5;
+    });
+
     // Compute default domains, and unique the y-domain.
     if (xDomain === undefined) xDomain = [0, d3.max(X)];
     let yDomain = new d3.InternSet(Y);
@@ -98,7 +105,7 @@ export default function CantonalGraph(
     // Construct scales and axes.
     const xScale = xType(xDomain, xRange);
     if (xType === d3.scaleSymlog) xScale.constant(symlogConstant);
-    if (xType === d3.scaleLog) xScale.clamp(true);
+    if (xScaleClamp) xScale.clamp(true);
 
     const yScale = d3.scaleBand(yDomain, yRangeFull).paddingInner(yPaddingInner).paddingOuter(0.2);
     const yScale1 = d3.scaleBand(yDomain1, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);

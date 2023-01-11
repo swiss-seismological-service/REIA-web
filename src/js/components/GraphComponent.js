@@ -32,15 +32,14 @@ class RIAGraphs {
                 x: (d) => [d.quantile10, d.mean, d.quantile90],
                 y: (d) => d.tag,
                 xType: d3.scaleSymlog,
-                symlogConstant: 0.7,
-                // xTickFormat: (d) =>
-                //     d === 1
-                //         ? '0'
-                //         : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+                xScaleClamp: true,
+                symlogConstant: 1,
                 xTickFormat: (d) =>
-                    d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
-                xDomain: [0, 50000],
-                xTickValues: [0, 5, 50, 500, 5000],
+                    d === 1
+                        ? 'keine'
+                        : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+                xDomain: [1, 50000],
+                xTickValues: [1, 5, 50, 500, 5000],
                 width: 600,
                 height: 350,
                 displayValue: false,
@@ -58,13 +57,14 @@ class RIAGraphs {
                 x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
                 y: (d) => d.tag,
                 xType: d3.scaleSymlog,
-                symlogConstant: 7,
+                symlogConstant: 1,
+                xScaleClamp: true,
                 xTickFormat: (d) =>
                     d === 1
-                        ? '0'
+                        ? 'keine'
                         : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
-                xDomain: [0, 500000],
-                xTickValues: [0, 50, 500, 5000, 50000],
+                xDomain: [1, 500000],
+                xTickValues: [1, 50, 500, 5000, 50000],
                 width: 600,
                 height: 350,
                 displayValue: true,
