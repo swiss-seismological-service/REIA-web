@@ -34,8 +34,8 @@ export function ColorScaleMarker(start, center, end, canvasElement) {
     context.clearRect(0, 0, width, height);
     const gradient = context.createLinearGradient(0, 0, width, 0);
 
-    start = clamp(start, 0, center - 10 ** -2);
-    end = clamp(end, center + 10 ** -2, 1);
+    start = clamp(start, 0, Math.max(0, center - 10 ** -2));
+    end = clamp(end, Math.min(1, center + 10 ** -2), 1);
     const range1 = center - start;
     const range2 = end - center;
 
