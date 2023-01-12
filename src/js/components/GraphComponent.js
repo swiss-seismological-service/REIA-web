@@ -33,13 +33,13 @@ class RIAGraphs {
                 y: (d) => d.tag,
                 xType: d3.scaleSymlog,
                 xScaleClamp: true,
-                symlogConstant: 1,
+                symlogConstant: 0.1,
                 xTickFormat: (d) =>
-                    d === 1
+                    d === 0.5
                         ? 'keine'
                         : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
-                xDomain: [1, 50000],
-                xTickValues: [1, 5, 50, 500, 5000],
+                xDomain: [0.5, 50000],
+                xTickValues: [0.5, 5, 50, 500, 5000],
                 width: 600,
                 height: 350,
                 displayValue: false,
@@ -57,7 +57,7 @@ class RIAGraphs {
                 x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
                 y: (d) => d.tag,
                 xType: d3.scaleSymlog,
-                symlogConstant: 1,
+                symlogConstant: 5.5,
                 xScaleClamp: true,
                 xTickFormat: (d) =>
                     d === 1
