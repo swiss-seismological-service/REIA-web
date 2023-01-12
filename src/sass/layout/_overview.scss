@@ -1,6 +1,10 @@
 .overview {
     padding: 0;
 
+    &__text {
+        padding: $padding-containers;
+    }
+
     &__table {
         width: 100%;
 
@@ -29,13 +33,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: $padding-containers;
+
+        > * {
+            margin: $padding-containers;
+        }
 
         &__number {
             max-width: 30%;
+            align-self: stretch;
+            margin: 0.4rem;
             flex-grow: 1;
             font-weight: 800;
             text-align: center;
+            align-items: center;
+            justify-content: center;
+
             display: none;
 
             &-1 {
@@ -64,7 +76,7 @@
             }
 
             &.active {
-                display: block;
+                display: flex;
             }
         }
     }
