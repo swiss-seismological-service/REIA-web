@@ -1,4 +1,5 @@
 import { html, render } from 'lit-html';
+import i18next from 'i18next';
 import styles from '../../sass/loss_component.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
 import injectSVG from '../utils/injectSvg';
@@ -115,7 +116,7 @@ class LossComponent extends HTMLElement {
                     <div class="loss__icons ${this.selectIcon(5)}" id="loss-5"></div>
                 </div>
                 <div class="loss__icons-description">
-                    <div class="loss__legend">keine</div>
+                    <div class="loss__legend">${i18next.t('report:keine')}</div>
                     ${this.thresholds
                         .slice(1, 5)
                         .map(

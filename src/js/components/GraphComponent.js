@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import i18next from 'i18next';
 import { getCantonalInjuries, getCantonalStructuralDamage } from '../utils/api';
 import getLatestCalculation from '../utils/data';
 import CantonalGraph from '../utils/CantonalGraph';
@@ -36,7 +37,7 @@ class RIAGraphs {
                 symlogConstant: 0.1,
                 xTickFormat: (d) =>
                     d === 0.5
-                        ? 'keine'
+                        ? i18next.t('report:keine')
                         : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
                 xDomain: [0.5, 50000],
                 xTickValues: [0.5, 5, 50, 500, 5000],
@@ -61,7 +62,7 @@ class RIAGraphs {
                 xScaleClamp: true,
                 xTickFormat: (d) =>
                     d === 1
-                        ? 'keine'
+                        ? i18next.t('report:keine')
                         : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
                 xDomain: [1, 500000],
                 xTickValues: [1, 50, 500, 5000, 50000],

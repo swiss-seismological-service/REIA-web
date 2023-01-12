@@ -1,6 +1,7 @@
 // import moment from 'moment';
 import proj4 from 'proj4';
 import i18next from 'i18next';
+import { formatLocale } from 'd3';
 import { round } from '../utils/numbers';
 
 class RIAInfo {
@@ -44,7 +45,8 @@ class RIAInfo {
         this.infoDepth.innerHTML = info.depth_value;
         this.infoIntensity.innerHTML = round(info.magnitude_value, 1);
         this.infoAuswertung.innerHTML = i18next.t('ueberblick-auswertung-val');
-        this.infoSwiss.innerHTML = `${round(l)} / ${round(b)}`;
+        let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+        this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
         this.infoMeta.href = 'http://seismo.ethz.ch';
     }
 
