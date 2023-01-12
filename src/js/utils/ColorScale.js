@@ -40,11 +40,11 @@ export function ColorScaleMarker(start, center, end, canvasElement) {
     const range2 = end - center;
 
     gradient.addColorStop(start, 'rgba(211, 211, 211, 1)');
-    gradient.addColorStop(start + 0.85 * range1, 'rgba(211, 211, 211, 0.2)');
-    gradient.addColorStop(start + 0.95 * range1, 'rgba(211, 211, 211, 0)');
+    gradient.addColorStop(start + 0.7 * range1, 'rgba(211, 211, 211, 0.6)');
+    gradient.addColorStop(start + 0.95 * range1, 'rgba(211, 211, 211, 0.15)');
     gradient.addColorStop(center, 'rgba(211, 211, 211, 0)');
-    gradient.addColorStop(end - 0.95 * range2, 'rgba(211, 211, 211, 0)');
-    gradient.addColorStop(end - 0.85 * range2, 'rgba(211, 211, 211, 0.2)');
+    gradient.addColorStop(end - 0.95 * range2, 'rgba(211, 211, 211, 0.15)');
+    gradient.addColorStop(end - 0.7 * range2, 'rgba(211, 211, 211, 0.6)');
     gradient.addColorStop(end, 'rgba(211, 211, 211, 1)');
 
     context.fillStyle = gradient;
