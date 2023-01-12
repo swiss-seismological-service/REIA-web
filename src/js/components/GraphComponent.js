@@ -42,7 +42,7 @@ class RIAGraphs {
                 xDomain: [0.5, 50000],
                 xTickValues: [0.5, 5, 50, 500, 5000],
                 width: 600,
-                height: 350,
+                height: 375,
                 displayValue: false,
             });
             injuredGraphElement.append(thegraph);
@@ -67,7 +67,7 @@ class RIAGraphs {
                 xDomain: [1, 500000],
                 xTickValues: [1, 50, 500, 5000, 50000],
                 width: 600,
-                height: 350,
+                height: 375,
                 displayValue: true,
             });
             damagesGraphElement.append(thegraph2);

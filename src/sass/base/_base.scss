@@ -13,8 +13,8 @@ html {
 }
 
 .parent-container {
-    padding-left: $padding-containers*2;
-    padding-right: $padding-containers*2;
+    padding-left: $padding-containers*3.5;
+    padding-right: $padding-containers*3.5;
     aspect-ratio: 1 / 1.41;
     // overflow:hidden;
     border: 1px dashed darkgrey;

@@ -101,6 +101,7 @@ class LossComponent extends HTMLElement {
         </style>
         <div class="loss">
             <slot name="titleslot"></slot>
+            <slot name="paragraphslot"></slot>
             <div id="spinner${this.type}" class="lds-ring">
                 <div></div>
                 <div></div>
