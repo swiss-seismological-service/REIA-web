@@ -1,4 +1,7 @@
 .header {
+    margin-left: 0;
+    margin-right: 0;
+
     &__logo {
         margin-bottom: $padding-containers;
 
@@ -11,8 +14,8 @@
 
     &__flag {
         position: relative;
-        left: -50px;
-        margin-bottom: $padding-containers;
+        padding: 0;
+        margin-left: -$padding-containers;
 
         svg {
             max-height: 10rem;
@@ -46,30 +49,29 @@
     }
 
     &__box {
-        margin-left: -50px;
-        padding-left: -50px;
         background-color: $color-grey;
         color: white;
         padding: $padding-containers;
-        
-        &-large {
-            padding-top: $padding-containers*1.5;
-            padding-bottom: $padding-containers*1.5;
-        }
 
         h4 {
             display: inline;
         }
 
-        p {
-            font-weight: 500;
-            font-size: 1.8rem;
+        h2 {
             display: inline;
+            font-weight: 600;
+        }
+
+        &--explanation {
+            padding-left: calc($indent-left + $padding-containers);
+            padding-top: $padding-containers*1.5;
+            padding-bottom: $padding-containers*1.5;
         }
     }
 
-    &__erdbeben {
-        padding: $padding-containers;
+    &__title {
+        padding: $padding-containers 0;
+        padding-left: $indent-left;
 
         h1 {
             line-height: 4rem;  

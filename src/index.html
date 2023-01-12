@@ -19,22 +19,23 @@
             <div class="col-6 header__logo">
                 <img id="logoSED" src="images/logos/logo_SED_ETHZ.png">
             </div>
-            <div class="col-12">
-                <div class="header__box">
-                    <h4 id="subtitle" data-i18n-key="report:headerbar">Erdbebenszenario</h4>
-                </div>
+            <div class="col-12 header__box">
+                <h4 id="subtitle" data-i18n-key="report:headerbar">Erdbebenszenario</h4>
             </div>
-            <div class="col-12 header__erdbeben">
+            <div class="col-12 header__title">
                 <h1><span data-i18n-key="report:title">Erdbeben bei</span> <span id="header-title">...</span></h1>
             </div>
         </div>
 
 
-        <div class="row grid">
-            <div class="col-6 overview__magnitude">
+        <div class="row grid__row">
+            <div class="vertical-title">
+                <h2 data-i18n-key="report:ueberblick">Überblick</h2>
+            </div>
+            <div class="col-6 grid__cell grid__cell__border--right grid__cell__border--bottom overview__magnitude">
                 <h2><span data-i18n-key="report:mag">Magnitude</span> <span id="overview-magnitude">...</span> [Mw]</h2>
             </div>
-            <div class="col-6 overview__stufe">
+            <div class="col-6 grid__cell grid__cell__border--bottom overview__stufe">
                 <h2 data-i18n-key="report:ueberblick-stufe">Gefahrenstufe</h2>
 
                 <h2 class="overview__stufe__number overview__stufe__number-1">1</h2>
@@ -44,10 +45,7 @@
                 <h2 class="overview__stufe__number overview__stufe__number-5">5</h2>
 
             </div>
-            <div class="col-6 overview__text">
-                <div class="grid__vertical-text">
-                    <h2 data-i18n-key="report:ueberblick">Überblick</h2>
-                </div>
+            <div class="col-6 grid__cell grid__cell__border--right overview__text">
                 <div>
                     <p>
                         <span id="overview-text">
@@ -56,7 +54,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-6 overview">
+            <div class="col-6 grid__cell overview">
                 <table class="table table-sm overview__table">
                     <tbody>
                         <tr>
@@ -90,25 +88,25 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-6 shakemap">
-                <div class="grid__vertical-text">
-                    <h2 data-i18n-key="report:national">National</h2>
-                </div>
-                <div>
-                    <h3 data-i18n-key="report:auswirkungen-title">Geschätzte Auswirkungen</h3>
-                    <p data-i18n-key="report:auswirkungen-text">
-                        Die geschätzten Auswirkungen werden in Intensitätsbereichen beschrieben,
-                        die in acht Stufen kategorisiert sind. Die Intensität beschreibt
-                        die Stärke eines Erdbebens basierend auf dem Ausmass der
-                        Auswirkungen und der subjektiven Wahrnehmung
-                        eines Beobachters.</p>
-                    <img id="map-shakemap" class="shakemap__image" src="">
-                    <div class="shakemap__legend">
-                        <img id="legende-shakemap" src="">
-                    </div>
+        </div>
+        <div class="row grid__row">
+            <div class="vertical-title">
+                <h2 data-i18n-key="report:national">National</h2>
+            </div>
+            <div class="col-6 grid__cell grid__cell__border--right shakemap">
+                <h3 data-i18n-key="report:auswirkungen-title">Geschätzte Auswirkungen</h3>
+                <p data-i18n-key="report:auswirkungen-text">
+                    Die geschätzten Auswirkungen werden in Intensitätsbereichen beschrieben,
+                    die in acht Stufen kategorisiert sind. Die Intensität beschreibt
+                    die Stärke eines Erdbebens basierend auf dem Ausmass der
+                    Auswirkungen und der subjektiven Wahrnehmung
+                    eines Beobachters.</p>
+                <img id="map-shakemap" class="shakemap__image" src="">
+                <div class="shakemap__legend">
+                    <img id="legende-shakemap" src="">
                 </div>
             </div>
-            <div class="col-6 losscharts">
+            <div class="col-6 grid__cell losscharts">
                 <div class="losscharts__container">
                     <loss-component id="loss-casualties" type="casualties" thresholds="0,5,50,500,5000,50000">
                         <div slot="titleslot">
@@ -148,10 +146,12 @@
                     </loss-component>
                 </div>
             </div>
-            <div class="col-6 cantonal">
-                <div class="grid__vertical-text">
-                    <h2 data-i18n-key="report:kantonal">Kantonal</h2>
-                </div>
+        </div>
+        <div class="row grid__row">
+            <div class="vertical-title">
+                <h2 data-i18n-key="report:kantonal">Kantonal</h2>
+            </div>
+            <div class="col-6 grid__cell grid__cell__border--right cantonal">
                 <div id="map-injured" class="cantonal__cols">
                     <div class="cantonal__maps">
                         <div>
@@ -838,7 +838,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 cantonal">
+            <div class="col-6 grid__cell cantonal">
                 <div id="map-damages" class="cantonal__cols">
                     <div class="cantonal__maps">
                         <div>
@@ -1299,54 +1299,51 @@
                 <p data-i18n-key="report:footer-unterstuetzung">Mit der Unterstützung von:</p>
                 <img src="images/logos/logo_BAFU_BABS.png" alt="">
             </div>
-            <div class="col-12 ">
-                <div class="footer__info">
-                    <img class="footer__info__icon" src="images/icons/was_tun.png">
-                    <div>
-                        <p class="footer__info__whattodo">
-                            <span data-i18n-key="report:footer-dowhat">Was tun nach einem Erdbeben?</span>
-                            <a href="www.seismo.ethz.ch/de/earthquakes/what-to-do/" target="_blank"
-                                rel="noopener noreferrer">www.seismo.ethz.ch/de/earthquakes/what-to-do/</a>
-                        </p>
-                        <p class="footer__info__further">
-                            <span data-i18n-key="report:footer-info">Weitere Informationen unter</span>
-                            <a href="www.seismo.ethz.ch" target="_blank"
-                                rel="noopener noreferrer">www.seismo.ethz.ch</a>
-                            <span data-i18n-key="report:footer-und">und</span>
-                            <a href="https://lage.naz.ch/eld2/login" target="_blank"
-                                rel="noopener noreferrer">https://lage.naz.ch/eld2/login</a>
+            <div class="col-12 footer__info">
+                <img class="footer__info__icon" src="images/icons/was_tun.png">
+                <div>
+                    <p class="footer__info__whattodo">
+                        <span data-i18n-key="report:footer-dowhat">Was tun nach einem Erdbeben?</span>
+                        <a href="www.seismo.ethz.ch/de/earthquakes/what-to-do/" target="_blank"
+                            rel="noopener noreferrer">www.seismo.ethz.ch/de/earthquakes/what-to-do/</a>
+                    </p>
+                    <p class="footer__info__further">
+                        <span data-i18n-key="report:footer-info">Weitere Informationen unter</span>
+                        <a href="www.seismo.ethz.ch" target="_blank" rel="noopener noreferrer">www.seismo.ethz.ch</a>
+                        <span data-i18n-key="report:footer-und">und</span>
+                        <a href="https://lage.naz.ch/eld2/login" target="_blank"
+                            rel="noopener noreferrer">https://lage.naz.ch/eld2/login</a>
 
-                        </p>
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container parent-container ex__parent">
-        <div class="row ex__header">
+    <div class="container parent-container">
+        <div class="row">
             <div class="col-6"></div>
-            <div class="col-6 ex__header__logo">
+            <div class="col-6 header__logo">
                 <img id="logoSED" src="images/logos/logo_SED_ETHZ.png">
             </div>
             <div class="col-12">
-                <div class="ex__header__box">
+                <div class="header__box header__box--explanation">
                     <h2 id="subtitle" data-i18n-key="explanation:title"></h2>
                 </div>
             </div>
         </div>
         <div class="row ex__text">
-            <div class="col-12 ex__cell" data-i18n-key="explanation:text"></div>
+            <div class="col-12 grid__cell" data-i18n-key="explanation:text"></div>
         </div>
-        <div class="row ex__row">
+        <div class="row grid__row">
             <div class="vertical-title">
                 <h2 data-i18n-key="report:ueberblick"></h2>
             </div>
             <div class="col-12">
                 <div class="row">
-                    <div class="col-6 ex__cell ex__cell__border--bottom ex__cell__border--right"
+                    <div class="col-6 grid__cell grid__cell__border--bottom grid__cell__border--right"
                         data-i18n-key="explanation:ueberblick-mag"></div>
-                    <div class="col-6 ex__cell ex__cell__border--bottom">
+                    <div class="col-6 grid__cell grid__cell__border--bottom">
                         <div class="row">
                             <div class="col-12" data-i18n-key="explanation:ueberblick-stufe"></div>
                             <div class="col-8">
@@ -1360,8 +1357,8 @@
                             </div>
                             <div class="col-4 ex__qrcode"><img src="images/icons/QR_code.svg" /></div>
                             <div class="col-12"><span data-i18n-key="explanation:ueberblick-stufe-weiter"></span>
-                                <a
-                                    href="www.naturgefahren.ch/home/umgang-mit-naturgefahren/erdbeben/gefahrenstufen.html">
+                                <a class="ex__link"
+                                    href="http://www.naturgefahren.ch/home/umgang-mit-naturgefahren/erdbeben/gefahrenstufen.html">
                                     www.naturgefahren.ch/<wbr>home/umgang-mit-naturgefahren/erdbeben/gefahrenstufen.html
                                 </a>
                             </div>
@@ -1369,11 +1366,114 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6 ex__cell ex__cell__border--right" data-i18n-key="explanation:ueberblick-info">
+                    <div class="col-6 grid__cell grid__cell__border--right" data-i18n-key="explanation:ueberblick-info">
                     </div>
-                    <div class="col-6 ex__cell" data-i18n-key="explanation:ueberblick-parameter"></div>
+                    <div class="col-6 grid__cell" data-i18n-key="explanation:ueberblick-parameter"></div>
                 </div>
 
+            </div>
+        </div>
+
+
+        <div class="row grid__row">
+            <div class="vertical-title">
+                <h2 data-i18n-key="report:national"></h2>
+            </div>
+            <div class="col-3 grid__cell grid__cell__border--right">
+                <p data-i18n-key="explanation:national-intensitaet-1"></p>
+                <br />
+                <p data-i18n-key="explanation:national-intensitaet-2"></p>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-12 grid__cell grid__cell__border--bottom">
+                        <span data-i18n-key="explanation:national-tote-1"></span>
+                        <ul>
+                            <li data-i18n-key="explanation:national-tote-2"></li>
+                            <li data-i18n-key="explanation:national-tote-3"></li>
+                            <li data-i18n-key="explanation:national-tote-4"></li>
+                        </ul>
+                        <span data-i18n-key="explanation:national-tote-5"></span>
+                        <ul>
+                            <li data-i18n-key="explanation:national-tote-6"></li>
+                            <li data-i18n-key="explanation:national-tote-7"></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 grid__cell grid__cell__border--bottom">
+                        <span data-i18n-key="explanation:national-schutz-1"></span>
+                        <ul>
+                            <li data-i18n-key="explanation:national-schutz-2"></li>
+                            <li data-i18n-key="explanation:national-schutz-3"></li>
+                            <li data-i18n-key="explanation:national-schutz-4"></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 grid__cell">
+                        <span data-i18n-key="explanation:national-schaden-1"></span>
+                        <ul>
+                            <li data-i18n-key="explanation:national-schaden-2"></li>
+                            <li data-i18n-key="explanation:national-schaden-3"></li>
+                            <li data-i18n-key="explanation:national-schaden-4"></li>
+                        </ul>
+                        <span data-i18n-key="explanation:national-schaden-5"></span>
+                        <ul>
+                            <li data-i18n-key="explanation:national-schaden-6"></li>
+                            <li data-i18n-key="explanation:national-schaden-7"></li>
+                            <li data-i18n-key="explanation:national-schaden-8"></li>
+                            <li data-i18n-key="explanation:national-schaden-9"></li>
+                            <li data-i18n-key="explanation:national-schaden-10"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row grid__row">
+            <div class="vertical-title">
+                <h2 data-i18n-key="report:kantonal"></h2>
+            </div>
+            <div class="col-6 grid__cell grid__cell__border--right">
+                <span data-i18n-key="explanation:kantonal-verletzte-1"></span>
+                <ul>
+                    <li data-i18n-key="explanation:kantonal-verletzte-2"></li>
+                    <li data-i18n-key="explanation:kantonal-verletzte-3"></li>
+                    <li data-i18n-key="explanation:kantonal-verletzte-4"></li>
+                </ul>
+                <span data-i18n-key="explanation:kantonal-verletzte-5"></span>
+                <ul>
+                    <li data-i18n-key="explanation:kantonal-verletzte-6"></li>
+                    <li data-i18n-key="explanation:kantonal-verletzte-7"></li>
+                </ul>
+            </div>
+            <div class="col-6 grid__cell">
+                <span data-i18n-key="explanation:kantonal-schaden-1"></span>
+                <ul>
+                    <li data-i18n-key="explanation:kantonal-schaden-2"></li>
+                    <li data-i18n-key="explanation:kantonal-schaden-3"></li>
+                    <li data-i18n-key="explanation:kantonal-schaden-4"></li>
+                    <li data-i18n-key="explanation:kantonal-schaden-5"></li>
+                    <li data-i18n-key="explanation:kantonal-schaden-6"></li>
+                </ul>
+                <span data-i18n-key="explanation:kantonal-schaden-7"></span>
+            </div>
+        </div>
+
+        <div class="row footer">
+            <div class="col-12 footer__info">
+                <img class="footer__info__icon" src="images/icons/was_tun.png">
+                <div>
+                    <p class="footer__info__whattodo">
+                        <span data-i18n-key="report:footer-dowhat">Was tun nach einem Erdbeben?</span>
+                        <a href="www.seismo.ethz.ch/de/earthquakes/what-to-do/" target="_blank"
+                            rel="noopener noreferrer">www.seismo.ethz.ch/de/earthquakes/what-to-do/</a>
+                    </p>
+                    <p class="footer__info__further">
+                        <span data-i18n-key="report:footer-info">Weitere Informationen unter</span>
+                        <a href="www.seismo.ethz.ch" target="_blank" rel="noopener noreferrer">www.seismo.ethz.ch</a>
+                        <span data-i18n-key="report:footer-und">und</span>
+                        <a href="https://lage.naz.ch/eld2/login" target="_blank"
+                            rel="noopener noreferrer">https://lage.naz.ch/eld2/login</a>
+
+                    </p>
+                </div>
             </div>
         </div>
     </div>

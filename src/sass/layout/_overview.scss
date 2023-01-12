@@ -1,10 +1,6 @@
 .overview {
     padding: 0;
 
-    &__text {
-        padding: $padding-containers;
-    }
-
     &__table {
         width: 100%;
 
@@ -23,10 +19,6 @@
                 border-bottom-style: hidden;
             }
         }
-    }
-
-    &__magnitude {
-        padding: $padding-containers;
     }
 
     &__stufe {

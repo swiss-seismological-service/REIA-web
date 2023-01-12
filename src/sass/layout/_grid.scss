@@ -1,45 +1,51 @@
 .grid {
-    > .col-6 {
-        /*** GRID BORDERS ***/
-        border: 0.1rem solid black;
-        border-right-style: none;
-        border-bottom-style: none;
+    &__row {
+        margin-left: $indent-left;
+        margin-right: 0;
+        position: relative;
 
-        &:nth-last-of-type(2),
-        &:last-of-type {
-            border-bottom-style: solid;
+        border-left: 1px solid black;
+          
+
+        &::before {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            left: -$indent-left;
+            width: calc(100% + $indent-left);
+            height: 100%;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+        
+        div > & ~ &::before {
+            border-top-style: none;
         }
 
-        /*** left protruding borders ***/
-        &:nth-of-type(odd) {
-            position: relative;
-
-            &::after {
-                content: "";
-                height: 0.1rem;
-                width: 50px;
-                background-color: black;
-                position: absolute;
-                bottom: -1px;
-                left: -45px;
-            }
-        }
-
-        &:first-of-type {
-            &::after {
-                bottom: auto;
-                top: -1px;
-            }
+        .vertical-title {
+            position: absolute;
+            width: fit-content;
+            transform-origin: top left;
+            transform: rotate(-90deg) translateX(-50%);
+            left: -4rem;
+            top: 50%;
         }
     }
 
-    /*** vertical headers ***/
-    &__vertical-text {
-        position: absolute;
-        height: 0;
-        transform-origin: top left;
-        transform: rotate(-90deg);
-        left: -50px;
-        top: 60%;
+
+
+
+    &__cell {
+        padding: $padding-containers;
+        text-align: justify;
+        text-justify: inter-word;
+
+        &__border--bottom {
+            border-bottom: 1px solid black;
+        }
+
+        &__border--right {
+            border-right: 1px solid black;
+        }
     }
 }
