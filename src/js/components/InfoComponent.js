@@ -1,4 +1,4 @@
-import moment from 'moment';
+// import moment from 'moment';
 import proj4 from 'proj4';
 import i18next from 'i18next';
 import { round } from '../utils/numbers';
@@ -18,7 +18,7 @@ class RIAInfo {
         this.overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
         this.overviewPlaces = document.getElementsByClassName('overview-place');
 
-        this.headerDatetime = document.getElementById('header-datetime');
+        // this.headerDatetime = document.getElementById('header-datetime');
         this.headerTitle = document.getElementById('header-title');
         this.headerWappen = document.getElementById('header-wappen');
         this.headerKuerzel = document.getElementById('header-kuerzel');
@@ -63,9 +63,9 @@ class RIAInfo {
     }
 
     replaceHeaderText(info, sheetType) {
-        let date = moment(info.calculation[0].creationinfo.creationtime);
+        // let date = moment(info.calculation[0].creationinfo.creationtime);
+        // this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
 
-        this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
         this.headerTitle.innerHTML = info.event_text;
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;

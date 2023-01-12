@@ -48,10 +48,14 @@
     &__box {
         margin-left: -50px;
         padding-left: -50px;
-        background-color: $color-blue;
+        background-color: $color-grey;
         color: white;
         padding: $padding-containers;
         
+        &-large {
+            padding-top: $padding-containers*1.5;
+            padding-bottom: $padding-containers*1.5;
+        }
 
         h4 {
             display: inline;

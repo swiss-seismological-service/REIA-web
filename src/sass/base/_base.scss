@@ -16,7 +16,10 @@ html {
     padding-left: 75px;
     padding-right: 25px;
     aspect-ratio: 1 / 1.41;
-    margin-top: 5rem;
     // overflow:hidden;
     border: 1px dashed darkgrey;
+
+    &:first-of-type {
+        margin-top: 5rem;
+    }
 }
