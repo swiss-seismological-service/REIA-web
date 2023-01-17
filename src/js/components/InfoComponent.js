@@ -24,6 +24,8 @@ class RIAInfo {
         this.headerWappen = document.getElementById('header-wappen');
         this.headerKuerzel = document.getElementById('header-kuerzel');
 
+        this.footerLogo = document.getElementById('logo_bafu_babs');
+
         earthquakeInfo.then((info) => this.replaceInfoTable(info));
         earthquakeInfo.then((info) => this.replaceOverviewText(info, sheetType));
         earthquakeInfo.then((info) => this.replaceHeaderText(info, sheetType));
@@ -71,6 +73,7 @@ class RIAInfo {
         this.headerTitle.innerHTML = info.event_text;
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
+        this.footerLogo.src = `images/logos/logo_${i18next.resolvedLanguage}.svg`;
     }
 }
 
