@@ -1,6 +1,6 @@
 {
     "title": "Explanations",
-    "text": "The values given here regarding the anticipated consequences of an earthquake are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23). The actual values may vary considerably under certain circumstances; therefore, all information is provided without warranty and is subject to change.",
+    "text": "The values given here regarding the earthquake scenario are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23). The actual values may vary considerably under certain circumstances; therefore, all information is provided without warranty and is subject to change.",
     "text-zusammenarbeit": "ERM-CH23 was developed by the Swiss Seismological Service (SED) at ETH Zurich in collaboration with the Federal Office for the Environment (FOEN) and the Federal Office for Civil Protection (FOCP).",
     "text-version": "The first version of a rapid impact assessment (RIA) version 1.0 is based on automatically processed information and measurement. Subsequent manual assessment by a specialist may result in the earthquake parameters being modified slightly, in which case an updated version (version 1.1) of the first RIA may be issued. Updated versions do not include actual observations of the earthquake (e.g., reported damage from field investigations).",
     "ueberblick-mag": "'MLhc' and 'Mw' are measures of magnitude and describe the energy released during an earthquake and its strength respectively.",
@@ -13,7 +13,7 @@
     "ueberblick-stufe-5": "Danger level 5: extreme danger",
     "ueberblick-stufe-weiter": "More information about danger levels is available here:",
     "ueberblick-parameter": "This table summarises the most important earthquake parameters. Clicking on the link in the last row will take you to a page with more information about the earthquake in question on the website of the Swiss Seismological Service at ETH Zurich.",
-    "national-intensitaet-1": "The map shows the expected effects of an earthquake. Intensity ranges are used to describe the effects of an earthquake. The intensity describes the strength of an earthquake based on the extent of the destruction (buildings, environment) and the subjective perception of a person.",
+    "national-intensitaet-1": "The map shows the expected effects of an earthquake described in intensities. The intensity describes the strength of an earthquake based on the extent of the impact and the subjective perception of a person.",
     "national-intensitaet-2": "An intensity map is automatically produced based on various data, including the peak ground accelerations and ground velocities recorded at the seismic stations, local site conditions, and empirical instrumental intensity models.",
     "national-tote-1": "The estimated number of fatalities is derived from the following values:",
     "national-tote-2": "Estimated number of heavily damaged or destroyed buildings",
