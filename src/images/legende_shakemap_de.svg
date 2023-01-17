@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 27.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 363.07 61.06" style="enable-background:new 0 0 363.07 61.06;" xml:space="preserve">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	x="0px" y="0px"
+	viewBox="0 0 363.07 61.06" style="enable-background:new 0 0 363.07 61.06;" xml:space="preserve">
 <style type="text/css">
-	
+	svg {font-size: 62.5%;}
 		.st0{clip-path:url(#SVGID_00000166648635984941866720000003370879949257273278_);fill:url(#SVGID_00000141422482436803427840000004388518690449394058_);}
 	.st1{fill:#D3D3D3;}
 	.st2{fill:none;stroke:#FFFFFF;stroke-width:0.5;stroke-miterlimit:10;}
@@ -14,7 +15,7 @@
 	.st5{display:none;}
 	.st6{display:inline;fill:none;stroke:#A7A9AC;stroke-width:0.25;stroke-miterlimit:10;}
 	.st7{font-family:'Verdana';}
-	.st8{font-size:6px;}
+	.st8{font-size:0.6rem;}
 	
 		.st9{clip-path:url(#SVGID_00000021836775763356775690000010179105288701612676_);fill:url(#SVGID_00000142886684355676784230000007418945307975181200_);}
 </style>
