@@ -1,6 +1,7 @@
 {
   "headerbar": "Erdbebenszenario",
   "title": "Erdbeben bei ",
+  "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",
   "keine": "keine",
   "ueberblick": "Überblick",

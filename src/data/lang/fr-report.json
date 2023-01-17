@@ -1,6 +1,7 @@
 {
   "headerbar": "Scénario de tremblement de terre",
   "title": "Séisme près de ",
+  "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",
   "keine": "aucun",
   "ueberblick": "Aperçu",

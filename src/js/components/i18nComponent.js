@@ -19,6 +19,26 @@ export async function initI18next() {
                 caches: ['localStorage', 'cookie'],
             },
         });
+    i18next.services?.formatter.add('preposition_title', (value, lng) => {
+        if (lng === 'fr') {
+            let vocals = ['a', 'e', 'i', 'y', 'o', 'u'];
+            if (
+                vocals.includes(value[0].toLowerCase()) ||
+                (value[0].toLowerCase() === 'h' && vocals.includes(value[1].toLowerCase()))
+            ) {
+                return `d'${value}`;
+            }
+            return `de ${value}`;
+        }
+        if (lng === 'it') {
+            let vocals = ['a', 'e', 'i', 'y', 'o', 'u'];
+            if (vocals.includes(value[0].toLowerCase())) {
+                return `ad ${value}`;
+            }
+            return `a ${value}`;
+        }
+        return value;
+    });
 }
 
 export function translatePageElements() {

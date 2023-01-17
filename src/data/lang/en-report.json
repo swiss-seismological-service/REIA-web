@@ -1,6 +1,7 @@
 {
     "headerbar": "Earthquake scenario",
     "title": "Earthquake in the vicinity of",
+    "preposition_title": "{{name, preposition_title}}",
     "mag": "Magnitude",
     "keine": "none",
     "automatisch": "automatisch",

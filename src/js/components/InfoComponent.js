@@ -68,7 +68,8 @@ class RIAInfo {
         // let date = moment(info.calculation[0].creationinfo.creationtime);
         // this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
 
-        this.headerTitle.innerHTML = info.event_text;
+        // this.headerTitle.innerHTML = info.event_text;
+        this.headerTitle.innerHTML = i18next.t('preposition_title', { name: info.event_text });
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
     }
