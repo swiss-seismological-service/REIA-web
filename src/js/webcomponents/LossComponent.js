@@ -1,5 +1,4 @@
 import { html, render } from 'lit-html';
-import i18next from 'i18next';
 import styles from '../../sass/loss_component.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
 import injectSVG from '../utils/injectSvg';
@@ -14,6 +13,7 @@ class LossComponent extends HTMLElement {
         this.q90 = null;
         this.type = null;
         this.thresholds = [0, 0, 0, 0, 0, 0];
+        this.none = '0';
 
         this.attachShadow({ mode: 'open' });
 
@@ -26,7 +26,7 @@ class LossComponent extends HTMLElement {
 
     // component attributes
     static get observedAttributes() {
-        return ['mean', 'q10', 'q90', 'thresholds', 'type'];
+        return ['mean', 'q10', 'q90', 'thresholds', 'type', 'none'];
     }
 
     // attribute change
@@ -117,7 +117,7 @@ class LossComponent extends HTMLElement {
                     <div class="loss__icons ${this.selectIcon(5)}" id="loss-5"></div>
                 </div>
                 <div class="loss__icons-description">
-                    <div class="loss__legend">${i18next.t('report:keine')}</div>
+                    <div class="loss__legend">${this.none}</div>
                     ${this.thresholds
                         .slice(1, 5)
                         .map(

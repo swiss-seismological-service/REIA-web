@@ -1,3 +1,5 @@
+import { formatLocale } from 'd3';
+
 export function round(value, precision) {
     let multiplier = 10 ** (precision || 0);
     let rounded = Math.round(value * multiplier) / multiplier;
@@ -13,7 +15,8 @@ export function round(value, precision) {
 }
 
 export function numberToString(number) {
-    if (number < 1000000) return number;
+    let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+    if (number < 1000000) return formatter(number);
     if (number < 1000000000) return `${number / 1000000} Mio.`;
     return `${number / 1000000000} Mia.`;
 }
