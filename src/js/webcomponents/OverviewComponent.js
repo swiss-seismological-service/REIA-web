@@ -12,7 +12,7 @@ class OverviewComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.lang = null;
         this.earthquakes = null;
-        this.pdfUrl = 'http://ermd.ethz.ch/pdf/?ready_status=ready_to_print&url=';
+        this.pdfUrl = 'http://ermscenario.ethz.ch/pdf/?ready_status=ready_to_print&url=';
         this.cantons = Object.fromEntries(cantons);
 
         this.injuredmap =
@@ -44,7 +44,7 @@ class OverviewComponent extends HTMLElement {
 
             this.earthquakes = this.earthquakes.map((eq) => {
                 if (this.pdf === 'yes') {
-                    eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}&lng=${
+                    eq.url = `http://ermscenario.ethz.ch/?originid=${b64encode(eq.originid)}&lng=${
                         this.lang
                     }`;
                 } else {

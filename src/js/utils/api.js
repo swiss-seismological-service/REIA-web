@@ -1,4 +1,4 @@
-const SERVER = 'http://ermd.ethz.ch/riaws/';
+const SERVER = 'http://ermscenario.ethz.ch/riaws/';
 // const SERVER = 'http://localhost:8000/';
 
 function getData(url) {
