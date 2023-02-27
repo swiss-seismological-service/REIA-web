@@ -1,4 +1,4 @@
-const SERVER = 'http://ermscenario.ethz.ch/riaws/';
+const SERVER = 'http://ermd.ethz.ch/reiaws/';
 // const SERVER = 'http://localhost:8000/';
 
 function getData(url) {
@@ -37,7 +37,7 @@ export function getCasualties(oid, tag) {
 }
 
 export function getDisplaced(oid, tag) {
-    let base = `${SERVER}v1/loss/${oid}/businessinterruption`;
+    let base = `${SERVER}v1/loss/${oid}/business_interruption`;
     if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
