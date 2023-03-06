@@ -38,9 +38,7 @@ class RiskAssessmentsComponent extends HTMLElement {
 
             this.riskassessments = this.riskassessments.map((eq) => {
                 if (this.pdf === 'yes') {
-                    eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}&lng=${
-                        this.lang
-                    }`;
+                    eq.url = `http://ermd.ethz.ch/reia.html?oid=${eq._oid}&lng=${this.lang}`;
                 } else {
                     // eq.url = `/?originid=${b64encode(eq.originid)}`;
                     eq.url = `/reia.html?oid=${eq._oid}`;
