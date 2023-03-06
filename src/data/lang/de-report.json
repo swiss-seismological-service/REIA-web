@@ -1,5 +1,5 @@
 {
-  "headerbar": "Erdbebenszenario",
+  "headerbar": "Schnelle Schadensabschätzungen – Ausgabedatum:",
   "title": "Erdbeben bei ",
   "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",
@@ -14,6 +14,7 @@
   "ueberblick-auswertung-val": "automatisch",
   "ueberblick-koord": "Schweizer Koordinaten",
   "ueberblick-weiter": "Weitere Ereignisdaten",
+  "ueberblick-nachbeben": "Es ist zu erwarten, dass in den nächsten Tagen und Wochen Nachbeben auftreten werden, die möglicherweise spürbar sind oder weitere Schäden anrichten. Das Auftreten eines ähnlich grossen oder grösseren Bebens in den nächsten Tagen oder Wochen ist sehr unwahrscheinlich, kann allerdings nicht ausgeschlossen werden.",
   "national": "National",
   "auswirkungen-title": "Geschätzte Auswirkungen",
   "auswirkungen-text": "Die geschätzten Auswirkungen werden in Intensitäten beschrieben. Die Intensität beschreibt die Stärke eines Erdbebens basierend auf dem Ausmass der Auswirkungen und der subjektiven Wahrnehmung von Personen.",

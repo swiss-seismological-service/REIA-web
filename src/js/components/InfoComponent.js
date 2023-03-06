@@ -1,8 +1,10 @@
-// import moment from 'moment';
+import moment from 'moment';
 import proj4 from 'proj4';
 import i18next from 'i18next';
 import { formatLocale } from 'd3';
 import { round } from '../utils/numbers';
+import { getDangerLevel } from '../utils/api';
+import { b64encode } from '../utils/b64';
 
 class RIAInfo {
     constructor(riskAssessment, sheetType) {
@@ -19,7 +21,7 @@ class RIAInfo {
         this.overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
         this.overviewPlaces = document.getElementsByClassName('overview-place');
 
-        // this.headerDatetime = document.getElementById('header-datetime');
+        this.headerDatetime = document.getElementById('header-datetime');
         this.headerTitle = document.getElementById('header-title');
         this.headerWappen = document.getElementById('header-wappen');
         this.headerKuerzel = document.getElementById('header-kuerzel');
@@ -49,14 +51,18 @@ class RIAInfo {
         this.infoAuswertung.innerHTML = i18next.t('ueberblick-auswertung-val');
         let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
         this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
-        this.infoMeta.href = 'http://seismo.ethz.ch';
+        this.infoMeta.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(
+            info.originid
+        )}%27`;
     }
 
     replaceOverviewText(info, sheetType) {
         this.overviewMagnitude.innerHTML = info.magnitude_value;
         this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`];
-        let warnlevel = 5;
-        this.overviewWarnlevels[warnlevel - 1].classList.add('active');
+        let warnlevel = getDangerLevel(b64encode(info.originid));
+        warnlevel = warnlevel.danger_level;
+        this.overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
+        this.overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
         let text =
             sheetType === 'CH'
                 ? i18next.t('national-schweiz')
@@ -67,10 +73,9 @@ class RIAInfo {
     }
 
     replaceHeaderText(info, sheetType) {
-        // let date = moment(info.calculation[0].creationinfo.creationtime);
-        // this.headerDatetime.innerHTML = date.format('D.MM.YYYY, HH:mm');
+        let date = moment(info.creationinfo.creationtime);
+        this.headerDatetime.innerHTML = date.format('DD.MM.YYYY, HH:mm');
 
-        // this.headerTitle.innerHTML = info.event_text;
         this.headerTitle.innerHTML = i18next.t('preposition_title', { name: info.event_text });
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;

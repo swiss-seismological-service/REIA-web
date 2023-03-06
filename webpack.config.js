@@ -45,20 +45,12 @@ const postCSSLoader = {
 
 module.exports = {
     entry: {
-        index: [
-            path.resolve(__dirname, 'src/js', 'index.js'),
-            path.resolve(__dirname, 'src/sass', 'main.scss'),
-        ],
-        overview: [
-            path.resolve(__dirname, 'src/js', 'overview.js'),
-            path.resolve(__dirname, 'src/sass', 'minimal.scss'),
-        ],
         reia: [
             path.resolve(__dirname, 'src/js', 'reia.js'),
             path.resolve(__dirname, 'src/sass', 'main.scss'),
         ],
-        overview_reia: [
-            path.resolve(__dirname, 'src/js', 'overview_reia.js'),
+        overview: [
+            path.resolve(__dirname, 'src/js', 'overview.js'),
             path.resolve(__dirname, 'src/sass', 'minimal.scss'),
         ],
     },
