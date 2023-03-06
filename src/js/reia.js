@@ -1,4 +1,4 @@
-import { getEarthquake } from './utils/api';
+import { getRiskAssessment } from './utils/api';
 import { initI18next, translatePageElements } from './components/i18nComponent';
 import LossComponent from './webcomponents/LossComponent'; // eslint-disable-line
 import RIAGraphs from './components/GraphComponent';
@@ -11,22 +11,22 @@ import RIAMaps from './components/MapComponent';
     await initI18next();
 
     const params = new URLSearchParams(window.location.search);
-    const originid = params.get('originid');
+    const oid = params.get('oid');
     const canton = params.get('canton');
 
-    if (!originid) {
+    if (!oid) {
         window.location.replace('/overview.html');
     }
 
-    const earthquakeInfo = getEarthquake(originid);
+    const riskAssessment = getRiskAssessment(oid);
 
-    const info = new RIAInfo(earthquakeInfo, canton || 'CH'); // eslint-disable-line
-    const scales = new RIAScale(earthquakeInfo, canton || 'CH');
-    const maps = new RIAMaps(earthquakeInfo, canton || 'CH');
+    const info = new RIAInfo(riskAssessment, canton || 'CH'); // eslint-disable-line
+    const scales = new RIAScale(riskAssessment, canton || 'CH');
+    const maps = new RIAMaps(riskAssessment, canton || 'CH');
 
-    const graphs = new RIAGraphs(earthquakeInfo, canton || 'CH');
+    const graphs = new RIAGraphs(riskAssessment, canton || 'CH');
 
-    earthquakeInfo.then(() => {
+    riskAssessment.then(() => {
         let promises = scales
             .returnPromises()
             .concat(maps.returnPromises(), graphs.returnPromises());

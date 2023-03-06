@@ -1,9 +1,8 @@
 import i18next from 'i18next';
 import { getBuildingCosts, getCasualties, getDisplaced } from '../utils/api';
-import getLatestCalculation from '../utils/data';
 
 class RIAScale {
-    constructor(earthquakeInfo, sheetType) {
+    constructor(riskAssessment, sheetType) {
         this.casualties = document.getElementById('loss-casualties');
         this.displaced = document.getElementById('loss-displaced');
         this.buildingCosts = document.getElementById('loss-buildingcosts');
@@ -12,8 +11,8 @@ class RIAScale {
         this.displacedPromise = null;
         this.buildingsPromise = null;
 
-        earthquakeInfo.then((info) => {
-            let loss = getLatestCalculation(info, 'loss');
+        riskAssessment.then((info) => {
+            let loss = info.losscalculation;
             this.addScaleData(loss._oid, sheetType);
         });
     }

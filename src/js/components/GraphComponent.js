@@ -1,26 +1,27 @@
 import * as d3 from 'd3';
 import i18next from 'i18next';
 import { getCantonalInjuries, getCantonalStructuralDamage } from '../utils/api';
-import getLatestCalculation from '../utils/data';
 import CantonalGraph from '../utils/CantonalGraph';
 
 class RIAGraphs {
-    constructor(earthquakeInfo, sheetType) {
+    constructor(riskAssessment, sheetType) {
         this.injuredElement = document.getElementById('graph-injured');
         this.damagesElement = document.getElementById('graph-damages');
 
         this.injuredPromise = null;
         this.damagesPromise = null;
         if (sheetType === 'CH') {
-            earthquakeInfo.then((info) => this.insertGraphs(info));
+            riskAssessment.then((info) => this.insertGraphs(info));
         }
     }
 
     returnPromises = () => [this.injuredPromise, this.damagesPromise];
 
     insertGraphs(info) {
-        let damage = getLatestCalculation(info, 'damage');
-        let loss = getLatestCalculation(info, 'loss');
+        // let damage = getLatestCalculation(info, 'damage');
+        let damage = info.damagecalculation;
+        // let loss = getLatestCalculation(info, 'loss');
+        let loss = info.losscalculation;
 
         this.injuredElement.style.display = 'block';
         let injuredGraphElement = this.injuredElement.querySelector('div:last-of-type');

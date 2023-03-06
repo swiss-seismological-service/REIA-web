@@ -1,11 +1,10 @@
 import i18next from 'i18next';
 import cantons from '../../data/pictureParamByCanton.csv';
 import { b64encode } from '../utils/b64';
-import getLatestCalculation from '../utils/data';
 import loadImage from '../utils/images';
 
 class RIAMaps {
-    constructor(earthquakeInfo, sheetType) {
+    constructor(riskAssessment, sheetType) {
         this.shakemapElement = document.getElementById('map-shakemap');
         this.injuredElement = document.getElementById('map-injured');
         this.damagesElement = document.getElementById('map-damages');
@@ -26,7 +25,7 @@ class RIAMaps {
             'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,damage_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
 
         this.addLegend();
-        earthquakeInfo.then((info) => this.insertMaps(info, sheetType));
+        riskAssessment.then((info) => this.insertMaps(info, sheetType));
     }
 
     returnPromises = () => [this.shakemapPromise, this.injuredPromise, this.damagesPromise];
@@ -43,8 +42,10 @@ class RIAMaps {
             `${this.shakemap}&LOCID='${b64encode(info.originid)}'`,
             this.shakemapElement
         );
-        let damage = getLatestCalculation(info, 'damage');
-        let loss = getLatestCalculation(info, 'loss');
+        // let damage = getLatestCalculation(info, 'damage');
+        // let loss = getLatestCalculation(info, 'loss');
+        let damage = info.damagecalculation;
+        let loss = info.losscalculation;
 
         this.cantonElements.forEach((span) => {
             span.innerHTML = sheetType;

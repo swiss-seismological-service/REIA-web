@@ -1,17 +1,17 @@
 import { html, render } from 'lit-html';
 import styles from '../../sass/overview_component.wc.scss';
 import cantons from '../../data/pictureParamByCanton.csv';
-import { getAllEarthquakes } from '../utils/api';
+import { getAllRiskAssessments } from '../utils/api';
 import { b64encode } from '../utils/b64';
 
-class CalculationsComponent extends HTMLElement {
+class RiskAssessmentsComponent extends HTMLElement {
     constructor() {
         super();
         const params = new URLSearchParams(window.location.search);
         this.pdf = params.get('pdf') || 'yes';
         this.attachShadow({ mode: 'open' });
         this.lang = null;
-        this.earthquakes = null;
+        this.riskassessments = null;
         this.pdfUrl = 'http://ermscenario.ethz.ch/pdf/?ready_status=ready_to_print&url=';
         this.cantons = Object.fromEntries(cantons);
     }
@@ -23,26 +23,27 @@ class CalculationsComponent extends HTMLElement {
     attributeChangedCallback(property, oldValue, newValue) {
         if (oldValue === newValue) return;
         this[property] = newValue;
-        this.renderEarthquakes();
+        this.renderRiskAssessments();
     }
 
     // called once at the beginning
     connectedCallback() {
         this.update();
-        this.renderEarthquakes();
+        this.renderRiskAssessments();
     }
 
-    renderEarthquakes() {
-        getAllEarthquakes().then((response) => {
-            this.earthquakes = response;
+    renderRiskAssessments() {
+        getAllRiskAssessments().then((response) => {
+            this.riskassessments = response;
 
-            this.earthquakes = this.earthquakes.map((eq) => {
+            this.riskassessments = this.riskassessments.map((eq) => {
                 if (this.pdf === 'yes') {
                     eq.url = `http://ermd.ethz.ch/?originid=${b64encode(eq.originid)}&lng=${
                         this.lang
                     }`;
                 } else {
-                    eq.url = `/?originid=${b64encode(eq.originid)}`;
+                    // eq.url = `/?originid=${b64encode(eq.originid)}`;
+                    eq.url = `/reia.html?oid=${eq._oid}`;
                 }
                 return eq;
             });
@@ -70,8 +71,8 @@ class CalculationsComponent extends HTMLElement {
                         </tr>
                     </thead>
                     <tbody>
-                        ${this.earthquakes
-                            ? this.earthquakes.map(
+                        ${this.riskassessments
+                            ? this.riskassessments.map(
                                   (e, idx) =>
                                       html`
                                           <tr>
@@ -134,4 +135,4 @@ class CalculationsComponent extends HTMLElement {
     };
 }
 
-customElements.define('calculations-component', CalculationsComponent);
+customElements.define('risk-assessments-component', RiskAssessmentsComponent);

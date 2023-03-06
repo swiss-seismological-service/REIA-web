@@ -1,5 +1,5 @@
-const SERVER = 'http://ermd.ethz.ch/reiaws/';
-// const SERVER = 'http://localhost:8000/';
+// const SERVER = 'http://ermd.ethz.ch/reiaws/';
+const SERVER = 'http://localhost:8000/';
 
 function getData(url) {
     return fetch(url, {
@@ -28,6 +28,14 @@ export function getEarthquake(originid) {
 
 export function getAllEarthquakes() {
     return getData(`${SERVER}v1/earthquakes`);
+}
+
+export function getRiskAssessment(oid) {
+    return getData(`${SERVER}v1/riskassessment/${oid}`);
+}
+
+export function getAllRiskAssessments() {
+    return getData(`${SERVER}v1/riskassessments`);
 }
 
 export function getCasualties(oid, tag) {

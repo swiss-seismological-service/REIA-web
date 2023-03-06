@@ -5,7 +5,7 @@ import { formatLocale } from 'd3';
 import { round } from '../utils/numbers';
 
 class RIAInfo {
-    constructor(earthquakeInfo, sheetType) {
+    constructor(riskAssessment, sheetType) {
         this.infoTime = document.getElementById('info-time');
         this.infoDate = document.getElementById('info-date');
         this.infoDepth = document.getElementById('info-depth');
@@ -26,9 +26,9 @@ class RIAInfo {
 
         this.footerLogo = document.getElementById('logo_bafu_babs');
 
-        earthquakeInfo.then((info) => this.replaceInfoTable(info));
-        earthquakeInfo.then((info) => this.replaceOverviewText(info, sheetType));
-        earthquakeInfo.then((info) => this.replaceHeaderText(info, sheetType));
+        riskAssessment.then((info) => this.replaceInfoTable(info));
+        riskAssessment.then((info) => this.replaceOverviewText(info, sheetType));
+        riskAssessment.then((info) => this.replaceHeaderText(info, sheetType));
 
         proj4.defs(
             'EPSG:2056',
