@@ -1,5 +1,5 @@
-const SERVER = 'http://ermd.ethz.ch/reiaws/';
-// const SERVER = 'http://localhost:8000/';
+// const SERVER = 'http://ermd.ethz.ch/reiaws/';
+const SERVER = 'http://localhost:8001/';
 
 function getData(url) {
     return fetch(url, {

@@ -39,30 +39,35 @@ class RIAInfo {
     }
 
     replaceInfoTable(info) {
-        const [l, b] = proj4('EPSG:2056', [info.longitude_value, info.latitude_value]);
+        if ('longitude_value' in info && 'latitude_value' in info) {
+            const [l, b] = proj4('EPSG:2056', [info.longitude_value, info.latitude_value]);
+            let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+            this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
+        } else {
+            this.infoSwiss.innerHTML = `- / -`;
+        }
 
         [this.infoDate.innerHTML, this.infoTime.innerHTML] = info.time_value?.split('T') || [
             '-',
             '-',
         ];
 
-        this.infoDepth.innerHTML = info.depth_value;
-        this.infoIntensity.innerHTML = round(info.magnitude_value, 1);
+        this.infoDepth.innerHTML = info.depth_value || '-';
+        this.infoIntensity.innerHTML = round(info.magnitude_value, 1) || '-';
         this.infoAuswertung.innerHTML = i18next.t('ueberblick-auswertung-val');
-        let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
-        this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
         this.infoMeta.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(
             info.originid
         )}%27`;
     }
 
     replaceOverviewText(info, sheetType) {
-        this.overviewMagnitude.innerHTML = info.magnitude_value;
-        this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`];
-        let warnlevel = getDangerLevel(b64encode(info.originid));
-        warnlevel = warnlevel.danger_level;
-        this.overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
-        this.overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
+        this.overviewMagnitude.innerHTML = info.magnitude_value || '-';
+        this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`] || '';
+        getDangerLevel(b64encode(info.originid)).then((warnlevel) => {
+            warnlevel = warnlevel.danger_level;
+            this.overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
+            this.overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
+        });
         let text =
             sheetType === 'CH'
                 ? i18next.t('national-schweiz')
@@ -76,7 +81,9 @@ class RIAInfo {
         let date = moment(info.creationinfo.creationtime);
         this.headerDatetime.innerHTML = date.format('DD.MM.YYYY, HH:mm');
 
-        this.headerTitle.innerHTML = i18next.t('preposition_title', { name: info.event_text });
+        this.headerTitle.innerHTML = i18next.t('preposition_title', {
+            name: info.event_text || '-',
+        });
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
         this.footerLogo.src = `images/logos/logo_${i18next.resolvedLanguage}.svg`;

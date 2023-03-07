@@ -83,7 +83,8 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                                 )}"
                                                                 target="_blank"
                                                             >
-                                                                ${e.event_text} ${e.magnitude_value}
+                                                                <!-- ${e.event_text} ${e.magnitude_value} -->
+                                                                ${e.originid}
                                                             </a>
                                                         </td>
                                                         <td>
@@ -103,7 +104,8 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                         </td>`
                                                   : html`<td>
                                                             <a href="${e.url}" target="_blank">
-                                                                ${e.event_text} ${e.magnitude_value}
+                                                                <!-- ${e.event_text} ${e.magnitude_value} -->
+                                                                ${e.originid}
                                                             </a>
                                                         </td>
                                                         <td>
