@@ -61,6 +61,12 @@ export default function CantonalGraph(
             gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(128, 0, 0, 1)');
         });
 
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].quantile10 > data[i].mean) {
+            data[i].quantile10 = data[i].mean - 0.001;
+        }
+    }
+
     // convenience function to divide layout in two columns
     const half = Math.ceil(data.length / 2);
     function getHalf(i) {
@@ -242,7 +248,10 @@ export default function CantonalGraph(
                 .append('stop')
                 .attr(
                     'offset',
-                    (i) => (xScale(X[i][1]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                    (i) =>
+                        (xScale(d3.max([X[i][1], xTickValues[0] + xTickValues[1] * 0.015])) -
+                            xScale(0)) /
+                        (xScale(xDomain[1]) - xScale(0))
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.98');
@@ -273,7 +282,10 @@ export default function CantonalGraph(
                 .append('stop')
                 .attr(
                     'offset',
-                    (i) => (xScale(X[i][2]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                    (i) =>
+                        (xScale(d3.max([X[i][2], xTickValues[0] + xTickValues[1] * 0.05])) -
+                            xScale(0)) /
+                        (xScale(xDomain[1]) - xScale(0))
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
