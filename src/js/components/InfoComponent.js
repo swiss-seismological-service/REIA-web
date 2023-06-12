@@ -3,7 +3,7 @@ import proj4 from 'proj4';
 import i18next from 'i18next';
 import { formatLocale } from 'd3';
 import { round } from '../utils/numbers';
-import { getDangerLevel } from '../utils/api';
+import { getDangerLevel, getOriginDescription, getOriginInfo } from '../utils/api';
 import { b64encode } from '../utils/b64';
 
 class RIAInfo {
@@ -39,32 +39,48 @@ class RIAInfo {
     }
 
     replaceInfoTable(info) {
-        if ('longitude_value' in info && 'latitude_value' in info) {
-            const [l, b] = proj4('EPSG:2056', [info.longitude_value, info.latitude_value]);
-            let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
-            this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
-        } else {
-            this.infoSwiss.innerHTML = `- / -`;
-        }
+        getOriginInfo(b64encode(info.originid)).then((originInfo) => {
+            if ('longitude' in originInfo && 'latitude' in originInfo) {
+                const [l, b] = proj4('EPSG:2056', [originInfo.longitude, originInfo.latitude]);
+                let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+                this.infoSwiss.innerHTML = `${formatter(l)} / ${formatter(b)}`;
+            } else {
+                this.infoSwiss.innerHTML = `- / -`;
+            }
 
-        [this.infoDate.innerHTML, this.infoTime.innerHTML] = info.time_value?.split('T') || [
-            '-',
-            '-',
-        ];
+            let date = moment(originInfo.time);
+            this.infoDate.innerHTML = date?.format('DD.MM.YYYY') || '-';
+            this.infoTime.innerHTML = date?.format('HH:mm') || '-';
 
-        this.infoDepth.innerHTML = info.depth_value || '-';
-        this.infoIntensity.innerHTML = round(info.magnitude_value, 1) || '-';
-        this.infoAuswertung.innerHTML = i18next.t('ueberblick-auswertung-val');
-        this.infoMeta.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(
-            info.originid
-        )}%27`;
+            this.infoDepth.innerHTML = round(originInfo.depth, 1) || '-';
+            this.infoIntensity.innerHTML = round(originInfo.magnitude, 1) || '-';
+            this.infoAuswertung.innerHTML =
+                originInfo.evaluationmode || i18next.t('ueberblick-auswertung-val');
+
+            this.infoMeta.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(
+                originInfo.originid
+            )}%27`;
+
+            this.overviewMagnitude.innerHTML = round(originInfo.magnitude, 1) || '-';
+
+            let canton = originInfo.region.split(' ').pop();
+            originInfo.region = `${originInfo.region.replace(canton, '')}(${canton})`;
+
+            this.headerTitle.innerHTML = i18next.t('preposition_title', {
+                name: originInfo.region || '-',
+            });
+        });
     }
 
     replaceOverviewText(info, sheetType) {
-        this.overviewMagnitude.innerHTML = info.magnitude_value || '-';
-        this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`] || '';
+        getOriginDescription(b64encode(info.originid), i18next.resolvedLanguage).then(
+            (description) => {
+                this.overviewText.innerHTML = description.description || '';
+            }
+        );
+        // this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`] || '';
         getDangerLevel(b64encode(info.originid)).then((warnlevel) => {
-            warnlevel = warnlevel.danger_level;
+            warnlevel = warnlevel[0].alarmlevel;
             this.overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
             this.overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
         });
@@ -81,9 +97,6 @@ class RIAInfo {
         let date = moment(info.creationinfo.creationtime);
         this.headerDatetime.innerHTML = date.format('DD.MM.YYYY, HH:mm');
 
-        this.headerTitle.innerHTML = i18next.t('preposition_title', {
-            name: info.event_text || '-',
-        });
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
         this.footerLogo.src = `images/logos/logo_${i18next.resolvedLanguage}.svg`;

@@ -217,7 +217,7 @@ export default function CantonalGraph(
                 .append('stop')
                 .attr(
                     'offset',
-                    (i) => (xScale(X[i][0]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0))
+                    (i) => (xScale(X[i][0]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
@@ -228,7 +228,7 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(X[i][0]) - xScale(0) + 0.7 * range1(i)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.4');
@@ -239,7 +239,7 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(X[i][0]) - xScale(0) + 0.95 * range1(i)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.85');
@@ -251,7 +251,7 @@ export default function CantonalGraph(
                     (i) =>
                         (xScale(d3.max([X[i][1], xTickValues[0] + xTickValues[1] * 0.015])) -
                             xScale(0)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.98');
@@ -262,7 +262,7 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(X[i][2]) - xScale(0) - 0.95 * range2(i)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.85');
@@ -273,7 +273,7 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(X[i][2]) - xScale(0) - 0.7 * range2(i)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.4');
@@ -285,7 +285,7 @@ export default function CantonalGraph(
                     (i) =>
                         (xScale(d3.max([X[i][2], xTickValues[0] + xTickValues[1] * 0.05])) -
                             xScale(0)) /
-                        (xScale(xDomain[1]) - xScale(0))
+                            (xScale(xDomain[1]) - xScale(0)) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');

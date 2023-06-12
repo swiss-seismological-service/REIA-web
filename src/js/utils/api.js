@@ -1,5 +1,5 @@
-const SERVER = 'http://ermd.ethz.ch/reiaws/';
-// const SERVER = 'http://localhost:8001/';
+// const SERVER = 'http://ermd.ethz.ch/reiaws/';
+const SERVER = 'http://localhost:8000/';
 
 function getData(url) {
     return fetch(url, {
@@ -22,8 +22,16 @@ function getData(url) {
         });
 }
 
+export function getOriginInfo(originid) {
+    return getData(`${SERVER}v1/origin/${originid}`);
+}
+
 export function getDangerLevel(originid) {
-    return getData(`${SERVER}v1/dangerlevel/${originid}`);
+    return getData(`${SERVER}v1/origin/${originid}/dangerlevel`);
+}
+
+export function getOriginDescription(originid, lang) {
+    return getData(`${SERVER}v1/origin/${originid}/description/${lang}`);
 }
 
 export function getRiskAssessment(oid) {
@@ -31,7 +39,7 @@ export function getRiskAssessment(oid) {
 }
 
 export function getAllRiskAssessments() {
-    return getData(`${SERVER}v1/riskassessments`);
+    return getData(`${SERVER}v1/riskassessment`);
 }
 
 export function getCasualties(oid, tag) {
@@ -61,7 +69,7 @@ export function getInjured(oid, tag) {
 export function getStructuralDamage(oid, tag) {
     let base = `${SERVER}v1/damage/${oid}/structural`;
     if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton?aggregation_tag=${tag}`);
+    return getData(`${base}/Canton/report?aggregation_tag=${tag}`);
 }
 
 export function getCantonalInjuries(oid) {
@@ -72,7 +80,7 @@ export function getCantonalInjuries(oid) {
 }
 
 export function getCantonalStructuralDamage(oid) {
-    let base = `${SERVER}v1/damage/${oid}/structural/Canton`;
+    let base = `${SERVER}v1/damage/${oid}/structural/Canton/report`;
     let cantonal = getData(base);
     let country = getStructuralDamage(oid, 'CH');
     return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));
