@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { getBuildingCosts, getCasualties, getDisplaced } from '../utils/api';
+import { getLoss } from '../utils/api';
 
 class RIAScale {
     constructor(riskAssessment, sheetType) {
@@ -20,25 +20,28 @@ class RIAScale {
     returnPromises = () => [this.casualtiesPromise, this.displacedPromise, this.buildingsPromise];
 
     addScaleData(lossId, sheetType) {
-        this.casualtiesPromise = getCasualties(lossId, sheetType).then((data) => {
-            if (sheetType !== 'CH') [data] = data;
-            this.casualties.setAttribute('mean', data.mean);
-            this.casualties.setAttribute('q10', data.percentile10);
-            this.casualties.setAttribute('q90', data.percentile90);
+        let tag = sheetType === 'CH' ? null : sheetType;
+        let sum = sheetType === 'CH';
+
+        this.casualtiesPromise = getLoss(lossId, 'fatalities', 'Canton', tag, sum).then((data) => {
+            [data] = data;
+            this.casualties.setAttribute('mean', data.loss_mean);
+            this.casualties.setAttribute('q10', data.loss_pc10);
+            this.casualties.setAttribute('q90', data.loss_pc90);
             this.casualties.setAttribute('none', i18next.t('report:keine_f'));
         });
-        this.displacedPromise = getDisplaced(lossId, sheetType).then((data) => {
-            if (sheetType !== 'CH') [data] = data;
-            this.displaced.setAttribute('mean', data.mean);
-            this.displaced.setAttribute('q10', data.percentile10);
-            this.displaced.setAttribute('q90', data.percentile90);
+        this.displacedPromise = getLoss(lossId, 'displaced', 'Canton', tag, sum).then((data) => {
+            [data] = data;
+            this.displaced.setAttribute('mean', data.loss_mean);
+            this.displaced.setAttribute('q10', data.loss_pc10);
+            this.displaced.setAttribute('q90', data.loss_pc90);
             this.displaced.setAttribute('none', i18next.t('report:keine_f'));
         });
-        this.buildingsPromise = getBuildingCosts(lossId, sheetType).then((data) => {
-            if (sheetType !== 'CH') [data] = data;
-            this.buildingCosts.setAttribute('mean', data.mean);
-            this.buildingCosts.setAttribute('q10', data.percentile10);
-            this.buildingCosts.setAttribute('q90', data.percentile90);
+        this.buildingsPromise = getLoss(lossId, 'structural', 'Canton', tag, sum).then((data) => {
+            [data] = data;
+            this.buildingCosts.setAttribute('mean', data.loss_mean);
+            this.buildingCosts.setAttribute('q10', data.loss_pc10);
+            this.buildingCosts.setAttribute('q90', data.loss_pc90);
             this.buildingCosts.setAttribute('none', i18next.t('report:keine'));
         });
     }

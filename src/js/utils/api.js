@@ -42,46 +42,40 @@ export function getAllRiskAssessments() {
     return getData(`${SERVER}v1/riskassessment`);
 }
 
-export function getCasualties(oid, tag) {
-    let base = `${SERVER}v1/loss/${oid}/occupants`;
-    if (tag === 'CH') return getData(`${base}/Country`);
+export function getCasualties(oid, aggregation, tag = null, sum = false) {
+    let base = `${SERVER}v1/loss/${oid}/fatalities`;
+    if (sum) if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?aggregation_tag=${tag}`);
 }
 
-export function getDisplaced(oid, tag) {
-    let base = `${SERVER}v1/loss/${oid}/business_interruption`;
-    if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton?aggregation_tag=${tag}`);
+export function getLoss(oid, type, aggregation, tag = null, sum = false) {
+    let base = `${SERVER}v1/loss/${oid}/${type}/${aggregation}`;
+    if (sum) return getData(`${base}?sum=true`);
+    if (tag) return getData(`${base}?aggregation_tag=${tag}`);
+    return getData(base);
 }
 
-export function getBuildingCosts(oid, tag) {
-    let base = `${SERVER}v1/loss/${oid}/structural`;
-    if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton?aggregation_tag=${tag}`);
-}
-
-export function getInjured(oid, tag) {
-    let base = `${SERVER}v1/loss/${oid}/nonstructural`;
-    if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton?aggregation_tag=${tag}`);
-}
-
-export function getStructuralDamage(oid, tag) {
-    let base = `${SERVER}v1/damage/${oid}/structural`;
-    if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton/report?aggregation_tag=${tag}`);
+export function getDamage(oid, type, aggregation, tag = null, sum = false) {
+    let base = `${SERVER}v1/damage/${oid}/${type}/${aggregation}/report`;
+    if (sum) return getData(`${base}?sum=true`);
+    if (tag) return getData(`${base}?aggregation_tag=${tag}`);
+    return getData(base);
 }
 
 export function getCantonalInjuries(oid) {
-    let base = `${SERVER}v1/loss/${oid}/nonstructural/Canton`;
-    let cantonal = getData(base);
-    let country = getInjured(oid, 'CH');
-    return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));
+    let cantonal = getLoss(oid, 'injured', 'Canton');
+    let country = getLoss(oid, 'injured', 'Canton', null, true);
+    return Promise.all([cantonal, country]).then(([ca, co]) => {
+        co.forEach((c) => (c.tag = ['CH']));
+        return ca.concat(co);
+    });
 }
 
 export function getCantonalStructuralDamage(oid) {
-    let base = `${SERVER}v1/damage/${oid}/structural/Canton/report`;
-    let cantonal = getData(base);
-    let country = getStructuralDamage(oid, 'CH');
-    return Promise.all([cantonal, country]).then(([ca, co]) => ca.concat([co]));
+    let cantonal = getDamage(oid, 'structural', 'Canton');
+    let country = getDamage(oid, 'structural', 'Canton', null, true);
+    return Promise.all([cantonal, country]).then(([ca, co]) => {
+        co.forEach((c) => (c.tag = ['CH']));
+        return ca.concat(co);
+    });
 }

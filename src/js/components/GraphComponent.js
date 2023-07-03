@@ -26,12 +26,13 @@ class RIAGraphs {
         this.injuredElement.style.display = 'block';
         let injuredGraphElement = this.injuredElement.querySelector('div:last-of-type');
         this.injuredPromise = getCantonalInjuries(loss._oid).then((data) => {
+            console.log(data);
             const thegraph = CantonalGraph(data, 1, {
                 marginLeft: 30,
                 marginRight: 20,
                 widthDamage: 0,
                 gutter: 60,
-                x: (d) => [d.quantile10, d.mean, d.quantile90],
+                x: (d) => [d.loss_pc10, d.loss_mean, d.loss_pc90],
                 y: (d) => d.tag,
                 xType: d3.scaleSymlog,
                 xScaleClamp: true,
@@ -52,12 +53,13 @@ class RIAGraphs {
         this.damagesElement.style.display = 'block';
         let damagesGraphElement = this.damagesElement.querySelector('div:last-of-type');
         this.damagesPromise = getCantonalStructuralDamage(damage._oid).then((data) => {
+            console.log(data);
             const thegraph2 = CantonalGraph(data, 2, {
                 marginLeft: 30,
                 marginRight: 20,
                 gutter: 40,
-                x: (d) => [d.quantile10, d.mean, d.quantile90, d.percentage],
-                y: (d) => d.tag,
+                x: (d) => [d.damage_pc10, d.damage_mean, d.damage_pc90, d.damage_percentage],
+                y: (d) => d.tag[0],
                 xType: d3.scaleSymlog,
                 symlogConstant: 5.5,
                 xScaleClamp: true,
