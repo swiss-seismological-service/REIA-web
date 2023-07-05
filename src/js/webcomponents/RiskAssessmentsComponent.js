@@ -79,6 +79,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                             <th scope="col">#</th>
                             <th scope="col">Origin ID</th>
                             <th scope="col">Status (loss/dmg)</th>
+                            <th scope="col">Creationtime</th>
                             <th scope="col">Country</th>
                             <th scope="col" data-i18n-key="report:overview-cantonal">
                                 Cantonal Sheet
@@ -98,6 +99,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                       this.status[e.damagecalculation?.status]
                                                   }`}
                                               </td>
+                                              <td>${e.creationinfo.creationtime}</td>
                                               ${this.pdf === 'yes'
                                                   ? html`<td>
                                                             <a
@@ -131,7 +133,10 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                         </td>
                                                         <td>
                                                             ${Object.entries(this.cantons).map(
-                                                                (c) => html`
+                                                                (c, idx) => html`
+                                                                    ${(idx + 1) % 14 === 0
+                                                                        ? html`<br />`
+                                                                        : html``}
                                                                     <a
                                                                         href="${e.url}&canton=${c[0]}"
                                                                         target="_blank"
