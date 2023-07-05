@@ -12,8 +12,22 @@ class RiskAssessmentsComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.lang = null;
         this.riskassessments = null;
+        this.page = parseInt(params.get('page'), 10) || 1;
+        this.pages = 1;
+        this.limit = 20;
+        this.offset = (this.page - 1) * this.limit;
         this.pdfUrl = 'http://ermscenario.ethz.ch/pdf/?ready_status=ready_to_print&url=';
+
         this.cantons = Object.fromEntries(cantons);
+        this.status = [
+            'undefined',
+            'failed',
+            'aborted',
+            'created',
+            'submitted',
+            'executing',
+            'complete',
+        ];
     }
 
     static get observedAttributes() {
@@ -33,14 +47,15 @@ class RiskAssessmentsComponent extends HTMLElement {
     }
 
     renderRiskAssessments() {
-        getAllRiskAssessments().then((response) => {
-            this.riskassessments = response;
+        getAllRiskAssessments(this.limit, this.offset).then((response) => {
+            this.riskassessments = response.items;
+
+            this.pages = Math.ceil(response.count / this.limit);
 
             this.riskassessments = this.riskassessments.map((eq) => {
                 if (this.pdf === 'yes') {
                     eq.url = `http://ermd.ethz.ch/reia.html?oid=${eq._oid}&lng=${this.lang}`;
                 } else {
-                    // eq.url = `/?originid=${b64encode(eq.originid)}`;
                     eq.url = `/reia.html?oid=${eq._oid}`;
                 }
                 return eq;
@@ -62,7 +77,9 @@ class RiskAssessmentsComponent extends HTMLElement {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col"><h2>Origin ID</h2></th>
+                            <th scope="col">Origin ID</th>
+                            <th scope="col">Status (loss/dmg)</th>
+                            <th scope="col">Country</th>
                             <th scope="col" data-i18n-key="report:overview-cantonal">
                                 Cantonal Sheet
                             </th>
@@ -71,10 +88,16 @@ class RiskAssessmentsComponent extends HTMLElement {
                     <tbody>
                         ${this.riskassessments
                             ? this.riskassessments.map(
-                                  (e, idx) =>
+                                  (e) =>
                                       html`
                                           <tr>
-                                              <th scope="row">${idx + 1}</th>
+                                              <th scope="row">${e._oid}</th>
+                                              <td>${e.originid}</td>
+                                              <td>
+                                                  ${`${this.status[e.losscalculation?.status]} / ${
+                                                      this.status[e.damagecalculation?.status]
+                                                  }`}
+                                              </td>
                                               ${this.pdf === 'yes'
                                                   ? html`<td>
                                                             <a
@@ -83,8 +106,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                                 )}"
                                                                 target="_blank"
                                                             >
-                                                                <!-- ${e.event_text} ${e.magnitude_value} -->
-                                                                ${e.originid}
+                                                                CH
                                                             </a>
                                                         </td>
                                                         <td>
@@ -104,8 +126,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                         </td>`
                                                   : html`<td>
                                                             <a href="${e.url}" target="_blank">
-                                                                <!-- ${e.event_text} ${e.magnitude_value} -->
-                                                                ${e.originid}
+                                                                CH
                                                             </a>
                                                         </td>
                                                         <td>
@@ -126,9 +147,68 @@ class RiskAssessmentsComponent extends HTMLElement {
                             : html``}
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a
+                                class="page-link"
+                                href="#"
+                                @click=${() => this.changeParam('page', this.page - 1)}
+                                >Previous</a
+                            >
+                        </li>
+
+                        <li class="page-item ${this.page === 1 ? 'active' : ''}">
+                            <a
+                                class="page-link"
+                                href="#"
+                                @click=${() => this.changeParam('page', 1)}
+                                >1</a
+                            >
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link disabled" href="#">...</a>
+                        </li>
+
+                        ${this.page !== 1 && this.page !== this.pages
+                            ? html`
+                                  <li class="page-item active" aria-current="page">
+                                      <a class="page-link" href="#">${this.page}</a>
+                                  </li>
+                                  <li class="page-item">
+                                      <a class="page-link disabled" href="#">...</a>
+                                  </li>
+                              `
+                            : html``}
+
+                        <li class="page-item ${this.page === this.pages ? 'active' : ''}">
+                            <a
+                                class="page-link"
+                                href="#"
+                                @click=${() => this.changeParam('page', this.pages)}
+                                >${this.pages}</a
+                            >
+                        </li>
+
+                        <li class="page-item">
+                            <a
+                                class="page-link"
+                                href="#"
+                                @click=${() => this.changeParam('page', this.page + 1)}
+                                >Next</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     `;
+
+    changeParam(param, value) {
+        const params = new URLSearchParams(window.location.search);
+        params.set(param, value);
+        window.location.search = params.toString();
+    }
 
     update = () => {
         render(this.template(), this.shadowRoot);

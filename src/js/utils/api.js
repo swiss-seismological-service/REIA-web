@@ -38,8 +38,8 @@ export function getRiskAssessment(oid) {
     return getData(`${SERVER}v1/riskassessment/${oid}`);
 }
 
-export function getAllRiskAssessments() {
-    return getData(`${SERVER}v1/riskassessment`);
+export function getAllRiskAssessments(limit = 20, offset = 0) {
+    return getData(`${SERVER}v1/riskassessment?limit=${limit}&offset=${offset}`);
 }
 
 export function getCasualties(oid, aggregation, tag = null, sum = false) {
