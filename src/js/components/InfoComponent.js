@@ -64,7 +64,11 @@ class RIAInfo {
             this.overviewMagnitude.innerHTML = round(originInfo.magnitude, 1) || '-';
 
             let canton = originInfo.region.split(' ').pop();
-            originInfo.region = `${originInfo.region.replace(canton, '')}(${canton})`;
+            // remove last occurrence of "canton" abbreviation and add it in brackets
+            originInfo.region = `${originInfo.region.replace(
+                new RegExp(`${canton}$`),
+                ''
+            )}(${canton})`;
 
             this.headerTitle.innerHTML = i18next.t('preposition_title', {
                 name: originInfo.region || '-',
