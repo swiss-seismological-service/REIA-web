@@ -84,7 +84,7 @@ class RIAInfo {
         );
         // this.overviewText.innerHTML = info[`description_${i18next.resolvedLanguage}`] || '';
         getDangerLevel(b64encode(info.originid)).then((warnlevel) => {
-            warnlevel = warnlevel[0].alarmlevel;
+            warnlevel = warnlevel[0]?.alarmlevel;
             this.overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
             this.overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
         });

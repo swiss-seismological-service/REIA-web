@@ -16,7 +16,7 @@ class RiskAssessmentsComponent extends HTMLElement {
         this.pages = 1;
         this.limit = 20;
         this.offset = (this.page - 1) * this.limit;
-        this.pdfUrl = 'http://ermscenario.ethz.ch/pdf/?ready_status=ready_to_print&url=';
+        this.pdfUrl = 'http://ermd.ethz.ch/pdf/?ready_status=ready_to_print&url=';
 
         this.cantons = Object.fromEntries(cantons);
         this.status = [

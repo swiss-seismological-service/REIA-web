@@ -1,5 +1,5 @@
-// const SERVER = 'http://ermd.ethz.ch/reiaws/';
-const SERVER = 'http://localhost:8000/';
+const SERVER = 'http://ermd.ethz.ch/reiaws/';
+// const SERVER = 'http://localhost:8000/';
 
 function getData(url) {
     return fetch(url, {
@@ -45,20 +45,20 @@ export function getAllRiskAssessments(limit = 20, offset = 0) {
 export function getCasualties(oid, aggregation, tag = null, sum = false) {
     let base = `${SERVER}v1/loss/${oid}/fatalities`;
     if (sum) if (tag === 'CH') return getData(`${base}/Country`);
-    return getData(`${base}/Canton?aggregation_tag=${tag}`);
+    return getData(`${base}/Canton?filter_tag_like=${tag}`);
 }
 
 export function getLoss(oid, type, aggregation, tag = null, sum = false) {
     let base = `${SERVER}v1/loss/${oid}/${type}/${aggregation}`;
     if (sum) return getData(`${base}?sum=true`);
-    if (tag) return getData(`${base}?aggregation_tag=${tag}`);
+    if (tag) return getData(`${base}?filter_tag_like=${tag}`);
     return getData(base);
 }
 
 export function getDamage(oid, type, aggregation, tag = null, sum = false) {
     let base = `${SERVER}v1/damage/${oid}/${type}/${aggregation}/report`;
     if (sum) return getData(`${base}?sum=true`);
-    if (tag) return getData(`${base}?aggregation_tag=${tag}`);
+    if (tag) return getData(`${base}?filter_tag_like=${tag}`);
     return getData(base);
 }
 
