@@ -56,7 +56,7 @@ module.exports = {
         ],
     },
 
-    mode: process.env.NODE_ENV,
+    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
 
     // default output folder.
     output: {
@@ -180,7 +180,9 @@ module.exports = {
     },
 
     plugins: [
-        new WebpackBundleAnalyzer(),
+        new WebpackBundleAnalyzer({
+            analyzerMode: process.env.NODE_ENV === 'build-dev' ? 'server' : 'disabled',
+        }),
         new MiniCssExtractPlugin({
             // filename: 'css/style.css',
             filename: 'css/[name].css',

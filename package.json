@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --node-env=development",
     "build": "rm -rf ./dist && webpack build --node-env=production",
-    "build-dev": "rm -rf ./dist && webpack build --node-env=development"
+    "build-dev": "rm -rf ./dist && webpack build --node-env=build-dev"
   },
   "author": "",
   "license": "ISC",
