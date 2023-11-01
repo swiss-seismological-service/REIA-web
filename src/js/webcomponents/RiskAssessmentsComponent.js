@@ -16,7 +16,7 @@ class RiskAssessmentsComponent extends HTMLElement {
         this.pages = 1;
         this.limit = 20;
         this.offset = (this.page - 1) * this.limit;
-        this.pdfUrl = 'http://ermd.ethz.ch/pdf/?ready_status=ready_to_print&url=';
+        this.pdfUrl = 'http://erma.ethz.ch/pdf/?ready_status=ready_to_print&url=';
 
         this.cantons = Object.fromEntries(cantons);
         this.status = [
@@ -54,7 +54,7 @@ class RiskAssessmentsComponent extends HTMLElement {
 
             this.riskassessments = this.riskassessments.map((eq) => {
                 if (this.pdf === 'yes') {
-                    eq.url = `http://ermd.ethz.ch/reia.html?oid=${eq._oid}&lng=${this.lang}`;
+                    eq.url = `http://erma.ethz.ch/reia.html?oid=${eq._oid}&lng=${this.lang}`;
                 } else {
                     eq.url = `/reia.html?oid=${eq._oid}`;
                 }
