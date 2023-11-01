@@ -1,6 +1,3 @@
-const SERVER = 'http://ermd.ethz.ch/reiaws/';
-// const SERVER = 'http://localhost:8000/';
-
 function getData(url) {
     return fetch(url, {
         method: 'GET',
@@ -23,40 +20,40 @@ function getData(url) {
 }
 
 export function getOriginInfo(originid) {
-    return getData(`${SERVER}v1/origin/${originid}`);
+    return getData(`${process.env.API_ADDRESS}/v1/origin/${originid}`);
 }
 
 export function getDangerLevel(originid) {
-    return getData(`${SERVER}v1/origin/${originid}/dangerlevel`);
+    return getData(`${process.env.API_ADDRESS}/v1/origin/${originid}/dangerlevel`);
 }
 
 export function getOriginDescription(originid, lang) {
-    return getData(`${SERVER}v1/origin/${originid}/description/${lang}`);
+    return getData(`${process.env.API_ADDRESS}/v1/origin/${originid}/description/${lang}`);
 }
 
 export function getRiskAssessment(oid) {
-    return getData(`${SERVER}v1/riskassessment/${oid}`);
+    return getData(`${process.env.API_ADDRESS}/v1/riskassessment/${oid}`);
 }
 
 export function getAllRiskAssessments(limit = 20, offset = 0) {
-    return getData(`${SERVER}v1/riskassessment?limit=${limit}&offset=${offset}`);
+    return getData(`${process.env.API_ADDRESS}/v1/riskassessment?limit=${limit}&offset=${offset}`);
 }
 
 export function getCasualties(oid, aggregation, tag = null, sum = false) {
-    let base = `${SERVER}v1/loss/${oid}/fatalities`;
+    let base = `${process.env.API_ADDRESS}/v1/loss/${oid}/fatalities`;
     if (sum) if (tag === 'CH') return getData(`${base}/Country`);
     return getData(`${base}/Canton?filter_tag_like=${tag}`);
 }
 
 export function getLoss(oid, type, aggregation, tag = null, sum = false) {
-    let base = `${SERVER}v1/loss/${oid}/${type}/${aggregation}`;
+    let base = `${process.env.API_ADDRESS}/v1/loss/${oid}/${type}/${aggregation}`;
     if (sum) return getData(`${base}?sum=true`);
     if (tag) return getData(`${base}?filter_tag_like=${tag}`);
     return getData(base);
 }
 
 export function getDamage(oid, type, aggregation, tag = null, sum = false) {
-    let base = `${SERVER}v1/damage/${oid}/${type}/${aggregation}/report`;
+    let base = `${process.env.API_ADDRESS}/v1/damage/${oid}/${type}/${aggregation}/report`;
     if (sum) return getData(`${base}?sum=true`);
     if (tag) return getData(`${base}?filter_tag_like=${tag}`);
     return getData(base);
