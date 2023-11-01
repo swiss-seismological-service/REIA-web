@@ -15,6 +15,7 @@ class RIAInfo {
         this.infoAuswertung = document.getElementById('info-auswertung');
         this.infoSwiss = document.getElementById('info-swiss');
         this.infoMeta = document.getElementById('info-meta');
+        this.infoMagtype = document.getElementById('info-magtype');
 
         this.overviewMagnitude = document.getElementById('overview-magnitude');
         this.overviewText = document.getElementById('overview-text');
@@ -56,9 +57,9 @@ class RIAInfo {
             this.infoIntensity.innerHTML = round(originInfo.magnitude, 1) || '-';
             this.infoAuswertung.innerHTML =
                 originInfo.evaluationmode || i18next.t('ueberblick-auswertung-val');
-
+            this.infoMagtype.innerHTML = `[${originInfo.magnitudetype}]` || '-';
             this.infoMeta.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(
-                originInfo.originid
+                info.originid
             )}%27`;
 
             this.overviewMagnitude.innerHTML = round(originInfo.magnitude, 1) || '-';

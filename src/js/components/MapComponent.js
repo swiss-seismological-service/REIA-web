@@ -18,11 +18,11 @@ class RIAMaps {
         this.cantons = Object.fromEntries(cantons);
 
         this.shakemap =
-            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,groundmotion_ch,lakes_white,cities_ch,scenario_marker&SRS=EPSG:21781&BBOX=477245.301518111,60628.0047852365,838844.754161255,301360.973213999&WIDTH=600&HEIGHT=400&FORMAT=aggpng24';
+            'https://map-ssl.seismo.ethz.ch/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,groundmotion_ch,lakes_white,cities_ch,event_ch_marker&SRS=EPSG:21781&BBOX=477245.301518111,60628.0047852365,838844.754161255,301360.973213999&WIDTH=600&HEIGHT=400&FORMAT=aggpng24';
         this.injuredmap =
-            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_event_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,ria_injured_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
+            'https://map-ssl.seismo.ethz.ch/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,ria_injured_municipalities_canton_calcid,lakes_white,cities_ch&FORMAT=aggpng24';
         this.damagemap =
-            'http://map.seddb20d.ethz.ch/cache2w/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_event_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,ria_damage_municipalities_canton_calcid,lakes_white,names_erm_ch23&FORMAT=aggpng24';
+            'https://map-ssl.seismo.ethz.ch/cgi-bin/mapserv?MAP=/var/www/mapfile/sed/erm_ch23_ria_pdf.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=shaded_relief_ch,rivers_white_ch,abroad_gray_ch,border_gray_ch_eu,ria_damage_municipalities_canton_calcid,lakes_white,cities_ch&FORMAT=aggpng24';
         this.addLegend();
         riskAssessment.then((info) => this.insertMaps(info, sheetType));
     }
