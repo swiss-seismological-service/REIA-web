@@ -1,8 +1,7 @@
-import moment from 'moment';
 import proj4 from 'proj4';
 import i18next from 'i18next';
 import { formatLocale } from 'd3';
-import { round } from '../utils/numbers';
+import { round, parseUTCDate, formatDate, formatTime } from '../utils/numbers';
 import { getDangerLevel, getOriginDescription, getOriginInfo } from '../utils/api';
 import { b64encode } from '../utils/b64';
 
@@ -49,9 +48,10 @@ class RIAInfo {
                 this.infoSwiss.innerHTML = `- / -`;
             }
 
-            let date = moment(originInfo.time);
-            this.infoDate.innerHTML = date?.format('DD.MM.YYYY') || '-';
-            this.infoTime.innerHTML = date?.format('HH:mm') || '-';
+            let date = parseUTCDate(originInfo.time);
+
+            this.infoDate.innerHTML = date ? formatDate(date) : '-';
+            this.infoTime.innerHTML = date ? formatTime(date) : '-';
 
             this.infoDepth.innerHTML = round(originInfo.depth, 1) || '-';
             this.infoIntensity.innerHTML = round(originInfo.magnitude, 1) || '-';
@@ -99,8 +99,8 @@ class RIAInfo {
     }
 
     replaceHeaderText(info, sheetType) {
-        let date = moment(info.creationinfo.creationtime);
-        this.headerDatetime.innerHTML = date.format('DD.MM.YYYY, HH:mm');
+        let date = parseUTCDate(info.creationinfo.creationtime);
+        this.headerDatetime.innerHTML = `${formatDate(date)},${formatTime(date)}`;
 
         this.headerKuerzel.innerHTML = sheetType;
         this.headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;

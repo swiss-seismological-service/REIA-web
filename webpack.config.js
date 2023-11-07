@@ -20,7 +20,7 @@ const htmlPluginEntries = templateFiles.map(
         new HTMLWebpackPlugin({
             inject: 'body',
             hash: true,
-            chunks: [path.parse(template).name],
+            chunks: ['webcomponents', path.parse(template).name],
             scriptLoading: 'blocking',
             filename: template,
             template: path.resolve(__dirname, 'src/', template),
@@ -46,14 +46,23 @@ const postCSSLoader = {
 
 module.exports = {
     entry: {
-        reia: [
-            path.resolve(__dirname, 'src/js', 'reia.js'),
-            path.resolve(__dirname, 'src/sass', 'main.scss'),
-        ],
-        overview: [
-            path.resolve(__dirname, 'src/js', 'overview.js'),
-            path.resolve(__dirname, 'src/sass', 'minimal.scss'),
-        ],
+        webcomponents: {
+            import: [path.resolve(__dirname, 'src/js/webcomponents', 'LossComponent.js')],
+        },
+        reia: {
+            import: [
+                path.resolve(__dirname, 'src/js', 'reia.js'),
+                path.resolve(__dirname, 'src/sass', 'main.scss'),
+            ],
+            dependOn: 'webcomponents',
+        },
+        overview: {
+            import: [
+                path.resolve(__dirname, 'src/js', 'overview.js'),
+                path.resolve(__dirname, 'src/sass', 'minimal.scss'),
+            ],
+            dependOn: 'webcomponents',
+        },
     },
 
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -171,6 +180,7 @@ module.exports = {
             }),
             new CssMinimizerPlugin(),
         ],
+        runtimeChunk: 'single',
     },
 
     /* Performance treshold configuration values */
@@ -184,7 +194,6 @@ module.exports = {
             analyzerMode: process.env.NODE_ENV === 'build-dev' ? 'server' : 'disabled',
         }),
         new MiniCssExtractPlugin({
-            // filename: 'css/style.css',
             filename: 'css/[name].css',
         }),
         new CopyWebpackPlugin({
