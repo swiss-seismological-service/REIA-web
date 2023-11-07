@@ -2,21 +2,18 @@ import { html, render } from 'lit-html';
 import styles from '../../sass/loss_component.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
 import { numberToString, injectSVG } from '../utils/utilities';
+import { getLoss } from '../utils/api';
 
-class LossComponent extends HTMLElement {
+class LossScale extends HTMLElement {
     constructor() {
         super();
-
         this.mean = null;
         this.q10 = null;
         this.q90 = null;
-        this.type = null;
-        this.thresholds = [0, 0, 0, 0, 0, 0];
-        this.none = '0';
 
         this.attachShadow({ mode: 'open' });
 
-        this.update();
+        this.readyPromise = null;
 
         this.colorscale = this.shadowRoot.getElementById('colorscale');
         this.colorScaleContext = ColorScale(this.colorscale);
@@ -25,37 +22,70 @@ class LossComponent extends HTMLElement {
 
     // component attributes
     static get observedAttributes() {
-        return ['mean', 'q10', 'q90', 'thresholds', 'type', 'none'];
+        return ['losscalculation', 'lossCategory', 'language', 'aggregation'];
     }
 
     // attribute change
     attributeChangedCallback(property, oldValue, newValue) {
         if (oldValue === newValue) return;
 
-        if (property === 'thresholds') newValue = newValue.split(',').map((n) => parseFloat(n));
-
         this[property] = newValue;
 
-        if (property === 'type' && newValue != null) this.setSVGs();
-
-        if (property === 'mean' && !Number.isNaN(newValue)) this.showScale();
-
-        this.selectIcon();
-
-        if (this.mean != null && this.q10 != null && this.q90 != null) this.calculateLevel();
-
-        this.update();
+        if (property === 'losscalculation' && newValue != null) {
+            this.updateData();
+            this.update();
+        }
     }
 
-    showScale = () => {
-        this.shadowRoot.getElementById(`spinner${this.type}`).style.display = 'none';
-        this.shadowRoot.getElementById(`lossdisplay${this.type}`).style.display = 'block';
+    updateData = () => {
+        this.readyPromise = getLoss(
+            this.losscalculation,
+            this.lossCategory,
+            'Canton',
+            this.aggregation === 'CH' ? null : this.aggregation,
+            this.aggregation === 'CH'
+        ).then((data) => {
+            [data] = data;
+            this.mean = data.loss_mean;
+            this.q10 = data.loss_pc10;
+            this.q90 = data.loss_pc90;
+            this.setThresholds();
+            console.log(this.thresholds);
+            this.setSvgType();
+            this.setHighlightedIcon();
+        });
     };
 
-    setSVGs = () => {
+    // get the text for the first tick in the correct language
+    getZeroTick = (lng) => {
+        let tick = {
+            de: 'keine',
+            fr: 'aucune',
+            it: 'nessuno',
+            en: 'none',
+        };
+        return tick[lng];
+    };
+
+    setThresholds = () => {
+        let thresh = {
+            fatalities: [0, 5, 50, 500, 5000, 50000],
+            displaced: [0, 50, 500, 5000, 50000, 500000],
+            buildingcosts: [0, 10000000, 100000000, 1000000000, 10000000000, 100000000000],
+        };
+
+        this.thresholds = thresh[this.lossCategory];
+    };
+
+    showScale = () => {
+        this.shadowRoot.getElementById(`spinner${this.lossCategory}`).style.display = 'none';
+        this.shadowRoot.getElementById(`lossdisplay${this.lossCategory}`).style.display = 'block';
+    };
+
+    setSvgType = () => {
         for (let i = 1; i <= 5; i++) {
             injectSVG(
-                `images/icons/${this.type}_${i}.svg`,
+                `images/icons/${this.lossCategory}_${i}.svg`,
                 this.shadowRoot.getElementById(`loss-${i}`)
             );
         }
@@ -64,14 +94,15 @@ class LossComponent extends HTMLElement {
     // called once at the beginning
     connectedCallback() {}
 
-    selectIcon = (lossID) => {
+    setHighlightedIcon = (lossID) => {
+        if (!this.thresholds || !this.lossCategory) return '';
         const isTrue =
             (this.thresholds[lossID - 1] <= this.mean &&
                 (this.thresholds[lossID] || this.mean + 1) > this.mean) ||
             (lossID === this.thresholds.length - 1 &&
                 this.mean >= this.thresholds[this.thresholds.length - 1]);
 
-        return isTrue ? `active-${this.type}` : '';
+        return isTrue ? `active-${this.lossCategory}` : '';
     };
 
     calculateLevel = () => {
@@ -92,7 +123,7 @@ class LossComponent extends HTMLElement {
 
         let color = `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`;
 
-        rootStyleSelector.setProperty(`--activeColor${this.type}`, `${color}`);
+        rootStyleSelector.setProperty(`--activeColor${this.lossCategory}`, `${color}`);
     };
 
     template = () => html` <style>
@@ -101,22 +132,22 @@ class LossComponent extends HTMLElement {
         <div class="loss">
             <slot name="titleslot"></slot>
             <slot name="paragraphslot"></slot>
-            <div id="spinner${this.type}" class="lds-ring">
+            <div id="spinner${this.lossCategory}" class="lds-ring">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <div id="lossdisplay${this.type}" class="loss__display">
+            <div id="lossdisplay${this.lossCategory}" class="loss__display">
                 <div class="loss__icons-box">
-                    <div class="loss__icons ${this.selectIcon(1)}" id="loss-1"></div>
-                    <div class="loss__icons ${this.selectIcon(2)}" id="loss-2"></div>
-                    <div class="loss__icons ${this.selectIcon(3)}" id="loss-3"></div>
-                    <div class="loss__icons ${this.selectIcon(4)}" id="loss-4"></div>
-                    <div class="loss__icons ${this.selectIcon(5)}" id="loss-5"></div>
+                    <div class="loss__icons ${this.setHighlightedIcon(1)}" id="loss-1"></div>
+                    <div class="loss__icons ${this.setHighlightedIcon(2)}" id="loss-2"></div>
+                    <div class="loss__icons ${this.setHighlightedIcon(3)}" id="loss-3"></div>
+                    <div class="loss__icons ${this.setHighlightedIcon(4)}" id="loss-4"></div>
+                    <div class="loss__icons ${this.setHighlightedIcon(5)}" id="loss-5"></div>
                 </div>
                 <div class="loss__icons-description">
-                    <div class="loss__legend">${this.none}</div>
+                    <div class="loss__legend">${this.getZeroTick(this.language)}</div>
                     ${this.thresholds
                         .slice(1, 5)
                         .map(
@@ -136,4 +167,4 @@ class LossComponent extends HTMLElement {
     };
 }
 
-customElements.define('loss-component', LossComponent);
+customElements.define('loss-scale', LossScale);

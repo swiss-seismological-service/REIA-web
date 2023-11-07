@@ -2,7 +2,7 @@ import { getRiskAssessment } from './utils/api';
 
 import { initI18next, translatePageElements } from './components/i18nComponent';
 
-import LossComponent from './webcomponents/LossComponent'; // eslint-disable-line
+import lossScale from './webcomponents/LossScale'; // eslint-disable-line
 import LossGraph from './webcomponents/LossGraph'; // eslint-disable-line
 import DamageGraph from './webcomponents/DamageGraph'; // eslint-disable-line
 
@@ -16,10 +16,6 @@ import RIAMaps from './components/MapComponent';
     const params = new URLSearchParams(window.location.search);
     const oid = params.get('oid');
     const canton = params.get('canton');
-
-    if (!oid) {
-        window.location.replace('/overview.html');
-    }
 
     const riskAssessment = getRiskAssessment(oid);
 

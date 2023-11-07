@@ -48,7 +48,7 @@ module.exports = {
     entry: {
         webcomponents: {
             import: [
-                path.resolve(__dirname, 'src/js/webcomponents', 'LossComponent.js'),
+                path.resolve(__dirname, 'src/js/webcomponents', 'LossScale.js'),
                 path.resolve(__dirname, 'src/js/webcomponents', 'DamageGraph.js'),
                 path.resolve(__dirname, 'src/js/webcomponents', 'LossGraph.js'),
             ],

@@ -110,7 +110,7 @@
             </div>
             <div class="col-6 losscharts">
                 <div class="losscharts__container">
-                    <loss-component id="loss-casualties" type="casualties" thresholds="0,5,50,500,5000,50000">
+                    <loss-scale id="loss-casualties">
                         <h3 class="loss__title" slot="titleslot">
                             <span data-i18n-key="report:national-tote-title">Anzahl
                                 Todesopfer</span> <span class="overview-place"></span>
@@ -120,10 +120,10 @@
                                 Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.
                             </span>
                         </p>
-                    </loss-component>
+                    </loss-scale>
                 </div>
                 <div class="losscharts__container">
-                    <loss-component id="loss-displaced" type="displaced" thresholds="0,50,500,5000,50000,500000">
+                    <loss-scale id="loss-displaced">
                         <h3 class="loss__title" slot="titleslot">
                             <span data-i18n-key="report:national-schutz-title">Anzahl Schutzsuchender</span> <span
                                 class="overview-place"></span>
@@ -134,11 +134,10 @@
                                 Bereich.
                             </span>
                         </p>
-                    </loss-component>
+                    </loss-scale>
                 </div>
                 <div class="losscharts__container">
-                    <loss-component id="loss-buildingcosts" type="buildingCosts"
-                        thresholds="0,10000000,100000000,1000000000,10000000000,100000000000">
+                    <loss-scale id="loss-buildingcosts">
                         <h3 class="loss__title" slot="titleslot">
                             <span data-i18n-key="report:national-gebaeude-title">Kosten
                                 Gebäudeschäden</span> <span class="overview-place"></span>
@@ -148,7 +147,7 @@
                                 grosser Wahrscheinlichkeit im eingefärbten
                                 Bereich.</span>
                         </p>
-                    </loss-component>
+                    </loss-scale>
                 </div>
             </div>
         </div>
