@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --node-env=development",
     "build": "rm -rf ./dist && webpack build --node-env=production",
-    "build-dev": "rm -rf ./dist && webpack build --node-env=build-dev"
+    "analyze": "rm -rf ./dist && webpack build --node-env=analyze"
   },
   "author": "",
   "license": "ISC",
@@ -48,8 +48,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "d3": "^7.8.0",
+    "d3-array": "^3.2.4",
+    "d3-axis": "^3.0.0",
+    "d3-fetch": "^3.0.1",
     "d3-format": "^3.1.0",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
     "i18next": "^22.4.8",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",

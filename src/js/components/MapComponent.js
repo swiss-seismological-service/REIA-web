@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 import cantons from '../../data/pictureParamByCanton.csv';
-import { b64encode } from '../utils/b64';
-import loadImage from '../utils/images';
+import { b64encode, loadImage } from '../utils/utilities';
 
 class RIAMaps {
     constructor(riskAssessment, sheetType) {

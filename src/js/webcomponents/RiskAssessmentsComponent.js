@@ -2,7 +2,7 @@ import { html, render } from 'lit-html';
 import styles from '../../sass/overview_component.wc.scss';
 import cantons from '../../data/pictureParamByCanton.csv';
 import { getAllRiskAssessments } from '../utils/api';
-import { b64encode } from '../utils/b64';
+import { b64encode } from '../utils/utilities';
 
 class RiskAssessmentsComponent extends HTMLElement {
     constructor() {

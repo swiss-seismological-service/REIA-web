@@ -1,4 +1,4 @@
-import { clamp } from './numbers';
+import { clamp } from './utilities';
 
 export function ColorScale(canvasElement = null, width = null, height = null) {
     if (!canvasElement) {

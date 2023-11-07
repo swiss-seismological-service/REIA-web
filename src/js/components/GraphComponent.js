@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { scaleSymlog } from 'd3-scale';
+import { formatLocale } from 'd3-format';
+
 import i18next from 'i18next';
 import { getCantonalInjuries, getCantonalStructuralDamage } from '../utils/api';
 import CantonalGraph from '../utils/CantonalGraph';
@@ -18,9 +20,7 @@ class RIAGraphs {
     returnPromises = () => [this.injuredPromise, this.damagesPromise];
 
     insertGraphs(info) {
-        // let damage = getLatestCalculation(info, 'damage');
         let damage = info.damagecalculation;
-        // let loss = getLatestCalculation(info, 'loss');
         let loss = info.losscalculation;
 
         this.injuredElement.style.display = 'block';
@@ -33,13 +33,13 @@ class RIAGraphs {
                 gutter: 60,
                 x: (d) => [d.loss_pc10, d.loss_mean, d.loss_pc90],
                 y: (d) => d.tag,
-                xType: d3.scaleSymlog,
+                xType: scaleSymlog,
                 xScaleClamp: true,
                 symlogConstant: 0.1,
                 xTickFormat: (d) =>
                     d === 0.5
                         ? i18next.t('report:keine')
-                        : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+                        : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
                 xDomain: [0.5, 50000],
                 xTickValues: [0.5, 5, 50, 500, 5000],
                 width: 600,
@@ -58,13 +58,13 @@ class RIAGraphs {
                 gutter: 40,
                 x: (d) => [d.damage_pc10, d.damage_mean, d.damage_pc90, d.damage_percentage],
                 y: (d) => d.tag[0],
-                xType: d3.scaleSymlog,
+                xType: scaleSymlog,
                 symlogConstant: 5.5,
                 xScaleClamp: true,
                 xTickFormat: (d) =>
                     d === 1
                         ? i18next.t('report:keine')
-                        : d3.formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+                        : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
                 xDomain: [1, 500000],
                 xTickValues: [1, 50, 500, 5000, 50000],
                 width: 600,

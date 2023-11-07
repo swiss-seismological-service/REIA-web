@@ -1,8 +1,7 @@
 import { html, render } from 'lit-html';
 import styles from '../../sass/loss_component.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
-import injectSVG from '../utils/injectSvg';
-import { numberToString } from '../utils/numbers';
+import { numberToString, injectSVG } from '../utils/utilities';
 
 class LossComponent extends HTMLElement {
     constructor() {

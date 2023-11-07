@@ -191,7 +191,7 @@ module.exports = {
 
     plugins: [
         new WebpackBundleAnalyzer({
-            analyzerMode: process.env.NODE_ENV === 'build-dev' ? 'server' : 'disabled',
+            analyzerMode: process.env.NODE_ENV === 'analyze' ? 'server' : 'disabled',
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',

@@ -1,9 +1,8 @@
 import proj4 from 'proj4';
 import i18next from 'i18next';
-import { formatLocale } from 'd3';
-import { round, parseUTCDate, formatDate, formatTime } from '../utils/numbers';
+import { formatLocale } from 'd3-format';
+import { round, parseUTCDate, formatDate, formatTime, b64encode } from '../utils/utilities';
 import { getDangerLevel, getOriginDescription, getOriginInfo } from '../utils/api';
-import { b64encode } from '../utils/b64';
 
 class RIAInfo {
     constructor(riskAssessment, sheetType) {

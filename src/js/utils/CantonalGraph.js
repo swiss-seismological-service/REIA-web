@@ -1,4 +1,9 @@
-import * as d3 from 'd3';
+import { create, select } from 'd3-selection';
+import { InternSet, max, range } from 'd3-array';
+import { scaleBand, scaleSymlog, scaleLinear } from 'd3-scale';
+import { axisLeft, axisTop } from 'd3-axis';
+import { format } from 'd3-format';
+import { svg as fetchSVG } from 'd3-fetch';
 
 export default function CantonalGraph(
     data,
@@ -15,7 +20,7 @@ export default function CantonalGraph(
         gutter = 40,
         widthDamage = 35,
         paddingLeftDamage = 0.1,
-        xType = d3.scaleLinear, // type of x-scale
+        xType = scaleLinear, // type of x-scale
         xDomain, // [xmin, xmax]
         xTickFormat,
         xTickValues = [1, 100, 1000, 10000],
@@ -27,8 +32,7 @@ export default function CantonalGraph(
     } = {}
 ) {
     // SVG
-    const svg = d3
-        .create('svg')
+    const svg = create('svg')
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
@@ -89,8 +93,8 @@ export default function CantonalGraph(
     ];
 
     // compute values
-    const X = d3.map(data, x);
-    const Y = d3.map(data, y);
+    const X = Array.from(data, x);
+    const Y = Array.from(data, y);
 
     // make sure quantiles work
     X.forEach((el, i, arr) => {
@@ -99,28 +103,28 @@ export default function CantonalGraph(
     });
 
     // Compute default domains, and unique the y-domain.
-    if (xDomain === undefined) xDomain = [0, d3.max(X)];
-    let yDomain = new d3.InternSet(Y);
+    if (xDomain === undefined) xDomain = [0, max(X)];
+    let yDomain = new InternSet(Y);
 
-    let yDomain1 = new d3.InternSet(d3.map(data.slice(0, half), y));
-    let yDomain2 = new d3.InternSet(d3.map(data.slice(half), y));
+    let yDomain1 = new InternSet(Array.from(data.slice(0, half), y));
+    let yDomain2 = new InternSet(Array.from(data.slice(half), y));
 
     // Omit any data not present in the y-domain.
-    const I = d3.range(X.length).filter((i) => yDomain.has(Y[i]));
+    const I = range(X.length).filter((i) => yDomain.has(Y[i]));
 
     // Construct scales and axes.
     const xScale = xType(xDomain, xRange);
-    if (xType === d3.scaleSymlog) xScale.constant(symlogConstant);
+    if (xType === scaleSymlog) xScale.constant(symlogConstant);
     if (xScaleClamp) xScale.clamp(true);
 
-    const yScale = d3.scaleBand(yDomain, yRangeFull).paddingInner(yPaddingInner).paddingOuter(0.2);
-    const yScale1 = d3.scaleBand(yDomain1, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);
-    const yAxis1 = d3.axisLeft(yScale1).tickSizeOuter(0);
+    const yScale = scaleBand(yDomain, yRangeFull).paddingInner(yPaddingInner).paddingOuter(0.2);
+    const yScale1 = scaleBand(yDomain1, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);
+    const yAxis1 = axisLeft(yScale1).tickSizeOuter(0);
 
-    const yScale2 = d3.scaleBand(yDomain2, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);
-    const yAxis2 = d3.axisLeft(yScale2).tickSizeOuter(0);
+    const yScale2 = scaleBand(yDomain2, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);
+    const yAxis2 = axisLeft(yScale2).tickSizeOuter(0);
 
-    const xAxis = d3.axisTop(xScale).tickValues(xTickValues).tickFormat(xTickFormat);
+    const xAxis = axisTop(xScale).tickValues(xTickValues).tickFormat(xTickFormat);
 
     const rightColumnStart = dataWidth + gutter + widthDamage * (1 + paddingLeftDamage);
     const innerPadding = yScale.step() * yPaddingInner;
@@ -146,14 +150,14 @@ export default function CantonalGraph(
 
         // HOUSE SVG
         // LEFT
-        const prom1 = d3.svg('images/icons/haus.svg').then((icon) => {
-            const iconNode = d3.select(icon.documentElement).remove();
+        const prom1 = fetchSVG('images/icons/haus.svg').then((icon) => {
+            const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });
 
         // RIGHT
-        const prom2 = d3.svg('images/icons/haus.svg').then((icon) => {
-            const iconNode = d3.select(icon.documentElement).remove();
+        const prom2 = fetchSVG('images/icons/haus.svg').then((icon) => {
+            const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });
 
@@ -200,7 +204,7 @@ export default function CantonalGraph(
             .text((i) => {
                 if (Y[i] === 'CH') return '';
                 if (X[i][3] < 1 && X[i][3] > 0) return '<1%';
-                return `${d3.format('.0%')(X[i][3] / 100)}`;
+                return `${format('.0%')(X[i][3] / 100)}`;
             });
     }
     // DATA MASKING GRADIENTS
@@ -249,7 +253,7 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(d3.max([X[i][1], xTickValues[0] + xTickValues[1] * 0.015])) -
+                        (xScale(max([X[i][1], xTickValues[0] + xTickValues[1] * 0.015])) -
                             xScale(0)) /
                             (xScale(xDomain[1]) - xScale(0)) || 0
                 )
@@ -283,7 +287,7 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(d3.max([X[i][2], xTickValues[0] + xTickValues[1] * 0.05])) -
+                        (xScale(max([X[i][2], xTickValues[0] + xTickValues[1] * 0.05])) -
                             xScale(0)) /
                             (xScale(xDomain[1]) - xScale(0)) || 0
                 )

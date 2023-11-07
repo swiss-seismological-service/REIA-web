@@ -1,6 +1,19 @@
 import { formatLocale } from 'd3-format';
 
+export async function loadImage(url, elem) {
+    // Programmatically load an image from a URL, return a promise,
+    // and set the src attribute of an element
+
+    return new Promise((resolve, reject) => {
+        elem.onload = () => resolve(elem);
+        elem.onerror = reject;
+        elem.src = url;
+    });
+}
+
 export function round(value, precision) {
+    // Round a number to a given precision
+
     let multiplier = 10 ** (precision || 0);
     let rounded = Math.round(value * multiplier) / multiplier;
 
@@ -10,11 +23,12 @@ export function round(value, precision) {
             rounded = `${rounded}0`;
         }
     }
-
     return rounded;
 }
 
 export function numberToString(number) {
+    // Convert a number to a string with thousands separators
+
     let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
     if (number < 1000000) return formatter(number);
     if (number < 1000000000) return `${number / 1000000} Mio.`;
@@ -22,11 +36,15 @@ export function numberToString(number) {
 }
 
 export function clamp(num, min, max) {
+    // Clamp a number between a minimum and a maximum value
+
     return Math.min(Math.max(num, min), max);
 }
 
 export function parseUTCDate(dateString) {
-    // try to parse as UTC
+    // Parse a date string. If there is no timezone information,
+    // assume UTC
+
     let zdate = `${dateString}Z`;
     let ts = Date.parse(zdate);
     if (Number.isNaN(ts)) {
@@ -37,6 +55,8 @@ export function parseUTCDate(dateString) {
 }
 
 export function formatDate(date) {
+    // Format a date as DD.MM.YYYY
+
     return `${String(date.getDate()).padStart(2, 0)}.${String(date.getMonth() + 1).padStart(
         2,
         0
@@ -44,5 +64,31 @@ export function formatDate(date) {
 }
 
 export function formatTime(date) {
+    // Format a date time as HH:MM
+
     return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
+}
+
+export function injectSVG(path, element) {
+    // Inject an SVG file into an element
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', path);
+    xhr.overrideMimeType('image/svg+xml');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            element.appendChild(xhr.responseXML.documentElement);
+        }
+    };
+    xhr.send();
+}
+
+export function b64encode(str) {
+    // Encode a string as base64
+    return window.btoa(decodeURIComponent(encodeURIComponent(str)));
+}
+
+export function b64decode(str) {
+    // Decode a base64 string
+    return decodeURIComponent(encodeURIComponent(window.atob(str)));
 }
