@@ -1,6 +1,6 @@
 import { create, select } from 'd3-selection';
 import { InternSet, max, range } from 'd3-array';
-import { scaleBand, scaleSymlog, scaleLinear } from 'd3-scale';
+import { scaleBand, scaleSymlog } from 'd3-scale';
 import { axisLeft, axisTop } from 'd3-axis';
 import { format } from 'd3-format';
 import { svg as fetchSVG } from 'd3-fetch';
@@ -11,24 +11,22 @@ export default function CantonalGraph(
     {
         x = (d) => d, // given d in data, returns the (quantitative) x-value
         y = (d, i) => i, // given d in data, returns the (ordinal) y-value
-        width = 640, // the outer width of the chart, in pixels
-        height = 500, // outer height, in pixels
-        marginTop = 0.066 * height, // the top margin, in pixels
-        marginRight = 40, // the right margin, in pixels
-        marginBottom = 10, // the bottom margin, in pixels
-        marginLeft = 40, // the left margin, in pixels
+        width = 640,
+        height = 500,
+        marginTop = 0.066 * height,
+        marginRight = 40,
+        marginBottom = 10,
+        marginLeft = 40,
         gutter = 40,
         widthDamage = 35,
         paddingLeftDamage = 0.1,
-        xType = scaleLinear, // type of x-scale
         xDomain, // [xmin, xmax]
         xTickFormat,
         xTickValues = [1, 100, 1000, 10000],
-        yPaddingInner = 0.4, // amount of y-range to reserve to separate bars
+        yPaddingInner = 0.4,
         yPaddingOuter = 0.2,
         displayValue = true,
         symlogConstant = 1,
-        xScaleClamp = false,
     } = {}
 ) {
     // SVG
@@ -36,7 +34,6 @@ export default function CantonalGraph(
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
-        // .attr('style', `width: ${width}px!important; height: ${height}px!important`);
         .attr('style', 'max-width: 100%; height: auto; height: intrinsic;');
 
     let defs = svg.append('defs');
@@ -113,9 +110,9 @@ export default function CantonalGraph(
     const I = range(X.length).filter((i) => yDomain.has(Y[i]));
 
     // Construct scales and axes.
-    const xScale = xType(xDomain, xRange);
-    if (xType === scaleSymlog) xScale.constant(symlogConstant);
-    if (xScaleClamp) xScale.clamp(true);
+    const xScale = scaleSymlog(xDomain, xRange);
+    xScale.constant(symlogConstant);
+    xScale.clamp(true);
 
     const yScale = scaleBand(yDomain, yRangeFull).paddingInner(yPaddingInner).paddingOuter(0.2);
     const yScale1 = scaleBand(yDomain1, yRange).paddingInner(yPaddingInner).paddingOuter(0.2);

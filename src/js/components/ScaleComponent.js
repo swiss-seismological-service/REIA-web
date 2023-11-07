@@ -6,7 +6,8 @@ class RIAScale {
         this.casualties = document.getElementById('loss-casualties');
         this.displaced = document.getElementById('loss-displaced');
         this.buildingCosts = document.getElementById('loss-buildingcosts');
-
+        this.lossGraph = document.getElementById('loss-graph');
+        this.damageGraph = document.getElementById('damage-graph');
         this.casualtiesPromise = null;
         this.displacedPromise = null;
         this.buildingsPromise = null;
@@ -14,10 +15,29 @@ class RIAScale {
         riskAssessment.then((info) => {
             let loss = info.losscalculation;
             this.addScaleData(loss._oid, sheetType);
+            this.addGraphData(loss._oid, info.damagecalculation._oid, sheetType);
         });
     }
 
-    returnPromises = () => [this.casualtiesPromise, this.displacedPromise, this.buildingsPromise];
+    returnPromises = () => [
+        this.casualtiesPromise,
+        this.displacedPromise,
+        this.buildingsPromise,
+        this.lossGraph.readyPromise,
+        this.damageGraph.readyPromise,
+    ];
+
+    addGraphData = (lossId, damageId, sheetType) => {
+        if (sheetType === 'CH') {
+            this.lossGraph.parentElement.parentElement.style.display = 'block';
+            this.damageGraph.parentElement.parentElement.style.display = 'block';
+        }
+        this.lossGraph.setAttribute('language', i18next.language);
+        this.lossGraph.setAttribute('losscalculation', lossId);
+
+        this.damageGraph.setAttribute('language', i18next.language);
+        this.damageGraph.setAttribute('damagecalculation', damageId);
+    };
 
     addScaleData(lossId, sheetType) {
         let tag = sheetType === 'CH' ? null : sheetType;

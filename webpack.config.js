@@ -47,7 +47,11 @@ const postCSSLoader = {
 module.exports = {
     entry: {
         webcomponents: {
-            import: [path.resolve(__dirname, 'src/js/webcomponents', 'LossComponent.js')],
+            import: [
+                path.resolve(__dirname, 'src/js/webcomponents', 'LossComponent.js'),
+                path.resolve(__dirname, 'src/js/webcomponents', 'DamageGraph.js'),
+                path.resolve(__dirname, 'src/js/webcomponents', 'LossGraph.js'),
+            ],
         },
         reia: {
             import: [
@@ -65,7 +69,10 @@ module.exports = {
         },
     },
 
-    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+    mode:
+        process.env.NODE_ENV === 'production' // || process.env.NODE_ENV === 'analyze'
+            ? 'production'
+            : 'development',
 
     // default output folder.
     output: {
