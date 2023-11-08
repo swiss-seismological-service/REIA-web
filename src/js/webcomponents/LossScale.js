@@ -36,6 +36,7 @@ class LossScale extends HTMLElement {
         }
 
         this._data = val;
+
         if (this._data) {
             this.update();
             this.calculateLevel();

@@ -7,7 +7,7 @@ import LossGraph from './webcomponents/LossGraph'; // eslint-disable-line
 import DamageGraph from './webcomponents/DamageGraph'; // eslint-disable-line
 
 import RIAInfo from './components/InfoComponent';
-import RIAScale from './components/ScaleComponent';
+import RIAData from './components/DataComponent';
 import RIAMaps from './components/MapComponent';
 
 (async function () { // eslint-disable-line
@@ -20,7 +20,7 @@ import RIAMaps from './components/MapComponent';
     const riskAssessment = getRiskAssessment(oid);
 
     const info = new RIAInfo(riskAssessment, canton || 'CH'); // eslint-disable-line
-    const scales = new RIAScale(riskAssessment, canton || 'CH');
+    const scales = new RIAData(riskAssessment, canton || 'CH');
     const maps = new RIAMaps(riskAssessment, canton || 'CH');
 
     riskAssessment.then(() => {
