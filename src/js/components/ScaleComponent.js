@@ -3,14 +3,14 @@ import { getLoss } from '../utils/api';
 
 class RIAScale {
     constructor(riskAssessment, sheetType) {
-        this.casualties = document.getElementById('loss-casualties');
+        this.fatalities = document.getElementById('loss-casualties');
         this.displaced = document.getElementById('loss-displaced');
-        this.buildingCosts = document.getElementById('loss-buildingcosts');
+        this.structural = document.getElementById('loss-buildingcosts');
         this.lossGraph = document.getElementById('loss-graph');
         this.damageGraph = document.getElementById('damage-graph');
-        this.casualtiesPromise = null;
+        this.fatalitiesPromise = null;
         this.displacedPromise = null;
-        this.buildingsPromise = null;
+        this.structuralPromise = null;
 
         riskAssessment.then((info) => {
             if (info.losscalculation) {
@@ -25,9 +25,9 @@ class RIAScale {
     }
 
     returnPromises = () => [
-        this.casualtiesPromise,
+        this.fatalitiesPromise,
         this.displacedPromise,
-        this.buildingsPromise,
+        this.structuralPromise,
         this.lossGraph.readyPromise,
         this.damageGraph.readyPromise,
     ];
@@ -47,24 +47,24 @@ class RIAScale {
     addScaleData(lossId, sheetType) {
         let tag = sheetType === 'CH' ? null : sheetType;
         let sum = sheetType === 'CH';
-        this.casualties.setAttribute('language', i18next.language);
-        this.casualties.setAttribute('lossCategory', 'fatalities');
-        this.casualties.setAttribute('losscalculation', lossId);
 
-        // this.displacedPromise = getLoss(lossId, 'displaced', 'Canton', tag, sum).then((data) => {
-        //     [data] = data;
-        //     this.displaced.setAttribute('mean', data.loss_mean);
-        //     this.displaced.setAttribute('q10', data.loss_pc10);
-        //     this.displaced.setAttribute('q90', data.loss_pc90);
-        //     this.displaced.setAttribute('none', i18next.t('report:keine_f'));
-        // });
-        // this.buildingsPromise = getLoss(lossId, 'structural', 'Canton', tag, sum).then((data) => {
-        //     [data] = data;
-        //     this.buildingCosts.setAttribute('mean', data.loss_mean);
-        //     this.buildingCosts.setAttribute('q10', data.loss_pc10);
-        //     this.buildingCosts.setAttribute('q90', data.loss_pc90);
-        //     this.buildingCosts.setAttribute('none', i18next.t('report:keine'));
-        // });
+        this.fatalities.setAttribute('language', i18next.language);
+        this.fatalities.setAttribute('losscategory', 'fatalities');
+        this.fatalitiesPromise = getLoss(lossId, 'fatalities', 'Canton', tag, sum);
+        // this.fatalities.setData(this.fatalitiesPromise);
+        this.fatalitiesPromise.then((data) => {
+            this.fatalities.setAttribute('data', JSON.stringify(data));
+        });
+
+        this.displaced.setAttribute('language', i18next.language);
+        this.displaced.setAttribute('losscategory', 'displaced');
+        this.displacedPromise = getLoss(lossId, 'displaced', 'Canton', tag, sum);
+        this.displaced.setData(this.displacedPromise);
+
+        this.structural.setAttribute('language', i18next.language);
+        this.structural.setAttribute('losscategory', 'structural');
+        this.structuralPromise = getLoss(lossId, 'structural', 'Canton', tag, sum);
+        this.structural.setData(this.structuralPromise);
     }
 }
 export default RIAScale;

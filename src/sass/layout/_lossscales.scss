@@ -1,4 +1,4 @@
-.losscharts {
+.lossscales {
     padding: 0;
     margin-top: 0;
 
@@ -15,5 +15,9 @@
         &:last-of-type {
             border-bottom-style: none;
         }
+    }
+
+    loss-scale {
+        font-size: 1rem;
     }
 }

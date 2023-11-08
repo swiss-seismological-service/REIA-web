@@ -1,6 +1,6 @@
 @import "abstracts/variables";
+@import "base/base";
 @import "base/typography";
-
 
 
 .loss {
@@ -10,12 +10,11 @@
 
     &__text {
         margin-top: 0;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.8em;
     }
 
     &__display {
-        padding: 0 10px 3.2rem;
-        display: none;
+        padding: 0 10px 3.2em;
     }
 
     &__icons-box {
@@ -30,7 +29,7 @@
 
         svg {
             width: 100%;
-            height: 6rem;
+            height: 6em;
             fill: rgb(218, 218, 218);
             
             path {
@@ -41,10 +40,10 @@
             }
         }
 
-        &.active-casualties {
+        &.active-fatalities {
             svg {
                 path {
-                    fill: var(--activeColorcasualties);
+                    fill: var(--activeColorfatalities);
                 }
             }
         }
@@ -57,10 +56,10 @@
             }
         }
 
-        &.active-buildingCosts {
+        &.active-structural {
             svg {
                 path {
-                    fill: var(--activeColorbuildingCosts);
+                    fill: var(--activeColorstructural);
                 }
             }
         }
@@ -75,8 +74,8 @@
         position: relative;
         width: 20%;
 
-        font-size: 1.2rem;
-        line-height: 1.2rem;
+        font-size: 1.2em;
+        line-height: 1.2em;
         text-align: center;
 
         &:first-of-type,
@@ -93,9 +92,9 @@
             position: absolute;
             z-index: -1;
             left: 48%;
-            bottom: -1.3rem;
-            width: 0.5rem;
-            height: 1rem;
+            bottom: -1.3em;
+            width: 0.5em;
+            height: 1em;
             background-color: lightgrey;
             content: "";
         }
@@ -112,17 +111,18 @@
         >* {
             position: absolute;
             width: 100%;
-            height: 1.4rem;
+            height: 1.4em;
             z-index: 1;
-            margin-top: 1.3rem;
+            margin-top: 1.3em;
         }
     }
 
     .lds-ring {
         display: inline-block;
         position: relative;
-        width: 80px;
+        width: 10%;
         height: 80px;
+        margin: 0 40%;
     }
 
     .lds-ring div {
