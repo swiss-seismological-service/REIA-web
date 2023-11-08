@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Schadensabschätzung</title>
+</head>
+
+<body>
+    <div style="width: 600px;">
+        <loss-graph losscalculation="1" language="de"></loss-graph>
+        <loss-scale style="font-size:10px;" losscategory="structural" language="de"></loss-scale>
+        <div id="text"></div>
+    </div>
+    <script>
+        var text = document.getElementById('text');
+
+        let originid = 'c21pOmNoLmV0aHouc2VkL3NjMjBkL09yaWdpbi9OTEwuMjAyMzA5MjUxMDEyMjguMjA2NDEuMTE5NzI1'
+        let language = 'de'
+
+        fetch(`http://ermd.ethz.ch/reiaws/v1/origin/${originid}/description/${language}`)
+            .then(response => response.json())
+            .then(data => {
+                text.innerHTML = data['description']
+            });
+
+        let data = [
+            {
+                "category": "structural",
+                "tag": [],
+                "loss_mean": 644521.48959501,
+                "loss_pc10": 504745.256000005,
+                "loss_pc90": 791616.88539998
+            }
+        ]
+        var lossScale = document.querySelector('loss-scale');
+        console.log(JSON.stringify(data));
+        lossScale.setAttribute('data', JSON.stringify(data));
+    </script>
+</body>
+
+</html>

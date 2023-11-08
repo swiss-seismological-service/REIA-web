@@ -187,7 +187,6 @@ module.exports = {
             }),
             new CssMinimizerPlugin(),
         ],
-        runtimeChunk: 'single',
     },
 
     /* Performance treshold configuration values */
