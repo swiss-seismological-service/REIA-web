@@ -29,6 +29,7 @@ class LossScale extends HTMLElement {
         }
     }
 
+    // this.data setter
     set data(val) {
         if (typeof val === 'string' || val instanceof String) {
             [val] = JSON.parse(decodeURIComponent(val));
@@ -43,10 +44,12 @@ class LossScale extends HTMLElement {
         }
     }
 
+    // this.data getter
     get data() {
         return this._data;
     }
 
+    // option to set this.data via method by passing a promise
     setData = (dataPromise) => {
         dataPromise.then((data) => {
             [this.data] = data;
@@ -64,6 +67,7 @@ class LossScale extends HTMLElement {
         return tick[lng];
     };
 
+    // set the thresholds for the color scale and labels
     setThresholds = () => {
         const thresh = {
             fatalities: [0, 5, 50, 500, 5000, 50000],
@@ -73,6 +77,7 @@ class LossScale extends HTMLElement {
         this.thresholds = thresh[this.losscategory];
     };
 
+    // select the correct svg's for the loss category
     injectSVGs = () => {
         for (let i = 1; i <= 5; i++) {
             injectSVG(
@@ -85,6 +90,7 @@ class LossScale extends HTMLElement {
     // called once at the beginning
     connectedCallback = () => {};
 
+    // check whether a loss icon should be active
     setHighlightedIcon = (lossID) => {
         if (!this.thresholds || !this.losscategory) return '';
         const isTrue =
@@ -96,6 +102,7 @@ class LossScale extends HTMLElement {
         return isTrue ? `active-${this.losscategory}` : '';
     };
 
+    // calculate color scale marker position
     calculateLevel = () => {
         this.markerscale = this._root.getElementById('markerscale');
         this.colorscale = this._root.getElementById('colorscale');
