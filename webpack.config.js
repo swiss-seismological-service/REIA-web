@@ -63,7 +63,7 @@ module.exports = (env) => ({
         overview: {
             import: [
                 path.resolve(__dirname, 'src/js', 'overview.js'),
-                path.resolve(__dirname, 'src/sass', 'minimal.scss'),
+                path.resolve(__dirname, 'src/sass', 'main.scss'),
             ],
             dependOn: 'webcomponents',
         },

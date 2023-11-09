@@ -1,23 +1,27 @@
 import { html, render } from 'lit-html';
-import styles from '../../sass/overview_component.wc.scss';
 import cantons from '../../data/pictureParamByCanton.csv';
 import { getAllRiskAssessments } from '../utils/api';
 import { b64encode } from '../utils/utilities';
 
-class RiskAssessmentsComponent extends HTMLElement {
-    constructor() {
-        super();
-        const params = new URLSearchParams(window.location.search);
-        this.pdf = params.get('pdf') || 'yes';
-        this.attachShadow({ mode: 'open' });
-        this.lang = null;
+class OverviewComponent {
+    constructor(container, language = 'de') {
+        // class data
+        this.container = container;
+        this.lang = language;
         this.riskassessments = null;
-        this.page = parseInt(params.get('page'), 10) || 1;
+
+        // Search Params
+        this.params = new URLSearchParams(window.location.search);
+        this.pdf = this.params.get('pdf') || 'yes';
+        this.page = parseInt(this.params.get('page'), 10) || 1;
+
+        // pagination
         this.pages = 1;
         this.limit = 20;
         this.offset = (this.page - 1) * this.limit;
-        this.pdfUrl = `${process.env.PDF_GENERATOR}/?ready_status=ready_to_print&url=`;
 
+        // constant data
+        this.pdfUrl = `${process.env.PDF_GENERATOR}/?ready_status=ready_to_print&url=`;
         this.cantons = Object.fromEntries(cantons);
         this.status = [
             'undefined',
@@ -28,22 +32,16 @@ class RiskAssessmentsComponent extends HTMLElement {
             'executing',
             'complete',
         ];
-    }
-
-    static get observedAttributes() {
-        return ['lang'];
-    }
-
-    attributeChangedCallback(property, oldValue, newValue) {
-        if (oldValue === newValue) return;
-        this[property] = newValue;
         this.renderRiskAssessments();
     }
 
-    // called once at the beginning
-    connectedCallback() {
+    set lang(val) {
+        this._lang = val;
         this.update();
-        this.renderRiskAssessments();
+    }
+
+    get lang() {
+        return this._lang;
     }
 
     renderRiskAssessments() {
@@ -54,7 +52,7 @@ class RiskAssessmentsComponent extends HTMLElement {
 
             this.riskassessments = this.riskassessments.map((eq) => {
                 if (this.pdf === 'yes') {
-                    eq.url = `${process.env.SERVER}/reia.html?oid=${eq._oid}&lng=${this.lang}`;
+                    eq.url = `${process.env.SERVER}/reia.html?oid=${eq._oid}`;
                 } else {
                     eq.url = `/reia.html?oid=${eq._oid}`;
                 }
@@ -64,13 +62,11 @@ class RiskAssessmentsComponent extends HTMLElement {
         });
     }
 
-    template = () => html`
-        <style>
-            ${styles}
+    template = () => html`<style>
+            * {
+                font-size: 1.2rem;
+            }
         </style>
-        <div class="container-xl">
-            <slot name="headerslot"></slot>
-        </div>
         <div class="container-xl">
             <div class="row">
                 <table class="table">
@@ -104,7 +100,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                   ? html`<td>
                                                             <a
                                                                 href="${this.pdfUrl}${b64encode(
-                                                                    e.url
+                                                                    `${e.url}&lng=${this.lang}`
                                                                 )}"
                                                                 target="_blank"
                                                             >
@@ -117,7 +113,7 @@ class RiskAssessmentsComponent extends HTMLElement {
                                                                     <a
                                                                         href="${this
                                                                             .pdfUrl}${b64encode(
-                                                                            `${e.url}&canton=${c[0]}`
+                                                                            `${e.url}&canton=${c[0]}&lng=${this.lang}`
                                                                         )}"
                                                                         target="_blank"
                                                                     >
@@ -206,18 +202,16 @@ class RiskAssessmentsComponent extends HTMLElement {
                     </ul>
                 </nav>
             </div>
-        </div>
-    `;
+        </div> `;
 
     changeParam(param, value) {
-        const params = new URLSearchParams(window.location.search);
-        params.set(param, value);
-        window.location.search = params.toString();
+        this.params.set(param, value);
+        window.location.search = this.params.toString();
     }
 
     update = () => {
-        render(this.template(), this.shadowRoot);
+        render(this.template(), this.container);
     };
 }
 
-customElements.define('risk-assessments-component', RiskAssessmentsComponent);
+export default OverviewComponent;
