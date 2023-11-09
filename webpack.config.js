@@ -44,7 +44,7 @@ const postCSSLoader = {
     },
 };
 
-module.exports = {
+module.exports = (env) => ({
     entry: {
         webcomponents: {
             import: [
@@ -69,10 +69,7 @@ module.exports = {
         },
     },
 
-    mode:
-        process.env.NODE_ENV === 'production' // || process.env.NODE_ENV === 'analyze'
-            ? 'production'
-            : 'development',
+    mode: env.production ? 'production' : 'development',
 
     // default output folder.
     output: {
@@ -127,14 +124,14 @@ module.exports = {
                 type: 'asset/resource',
                 generator: {
                     emit: true,
-                    filename: 'images/[name][ext][query]',
+                    filename: '[name][ext][query]',
                 },
             },
             {
                 test: /\.(svg)$/i,
                 type: 'asset',
                 generator: {
-                    filename: 'images/[name][ext][query]',
+                    filename: '[name][ext][query]',
                 },
             },
             {
@@ -197,7 +194,7 @@ module.exports = {
 
     plugins: [
         new WebpackBundleAnalyzer({
-            analyzerMode: process.env.NODE_ENV === 'analyze' ? 'server' : 'disabled',
+            analyzerMode: env.analyze ? 'server' : 'disabled',
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
@@ -207,6 +204,14 @@ module.exports = {
                 {
                     from: path.resolve('src', 'images'),
                     to: path.resolve('dist', 'images'),
+                    toType: 'dir',
+                    globOptions: {
+                        ignore: ['*.DS_Store', 'Thumbs.db'],
+                    },
+                },
+                {
+                    from: path.resolve('src', 'images.wc'),
+                    to: path.resolve('dist', 'images.wc'),
                     toType: 'dir',
                     globOptions: {
                         ignore: ['*.DS_Store', 'Thumbs.db'],
@@ -224,4 +229,4 @@ module.exports = {
         }),
         new Dotenv(),
     ].concat(htmlPluginEntries),
-};
+});

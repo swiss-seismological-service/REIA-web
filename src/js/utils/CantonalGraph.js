@@ -147,13 +147,13 @@ export default function CantonalGraph(
 
         // HOUSE SVG
         // LEFT
-        const prom1 = fetchSVG('images/icons/haus.svg').then((icon) => {
+        const prom1 = fetchSVG('images.wc/haus.svg').then((icon) => {
             const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });
 
         // RIGHT
-        const prom2 = fetchSVG('images/icons/haus.svg').then((icon) => {
+        const prom2 = fetchSVG('images.wc/haus.svg').then((icon) => {
             const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });

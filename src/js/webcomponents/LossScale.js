@@ -82,7 +82,7 @@ class LossScale extends HTMLElement {
     injectSVGs = () => {
         for (let i = 1; i <= 5; i++) {
             injectSVG(
-                `images/icons/${this.losscategory}_${i}.svg`,
+                `images.wc/${this.losscategory}_${i}.svg`,
                 this._root.getElementById(`loss-${i}`)
             );
         }

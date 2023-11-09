@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --node-env=development",
-    "build": "rm -rf ./dist && webpack build --node-env=production",
-    "analyze": "rm -rf ./dist && webpack build --node-env=analyze"
+    "build": "rm -rf ./dist && webpack build --env production",
+    "analyze": "rm -rf ./dist && webpack build --env analyze",
+    "webcomponents": "rm -rf ./dist && webpack build --env production && mkdir ./dist/webcomponents && cp ./dist/js/webcomponents.js ./dist/webcomponents && cp -r ./dist/images.wc/ ./dist/webcomponents/images.wc/"
   },
   "author": "",
   "license": "ISC",
