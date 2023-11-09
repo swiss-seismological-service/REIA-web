@@ -6,8 +6,9 @@ import { initI18next, translatePageElements, bindLocaleSwitcher } from './compon
     await initI18next();
     const switcher = document.querySelector('[data-i18n-switcher]');
     const overviewContainer = document.querySelector('#overview');
+    const paginationContainer = document.querySelector('#pagination');
 
-    const overview = new OverviewComponent(overviewContainer);
+    const overview = new OverviewComponent(overviewContainer, paginationContainer);
 
     if (switcher)
         bindLocaleSwitcher(switcher, (l) => {
