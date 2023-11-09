@@ -13,6 +13,7 @@ export async function loadImage(url, elem) {
 
 export function round(value, precision) {
     // Round a number to a given precision
+    if (typeof value !== 'number') return null;
 
     let multiplier = 10 ** (precision || 0);
     let rounded = Math.round(value * multiplier) / multiplier;
@@ -44,6 +45,7 @@ export function clamp(num, min, max) {
 export function parseUTCDate(dateString) {
     // Parse a date string. If there is no timezone information,
     // assume UTC
+    if (typeof dateString !== 'string') return null;
 
     let zdate = `${dateString}Z`;
     let ts = Date.parse(zdate);

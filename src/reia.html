@@ -34,7 +34,7 @@
                 <h2 data-i18n-key="report:ueberblick">Überblick</h2>
             </div>
             <div class="col-6 grid__cell grid__cell__border--right grid__cell__border--bottom overview__magnitude">
-                <h2><span data-i18n-key="report:mag">Magnitude</span> <span id="overview-magnitude"></span> [MLhc]</h2>
+                <h2><span data-i18n-key="report:mag">Magnitude</span> <span id="overview-magnitude"></span></h2>
             </div>
             <div class="col-6 grid__cell grid__cell__border--bottom overview__stufe">
                 <h2 data-i18n-key="report:ueberblick-stufe">Gefahrenstufe</h2>
@@ -52,43 +52,10 @@
                         <span id="overview-text">
                         </span><br />
                     </p>
-                    <!-- <p data-i18n-key="report:ueberblick-nachbeben"></p> -->
                 </div>
             </div>
-            <div class="col-6 grid__cell overview">
-                <table class="table table-sm overview__table">
-                    <tbody>
-                        <tr>
-                            <td data-i18n-key="report:ueberblick-zeit">Zeit [UTC]</td>
-                            <td id="info-time">...</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n-key="report:ueberblick-datum">Datum</td>
-                            <td id="info-date">...</td>
-                        </tr>
-                        <tr>
-                            <td><span data-i18n-key="report:ueberblick-tiefe">Herdtiefe</span> [km]</td>
-                            <td id="info-depth">...</td>
-                        </tr>
-                        <tr>
-                            <td><span data-i18n-key="report:mag">Magnitude</span> <span id="info-magtype">[MLhc]</span>
-                            </td>
-                            <td id="info-intensity">...</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n-key="report:ueberblick-auswertung">Auswertung</td>
-                            <td id="info-auswertung">...</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n-key="report:ueberblick-koord">Schweizer Koordinaten</td>
-                            <td id="info-swiss">...</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n-key="report:ueberblick-weiter">Weitere Ereignisdaten</td>
-                            <td><a id="info-meta" href="" target="_blank">Link</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="overview-table" class="col-6 grid__cell overview">
+                <info-table id="info-table"></info-table>
             </div>
         </div>
         <div class="row grid__row">

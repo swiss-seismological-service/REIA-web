@@ -1,14 +1,13 @@
+import i18next from 'i18next';
 import { getRiskAssessment } from './utils/api';
-
 import { initI18next, translatePageElements } from './components/i18nComponent';
 
 import lossScale from './webcomponents/LossScale'; // eslint-disable-line
 import LossGraph from './webcomponents/LossGraph'; // eslint-disable-line
 import DamageGraph from './webcomponents/DamageGraph'; // eslint-disable-line
+import InfoTable from './webcomponents/InfoTable'; // eslint-disable-line
 
-import RIAInfo from './components/InfoComponent';
-import RIAData from './components/DataComponent';
-import RIAMaps from './components/MapComponent';
+import DataComponent from './components/DataComponent';
 
 (async function () { // eslint-disable-line
     await initI18next();
@@ -19,17 +18,23 @@ import RIAMaps from './components/MapComponent';
 
     const riskAssessment = getRiskAssessment(oid);
 
-    const info = new RIAInfo(riskAssessment, canton || 'CH'); // eslint-disable-line
-    const scales = new RIAData(riskAssessment, canton || 'CH');
-    const maps = new RIAMaps(riskAssessment, canton || 'CH');
+    const dataComponent = new DataComponent(riskAssessment, canton || 'CH');
 
     riskAssessment.then(() => {
-        let promises = scales.returnPromises().concat(maps.returnPromises());
+        let promises = dataComponent.returnPromises();
 
         Promise.all(promises).then(() => {
             window.status = 'ready_to_print';
             console.log('ready_to_print'); // eslint-disable-line
         });
     });
+
+    // dynamically set language specific images
+    let footerLogo = document.getElementById('logo_bafu_babs');
+    footerLogo.src = `images/logos/logo_${i18next.resolvedLanguage}.svg`;
+
+    let shakemapLegend = document.getElementById('legende-shakemap');
+    shakemapLegend.src = `images/legende_shakemap_${i18next.resolvedLanguage}.svg`;
+
     translatePageElements();
 })();
