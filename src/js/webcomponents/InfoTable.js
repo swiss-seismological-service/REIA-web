@@ -103,7 +103,7 @@ class InfoTable extends HTMLElement {
             </tr>
             <tr>
                 <td>${i18next.t('report:ueberblick-weiter')}</td>
-                <td><a id="info-meta" href="" target="_blank">Link</a></td>
+                <td><a id="info-meta" href="${this.origininfo?.href}" target="_blank">Link</a></td>
             </tr>
         </tbody>
     </table>`;
