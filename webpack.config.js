@@ -53,19 +53,16 @@ module.exports = (env) => ({
                 path.resolve(__dirname, 'src/js/webcomponents', 'LossGraph.js'),
             ],
         },
+        style: {
+            import: [path.resolve(__dirname, 'src/sass', 'main.scss')],
+        },
         reia: {
-            import: [
-                path.resolve(__dirname, 'src/js', 'reia.js'),
-                path.resolve(__dirname, 'src/sass', 'main.scss'),
-            ],
-            dependOn: 'webcomponents',
+            import: [path.resolve(__dirname, 'src/js', 'reia.js')],
+            dependOn: ['webcomponents', 'style'],
         },
         overview: {
-            import: [
-                path.resolve(__dirname, 'src/js', 'overview.js'),
-                path.resolve(__dirname, 'src/sass', 'main.scss'),
-            ],
-            dependOn: 'webcomponents',
+            import: [path.resolve(__dirname, 'src/js', 'overview.js')],
+            dependOn: ['webcomponents', 'style'],
         },
     },
 
@@ -99,7 +96,7 @@ module.exports = (env) => ({
                     },
                     'css-loader', // css loader
                     postCSSLoader,
-                    { loader: 'sass-loader', options: { sourceMap: true } }, // sass files loader
+                    'sass-loader',
                 ],
             },
             // loader for WebComponents SASS

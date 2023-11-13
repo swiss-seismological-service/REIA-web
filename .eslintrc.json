@@ -30,25 +30,6 @@
         "no-unused-expressions": ["error", { "allowTernary": true }],
         "no-param-reassign": ["off"],
         "no-underscore-dangle": ["off"],
-        "prefer-const": ["off"],
-        // "prefer-destructuring": [
-        //     "error",
-        //     {
-        //         "array": false,
-        //         "object": true
-        //     },
-        //     {
-        //         "enforceForRenamedProperties": false
-        //     }
-        // ],
-        "prettier/prettier": [
-            "error",
-            {
-                "trailingComma": "es5",
-                "singleQuote": true,
-                "printWidth": 100,
-                "tabWidth": 4
-            }
-        ]
+        "prefer-const": ["off"]
     }
 }

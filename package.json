@@ -2,12 +2,12 @@
   "name": "javascript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "webpack serve --node-env=development",
-    "build": "rm -rf ./dist && webpack build --env production",
-    "analyze": "rm -rf ./dist && webpack build --env analyze",
-    "webcomponents": "rm -rf ./dist && webpack build --env production && mkdir ./dist/webcomponents && cp ./dist/js/webcomponents.js ./dist/webcomponents && cp -r ./dist/images.wc/ ./dist/webcomponents/images.wc/"
+    "build": "webpack build --env production",
+    "analyze": "webpack build --env analyze",
+    "webcomponents": "webpack build --env production && mkdir ./dist/webcomponents && cp ./dist/js/webcomponents.js ./dist/webcomponents && cp -r ./dist/images.wc/ ./dist/webcomponents/images.wc/"
   },
   "author": "",
   "license": "ISC",
@@ -37,7 +37,6 @@
     "prettier": "^2.8.1",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
-    "style-loader": "^3.3.1",
     "stylelint": "^14.16.1",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser-webpack-plugin": "^5.3.6",
