@@ -62,7 +62,7 @@ class OverviewComponent {
                 } else {
                     eq.ch_url = `/reia.html?oid=${eq._oid}`;
                     eq.kt_urls = Object.entries(this.cantons).map(
-                        (c) => `${eq.url}&canton=${c[0]}`
+                        (c) => `${eq.ch_url}&canton=${c[0]}`
                     );
                 }
                 return eq;

@@ -1,4 +1,3 @@
-import i18next from 'i18next';
 import { getRiskAssessment } from './utils/api';
 import { initI18next, translatePageElements } from './components/i18nComponent';
 
@@ -9,8 +8,8 @@ import InfoTable from './webcomponents/InfoTable'; // eslint-disable-line
 
 import DataComponent from './components/DataComponent';
 
+// eslint-disable-next-line
 (async function () {
-    // eslint-disable-line
     await initI18next();
 
     const params = new URLSearchParams(window.location.search);

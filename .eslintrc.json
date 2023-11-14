@@ -22,6 +22,10 @@
         "no-return-assign": ["off"],
         "no-unused-expressions": ["error", { "allowTernary": true }],
         "no-param-reassign": ["off"],
-        "prefer-const": ["off"]
+        "prefer-const": ["off"],
+        "no-underscore-dangle": ["off"],
+        "class-methods-use-this": ["off"],
+        "import/no-extraneous-dependencies": ["off"],
+        "no-plusplus": ["off"]
     }
 }

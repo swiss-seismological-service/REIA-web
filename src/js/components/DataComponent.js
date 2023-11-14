@@ -197,7 +197,7 @@ class DataComponent {
             let injuredMapElement = injuredElement.getElementsByTagName('img')[0];
             this.promises.push(
                 loadImage(
-                    `${process.env.INJURED_MAP}&CALCID=${lossId}&CANTON=${sheetType}${cantonParams[sheetType]}`,
+                    `${process.env.INJURED_MAP}&CALCID=${lossId}&CANTON=${sheetType}${cantonParams[sheetType]}`, //eslint-disable-line
                     injuredMapElement
                 )
             );
@@ -206,7 +206,7 @@ class DataComponent {
             let damagesMapElement = damagesElement.getElementsByTagName('img')[0];
             this.promises.push(
                 loadImage(
-                    `${process.env.DAMAGE_MAP}&CALCID=${damageId}&CANTON=${sheetType}${cantonParams[sheetType]}`,
+                    `${process.env.DAMAGE_MAP}&CALCID=${damageId}&CANTON=${sheetType}${cantonParams[sheetType]}`, //eslint-disable-line
                     damagesMapElement
                 )
             );
