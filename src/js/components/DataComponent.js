@@ -15,7 +15,12 @@ import {
     b64encode,
     round,
     loadImage,
+    importFolder,
 } from '../utils/utilities';
+
+const bafuLogo = importFolder(require.context('../../images/logos/bafu', false, /\.svg$/));
+const legendShakemap = importFolder(require.context('../../images/shakemap', false, /\.svg$/));
+const wappenImage = importFolder(require.context('../../images/wappen', false, /\.png$/));
 
 class DataComponent {
     constructor(riskAssessment, sheetType) {
@@ -25,6 +30,8 @@ class DataComponent {
             let lossId = info.losscalculation?._oid;
             let damageId = info.damagecalculation?._oid;
             let originId = info.originid;
+
+            this.addLanguageImages();
 
             if (lossId && damageId) {
                 this.addScaleData(lossId, sheetType);
@@ -43,6 +50,15 @@ class DataComponent {
     }
 
     returnPromises = () => this.promises;
+
+    addLanguageImages = () => {
+        // dynamically set language specific images
+        let footerLogo = document.getElementById('logo_bafu_babs');
+        footerLogo.src = bafuLogo[`logo_${i18next.resolvedLanguage}.svg`];
+
+        let shakemapLegend = document.getElementById('legende-shakemap');
+        shakemapLegend.src = legendShakemap[`legende_shakemap_${i18next.resolvedLanguage}.svg`];
+    };
 
     addGraphData = (lossId, damageId, sheetType) => {
         let lossGraph = document.getElementById('loss-graph');
@@ -135,7 +151,7 @@ class DataComponent {
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatTime(date)}` : '';
 
         headerKuerzel.innerHTML = sheetType;
-        headerWappen.src = `images/wappen/${sheetType || 'CH'}.png`;
+        headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
     }
 
     addOriginDescription(originId) {

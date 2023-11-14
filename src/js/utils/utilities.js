@@ -94,3 +94,7 @@ export function b64decode(str) {
     // Decode a base64 string
     return decodeURIComponent(encodeURIComponent(window.atob(str)));
 }
+
+export function importFolder(r) {
+    return Object.fromEntries(r.keys().map((x) => [x.replace('./', ''), r(x)]));
+}

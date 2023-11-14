@@ -9,7 +9,8 @@ import InfoTable from './webcomponents/InfoTable'; // eslint-disable-line
 
 import DataComponent from './components/DataComponent';
 
-(async function () { // eslint-disable-line
+(async function () {
+    // eslint-disable-line
     await initI18next();
 
     const params = new URLSearchParams(window.location.search);
@@ -28,13 +29,6 @@ import DataComponent from './components/DataComponent';
             console.log('ready_to_print'); // eslint-disable-line
         });
     });
-
-    // dynamically set language specific images
-    let footerLogo = document.getElementById('logo_bafu_babs');
-    footerLogo.src = `images/logos/logo_${i18next.resolvedLanguage}.svg`;
-
-    let shakemapLegend = document.getElementById('legende-shakemap');
-    shakemapLegend.src = `images/legende_shakemap_${i18next.resolvedLanguage}.svg`;
 
     translatePageElements();
 })();

@@ -68,45 +68,48 @@ class InfoTable extends HTMLElement {
         )}%27`;
     };
 
-    template = () => html`<table class="table table-sm overview__table">
-        <tbody>
-            <tr>
-                <td>${i18next.t('report:ueberblick-zeit')}</td>
-                <td id="info-time">${this.origininfo?.time || '-'}</td>
-            </tr>
-            <tr>
-                <td>${i18next.t('report:ueberblick-datum')}</td>
-                <td id="info-date">${this.origininfo?.date || '-'}</td>
-            </tr>
-            <tr>
-                <td><span>${i18next.t('report:ueberblick-tiefe')}</span> [km]</td>
-                <td id="info-depth">${round(this.origininfo?.depth, 1) || '-'}</td>
-            </tr>
-            <tr>
-                <td>
-                    <span>${i18next.t('report:mag')}</span>
-                    <span id="info-magtype">[${this.origininfo?.magnitudetype || ''}]</span>
-                </td>
-                <td id="info-magnitude">${round(this.origininfo?.magnitude, 1) || '-'}</td>
-            </tr>
-            <tr>
-                <td>${i18next.t('report:ueberblick-auswertung')}</td>
-                <td id="info-auswertung">
-                    ${this.origininfo?.evaluationmode || i18next.t('ueberblick-auswertung-val')}
-                </td>
-            </tr>
-            <tr>
-                <td>${i18next.t('report:ueberblick-koord')}</td>
-                <td id="info-koordinaten">
-                    ${this.origininfo?.longitude || '-'} / ${this.origininfo?.latitude || '-'}
-                </td>
-            </tr>
-            <tr>
-                <td>${i18next.t('report:ueberblick-weiter')}</td>
-                <td><a id="info-meta" href="${this.origininfo?.href}" target="_blank">Link</a></td>
-            </tr>
-        </tbody>
-    </table>`;
+    template = () =>
+        html`<table class="table table-sm overview__table">
+            <tbody>
+                <tr>
+                    <td>${i18next.t('report:ueberblick-zeit')}</td>
+                    <td id="info-time">${this.origininfo?.time || '-'}</td>
+                </tr>
+                <tr>
+                    <td>${i18next.t('report:ueberblick-datum')}</td>
+                    <td id="info-date">${this.origininfo?.date || '-'}</td>
+                </tr>
+                <tr>
+                    <td><span>${i18next.t('report:ueberblick-tiefe')}</span> [km]</td>
+                    <td id="info-depth">${round(this.origininfo?.depth, 1) || '-'}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>${i18next.t('report:mag')}</span>
+                        <span id="info-magtype">[${this.origininfo?.magnitudetype || ''}]</span>
+                    </td>
+                    <td id="info-magnitude">${round(this.origininfo?.magnitude, 1) || '-'}</td>
+                </tr>
+                <tr>
+                    <td>${i18next.t('report:ueberblick-auswertung')}</td>
+                    <td id="info-auswertung">
+                        ${this.origininfo?.evaluationmode || i18next.t('ueberblick-auswertung-val')}
+                    </td>
+                </tr>
+                <tr>
+                    <td>${i18next.t('report:ueberblick-koord')}</td>
+                    <td id="info-koordinaten">
+                        ${this.origininfo?.longitude || '-'} / ${this.origininfo?.latitude || '-'}
+                    </td>
+                </tr>
+                <tr>
+                    <td>${i18next.t('report:ueberblick-weiter')}</td>
+                    <td>
+                        <a id="info-meta" href="${this.origininfo?.href}" target="_blank">Link</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>`;
 
     update = () => {
         render(this.template(), this);

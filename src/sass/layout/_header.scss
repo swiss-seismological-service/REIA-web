@@ -15,7 +15,7 @@
     &__flag {
         position: relative;
         padding: 0;
-        margin-left: -$padding-containers*3.5;
+        margin-left: -$padding-containers * 3.5;
 
         svg {
             max-height: 10rem;
@@ -64,8 +64,8 @@
 
         &--explanation {
             padding-left: calc($indent-left + $padding-containers);
-            padding-top: $padding-containers*1.5;
-            padding-bottom: $padding-containers*1.5;
+            padding-top: $padding-containers * 1.5;
+            padding-bottom: $padding-containers * 1.5;
         }
     }
 
@@ -74,9 +74,8 @@
         padding-left: $indent-left;
 
         h1 {
-            line-height: 4rem;  
+            line-height: 4rem;
         }
-        
     }
 
     .col-12 {

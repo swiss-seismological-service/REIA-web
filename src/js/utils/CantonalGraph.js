@@ -4,6 +4,7 @@ import { scaleBand, scaleSymlog } from 'd3-scale';
 import { axisLeft, axisTop } from 'd3-axis';
 import { format } from 'd3-format';
 import { svg as fetchSVG } from 'd3-fetch';
+import haus from '../../images/icons/haus.svg';
 
 export default function CantonalGraph(
     data,
@@ -147,13 +148,13 @@ export default function CantonalGraph(
 
         // HOUSE SVG
         // LEFT
-        const prom1 = fetchSVG('images.wc/haus.svg').then((icon) => {
+        const prom1 = fetchSVG(haus).then((icon) => {
             const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });
 
         // RIGHT
-        const prom2 = fetchSVG('images.wc/haus.svg').then((icon) => {
+        const prom2 = fetchSVG(haus).then((icon) => {
             const iconNode = select(icon.documentElement).remove();
             svg.node().appendChild(iconNode.node());
         });

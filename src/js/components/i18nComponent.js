@@ -1,19 +1,20 @@
 import i18next from 'i18next';
 import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { importFolder } from '../utils/utilities';
+
+const translations = importFolder(require.context('../../data/lang', false, /.json$/));
 
 export async function initI18next() {
     await i18next
         .use(HttpApi)
         .use(LanguageDetector)
         .init({
-            //   lng: "de",
             supportedLngs: ['en', 'de', 'fr', 'it'],
             fallbackLng: 'de',
-            // debug: true,
             ns: ['report', 'explanation'],
             backend: {
-                loadPath: '/lang/{{lng}}-{{ns}}.json',
+                loadPath: (lng, ns) => translations[`${lng}-${ns}.json`],
             },
             detection: {
                 caches: ['localStorage', 'cookie'],

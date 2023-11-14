@@ -4,9 +4,12 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve --node-env=development",
-    "build": "webpack build --env production",
-    "analyze": "webpack build --env analyze"
+    "start": "webpack serve --config webpack.ria.js",
+    "build": "webpack build --env production --config webpack.ria.js",
+    "analyze": "webpack build --env analyze --config webpack.ria.js",
+    "start:wc": "webpack serve --config webpack.wc.js",
+    "build:wc": "webpack build --env production --config webpack.wc.js",
+    "analyze:wc": "webpack build --env analyze --config webpack.wc.js"
   },
   "author": "",
   "license": "ISC",
@@ -38,10 +41,12 @@
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.10.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "core-js": "^3.33.2",
     "d3-array": "^3.2.4",
     "d3-axis": "^3.0.0",
     "d3-fetch": "^3.0.1",

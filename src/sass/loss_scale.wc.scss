@@ -1,7 +1,6 @@
-@import "abstracts/variables";
-@import "base/base";
-@import "base/typography";
-
+@import 'abstracts/variables';
+@import 'base/base';
+@import 'base/typography';
 
 .loss {
     &__title {
@@ -31,7 +30,7 @@
             width: 100%;
             height: 6em;
             fill: rgb(218, 218, 218);
-            
+
             path {
                 fill: #d3d3d3;
                 stroke: #fff;
@@ -96,7 +95,7 @@
             width: 0.5em;
             height: 1em;
             background-color: lightgrey;
-            content: "";
+            content: '';
         }
 
         &:first-of-type::after,
@@ -108,7 +107,7 @@
     &__colorscale {
         position: relative;
 
-        >* {
+        > * {
             position: absolute;
             width: 100%;
             height: 1.4em;
@@ -158,6 +157,4 @@
             transform: rotate(360deg);
         }
     }
-
-
 }

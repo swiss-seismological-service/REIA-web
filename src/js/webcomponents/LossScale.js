@@ -1,7 +1,9 @@
 import { html, render } from 'lit-html';
 import styles from '../../sass/loss_scale.wc.scss';
 import { ColorScale, ColorScaleMarker, getPercentage } from '../utils/ColorScale';
-import { numberToString, injectSVG } from '../utils/utilities';
+import { numberToString, injectSVG, importFolder } from '../utils/utilities';
+
+const lossIcons = importFolder(require.context('../../images/icons/loss_scale', false, /\.svg$/));
 
 class LossScale extends HTMLElement {
     constructor() {
@@ -82,7 +84,7 @@ class LossScale extends HTMLElement {
     injectSVGs = () => {
         for (let i = 1; i <= 5; i++) {
             injectSVG(
-                `images.wc/${this.losscategory}_${i}.svg`,
+                lossIcons[`${this.losscategory}_${i}.svg`],
                 this._root.getElementById(`loss-${i}`)
             );
         }
@@ -131,43 +133,61 @@ class LossScale extends HTMLElement {
         rootStyleSelector.setProperty(`--activeColor${this.losscategory}`, `${color}`);
     };
 
-    template = () => html` <style>
-            ${styles}
-        </style>
-        <div class="loss">
-            <slot name="titleslot"></slot>
-            <slot name="paragraphslot"></slot>
-            ${!this.data || !this.losscategory || !this.language
-                ? html`<div class="spinner lds-ring">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                  </div>`
-                : html` <div class="loss__display">
-                      <div class="loss__icons-box">
-                          <div class="loss__icons ${this.setHighlightedIcon(1)}" id="loss-1"></div>
-                          <div class="loss__icons ${this.setHighlightedIcon(2)}" id="loss-2"></div>
-                          <div class="loss__icons ${this.setHighlightedIcon(3)}" id="loss-3"></div>
-                          <div class="loss__icons ${this.setHighlightedIcon(4)}" id="loss-4"></div>
-                          <div class="loss__icons ${this.setHighlightedIcon(5)}" id="loss-5"></div>
-                      </div>
-                      <div class="loss__icons-description">
-                          <div class="loss__legend">${this.getZeroTick(this.language)}</div>
-                          ${this.thresholds
-                              .slice(1, 5)
-                              .map(
-                                  (step) =>
-                                      html`<div class="loss__legend">${numberToString(step)}</div>`
-                              )}
-                          <div class="loss__legend"></div>
-                      </div>
-                      <div class="loss__colorscale">
-                          <canvas id="colorscale"></canvas>
-                          <canvas id="markerscale"></canvas>
-                      </div>
-                  </div>`}
-        </div>`;
+    template = () =>
+        html` <style>
+                ${styles}
+            </style>
+            <div class="loss">
+                <slot name="titleslot"></slot>
+                <slot name="paragraphslot"></slot>
+                ${!this.data || !this.losscategory || !this.language
+                    ? html`<div class="spinner lds-ring">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                      </div>`
+                    : html` <div class="loss__display">
+                          <div class="loss__icons-box">
+                              <div
+                                  class="loss__icons ${this.setHighlightedIcon(1)}"
+                                  id="loss-1"
+                              ></div>
+                              <div
+                                  class="loss__icons ${this.setHighlightedIcon(2)}"
+                                  id="loss-2"
+                              ></div>
+                              <div
+                                  class="loss__icons ${this.setHighlightedIcon(3)}"
+                                  id="loss-3"
+                              ></div>
+                              <div
+                                  class="loss__icons ${this.setHighlightedIcon(4)}"
+                                  id="loss-4"
+                              ></div>
+                              <div
+                                  class="loss__icons ${this.setHighlightedIcon(5)}"
+                                  id="loss-5"
+                              ></div>
+                          </div>
+                          <div class="loss__icons-description">
+                              <div class="loss__legend">${this.getZeroTick(this.language)}</div>
+                              ${this.thresholds
+                                  .slice(1, 5)
+                                  .map(
+                                      (step) =>
+                                          html`<div class="loss__legend">
+                                              ${numberToString(step)}
+                                          </div>`
+                                  )}
+                              <div class="loss__legend"></div>
+                          </div>
+                          <div class="loss__colorscale">
+                              <canvas id="colorscale"></canvas>
+                              <canvas id="markerscale"></canvas>
+                          </div>
+                      </div>`}
+            </div>`;
 
     update = () => {
         render(this.template(), this._root);
