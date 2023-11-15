@@ -118,7 +118,7 @@ module.exports = (env) => ({
         },
         watchFiles: ['src/**/*'],
         open: false,
-        hot: false,
+        hot: true,
         host: 'localhost',
         port: 5000,
     },
