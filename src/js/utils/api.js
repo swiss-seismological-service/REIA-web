@@ -1,4 +1,5 @@
 function getData(url, apiAddress) {
+    apiAddress = apiAddress || process.env.API_ADDRESS;
     // remove trailing slash from apiAddress if present
     apiAddress = apiAddress.endsWith('/') ? apiAddress.slice(0, -1) : apiAddress;
 
@@ -22,59 +23,41 @@ function getData(url, apiAddress) {
         });
 }
 
-export function getOriginInfo(originid, apiAddress = process.env.API_ADDRESS) {
+export function getOriginInfo(originid, apiAddress = null) {
     return getData(`/v1/origin/${originid}`, apiAddress);
 }
 
-export function getDangerLevel(originid, apiAddress = process.env.API_ADDRESS) {
+export function getDangerLevel(originid, apiAddress = null) {
     return getData(`/v1/origin/${originid}/dangerlevel`, apiAddress);
 }
 
-export function getOriginDescription(originid, lang, apiAddress = process.env.API_ADDRESS) {
+export function getOriginDescription(originid, lang, apiAddress = null) {
     return getData(`/v1/origin/${originid}/description/${lang}`, apiAddress);
 }
 
-export function getRiskAssessment(oid, apiAddress = process.env.API_ADDRESS) {
+export function getRiskAssessment(oid, apiAddress = null) {
     return getData(`/v1/riskassessment/${oid}`, apiAddress);
 }
 
-export function getAllRiskAssessments(
-    limit = 20,
-    offset = 0,
-    apiAddress = process.env.API_ADDRESS
-) {
+export function getAllRiskAssessments(limit = 20, offset = 0, apiAddress = null) {
     return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
 }
 
-export function getLoss(
-    oid,
-    type,
-    aggregation,
-    tag = null,
-    sum = false,
-    apiAddress = process.env.API_ADDRESS
-) {
+export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
     let base = `/v1/loss/${oid}/${type}/${aggregation}`;
     if (sum) return getData(`${base}?sum=true`, apiAddress);
     if (tag) return getData(`${base}?filter_tag_like=${tag}`, apiAddress);
     return getData(base, apiAddress);
 }
 
-export function getDamage(
-    oid,
-    type,
-    aggregation,
-    tag = null,
-    sum = false,
-    apiAddress = process.env.API_ADDRESS
-) {
+export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
     let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
     if (sum) return getData(`${base}?sum=true`, apiAddress);
     if (tag) return getData(`${base}?filter_tag_like=${tag}`, apiAddress);
     return getData(base, apiAddress);
 }
 
-export function getCantonalInjuries(oid, apiAddress = process.env.API_ADDRESS) {
+export function getCantonalInjuries(oid, apiAddress = null) {
     let cantonal = getLoss(oid, 'injured', 'Canton', null, false, apiAddress);
     let country = getLoss(oid, 'injured', 'Canton', null, true, apiAddress);
     return Promise.all([cantonal, country]).then(([ca, co]) => {
@@ -83,7 +66,7 @@ export function getCantonalInjuries(oid, apiAddress = process.env.API_ADDRESS) {
     });
 }
 
-export function getCantonalStructuralDamage(oid, apiAddress = process.env.API_ADDRESS) {
+export function getCantonalStructuralDamage(oid, apiAddress = null) {
     let cantonal = getDamage(oid, 'structural', 'Canton', null, false, apiAddress);
     let country = getDamage(oid, 'structural', 'Canton', null, true, apiAddress);
     return Promise.all([cantonal, country]).then(([ca, co]) => {
