@@ -26,6 +26,8 @@ module.exports = (env) =>
                     path.resolve(__dirname, 'src/js/webcomponents', 'LossScale.js'),
                     path.resolve(__dirname, 'src/js/webcomponents', 'DamageGraph.js'),
                     path.resolve(__dirname, 'src/js/webcomponents', 'LossGraph.js'),
+                    path.resolve(__dirname, 'src/js/webcomponents', 'DataLoader.js'),
+
                 ],
             },
         },
