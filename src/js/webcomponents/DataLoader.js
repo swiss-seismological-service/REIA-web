@@ -1,4 +1,8 @@
-import { getAllRiskAssessments, getLoss, getCantonalInjuries, getCantonalStructuralDamage } from "../utils/api";
+/* eslint-disable max-len */
+import { getAllRiskAssessments, 
+         getLoss, 
+         getCantonalInjuries, 
+         getCantonalStructuralDamage } from "../utils/api";
 
 class DataLoader extends HTMLElement {
   
@@ -15,31 +19,63 @@ class DataLoader extends HTMLElement {
             return;
         }
 
+
         const fetchRiskAssessmentData = async () => {
             try {
                 const data = await getAllRiskAssessments(20, 0, originId, baseUrl);
-                return data.items.slice(-1);
+               
+                const preferred = data.items.filter((item) => item.preferred && item.published);
+               
+                
+                if (preferred.length > 1) {
+                    return preferred.reduce((latest, current) =>
+                    new Date(current.creationinfo.creationtime) > new Date(latest.creationinfo.creationtime) ? current : latest);
+                } 
+
+                return preferred;
+            
             } catch (error) {
                 console.error('Error fetching risk assessment data:', error);
-                return [];
+                throw error;
             }
         };
 
+
+
+
         fetchRiskAssessmentData()
             .then((data) => {
-                if (data.length > 0) {
-                    const lossCalculationOid = data[0].losscalculation._oid;
-                    const damageCalculationOid = data[0].damagecalculation._oid;
+                if (data.length === 1) {
+                    const lossCalculationOid = data.map(d=>d.losscalculation._oid);
+                    const damageCalculationOid = data.map( d=>d.damagecalculation._oid);
 
                     const setLossData = (lossScale) => {
                         lossScale.setData(
-                            getLoss(lossCalculationOid, lossScale.getAttribute('losscategory'), 'Canton', null, false, baseUrl)
+                            getLoss(lossCalculationOid, 
+                                    lossScale.getAttribute('losscategory'), 
+                                    'Canton', 
+                                    null, 
+                                    false, 
+                                    baseUrl)
                         );
                     };
 
-                    document.querySelectorAll('loss-scale').forEach(setLossData);
-                    document.querySelector('loss-graph').setData(getCantonalInjuries(lossCalculationOid, baseUrl));
-                    document.querySelector('damage-graph').setData(getCantonalStructuralDamage(damageCalculationOid, baseUrl));
+                    // Loss scales
+                    document.querySelectorAll('loss-scale')
+                            .forEach(setLossData);
+
+                    // Loss graph
+                    document.querySelector('loss-graph')
+                            .setData(getCantonalInjuries(lossCalculationOid, baseUrl));
+
+                    // Damage graph
+                    document.querySelector('damage-graph')
+                            .setData(getCantonalStructuralDamage(damageCalculationOid, baseUrl));
+
+                } else if (data.length > 1) {
+
+                    console.warn('Multiple risk assessments found for the provided originId with the same creationinfo');
+
                 } else {
                     console.warn('No data available for the provided originId.');
                 }
@@ -47,7 +83,9 @@ class DataLoader extends HTMLElement {
             .catch((error) => {
                 console.error('Error processing fetched data:', error);
             });
-    }
+     }
+
+  
 }
 
 customElements.define('data-loader', DataLoader);
