@@ -1,91 +1,98 @@
-/* eslint-disable max-len */
-import { getAllRiskAssessments, 
-         getLoss, 
-         getCantonalInjuries, 
-         getCantonalStructuralDamage } from "../utils/api";
+import {
+    getAllRiskAssessments,
+    getLoss,
+    getCantonalInjuries,
+    getCantonalStructuralDamage,
+} from '../utils/api';
 
 class DataLoader extends HTMLElement {
-  
+    constructor() {
+        super();
+        this.originid = null;
+        this.baseurl = null;
+    }
+
     static get observedAttributes() {
-        return ['originId', 'baseUrl'];
+        return ['originid', 'baseurl'];
+    }
+
+    attributeChangedCallback(property, oldValue, newValue) {
+        if (oldValue === newValue) return;
+
+        this[property] = newValue;
     }
 
     connectedCallback() {
-        const originId = this.getAttribute('originId');
-        const baseUrl = this.getAttribute('baseUrl');
+        this.updateData();
+    }
 
-        if (!originId || !baseUrl) {
-            console.error('Missing required attributes: originId or baseUrl');
-            return;
-        }
+    updateData = () => {
+        if (this.originid && this.baseurl) {
+            const lossScales = document.querySelectorAll('loss-scale');
+            const lossGraph = document.querySelector('loss-graph');
+            const damageGraph = document.querySelector('damage-graph');
 
+            this.fetchRiskAssessmentData().then((data) => {
+                if (data) {
+                    const lossCalculationOid = data[0].losscalculation._oid;
+                    const damageCalculationOid = data[0].damagecalculation._oid;
 
-        const fetchRiskAssessmentData = async () => {
-            try {
-                const data = await getAllRiskAssessments(20, 0, originId, baseUrl);
-               
-                const preferred = data.items.filter((item) => item.preferred && item.published);
-               
-                
-                if (preferred.length > 1) {
-                    return preferred.reduce((latest, current) =>
-                    new Date(current.creationinfo.creationtime) > new Date(latest.creationinfo.creationtime) ? current : latest);
-                } 
+                    if (lossScales) {
+                        lossScales.forEach((lossScale) => {
+                            this.setLossData(
+                                lossScale,
+                                lossScale.getAttribute('losscategory'),
+                                lossCalculationOid,
+                                this.baseurl
+                            );
+                        });
+                    }
 
-                return preferred;
-            
-            } catch (error) {
-                console.error('Error fetching risk assessment data:', error);
-                throw error;
-            }
-        };
+                    if (lossGraph) {
+                        lossGraph.setData(getCantonalInjuries(lossCalculationOid, this.baseurl));
+                    }
 
-
-
-
-        fetchRiskAssessmentData()
-            .then((data) => {
-                if (data.length === 1) {
-                    const lossCalculationOid = data.map(d=>d.losscalculation._oid);
-                    const damageCalculationOid = data.map( d=>d.damagecalculation._oid);
-
-                    const setLossData = (lossScale) => {
-                        lossScale.setData(
-                            getLoss(lossCalculationOid, 
-                                    lossScale.getAttribute('losscategory'), 
-                                    'Canton', 
-                                    null, 
-                                    false, 
-                                    baseUrl)
+                    if (damageGraph) {
+                        damageGraph.setData(
+                            getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
                         );
-                    };
-
-                    // Loss scales
-                    document.querySelectorAll('loss-scale')
-                            .forEach(setLossData);
-
-                    // Loss graph
-                    document.querySelector('loss-graph')
-                            .setData(getCantonalInjuries(lossCalculationOid, baseUrl));
-
-                    // Damage graph
-                    document.querySelector('damage-graph')
-                            .setData(getCantonalStructuralDamage(damageCalculationOid, baseUrl));
-
-                } else if (data.length > 1) {
-
-                    console.warn('Multiple risk assessments found for the provided originId with the same creationinfo');
-
-                } else {
-                    console.warn('No data available for the provided originId.');
+                    }
                 }
-            })
-            .catch((error) => {
-                console.error('Error processing fetched data:', error);
             });
-     }
+        }
+    };
 
-  
+    setLossData = (lossScale, lossScaleCategory, lossCalculationOid, baseUrl) => {
+        lossScale.setData(
+            getLoss(lossCalculationOid, lossScaleCategory, 'Canton', null, true, baseUrl)
+        );
+    };
+
+    fetchRiskAssessmentData = async () => {
+        try {
+            const data = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
+
+            const preferred = data.items.filter((item) => item.preferred && item.published);
+
+            if (preferred.length > 1) {
+                return preferred.reduce((latest, current) =>
+                    new Date(current.creationinfo.creationtime) >
+                    new Date(latest.creationinfo.creationtime)
+                        ? current
+                        : latest
+                );
+            }
+            if (preferred.length === 0) {
+                console.warn('No risk assessment found');
+                return null;
+            }
+
+            return preferred;
+        } catch (error) {
+            console.error('Error fetching risk assessment data:', error);
+            throw error;
+        }
+    };
 }
 
 customElements.define('data-loader', DataLoader);

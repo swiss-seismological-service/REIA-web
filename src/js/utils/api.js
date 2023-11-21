@@ -40,9 +40,14 @@ export function getRiskAssessment(oid, apiAddress = null) {
 }
 
 export function getAllRiskAssessments(limit = 20, offset = 0, originid = null, apiAddress = null) {
-    return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}&originid=${originid}`, apiAddress);
-}
+    if (originid)
+        return getData(
+            `/v1/riskassessment?limit=${limit}&offset=${offset}&originid=${originid}`,
+            apiAddress
+        );
 
+    return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
+}
 
 export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
     let base = `/v1/loss/${oid}/${type}/${aggregation}`;
