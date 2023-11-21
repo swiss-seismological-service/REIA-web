@@ -20,10 +20,9 @@ class DataLoader extends HTMLElement {
         if (oldValue === newValue) return;
 
         this[property] = newValue;
-    }
-
-    connectedCallback() {
+        
         this.updateData();
+
     }
 
     updateData = () => {
@@ -34,8 +33,8 @@ class DataLoader extends HTMLElement {
 
             this.fetchRiskAssessmentData().then((data) => {
                 if (data) {
-                    const lossCalculationOid = data[0].losscalculation._oid;
-                    const damageCalculationOid = data[0].damagecalculation._oid;
+                    const lossCalculationOid = data.losscalculation._oid;
+                    const damageCalculationOid = data.damagecalculation._oid;
 
                     if (lossScales) {
                         lossScales.forEach((lossScale) => {
@@ -87,7 +86,7 @@ class DataLoader extends HTMLElement {
                 return null;
             }
 
-            return preferred;
+            return preferred[0];
         } catch (error) {
             console.error('Error fetching risk assessment data:', error);
             throw error;
