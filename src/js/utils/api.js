@@ -40,6 +40,10 @@ export function getRiskAssessment(oid, apiAddress = null) {
 }
 
 export function getAllRiskAssessments(limit = 20, offset = 0, apiAddress = null) {
+    return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
+}
+
+export function getAllRiskAssessmentsWithFlag(limit = 20, offset = 0, apiAddress = null) {
     return getData(
         `/v1/riskassessment?limit=${limit}&offset=${offset}&${process.env.SECRET}`,
         apiAddress
