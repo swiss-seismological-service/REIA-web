@@ -51,7 +51,9 @@ class DataLoader extends HTMLElement {
         if (this.lossScales.length > 0) {
             this.lossScales.forEach((lossScale) => {
                 const lossCategory = lossScale.getAttribute('losscategory');
-                this.setLossData(lossScale, lossCategory, lossCalculationOid);
+                lossScale.setData(
+                    getLoss(lossCalculationOid, lossCategory, 'Canton', null, true, this.baseurl)
+                );
             });
         }
     }
@@ -68,12 +70,6 @@ class DataLoader extends HTMLElement {
                 getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
             );
         }
-    }
-
-    setLossData(lossScale, lossScaleCategory, lossCalculationOid) {
-        lossScale.setData(
-            getLoss(lossCalculationOid, lossScaleCategory, 'Canton', null, true, this.baseurl)
-        );
     }
 
     async fetchRiskAssessmentData() {
