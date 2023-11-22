@@ -80,12 +80,11 @@ class LossScale extends HTMLElement {
         this.thresholds = thresh[this.losscategory];
     };
 
-    // select the correct svg's for the loss category
     injectSVGs = () => {
         for (let i = 1; i <= 5; i++) {
             injectSVG(
                 lossIcons[`${this.losscategory}_${i}.svg`],
-                this._root.getElementById(`loss-${i}`)
+                this._root.querySelector(`#loss-${i}>svg`)
             );
         }
     };
@@ -149,26 +148,21 @@ class LossScale extends HTMLElement {
                       </div>`
                     : html` <div class="loss__display">
                           <div class="loss__icons-box">
-                              <div
-                                  class="loss__icons ${this.setHighlightedIcon(1)}"
-                                  id="loss-1"
-                              ></div>
-                              <div
-                                  class="loss__icons ${this.setHighlightedIcon(2)}"
-                                  id="loss-2"
-                              ></div>
-                              <div
-                                  class="loss__icons ${this.setHighlightedIcon(3)}"
-                                  id="loss-3"
-                              ></div>
-                              <div
-                                  class="loss__icons ${this.setHighlightedIcon(4)}"
-                                  id="loss-4"
-                              ></div>
-                              <div
-                                  class="loss__icons ${this.setHighlightedIcon(5)}"
-                                  id="loss-5"
-                              ></div>
+                              <div class="loss__icons ${this.setHighlightedIcon(1)}" id="loss-1">
+                                  <svg></svg>
+                              </div>
+                              <div class="loss__icons ${this.setHighlightedIcon(2)}" id="loss-2">
+                                  <svg></svg>
+                              </div>
+                              <div class="loss__icons ${this.setHighlightedIcon(3)}" id="loss-3">
+                                  <svg></svg>
+                              </div>
+                              <div class="loss__icons ${this.setHighlightedIcon(4)}" id="loss-4">
+                                  <svg></svg>
+                              </div>
+                              <div class="loss__icons ${this.setHighlightedIcon(5)}" id="loss-5">
+                                  <svg></svg>
+                              </div>
                           </div>
                           <div class="loss__icons-description">
                               <div class="loss__legend">${this.getZeroTick(this.language)}</div>
