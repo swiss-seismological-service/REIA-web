@@ -71,18 +71,26 @@ export function formatTime(date) {
     return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
 }
 
-export function injectSVG(path, element) {
+export async function injectSVG(path, element) {
     // Inject an SVG file into an element
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', path);
-    xhr.overrideMimeType('image/svg+xml');
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            element.appendChild(xhr.responseXML.documentElement);
+    return new Promise((resolve) => {
+        if (!element) resolve();
+        else {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', path);
+            xhr.overrideMimeType('image/svg+xml');
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    element.replaceWith(xhr.responseXML.documentElement);
+                    resolve(xhr.responseXML.documentElement);
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    console.error(`Could not load ${path}`); // eslint-disable-line
+                    resolve();
+                }
+            };
+            xhr.send();
         }
-    };
-    xhr.send();
+    });
 }
 
 export function b64encode(str) {
