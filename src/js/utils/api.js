@@ -39,7 +39,13 @@ export function getRiskAssessment(oid, apiAddress = null) {
     return getData(`/v1/riskassessment/${oid}`, apiAddress);
 }
 
-export function getAllRiskAssessments(limit = 20, offset = 0, apiAddress = null) {
+export function getAllRiskAssessments(limit = 20, offset = 0, originid = null, apiAddress = null) {
+    if (originid)
+        return getData(
+            `/v1/riskassessment?limit=${limit}&offset=${offset}&originid=${originid}`,
+            apiAddress
+        );
+
     return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
 }
 
