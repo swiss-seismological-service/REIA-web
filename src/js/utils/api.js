@@ -40,20 +40,23 @@ export function getRiskAssessment(oid, apiAddress = null) {
 }
 
 export function getAllRiskAssessments(limit = 20, offset = 0, apiAddress = null) {
-    return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
+    return getData(
+        `/v1/riskassessment?limit=${limit}&offset=${offset}&${process.env.SECRET}`,
+        apiAddress
+    );
 }
 
 export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
-    let base = `/v1/loss/${oid}/${type}/${aggregation}`;
-    if (sum) return getData(`${base}?sum=true`, apiAddress);
-    if (tag) return getData(`${base}?filter_tag_like=${tag}`, apiAddress);
+    let base = `/v1/loss/${oid}/${type}/${aggregation}?${process.env.SECRET}`;
+    if (sum) return getData(`${base}&sum=true`, apiAddress);
+    if (tag) return getData(`${base}&filter_tag_like=${tag}`, apiAddress);
     return getData(base, apiAddress);
 }
 
 export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
-    let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
-    if (sum) return getData(`${base}?sum=true`, apiAddress);
-    if (tag) return getData(`${base}?filter_tag_like=${tag}`, apiAddress);
+    let base = `/v1/damage/${oid}/${type}/${aggregation}/report?${process.env.SECRET}`;
+    if (sum) return getData(`${base}&sum=true`, apiAddress);
+    if (tag) return getData(`${base}&filter_tag_like=${tag}`, apiAddress);
     return getData(base, apiAddress);
 }
 
