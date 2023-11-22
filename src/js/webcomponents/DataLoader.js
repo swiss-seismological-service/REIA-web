@@ -10,67 +10,75 @@ class DataLoader extends HTMLElement {
         super();
         this.originid = null;
         this.baseurl = null;
+        this.lossScales = document.querySelectorAll('loss-scale');
+        this.lossGraph = document.querySelector('loss-graph');
+        this.damageGraph = document.querySelector('damage-graph');
     }
 
     static get observedAttributes() {
         return ['originid', 'baseurl'];
     }
 
-    attributeChangedCallback(property, oldValue, newValue) {
-        if (oldValue === newValue) return;
-
-        this[property] = newValue;
-        
+    connectedCallback() {
         this.updateData();
-
     }
 
-    updateData = () => {
-        if (this.originid && this.baseurl) {
-            const lossScales = document.querySelectorAll('loss-scale');
-            const lossGraph = document.querySelector('loss-graph');
-            const damageGraph = document.querySelector('damage-graph');
+    attributeChangedCallback(property, oldValue, newValue) {
+        if (oldValue === newValue) return;
+        this[property] = newValue;
+        this.updateData();
+    }
 
-            this.fetchRiskAssessmentData().then((data) => {
+    async updateData() {
+        if (this.originid && this.baseurl) {
+            try {
+                const data = await this.fetchRiskAssessmentData();
+
                 if (data) {
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
-
-                    if (lossScales) {
-                        lossScales.forEach((lossScale) => {
-                            this.setLossData(
-                                lossScale,
-                                lossScale.getAttribute('losscategory'),
-                                lossCalculationOid,
-                                this.baseurl
-                            );
-                        });
-                    }
-
-                    if (lossGraph) {
-                        lossGraph.setData(getCantonalInjuries(lossCalculationOid, this.baseurl));
-                    }
-
-                    if (damageGraph) {
-                        damageGraph.setData(
-                            getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
-                        );
-                    }
+                    this.updateLossScales(lossCalculationOid);
+                    this.updateLossGraph(lossCalculationOid);
+                    this.updateDamageGraph(damageCalculationOid);
                 }
+            } catch (error) {
+                console.error('Error fetching or updating data:', error);
+            }
+        }
+    }
+
+    updateLossScales(lossCalculationOid) {
+        if (this.lossScales.length > 0) {
+            this.lossScales.forEach((lossScale) => {
+                const lossCategory = lossScale.getAttribute('losscategory');
+                this.setLossData(lossScale, lossCategory, lossCalculationOid);
             });
         }
-    };
+    }
 
-    setLossData = (lossScale, lossScaleCategory, lossCalculationOid, baseUrl) => {
+    updateLossGraph(lossCalculationOid) {
+        if (this.lossGraph) {
+            this.lossGraph.setData(getCantonalInjuries(lossCalculationOid, this.baseurl));
+        }
+    }
+
+    updateDamageGraph(damageCalculationOid) {
+        if (this.damageGraph) {
+            this.damageGraph.setData(
+                getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
+            );
+        }
+    }
+
+    setLossData(lossScale, lossScaleCategory, lossCalculationOid) {
         lossScale.setData(
-            getLoss(lossCalculationOid, lossScaleCategory, 'Canton', null, true, baseUrl)
+            getLoss(lossCalculationOid, lossScaleCategory, 'Canton', null, true, this.baseurl)
         );
-    };
+    }
 
-    fetchRiskAssessmentData = async () => {
+    async fetchRiskAssessmentData() {
         try {
             const data = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
-
             const preferred = data.items.filter((item) => item.preferred && item.published);
 
             if (preferred.length > 1) {
@@ -81,8 +89,9 @@ class DataLoader extends HTMLElement {
                         : latest
                 );
             }
+
             if (preferred.length === 0) {
-                console.warn('No risk assessment found');
+                console.warn('No published and preferred risk assessment found for this origin id');
                 return null;
             }
 
@@ -91,7 +100,7 @@ class DataLoader extends HTMLElement {
             console.error('Error fetching risk assessment data:', error);
             throw error;
         }
-    };
+    }
 }
 
 customElements.define('data-loader', DataLoader);
