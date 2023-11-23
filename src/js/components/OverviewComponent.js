@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import cantons from '../../data/pictureParamByCanton.csv';
-import { getAllRiskAssessments } from '../utils/api';
+import { getAllRiskAssessmentsWithFlag } from '../utils/api';
 import { b64encode } from '../utils/utilities';
 
 class OverviewComponent {
@@ -46,7 +46,7 @@ class OverviewComponent {
     }
 
     renderRiskAssessments() {
-        getAllRiskAssessments(this.limit, this.offset).then((response) => {
+        getAllRiskAssessmentsWithFlag(this.limit, this.offset).then((response) => {
             this.riskassessments = response.items;
 
             this.pages = Math.ceil(response.count / this.limit);
