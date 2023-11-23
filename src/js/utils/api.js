@@ -1,9 +1,12 @@
-function getData(url, apiAddress) {
+function getData(url, apiAddress, queryParams = {}) {
     apiAddress = apiAddress || process.env.API_ADDRESS;
     // remove trailing slash from apiAddress if present
     apiAddress = apiAddress.endsWith('/') ? apiAddress.slice(0, -1) : apiAddress;
 
-    return fetch(`${apiAddress}${url}`, {
+    const queryString = new URLSearchParams(queryParams);
+    const fullUrl = queryParams ? `${apiAddress}${url}?${queryString}` : `${apiAddress}${url}`;
+
+    return fetch(fullUrl, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -40,34 +43,44 @@ export function getRiskAssessment(oid, apiAddress = null) {
 }
 
 export function getAllRiskAssessments(limit = 20, offset = 0, originid = null, apiAddress = null) {
-    if (originid)
-        return getData(
-            `/v1/riskassessment?limit=${limit}&offset=${offset}&originid=${originid}`,
-            apiAddress
-        );
-
-    return getData(`/v1/riskassessment?limit=${limit}&offset=${offset}`, apiAddress);
+    const queryParams = {
+        limit,
+        offset,
+        ...(originid && { originid }),
+    };
+    return getData('/v1/riskassessment', apiAddress, queryParams);
 }
 
 export function getAllRiskAssessmentsWithFlag(limit = 20, offset = 0, apiAddress = null) {
-    return getData(
-        `/v1/riskassessment?limit=${limit}&offset=${offset}&${process.env.SECRET}`,
-        apiAddress
-    );
+    const [secretKey, secretValue] = process.env.SECRET.split('=');
+    const queryParams = {
+        [secretKey]: secretValue,
+        limit,
+        offset,
+    };
+    return getData('/v1/riskassessment', apiAddress, queryParams);
 }
 
 export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
-    let base = `/v1/loss/${oid}/${type}/${aggregation}?${process.env.SECRET}`;
-    if (sum) return getData(`${base}&sum=true`, apiAddress);
-    if (tag) return getData(`${base}&filter_tag_like=${tag}`, apiAddress);
-    return getData(base, apiAddress);
+    const [secretKey, secretValue] = process.env.SECRET.split('=');
+    const queryParams = {
+        [secretKey]: secretValue,
+        ...(tag && { filter_tag_like: tag }),
+        ...(sum && { sum: true }),
+    };
+    let base = `/v1/loss/${oid}/${type}/${aggregation}`;
+    return getData(base, apiAddress, queryParams);
 }
 
 export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
-    let base = `/v1/damage/${oid}/${type}/${aggregation}/report?${process.env.SECRET}`;
-    if (sum) return getData(`${base}&sum=true`, apiAddress);
-    if (tag) return getData(`${base}&filter_tag_like=${tag}`, apiAddress);
-    return getData(base, apiAddress);
+    const [secretKey, secretValue] = process.env.SECRET.split('=');
+    const queryParams = {
+        [secretKey]: secretValue,
+        ...(tag && { filter_tag_like: tag }),
+        ...(sum && { sum: true }),
+    };
+    let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
+    return getData(base, apiAddress, queryParams);
 }
 
 export function getCantonalInjuries(oid, apiAddress = null) {
