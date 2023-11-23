@@ -65,8 +65,8 @@ export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddr
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
         [secretKey]: secretValue,
-        ...(tag && { filter_tag_like: tag }),
-        ...(sum && { sum: true }),
+        ...(tag && !sum && { filter_tag_like: tag }),
+        ...(sum && !tag && { sum: true }),
     };
     let base = `/v1/loss/${oid}/${type}/${aggregation}`;
     return getData(base, apiAddress, queryParams);
@@ -76,8 +76,8 @@ export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAd
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
         [secretKey]: secretValue,
-        ...(tag && { filter_tag_like: tag }),
-        ...(sum && { sum: true }),
+        ...(tag && !sum && { filter_tag_like: tag }),
+        ...(sum && !tag && { sum: true }),
     };
     let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
     return getData(base, apiAddress, queryParams);
