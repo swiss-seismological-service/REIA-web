@@ -1,4 +1,4 @@
-function getData(url, apiAddress, queryParams = {}) {
+function getData(url, apiAddress, queryParams = null) {
     apiAddress = apiAddress || process.env.API_ADDRESS;
     // remove trailing slash from apiAddress if present
     apiAddress = apiAddress.endsWith('/') ? apiAddress.slice(0, -1) : apiAddress;
