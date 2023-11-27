@@ -19,7 +19,7 @@
 
         svg {
             max-height: 10rem;
-            width: 40%;
+            width: 80%;
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -27,24 +27,37 @@
         }
 
         img {
-            max-height: 65%;
-            max-width: 10%;
+            max-height: 85%;
+            max-width: 20%;
             border: white 3px solid;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 4%;
+            left: 8%;
         }
 
         div {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 15%;
+            left: 30%;
             line-height: 4.5rem;
             font-size: 4.5rem;
             font-weight: 600;
             color: white;
+        }   
+     
+    }
+
+    &__version {
+   
+        h1 {
+            position: relative;
+            top: 50%;
+            left: -20%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            font-weight: 600;
         }
     }
 

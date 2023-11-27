@@ -7,6 +7,7 @@ import {
     getOriginInfo,
     getDangerLevel,
     getOriginDescription,
+    getAllRiskAssessments,
 } from '../utils/api';
 import {
     parseUTCDate,
@@ -146,12 +147,39 @@ class DataComponent {
         let headerDatetime = document.getElementById('header-datetime');
         let headerWappen = document.getElementById('header-wappen');
         let headerKuerzel = document.getElementById('header-kuerzel');
+        let headerReportVersion = document.getElementById('header-report-version');
 
         let date = parseUTCDate(info?.creationinfo?.creationtime);
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)}` : '';
 
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
+        if (info?.originid) {
+            this.promises.push(
+                getAllRiskAssessments(20, 0, b64encode(info?.originid)).then((data) => {
+                    const publishedRiskAssessments = data.items.filter((item) => item.published);
+
+                    if (publishedRiskAssessments.length > 1) {
+                        publishedRiskAssessments.forEach((item) => {
+                            item.creationinfo.creationtime = new Date(
+                                item.creationinfo.creationtime
+                            );
+                        });
+                        publishedRiskAssessments.sort(
+                            (a, b) => a.creationinfo.creationtime - b.creationinfo.creationtime
+                        );
+                    }
+
+                    const version = publishedRiskAssessments.findIndex(
+                        (item) => item._oid === info._oid
+                    );
+
+                    headerReportVersion.innerHTML = version >= 0 ? `1.${version}` : 'N/A';
+                })
+            );
+        } else {
+            headerReportVersion.innerHTML = 'N/A';
+        }
     }
 
     addOriginDescription(originId) {
