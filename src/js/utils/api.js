@@ -76,8 +76,8 @@ export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAd
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
         [secretKey]: secretValue,
-        ...(tag && !sum && { filter_tag_like: tag }),
-        ...(sum && !tag && { sum: true }),
+        ...(tag && { filter_tag_like: tag }),
+        ...(sum && { sum: true }),
     };
     let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
     return getData(base, apiAddress, queryParams);
