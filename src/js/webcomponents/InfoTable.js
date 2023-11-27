@@ -2,7 +2,14 @@ import { html, render } from 'lit-html';
 import proj4 from 'proj4';
 import i18next from 'i18next';
 
-import { round, parseUTCDate, formatDate, formatTime, b64encode } from '../utils/utilities';
+import {
+    round,
+    parseUTCDate,
+    formatDate,
+    formatTime,
+    b64encode,
+    thousandsFormatter,
+} from '../utils/utilities';
 
 class InfoTable extends HTMLElement {
     constructor() {
@@ -98,7 +105,8 @@ class InfoTable extends HTMLElement {
                 <tr>
                     <td>${i18next.t('report:ueberblick-koord')}</td>
                     <td id="info-koordinaten">
-                        ${this.origininfo?.longitude || '-'} / ${this.origininfo?.latitude || '-'}
+                        ${thousandsFormatter(this.origininfo?.longitude) || '-'} /
+                        ${thousandsFormatter(this.origininfo?.latitude) || '-'}
                     </td>
                 </tr>
                 <tr>
