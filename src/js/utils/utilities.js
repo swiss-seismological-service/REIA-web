@@ -33,11 +33,30 @@ export function thousandsFormatter(number) {
     return formatter(number);
 }
 
-export function numberToString(number) {
+export function numberToString(number, language = 'de') {
+    const numberTranslations = {
+        fr: {
+            million: 'M',
+            billion: 'Md',
+        },
+        it: {
+            million: 'Mln',
+            billion: 'Mrd',
+        },
+        de: {
+            million: 'Mio.',
+            billion: 'Mrd.',
+        },
+        en: {
+            million: 'M',
+            billion: 'B',
+        },
+    };
+
     // Convert a number to a string with thousands separators
     if (number < 1000000) return thousandsFormatter(number);
-    if (number < 1000000000) return `${number / 1000000} Mio.`;
-    return `${number / 1000000000} Mia.`;
+    if (number < 1000000000) return `${number / 1000000} ${numberTranslations[language].million}`;
+    return `${number / 1000000000} ${numberTranslations[language].billion}`;
 }
 
 export function clamp(num, min, max) {
