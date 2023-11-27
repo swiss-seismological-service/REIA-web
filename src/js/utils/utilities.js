@@ -27,11 +27,15 @@ export function round(value, precision) {
     return rounded;
 }
 
+export function thousandsFormatter(number) {
+    if (number === null || number === undefined) return null;
+    let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+    return formatter(number);
+}
+
 export function numberToString(number) {
     // Convert a number to a string with thousands separators
-
-    let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
-    if (number < 1000000) return formatter(number);
+    if (number < 1000000) return thousandsFormatter(number);
     if (number < 1000000000) return `${number / 1000000} Mio.`;
     return `${number / 1000000000} Mia.`;
 }
