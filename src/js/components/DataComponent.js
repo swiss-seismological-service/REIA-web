@@ -11,7 +11,7 @@ import {
 import {
     parseUTCDate,
     formatDate,
-    formatTime,
+    formatUTCTime,
     b64encode,
     round,
     loadImage,
@@ -148,7 +148,7 @@ class DataComponent {
         let headerKuerzel = document.getElementById('header-kuerzel');
 
         let date = parseUTCDate(info?.creationinfo?.creationtime);
-        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatTime(date)}` : '';
+        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)}` : '';
 
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];

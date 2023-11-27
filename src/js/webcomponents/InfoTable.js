@@ -2,7 +2,14 @@ import { html, render } from 'lit-html';
 import proj4 from 'proj4';
 import i18next from 'i18next';
 
-import { round, parseUTCDate, formatDate, formatTime, b64encode } from '../utils/utilities';
+import {
+    round,
+    parseUTCDate,
+    formatDate,
+    formatUTCTime,
+    b64encode,
+    thousandsFormatter,
+} from '../utils/utilities';
 
 class InfoTable extends HTMLElement {
     constructor() {
@@ -61,7 +68,7 @@ class InfoTable extends HTMLElement {
 
         this.origininfo.time = this.origininfo?.time ? parseUTCDate(this.origininfo.time) : null;
         this.origininfo.date = this.origininfo.time ? formatDate(this.origininfo.time) : null;
-        this.origininfo.time = this.origininfo.time ? formatTime(this.origininfo.time) : null;
+        this.origininfo.time = this.origininfo.time ? formatUTCTime(this.origininfo.time) : null;
 
         this.origininfo.href = `http://seismo.ethz.ch/en/earthquakes/switzerland
         /eventpage.html?originId=%27${b64encode(this.originid)}%27`;
@@ -98,7 +105,8 @@ class InfoTable extends HTMLElement {
                 <tr>
                     <td>${i18next.t('report:ueberblick-koord')}</td>
                     <td id="info-koordinaten">
-                        ${this.origininfo?.longitude || '-'} / ${this.origininfo?.latitude || '-'}
+                        ${thousandsFormatter(this.origininfo?.longitude) || '-'} /
+                        ${thousandsFormatter(this.origininfo?.latitude) || '-'}
                     </td>
                 </tr>
                 <tr>

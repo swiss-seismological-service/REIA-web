@@ -27,11 +27,15 @@ export function round(value, precision) {
     return rounded;
 }
 
+export function thousandsFormatter(number) {
+    if (number === null || number === undefined) return null;
+    let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
+    return formatter(number);
+}
+
 export function numberToString(number) {
     // Convert a number to a string with thousands separators
-
-    let formatter = formatLocale({ thousands: "'", grouping: [3] }).format(',.0f');
-    if (number < 1000000) return formatter(number);
+    if (number < 1000000) return thousandsFormatter(number);
     if (number < 1000000000) return `${number / 1000000} Mio.`;
     return `${number / 1000000000} Mia.`;
 }
@@ -45,6 +49,7 @@ export function clamp(num, min, max) {
 export function parseUTCDate(dateString) {
     // Parse a date string. If there is no timezone information,
     // assume UTC
+
     if (typeof dateString !== 'string') return null;
 
     let zdate = `${dateString}Z`;
@@ -65,10 +70,12 @@ export function formatDate(date) {
     )}.${date.getFullYear()}`;
 }
 
-export function formatTime(date) {
+export function formatUTCTime(date) {
     // Format a date time as HH:MM
-
-    return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
+    return `${String(date.getUTCHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(
+        2,
+        0
+    )}`;
 }
 
 export async function injectSVG(path, element) {
