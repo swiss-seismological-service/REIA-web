@@ -45,6 +45,7 @@ export function clamp(num, min, max) {
 export function parseUTCDate(dateString) {
     // Parse a date string. If there is no timezone information,
     // assume UTC
+
     if (typeof dateString !== 'string') return null;
 
     let zdate = `${dateString}Z`;
@@ -65,10 +66,12 @@ export function formatDate(date) {
     )}.${date.getFullYear()}`;
 }
 
-export function formatTime(date) {
+export function formatUTCTime(date) {
     // Format a date time as HH:MM
-
-    return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
+    return `${String(date.getUTCHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(
+        2,
+        0
+    )}`;
 }
 
 export async function injectSVG(path, element) {
