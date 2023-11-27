@@ -65,8 +65,8 @@ export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddr
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
         [secretKey]: secretValue,
-        ...(tag && !sum && { filter_tag_like: tag }),
-        ...(sum && !tag && { sum: true }),
+        ...(tag && { filter_tag_like: tag }),
+        ...(sum && { sum: true }),
     };
     let base = `/v1/loss/${oid}/${type}/${aggregation}`;
     return getData(base, apiAddress, queryParams);
