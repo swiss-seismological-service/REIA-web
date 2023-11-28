@@ -91,6 +91,14 @@ class DataLoader extends HTMLElement {
                 return null;
             }
 
+            // Dispatch oid event
+            const oid = preferred[0]._oid;
+            const event = new CustomEvent('oid', {
+                detail: oid,
+            });
+
+            this.dispatchEvent(event);
+
             return preferred[0];
         } catch (error) {
             console.error('Error fetching risk assessment data:', error);
