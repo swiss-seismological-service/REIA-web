@@ -171,7 +171,8 @@ class LossScale extends HTMLElement {
                                   .map(
                                       (step) =>
                                           html`<div class="loss__legend">
-                                              ${numberToString(step)}
+                                              ${numberToString(step, this.language)}
+                                              ${this.losscategory === 'structural' ? 'CHF' : ''}
                                           </div>`
                                   )}
                               <div class="loss__legend"></div>
