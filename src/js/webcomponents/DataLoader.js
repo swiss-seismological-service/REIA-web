@@ -10,6 +10,7 @@ class DataLoader extends HTMLElement {
         super();
         this.originid = null;
         this.baseurl = null;
+        this.promises = [];
         this.lossScales = document.querySelectorAll('loss-scale');
         this.lossGraph = document.querySelector('loss-graph');
         this.damageGraph = document.querySelector('damage-graph');
@@ -17,10 +18,6 @@ class DataLoader extends HTMLElement {
 
     static get observedAttributes() {
         return ['originid', 'baseurl'];
-    }
-
-    connectedCallback() {
-        this.updateData();
     }
 
     attributeChangedCallback(property, oldValue, newValue) {
@@ -37,10 +34,15 @@ class DataLoader extends HTMLElement {
                 if (data) {
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
+
                     this.updateLossScales(lossCalculationOid);
                     this.updateLossGraph(lossCalculationOid);
                     this.updateDamageGraph(damageCalculationOid);
                     this.updateOid(data._oid);
+                    Promise.all(this.promises).then(() => {
+                        const event = new CustomEvent('data-ready');
+                        this.dispatchEvent(event);
+                    });
                 }
             } catch (error) {
                 console.error('Error fetching or updating data:', error);
@@ -52,37 +54,55 @@ class DataLoader extends HTMLElement {
         if (this.lossScales.length > 0) {
             this.lossScales.forEach((lossScale) => {
                 const lossCategory = lossScale.getAttribute('losscategory');
-                lossScale.setData(
-                    getLoss(lossCalculationOid, lossCategory, 'Canton', null, true, this.baseurl)
+                const loss = getLoss(
+                    lossCalculationOid,
+                    lossCategory,
+                    'Canton',
+                    null,
+                    true,
+                    this.baseurl
                 );
+                this.promises.push(loss);
+                lossScale.setData(loss);
             });
         }
     }
 
     updateLossGraph(lossCalculationOid) {
         if (this.lossGraph) {
-            this.lossGraph.setData(getCantonalInjuries(lossCalculationOid, this.baseurl));
+            let cantonalInjuries = getCantonalInjuries(lossCalculationOid, this.baseurl);
+            this.promises.push(cantonalInjuries);
+            this.lossGraph.setData(cantonalInjuries);
         }
     }
 
     updateDamageGraph(damageCalculationOid) {
         if (this.damageGraph) {
-            this.damageGraph.setData(
-                getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
+            let cantonStructuralDamage = getCantonalStructuralDamage(
+                damageCalculationOid,
+                this.baseurl
             );
+            this.promises.push(cantonStructuralDamage);
+            this.damageGraph.setData(cantonStructuralDamage);
         }
     }
 
     updateOid(oid) {
-        this.setAttribute('oid', oid);
-        const event = new CustomEvent('oid-updated');
-        this.dispatchEvent(event);
+        const promise = new Promise((resolve) => {
+            this.setAttribute('oid', oid);
+            resolve();
+        });
+
+        this.promises.push(promise);
     }
 
     async fetchRiskAssessmentData() {
         try {
-            const data = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
-            const preferred = data.items.filter((item) => item.preferred && item.published);
+            const riskAssessments = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
+            this.promises.push(riskAssessments);
+            const preferred = riskAssessments.items.filter(
+                (item) => item.preferred && item.published
+            );
 
             if (preferred.length > 1) {
                 return preferred.reduce((latest, current) =>
