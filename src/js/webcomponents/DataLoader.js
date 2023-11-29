@@ -34,11 +34,12 @@ class DataLoader extends HTMLElement {
                 if (data) {
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
+                    const oid = data._oid;
 
                     this.updateLossScales(lossCalculationOid);
                     this.updateLossGraph(lossCalculationOid);
                     this.updateDamageGraph(damageCalculationOid);
-                    this.updateOid(data._oid);
+                    this.updateOid(oid);
                     Promise.all(this.promises).then(() => {
                         const event = new CustomEvent('data-ready');
                         this.dispatchEvent(event);
