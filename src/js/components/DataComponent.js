@@ -158,19 +158,15 @@ class DataComponent {
             this.promises.push(
                 getAllRiskAssessments(100, 0, b64encode(info?.originid)).then((data) => {
                     const publishedRiskAssessments = data.items.filter((item) => item.published);
-
-                    if (publishedRiskAssessments.length > 1) {
-                        publishedRiskAssessments.sort(
-                            (a, b) =>
-                                new Date(a.creationinfo.creationtime) -
-                                new Date(b.creationinfo.creationtime)
-                        );
-                    }
+                    publishedRiskAssessments.sort(
+                        (a, b) =>
+                            new Date(a.creationinfo.creationtime) -
+                            new Date(b.creationinfo.creationtime)
+                    );
 
                     const version = publishedRiskAssessments.findIndex(
                         (item) => item._oid === info._oid
                     );
-
                     headerReportVersion.innerHTML = version >= 0 ? `1.${version}` : 'unpublished';
                 })
             );
