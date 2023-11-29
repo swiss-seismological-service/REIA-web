@@ -10,14 +10,13 @@ class DataLoader extends HTMLElement {
         super();
         this.originid = null;
         this.baseurl = null;
-        this.oid = null;
         this.lossScales = document.querySelectorAll('loss-scale');
         this.lossGraph = document.querySelector('loss-graph');
         this.damageGraph = document.querySelector('damage-graph');
     }
 
     static get observedAttributes() {
-        return ['originid', 'baseurl', 'oid'];
+        return ['originid', 'baseurl'];
     }
 
     connectedCallback() {
@@ -36,12 +35,12 @@ class DataLoader extends HTMLElement {
                 const data = await this.fetchRiskAssessmentData();
 
                 if (data) {
-                    this.setAttribute('oid', data._oid);
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
                     this.updateLossScales(lossCalculationOid);
                     this.updateLossGraph(lossCalculationOid);
                     this.updateDamageGraph(damageCalculationOid);
+                    this.updateOid(data._oid);
                 }
             } catch (error) {
                 console.error('Error fetching or updating data:', error);
@@ -72,6 +71,12 @@ class DataLoader extends HTMLElement {
                 getCantonalStructuralDamage(damageCalculationOid, this.baseurl)
             );
         }
+    }
+
+    updateOid(oid) {
+        this.setAttribute('oid', oid);
+        const event = new CustomEvent('oid-updated');
+        this.dispatchEvent(event);
     }
 
     async fetchRiskAssessmentData() {
