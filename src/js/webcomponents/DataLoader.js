@@ -10,13 +10,14 @@ class DataLoader extends HTMLElement {
         super();
         this.originid = null;
         this.baseurl = null;
+        this.oid = null;
         this.lossScales = document.querySelectorAll('loss-scale');
         this.lossGraph = document.querySelector('loss-graph');
         this.damageGraph = document.querySelector('damage-graph');
     }
 
     static get observedAttributes() {
-        return ['originid', 'baseurl'];
+        return ['originid', 'baseurl', 'oid'];
     }
 
     connectedCallback() {
@@ -35,6 +36,7 @@ class DataLoader extends HTMLElement {
                 const data = await this.fetchRiskAssessmentData();
 
                 if (data) {
+                    this.setAttribute('oid', data._oid);
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
                     this.updateLossScales(lossCalculationOid);
@@ -90,14 +92,6 @@ class DataLoader extends HTMLElement {
                 console.warn('No published and preferred risk assessment found for this origin id');
                 return null;
             }
-
-            // Dispatch oid event
-            const oid = preferred[0]._oid;
-            const event = new CustomEvent('oid', {
-                detail: oid,
-            });
-
-            this.dispatchEvent(event);
 
             return preferred[0];
         } catch (error) {
