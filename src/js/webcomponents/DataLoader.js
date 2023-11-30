@@ -53,7 +53,7 @@ class DataLoader extends HTMLElement {
                     this.setAttribute('oid', oid);
 
                     await Promise.all(this.promises).then(() => {
-                        const event = new CustomEvent('data-ready');
+                        const event = new CustomEvent('data-ready', { bubbles: true });
                         this.dispatchEvent(event);
                     });
                 }
