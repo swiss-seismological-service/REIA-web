@@ -40,6 +40,7 @@ class DataLoader extends HTMLElement {
                     this.updateLossGraph(lossCalculationOid);
                     this.updateDamageGraph(damageCalculationOid);
                     this.updateOid(oid);
+
                     Promise.all(this.promises).then(() => {
                         const event = new CustomEvent('data-ready');
                         this.dispatchEvent(event);
@@ -91,7 +92,7 @@ class DataLoader extends HTMLElement {
     updateOid(oid) {
         const promise = new Promise((resolve) => {
             this.setAttribute('oid', oid);
-            resolve();
+            resolve('oid updated');
         });
 
         this.promises.push(promise);
@@ -100,7 +101,6 @@ class DataLoader extends HTMLElement {
     async fetchRiskAssessmentData() {
         try {
             const riskAssessments = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
-            this.promises.push(riskAssessments);
             const preferred = riskAssessments.items.filter(
                 (item) => item.preferred && item.published
             );
