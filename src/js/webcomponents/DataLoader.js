@@ -11,26 +11,37 @@ class DataLoader extends HTMLElement {
         this.originid = null;
         this.baseurl = null;
         this.promises = [];
+        this.oid = this.getAttribute('oid');
         this.lossScales = document.querySelectorAll('loss-scale');
         this.lossGraph = document.querySelector('loss-graph');
         this.damageGraph = document.querySelector('damage-graph');
     }
 
     static get observedAttributes() {
-        return ['originid', 'baseurl'];
+        return ['originid', 'baseurl', 'oid'];
     }
 
     attributeChangedCallback(property, oldValue, newValue) {
         if (oldValue === newValue) return;
         this[property] = newValue;
-        this.updateData();
+
+        if (property === 'originid' || property === 'baseurl') {
+            this.updateData();
+        }
+
+        if (property === 'oid' && newValue) {
+            this.promises.push(
+                new Promise((resolve) => {
+                    resolve(newValue);
+                })
+            );
+        }
     }
 
     async updateData() {
         if (this.originid && this.baseurl) {
             try {
                 const data = await this.fetchRiskAssessmentData();
-
                 if (data) {
                     const lossCalculationOid = data.losscalculation._oid;
                     const damageCalculationOid = data.damagecalculation._oid;
@@ -39,9 +50,9 @@ class DataLoader extends HTMLElement {
                     this.updateLossScales(lossCalculationOid);
                     this.updateLossGraph(lossCalculationOid);
                     this.updateDamageGraph(damageCalculationOid);
-                    this.updateOid(oid);
+                    this.setAttribute('oid', oid);
 
-                    Promise.all(this.promises).then(() => {
+                    await Promise.all(this.promises).then(() => {
                         const event = new CustomEvent('data-ready');
                         this.dispatchEvent(event);
                     });
@@ -64,8 +75,8 @@ class DataLoader extends HTMLElement {
                     true,
                     this.baseurl
                 );
-                this.promises.push(loss);
                 lossScale.setData(loss);
+                this.promises.push(loss);
             });
         }
     }
@@ -73,8 +84,8 @@ class DataLoader extends HTMLElement {
     updateLossGraph(lossCalculationOid) {
         if (this.lossGraph) {
             let cantonalInjuries = getCantonalInjuries(lossCalculationOid, this.baseurl);
-            this.promises.push(cantonalInjuries);
             this.lossGraph.setData(cantonalInjuries);
+            this.promises.push(cantonalInjuries);
         }
     }
 
@@ -84,18 +95,9 @@ class DataLoader extends HTMLElement {
                 damageCalculationOid,
                 this.baseurl
             );
-            this.promises.push(cantonStructuralDamage);
             this.damageGraph.setData(cantonStructuralDamage);
+            this.promises.push(cantonStructuralDamage);
         }
-    }
-
-    updateOid(oid) {
-        const promise = new Promise((resolve) => {
-            this.setAttribute('oid', oid);
-            resolve('oid updated');
-        });
-
-        this.promises.push(promise);
     }
 
     async fetchRiskAssessmentData() {
