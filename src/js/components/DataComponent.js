@@ -45,7 +45,7 @@ class DataComponent {
             if (originId) {
                 this.addOriginInfo(originId);
                 this.addOriginDescription(originId);
-                this.addDangerLevel(originId);
+                this.addDangerLevel(originId, sheetType);
             }
         });
     }
@@ -186,8 +186,11 @@ class DataComponent {
         );
     }
 
-    addDangerLevel(originId) {
+    addDangerLevel(originId, sheetType) {
         let overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
+        let dangerLevelCantonCH = document.getElementById('ch-danger-level');
+        if (sheetType !== 'CH') dangerLevelCantonCH.innerHTML = 'CH';
+
         this.promises.push(
             getDangerLevel(b64encode(originId)).then((warnlevel) => {
                 warnlevel = Math.max(1, warnlevel[0]?.alarmlevel);
