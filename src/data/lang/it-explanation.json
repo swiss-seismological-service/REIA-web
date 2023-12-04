@@ -5,7 +5,7 @@
     "text-version": "La prima edizione della stima rapida dei danni, la versione 1.0, si basa su informazioni e dati di misura elaborati automaticamente. La successiva analisi manuale da parte di un esperto può portare a una leggera modifica dei parametri del sisma. In questo caso può succedere che ven-ga  emessa una versione aggiornata (versione 1.1) della stima rapida dei danni. La versione aggiornata non tiene conto delle osservazioni effettive del terremoto (ad es. i danni segnalati dalle indagini sul campo).",
     "ueberblick-mag": "MLhc e Mw sono modalità di definizione della magnitudo e forniscono informazioni sull’energia liberata durante una scossa e sulla sua forza.",
     "ueberblick-info": "Il riepilogo riassume le informazioni più importanti sul sisma. A tal fine vengono assemblati automaticamente elementi di testo standard.",
-    "ueberblick-stufe": "I livelli di pericolo da 1 a 5 sono stati stabiliti congiuntamente dai Servizi specializzati pericoli naturali della Confederazione:",
+    "ueberblick-stufe": "I livelli di pericolo (SG) da 1 a 5 sono stati stabiliti congiuntamente dai Servizi specializzati pericoli naturali della Confederazione:",
     "ueberblick-stufe-1": "Livello di pericolo 1: pericolo nullo o debole",
     "ueberblick-stufe-2": "Livello di pericolo 2: pericolo moderato",
     "ueberblick-stufe-3": "Livello di pericolo 3: pericolo marcato",

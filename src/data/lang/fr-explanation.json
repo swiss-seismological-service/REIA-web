@@ -5,7 +5,7 @@
     "text-version": "La première édition de l’estimation rapide des dégâts, a version 1.0, se base sur les informations traitées automatiquement et sur les mesures aux stations. Une évaluation manuelle ultérieure par un ou une spécialiste peut légèrement modifier les paramètres du séisme. Dans de tels cas, il est possible qu’une version mise à jour (version 1.1) de la première évaluation rapide des dégâts soit publiée. Les observations de terrain des impacts du séisme (p. ex. les dégâts rapportés par les équipes d'évaluation) ne sont pas prises en compte dans la version actualisée.",
     "ueberblick-mag": "MLhc et Mw sont des unités de magnitude et donnent des informations sur l’énergie libérée pendant un séisme, et donc sur sa force.",
     "ueberblick-info": "L’aperçu résume les informations les plus importantes sur le tremblement de terre. Pour ce faire, des éléments de texte standardisés sont automatiquement assemblés.",
-    "ueberblick-stufe": "Les degrés de danger 1 à 5 ont été définis conjointement par les Services fédéraux spécialisés dans les dangers naturels. ",
+    "ueberblick-stufe": "Les degrés de danger (SG) 1 à 5 ont été définis conjointement par les Services fédéraux spécialisés dans les dangers naturels. ",
     "ueberblick-stufe-1": "Degré de danger 1 : aucun danger ou danger faible",
     "ueberblick-stufe-2": "Degré de danger 2 : danger limité",
     "ueberblick-stufe-3": "Degré de danger 3 : danger marqué",
