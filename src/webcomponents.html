@@ -11,12 +11,19 @@
         <loss-scale style="font-size:10px;" losscategory="structural" language="de"></loss-scale>
         <loss-scale style="font-size:10px;" losscategory="fatalities" language="it"></loss-scale>
         <loss-scale style="font-size:10px;" losscategory="displaced" language="fr"></loss-scale>
-        
+
         <loss-graph style="font-size:10px;" language="de"></loss-graph>
-        <damage-graph style="font-size:10px" language="fr" ></damage-graph>
-        
-        <data-loader originid="c21pOmNoLmV0aHouc2VkL0tQMjAyMzA3MDcwNjAwLkFVVE9MT0MvMjAyMzA3MDcwNjA3MzUvb3JpZ2luLzE=" baseurl="http://ermd.ethz.ch/reiaws"></data-loader>
+        <damage-graph style="font-size:10px" language="fr"></damage-graph>
+
+        <data-loader originid="c21pOmNoLmV0aHouc2VkL0tQMjAyMzA3MDcwNjAwLkFVVE9MT0MvMjAyMzA3MDcwNjA3MzUvb3JpZ2luLzE="
+            baseurl="http://ermd.ethz.ch/reiaws" oid=""></data-loader>
     </div>
 </body>
+
+<script>
+    document.addEventListener('data-ready', function (e) {
+        console.log('data is ready');
+    });
+</script>
 
 </html>
