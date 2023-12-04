@@ -11,14 +11,13 @@ class DataLoader extends HTMLElement {
         this.originid = null;
         this.baseurl = null;
         this.promises = [];
-        this.oid = this.getAttribute('oid');
         this.lossScales = document.querySelectorAll('loss-scale');
         this.lossGraph = document.querySelector('loss-graph');
         this.damageGraph = document.querySelector('damage-graph');
     }
 
     static get observedAttributes() {
-        return ['originid', 'baseurl', 'oid'];
+        return ['originid', 'baseurl'];
     }
 
     attributeChangedCallback(property, oldValue, newValue) {
@@ -27,14 +26,6 @@ class DataLoader extends HTMLElement {
 
         if (property === 'originid' || property === 'baseurl') {
             this.updateData();
-        }
-
-        if (property === 'oid' && newValue) {
-            this.promises.push(
-                new Promise((resolve) => {
-                    resolve(newValue);
-                })
-            );
         }
     }
 
@@ -52,7 +43,7 @@ class DataLoader extends HTMLElement {
                     this.updateDamageGraph(damageCalculationOid);
                     this.setAttribute('oid', oid);
 
-                    await Promise.all(this.promises).then(() => {
+                    Promise.all(this.promises).then(() => {
                         const event = new CustomEvent('data-ready', { bubbles: true });
                         this.dispatchEvent(event);
                     });
@@ -102,26 +93,27 @@ class DataLoader extends HTMLElement {
 
     async fetchRiskAssessmentData() {
         try {
-            const riskAssessments = await getAllRiskAssessments(20, 0, this.originid, this.baseurl);
+            const riskAssessments = await getAllRiskAssessments(
+                100,
+                0,
+                this.originid,
+                this.baseurl
+            );
             const preferred = riskAssessments.items.filter(
                 (item) => item.preferred && item.published
             );
-
-            if (preferred.length > 1) {
-                return preferred.reduce((latest, current) =>
-                    new Date(current.creationinfo.creationtime) >
-                    new Date(latest.creationinfo.creationtime)
-                        ? current
-                        : latest
-                );
-            }
 
             if (preferred.length === 0) {
                 console.warn('No published and preferred risk assessment found for this origin id');
                 return null;
             }
 
-            return preferred[0];
+            return preferred.reduce((latest, current) =>
+                new Date(current.creationinfo.creationtime) >
+                new Date(latest.creationinfo.creationtime)
+                    ? current
+                    : latest
+            );
         } catch (error) {
             console.error('Error fetching risk assessment data:', error);
             throw error;
