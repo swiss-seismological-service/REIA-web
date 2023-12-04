@@ -70,8 +70,8 @@ class InfoTable extends HTMLElement {
         this.origininfo.date = this.origininfo.time ? formatDate(this.origininfo.time) : null;
         this.origininfo.time = this.origininfo.time ? formatUTCTime(this.origininfo.time) : null;
 
-        this.origininfo.href = `http://seismo.ethz.ch/en/earthquakes/switzerland
-        /eventpage.html?originId=%27${b64encode(this.originid)}%27`;
+        // prettier-ignore
+        this.origininfo.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(this.originid)}%27`; // eslint-disable-line
     };
 
     template = () =>
