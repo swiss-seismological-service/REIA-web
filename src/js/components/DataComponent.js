@@ -151,9 +151,6 @@ class DataComponent {
         let headerBox = document.querySelector('.header__box');
         let headerText = document.getElementById('header-text');
 
-        let date = parseUTCDate(info?.creationinfo?.creationtime);
-        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
-
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
 
@@ -165,6 +162,8 @@ class DataComponent {
 
         headerText.innerHTML = i18next.t('headerbar-natural');
         headerBox.classList.add('natural');
+        let date = parseUTCDate(info?.creationinfo?.creationtime);
+        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
 
         if (info?.originid) {
             this.promises.push(
