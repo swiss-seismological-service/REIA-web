@@ -1,5 +1,6 @@
 {
-    "headerbar": "Stime rapide dei danni – data di pubblicazione:",
+    "headerbar-natural": "Stime rapide dei danni – data di pubblicazione:",
+    "headerbar-scenario": "Scenario sismico",
     "title": "Terremoto",
     "preposition_title": "{{name, preposition_title}}",
     "mag": "Magnitudo",

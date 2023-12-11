@@ -1,5 +1,6 @@
 {
-  "headerbar": "Schnelle Schadensabschätzungen – Ausgabedatum:",
+  "headerbar-natural": "Schnelle Schadensabschätzungen – Ausgabedatum:",
+  "headerbar-scenario": "Erdbebenszenario",
   "title": "Erdbeben bei ",
   "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",

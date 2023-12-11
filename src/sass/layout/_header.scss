@@ -63,7 +63,6 @@
     }
 
     &__box {
-        background-color: $color-blue;
         color: white;
         padding: $padding-containers;
 
@@ -81,6 +80,14 @@
             padding-top: $padding-containers * 1.5;
             padding-bottom: $padding-containers * 1.5;
         }
+
+        &.natural {
+            background-color: $color-blue;
+        }
+
+        &.scenario {
+            background-color: dimgray;
+        }       
     }
 
     &__title {

@@ -148,12 +148,24 @@ class DataComponent {
         let headerWappen = document.getElementById('header-wappen');
         let headerKuerzel = document.getElementById('header-kuerzel');
         let headerReportVersion = document.getElementById('header-report-version');
+        let headerBox = document.querySelector('.header__box');
+        let headerText = document.getElementById('header-text');
 
         let date = parseUTCDate(info?.creationinfo?.creationtime);
-        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)}` : '';
+        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
 
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
+
+        if (info.type === 'scenario') {
+            headerText.innerHTML = i18next.t('headerbar-scenario');
+            headerBox.classList.add('scenario');
+            return;
+        }
+
+        headerText.innerHTML = i18next.t('headerbar-natural');
+        headerBox.classList.add('natural');
+
         if (info?.originid) {
             this.promises.push(
                 getAllRiskAssessments(100, 0, b64encode(info?.originid)).then((data) => {
