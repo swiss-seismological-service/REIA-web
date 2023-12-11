@@ -186,7 +186,7 @@ class DataComponent {
                 })
             );
         } else {
-            headerReportVersion.innerHTML = `${i18next.t('version')} unpublished`;
+            headerReportVersion.innerHTML = `${i18next.t('version')} N/A`;
         }
     }
 
