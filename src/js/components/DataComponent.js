@@ -178,11 +178,15 @@ class DataComponent {
                     const version = publishedRiskAssessments.findIndex(
                         (item) => item._oid === info._oid
                     );
-                    headerReportVersion.innerHTML = version >= 0 ? `1.${version}` : 'unpublished';
+
+                    headerReportVersion.innerHTML =
+                        version >= 0
+                            ? `${i18next.t('version')} 1.${version}`
+                            : `${i18next.t('version')} unpublished`;
                 })
             );
         } else {
-            headerReportVersion.innerHTML = 'N/A';
+            headerReportVersion.innerHTML = `${i18next.t('version')} unpublished`;
         }
     }
 
