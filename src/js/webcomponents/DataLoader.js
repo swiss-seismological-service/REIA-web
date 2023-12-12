@@ -47,9 +47,13 @@ class DataLoader extends HTMLElement {
                         const event = new CustomEvent('data-ready', { bubbles: true });
                         this.dispatchEvent(event);
                     });
+                } else {
+                    const event = new CustomEvent('data-empty', { bubbles: true });
+                    this.dispatchEvent(event);
                 }
             } catch (error) {
-                console.error('Error fetching or updating data:', error);
+                const event = new CustomEvent('data-error', { bubbles: true, detail: error });
+                this.dispatchEvent(event);
             }
         }
     }
