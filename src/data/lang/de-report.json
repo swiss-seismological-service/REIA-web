@@ -43,5 +43,6 @@
   "footer-unterstuetzung": "Mit der Unterstützung von:",
   "footer-dowhat": "Was tun nach einem Erdbeben?",
   "footer-info": "Weitere Informationen unter",
-  "version":"Version"
+  "version":"Version",
+  "unpublished-version": "Unveröffentlichte {{version}}"
 }

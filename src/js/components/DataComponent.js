@@ -164,12 +164,13 @@ class DataComponent {
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
 
-        if (info?.type === 'scenario') {
+        if (infoType === 'scenario') {
             headerBox.forEach((box) => box.classList.add('scenario'));
             return;
         }
 
         headerBox.forEach((box) => box.classList.add('natural'));
+
         let date = parseUTCDate(info?.creationinfo?.creationtime);
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
 
@@ -190,7 +191,7 @@ class DataComponent {
                     headerReportVersion.innerHTML =
                         version >= 0
                             ? `${i18next.t('version')} 1.${version}`
-                            : `${i18next.t('version')} unpublished`;
+                            : `${i18next.t('unpublished-version')}`;
                 })
             );
         } else {
