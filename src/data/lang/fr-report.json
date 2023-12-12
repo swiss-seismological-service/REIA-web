@@ -1,6 +1,8 @@
 {
-  "headerbar-natural": "Évaluations rapides des dégâts – Date d’édition:",
-  "headerbar-scenario": "Scénario de tremblement de terre",
+  "headerbar" : {
+    "natural": "Évaluations rapides des dégâts – Date d’édition:",
+    "scenario": "Scénario de tremblement de terre"
+  },
   "title": "Séisme près",
   "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",

@@ -1,6 +1,8 @@
-{
-    "headerbar-natural": "Rapid Impact Assessments – Issue date:",
-    "headerbar-scenario": "Earthquake scenario",
+{   
+    "headerbar": {
+        "natural" : "Rapid Impact Assessments – Issue date:",
+        "scenario": "Earthquake scenario"
+    },
     "title": "Earthquake in the vicinity of",
     "preposition_title": "{{name, preposition_title}}",
     "mag": "Magnitude",

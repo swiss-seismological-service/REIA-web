@@ -41,6 +41,7 @@ class DataComponent {
             }
 
             this.addHeaderInfo(info, sheetType);
+            this.addExplanationText(info);
 
             if (originId) {
                 this.addOriginInfo(originId);
@@ -151,17 +152,19 @@ class DataComponent {
         let headerBox = document.querySelector('.header__box');
         let headerText = document.getElementById('header-text');
 
+        let infoType = info?.type;
+        headerText.innerHTML = infoType ? i18next.t(`headerbar.${infoType}`) : '';
+
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
 
-        if (info.type === 'scenario') {
-            headerText.innerHTML = i18next.t('headerbar-scenario');
+        if (info?.type === 'scenario') {
             headerBox.classList.add('scenario');
             return;
         }
 
-        headerText.innerHTML = i18next.t('headerbar-natural');
         headerBox.classList.add('natural');
+
         let date = parseUTCDate(info?.creationinfo?.creationtime);
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
 
@@ -249,6 +252,20 @@ class DataComponent {
                     damagesMapElement
                 )
             );
+        }
+    }
+
+    addExplanationText(info) {
+        let explanationText = document.getElementById('explanation-text');
+        let infoType = info?.type;
+
+        if (infoType) {
+            let typeText = i18next.t(`explanation:text.type.${infoType}`);
+            let mainText = i18next.t('explanation:text.main', { type: typeText });
+
+            explanationText.innerHTML = mainText;
+        } else {
+            explanationText.innerHTML = '';
         }
     }
 }

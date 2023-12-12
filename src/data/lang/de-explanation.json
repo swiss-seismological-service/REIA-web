@@ -1,6 +1,11 @@
 {
     "title": "Erläuterungen",
-    "text": "Bei den hier angegebenen Werten zu den erwarteten Folgen des Bebens handelt es sich um au-tomatisch erzeugte Schätzungen. Sie beruhen auf Annahmen basierend auf dem Erdbebenrisi-komodell Schweiz (ERM-CH23). Die tatsächlichen Werte können unter Umständen stark davon abweichen. Daher sind alle Angaben ohne Gewähr und vorbehaltlich Änderungen.",
+    "text": {
+            "main" : "Bei den hier angegebenen Werten zu {{type}} handelt es sich um automatisch erzeugte Schätzungen. Sie beruhen auf Annahmen basierend auf dem Erdbebenrisi-komodell Schweiz (ERM-CH23). Die tatsächlichen Werte können unter Umständen stark davon abweichen. Daher sind alle Angaben ohne Gewähr und vorbehaltlich Änderungen.",
+            "type": {
+                "natural" : "den erwarteten Folgen des Bebens",
+                "scenario" : "diesem Erdbebenszenario"
+            }},
     "text-zusammenarbeit": "Das Erdbebenrisikomodell Schweiz wurde vom Schweizerischen Erdbebendienst (SED) an der ETH Zürich in Zusammenarbeit mit dem Bundesamt für Umwelt (BAFU) und dem Bundesamt für Bevölkerungsschutz (BABS) entwickelt.",
     "text-version": "Die erste Ausgabe der schnellen Schadensabschätzung ist die Version 1.0 und basiert auf den automatisch-generierten Messdaten. Durch die spätere manuelle Auswertung durch eine Fach-person können sich die Bebenparameter leicht ändern. Unter Umständen wird in solchen Fällen eine aufdatierte Version (Version 1.1) der ersten schnellen Schadensabschätzung veröffentlicht. Tatsächliche Beobachtungen (z. B. zum Schadensausmass) des Bebens fliessen nicht in die ak-tualisierte Version ein.",
     "ueberblick-mag": "MLhc und Mw sind Magnitudeneinheiten und geben Auskunft über die während eines Bebens freigesetzte Energie beziehungsweise dessen Stärke.",
