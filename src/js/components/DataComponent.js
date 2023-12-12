@@ -31,6 +31,7 @@ class DataComponent {
             let lossId = info.losscalculation?._oid;
             let damageId = info.damagecalculation?._oid;
             let originId = info.originid;
+            let infoType = info.type;
 
             this.addLanguageImages();
 
@@ -41,10 +42,10 @@ class DataComponent {
             }
 
             this.addHeaderInfo(info, sheetType);
-            this.addExplanationText(info);
+            this.addExplanationText(infoType);
 
             if (originId) {
-                this.addOriginInfo(originId);
+                this.addOriginInfo(originId, infoType);
                 this.addOriginDescription(originId);
                 this.addDangerLevel(originId, sheetType);
             }
@@ -116,10 +117,11 @@ class DataComponent {
         });
     }
 
-    addOriginInfo(originId) {
+    addOriginInfo(originId, infoType) {
         let headerTitle = document.getElementById('header-title');
         let overviewMagnitude = document.getElementById('overview-magnitude');
         let infoTable = document.getElementById('info-table');
+        let infoMeta = document.getElementById('info-meta');
 
         this.promises.push(
             getOriginInfo(b64encode(originId)).then((originInfo) => {
@@ -140,6 +142,10 @@ class DataComponent {
                 headerTitle.innerHTML = i18next.t('preposition_title', {
                     name: originInfo.region || '-',
                 });
+
+                if (infoType === 'scenario') {
+                    infoMeta.setAttribute('href', 'http://seismo.ethz.ch/');
+                }
             })
         );
     }
@@ -149,7 +155,7 @@ class DataComponent {
         let headerWappen = document.getElementById('header-wappen');
         let headerKuerzel = document.getElementById('header-kuerzel');
         let headerReportVersion = document.getElementById('header-report-version');
-        let headerBox = document.querySelector('.header__box');
+        let headerBox = document.querySelectorAll('.header__box');
         let headerText = document.getElementById('header-text');
 
         let infoType = info?.type;
@@ -159,12 +165,11 @@ class DataComponent {
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
 
         if (info?.type === 'scenario') {
-            headerBox.classList.add('scenario');
+            headerBox.forEach((box) => box.classList.add('scenario'));
             return;
         }
 
-        headerBox.classList.add('natural');
-
+        headerBox.forEach((box) => box.classList.add('natural'));
         let date = parseUTCDate(info?.creationinfo?.creationtime);
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
 
@@ -255,9 +260,8 @@ class DataComponent {
         }
     }
 
-    addExplanationText(info) {
+    addExplanationText(infoType) {
         let explanationText = document.getElementById('explanation-text');
-        let infoType = info?.type;
 
         if (infoType) {
             let typeText = i18next.t(`explanation:text.type.${infoType}`);
