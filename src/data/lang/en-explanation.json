@@ -1,6 +1,6 @@
 {
     "title": "Explanations",
-    "text": "The values given here regarding the earthquake scenario are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23). The actual values may vary considerably under certain circumstances; therefore, all information is provided without warranty and is subject to change.",
+    "text": "The values given here regarding the expected consequences of the earthquake are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23). The actual values may vary considerably under certain circumstances; therefore, all information is provided without warranty and is subject to change.",
     "text-zusammenarbeit": "ERM-CH23 was developed by the Swiss Seismological Service (SED) at ETH Zurich in collaboration with the Federal Office for the Environment (FOEN) and the Federal Office for Civil Protection (FOCP).",
     "text-version": "The first version of a rapid impact assessment (RIA) version 1.0 is based on automatically processed information and measurement. Subsequent manual assessment by a specialist may result in the earthquake parameters being modified slightly, in which case an updated version (version 1.1) of the first RIA may be issued. Updated versions do not include actual observations of the earthquake (e.g., reported damage from field investigations).",
     "ueberblick-mag": "'MLhc' and 'Mw' are measures of magnitude and describe the energy released during an earthquake and its strength respectively.",
