@@ -45,15 +45,15 @@ class DataLoader extends HTMLElement {
 
                     Promise.all(this.promises).then(() => {
                         this.status = 'ready';
-                        this.dispatchDataLoadingStatus(this.status);
+                        this.dispatchDataLoadingStatus();
                     });
                 } else {
                     this.status = 'empty';
-                    this.dispatchDataLoadingStatus(this.status);
+                    this.dispatchDataLoadingStatus();
                 }
             } catch (error) {
                 this.status = 'error';
-                this.dispatchDataLoadingStatus(this.status);
+                this.dispatchDataLoadingStatus();
             }
         }
     }
