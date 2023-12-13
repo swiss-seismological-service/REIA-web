@@ -44,12 +44,16 @@ class DataLoader extends HTMLElement {
                     this.setAttribute('oid', oid);
 
                     Promise.all(this.promises).then(() => {
-                        const event = new CustomEvent('data-ready', { bubbles: true });
-                        this.dispatchEvent(event);
+                        this.status = 'ready';
+                        this.dispatchDataLoadingStatus(this.status);
                     });
+                } else {
+                    this.status = 'empty';
+                    this.dispatchDataLoadingStatus(this.status);
                 }
             } catch (error) {
-                console.error('Error fetching or updating data:', error);
+                this.status = 'error';
+                this.dispatchDataLoadingStatus(this.status);
             }
         }
     }
@@ -118,6 +122,11 @@ class DataLoader extends HTMLElement {
             console.error('Error fetching risk assessment data:', error);
             throw error;
         }
+    }
+
+    dispatchDataLoadingStatus() {
+        const event = new CustomEvent('data', { bubbles: true, detail: this.status });
+        this.dispatchEvent(event);
     }
 }
 
