@@ -21,16 +21,8 @@
 </body>
 
 <script>
-    document.addEventListener('data-ready', function (e) {
-        console.log('data is ready');
-    });
-
-    document.addEventListener('data-error', function (e) {
+    document.addEventListener('data', function (e) {
         console.log(e.detail);
-    });
-
-    document.addEventListener('data-empty', function (e) {
-        console.log('data is falsy (empty, null, undefined)');
     });
 </script>
 
