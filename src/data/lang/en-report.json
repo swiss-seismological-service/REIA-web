@@ -1,5 +1,8 @@
-{
-    "headerbar": "Rapid Impact Assessments – Issue date:",
+{   
+    "headerbar": {
+        "natural" : "Rapid Impact Assessments – Issue date:",
+        "scenario": "Earthquake scenario"
+    },
     "title": "Earthquake in the vicinity of",
     "preposition_title": "{{name, preposition_title}}",
     "mag": "Magnitude",
@@ -41,5 +44,6 @@
     "footer-unterstuetzung": "With the support of:",
     "footer-dowhat": "What should you do after an earthquake? See",
     "footer-info": "More information is available at",
-    "version": "Version"
+    "version": "Version",
+    "unpublished-version": "Unpublished version"
 }

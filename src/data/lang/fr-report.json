@@ -1,5 +1,8 @@
 {
-  "headerbar": "Évaluations rapides des dégâts – Date d’édition:",
+  "headerbar" : {
+    "natural": "Évaluations rapides des dégâts – Date d’édition:",
+    "scenario": "Scénario de tremblement de terre"
+  },
   "title": "Séisme près",
   "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",
@@ -40,5 +43,6 @@
   "footer-unterstuetzung": "Avec le soutien de:",
   "footer-dowhat": "Que faire après un tremblement de terre ?",
   "footer-info": "Plus d’informations sur",
-  "version": "Version"
+  "version": "Version",
+  "unpublished-version" : "Version non publiée"
 }

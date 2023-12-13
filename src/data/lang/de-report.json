@@ -1,5 +1,8 @@
-{
-  "headerbar": "Schnelle Schadensabschätzungen – Ausgabedatum:",
+{ 
+  "headerbar": {
+    "natural" : "Schnelle Schadensabschätzungen – Ausgabedatum:",
+    "scenario" : "Erdbebenszenario"
+  },
   "title": "Erdbeben bei ",
   "preposition_title": "{{name, preposition_title}}",
   "mag": "Magnitude",
@@ -40,5 +43,6 @@
   "footer-unterstuetzung": "Mit der Unterstützung von:",
   "footer-dowhat": "Was tun nach einem Erdbeben?",
   "footer-info": "Weitere Informationen unter",
-  "version":"Version"
+  "version":"Version",
+  "unpublished-version": "Unveröffentlichte Version"
 }

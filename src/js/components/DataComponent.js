@@ -31,6 +31,7 @@ class DataComponent {
             let lossId = info.losscalculation?._oid;
             let damageId = info.damagecalculation?._oid;
             let originId = info.originid;
+            let infoType = info.type;
 
             this.addLanguageImages();
 
@@ -41,9 +42,10 @@ class DataComponent {
             }
 
             this.addHeaderInfo(info, sheetType);
+            this.addExplanationText(infoType);
 
             if (originId) {
-                this.addOriginInfo(originId);
+                this.addOriginInfo(originId, infoType);
                 this.addOriginDescription(originId);
                 this.addDangerLevel(originId, sheetType);
             }
@@ -115,10 +117,11 @@ class DataComponent {
         });
     }
 
-    addOriginInfo(originId) {
+    addOriginInfo(originId, infoType) {
         let headerTitle = document.getElementById('header-title');
         let overviewMagnitude = document.getElementById('overview-magnitude');
         let infoTable = document.getElementById('info-table');
+        let infoMeta = document.getElementById('info-meta');
 
         this.promises.push(
             getOriginInfo(b64encode(originId)).then((originInfo) => {
@@ -139,6 +142,10 @@ class DataComponent {
                 headerTitle.innerHTML = i18next.t('preposition_title', {
                     name: originInfo.region || '-',
                 });
+
+                if (infoType === 'scenario') {
+                    infoMeta.setAttribute('href', 'http://seismo.ethz.ch/');
+                }
             })
         );
     }
@@ -148,12 +155,25 @@ class DataComponent {
         let headerWappen = document.getElementById('header-wappen');
         let headerKuerzel = document.getElementById('header-kuerzel');
         let headerReportVersion = document.getElementById('header-report-version');
+        let headerBox = document.querySelectorAll('.header__box');
+        let headerText = document.getElementById('header-text');
 
-        let date = parseUTCDate(info?.creationinfo?.creationtime);
-        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)}` : '';
+        let infoType = info?.type;
+        headerText.innerHTML = infoType ? i18next.t(`headerbar.${infoType}`) : '';
 
         headerKuerzel.innerHTML = sheetType;
         headerWappen.src = wappenImage[`${sheetType || 'CH'}.png`];
+
+        if (infoType === 'scenario') {
+            headerBox.forEach((box) => box.classList.add('scenario'));
+            return;
+        }
+
+        headerBox.forEach((box) => box.classList.add('natural'));
+
+        let date = parseUTCDate(info?.creationinfo?.creationtime);
+        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
+
         if (info?.originid) {
             this.promises.push(
                 getAllRiskAssessments(100, 0, b64encode(info?.originid)).then((data) => {
@@ -167,11 +187,15 @@ class DataComponent {
                     const version = publishedRiskAssessments.findIndex(
                         (item) => item._oid === info._oid
                     );
-                    headerReportVersion.innerHTML = version >= 0 ? `1.${version}` : 'unpublished';
+
+                    headerReportVersion.innerHTML =
+                        version >= 0
+                            ? `${i18next.t('version')} 1.${version}`
+                            : `${i18next.t('unpublished-version')}`;
                 })
             );
         } else {
-            headerReportVersion.innerHTML = 'N/A';
+            headerReportVersion.innerHTML = `${i18next.t('version')} N/A`;
         }
     }
 
@@ -234,6 +258,19 @@ class DataComponent {
                     damagesMapElement
                 )
             );
+        }
+    }
+
+    addExplanationText(infoType) {
+        let explanationText = document.getElementById('explanation-text');
+
+        if (infoType) {
+            let typeText = i18next.t(`explanation:text.type.${infoType}`);
+            let mainText = i18next.t('explanation:text.main', { type: typeText });
+
+            explanationText.innerHTML = mainText;
+        } else {
+            explanationText.innerHTML = '';
         }
     }
 }
