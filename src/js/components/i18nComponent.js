@@ -47,6 +47,7 @@ export function translatePageElements() {
     translatableElements.forEach((el) => {
         const key = el.getAttribute('data-i18n-key');
         el.innerHTML = i18next.t(key);
+        if (el.tagName === 'A') el.href = i18next.t(key);
     });
 }
 export function bindLocaleSwitcher(switcher, update) {
