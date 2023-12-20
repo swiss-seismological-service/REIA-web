@@ -1,15 +1,15 @@
 {
     "title": "Spiegazioni",
     "text": {
-        "main" : "I valori qui forniti relativi {{type}} costituiscono stime generate in modo automatico che si fondano su ipotesi basate sul modello svizzero di rischio sismico (ERM-CH23). In alcuni casi i valori effettivi potrebbero rivelarsi molto diversi. Per questo motivo, decliniamo qualsiasi responsabilità per le informazioni riportate e ci riserviamo la possibilità di apportare modifiche.",
+        "main" : "I valori qui forniti relativi {{type}} costituiscono stime generate in modo automatico che si fondano su ipotesi basate sul modello di rischio sismico della Svizzera (ERM-CH23). In alcuni casi i valori effettivi potrebbero rivelarsi molto diversi. Per questo motivo, decliniamo qualsiasi responsabilità per le informazioni riportate e ci riserviamo la possibilità di apportare modifiche. Le stime rapide dei danni non tengono conto delle osservazioni reali sul campo o dei danni causati da terremoti precedenti.",
         "type" : {
             "natural" : "alle conseguenze previste del sisma",
             "scenario" : "allo scenario sismico"
         }
     },
-    "text-zusammenarbeit": "Il modello svizzero di rischio sismico è stato sviluppato dal Servizio Sismico Svizzero (SED) con sede all’ETH di Zurigo in collaborazione con l’Ufficio federale dell’ambiente (UFAM) e l’Ufficio federale della protezione della popolazione (UFPP).",
-    "text-version": "La prima edizione della stima rapida dei danni, la versione 1.0, si basa su informazioni e dati di misura elaborati automaticamente. La successiva analisi manuale da parte di un esperto può portare a una leggera modifica dei parametri del sisma. In questo caso può succedere che ven-ga  emessa una versione aggiornata (versione 1.1) della stima rapida dei danni. La versione aggiornata non tiene conto delle osservazioni effettive del terremoto (ad es. i danni segnalati dalle indagini sul campo).",
-    "ueberblick-mag": "MLhc e Mw sono modalità di definizione della magnitudo e forniscono informazioni sull’energia liberata durante una scossa e sulla sua forza.",
+    "text-zusammenarbeit": "Il modello di rischio sismico della Svizzera è stato sviluppato dal Servizio Sismico Svizzero (SED) con sede all’ETH di Zurigo in collaborazione con l’Ufficio federale dell’ambiente (UFAM) e l’Ufficio federale della protezione della popolazione (UFPP).",
+    "text-version": "La prima edizione della stima rapida dei danni, la versione 1.0, si basa su informazioni e dati di misura elaborati automaticamente. La successiva analisi manuale da parte di un esperto può portare a una leggera modifica dei parametri del sisma. In questo caso può succedere che venga emessa una versione aggiornata (versione 1.1) della stima rapida dei danni. ",
+    "ueberblick-mag": "MLhc e Mw sono tipi di magnitudo e forniscono informazioni sull’energia liberata durante una scossa e sulla sua forza.",
     "ueberblick-info": "Il riepilogo riassume le informazioni più importanti sul sisma. A tal fine vengono assemblati automaticamente elementi di testo standard.",
     "ueberblick-stufe": "I livelli di pericolo (SG) da 1 a 5 sono stati stabiliti congiuntamente dai Servizi specializzati pericoli naturali della Confederazione:",
     "ueberblick-stufe-1": "Livello di pericolo 1: pericolo nullo o debole",
@@ -18,6 +18,7 @@
     "ueberblick-stufe-4": "Livello di pericolo 4: pericolo forte",
     "ueberblick-stufe-5": "Livello di pericolo 5: pericolo molto forte",
     "ueberblick-stufe-weiter": "Per ulteriori informazioni sui livelli di pericolo:",
+    "ueberblick-stufe-link": "https://www.pericoli-naturali.ch/home/gestione-dei-pericoli-naturali/spiegazioni-dei-livelli-di-pericolo.html",
     "ueberblick-parameter": "Nella presente tabella sono elencati i parametri più importanti relativi al sisma. Il link riportato nell’ultima riga consente di accedere a ulteriori informazioni relative al terremoto in questione sul sito web del Servizio Sismico Svizzero (SED) con sede all’ETH di Zurigo.",
     "national-intensitaet-1": "La mappa mostra le conseguenze previste del sisma. Le conseguenze stimate vengono descritte in intensità. L’intensità descrive la forza di un terremoto in un luogo, basandosi sugli effetti e sulla percezione soggettiva delle persone.",
     "national-intensitaet-2": "Una mappa dell'intensità viene prodotta automaticamente in base a diversi fattori, tra cui i massimi di accelerazione e di velocità al suolo registrati dalle stazioni sismiche, le condizioni locali del sito e i modelli empirici di intensità strumentale.",
