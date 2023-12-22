@@ -217,7 +217,7 @@ class DataComponent {
 
         this.promises.push(
             getDangerLevel(b64encode(originId)).then((warnlevel) => {
-                warnlevel = Math.max(1, warnlevel[0]?.alarmlevel);
+                warnlevel = Math.max(1, warnlevel?.danger_level);
                 overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
                 overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
             })
