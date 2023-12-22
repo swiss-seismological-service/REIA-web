@@ -211,15 +211,15 @@ class DataComponent {
     }
 
     addDangerLevel(originId, sheetType) {
-        let overviewWarnlevels = document.getElementsByClassName('overview__stufe__number');
+        let overviewDangerLevels = document.getElementsByClassName('overview__stufe__number');
         let dangerLevelCantonCH = document.getElementById('ch-danger-level');
         if (sheetType !== 'CH') dangerLevelCantonCH.innerHTML = 'CH';
 
         this.promises.push(
-            getDangerLevel(b64encode(originId)).then((warnlevel) => {
-                warnlevel = Math.max(1, warnlevel?.danger_level);
-                overviewWarnlevels[(warnlevel || 1) - 1].classList.add('active');
-                overviewWarnlevels[(warnlevel || 1) - 1].innerHTML = warnlevel || '-';
+            getDangerLevel(b64encode(originId)).then((response) => {
+                response = Math.max(1, response?.danger_level);
+                overviewDangerLevels[(response || 1) - 1].classList.add('active');
+                overviewDangerLevels[(response || 1) - 1].innerHTML = response || '-';
             })
         );
     }
