@@ -1,6 +1,6 @@
 import i18next from 'i18next';
-import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import HttpApi from 'i18next-http-backend';
 import { importFolder } from '../utils/utilities';
 
 const translations = importFolder(require.context('../../data/lang', false, /.json$/));
@@ -47,7 +47,9 @@ export function translatePageElements() {
     translatableElements.forEach((el) => {
         const key = el.getAttribute('data-i18n-key');
         el.innerHTML = i18next.t(key);
-        if (el.tagName === 'A') el.href = i18next.t(key);
+        if (el.tagName === 'A' && i18next.exists(`${key}-href`)) {
+            el.href = i18next.t(`${key}-href`);
+        }
     });
 }
 export function bindLocaleSwitcher(switcher, update) {
