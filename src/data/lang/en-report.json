@@ -45,7 +45,9 @@
     "footer-dowhat": "What should you do after an earthquake? See",
     "footer-info": "More information is available at",
     "footer-link-home" : "http://www.seismo.ethz.ch/en/home",
+    "footer-link-home-href" : "http://www.seismo.ethz.ch/en/home",
     "footer-link-what-to-do" : "http://www.seismo.ethz.ch/en/earthquakes/what-to-do",
+    "footer-link-what-to-do-href" : "http://www.seismo.ethz.ch/en/earthquakes/what-to-do",
     "version": "Version",
     "unpublished-version": "Unpublished version"
 }
