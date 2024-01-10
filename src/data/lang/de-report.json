@@ -1,7 +1,7 @@
-{ 
+{
   "headerbar": {
-    "natural" : "Schnelle Schadensabschätzungen – Ausgabedatum:",
-    "scenario" : "Erdbebenszenario"
+    "natural": "Schnelle Schadensabschätzungen – Ausgabedatum:",
+    "scenario": "Erdbebenszenario"
   },
   "title": "Erdbeben bei ",
   "preposition_title": "{{name, preposition_title}}",
@@ -43,10 +43,8 @@
   "footer-unterstuetzung": "Mit der Unterstützung von:",
   "footer-dowhat": "Was tun nach einem Erdbeben?",
   "footer-info": "Weitere Informationen unter",
-  "footer-link-home" : "http://www.seismo.ethz.ch/de/home",
-  "footer-link-home-href" : "http://www.seismo.ethz.ch/de/home",
-  "footer-link-what-to-do" : "http://www.seismo.ethz.ch/de/earthquakes/what-to-do",
-  "footer-link-what-to-do-href" : "http://www.seismo.ethz.ch/de/earthquakes/what-to-do",
-  "version":"Version",
-  "unpublished-version": "Unveröffentlichte Version"
+  "footer-link-home": "http://www.seismo.ethz.ch/de/home",
+  "footer-link-home-href": "http://www.seismo.ethz.ch/de/home",
+  "footer-link-what-to-do": "http://www.seismo.ethz.ch/de/earthquakes/what-to-do",
+  "footer-link-what-to-do-href": "http://www.seismo.ethz.ch/de/earthquakes/what-to-do"
 }
