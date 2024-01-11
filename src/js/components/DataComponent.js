@@ -141,9 +141,11 @@ class DataComponent {
                 headerTitle.innerHTML = i18next.t('preposition_title', {
                     name: originInfo.region || '-',
                 });
-
                 if (infoType === 'scenario') {
-                    infoMeta.setAttribute('href', 'http://seismo.ethz.ch/');
+                    infoMeta.setAttribute(
+                        'href',
+                        `${process.env.SED_HOMEPAGE}/${i18next.language}`
+                    );
                 }
             })
         );
