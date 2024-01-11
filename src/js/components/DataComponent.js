@@ -7,7 +7,6 @@ import {
     getOriginInfo,
     getDangerLevel,
     getOriginDescription,
-    getAllRiskAssessments,
 } from '../utils/api';
 import {
     parseUTCDate,
@@ -154,7 +153,6 @@ class DataComponent {
         let headerDatetime = document.getElementById('header-datetime');
         let headerWappen = document.getElementById('header-wappen');
         let headerKuerzel = document.getElementById('header-kuerzel');
-        let headerReportVersion = document.getElementById('header-report-version');
         let headerBox = document.querySelectorAll('.header__box');
         let headerText = document.getElementById('header-text');
 
@@ -173,30 +171,6 @@ class DataComponent {
 
         let date = parseUTCDate(info?.creationinfo?.creationtime);
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
-
-        if (info?.originid) {
-            this.promises.push(
-                getAllRiskAssessments(100, 0, b64encode(info?.originid)).then((data) => {
-                    const publishedRiskAssessments = data.items.filter((item) => item.published);
-                    publishedRiskAssessments.sort(
-                        (a, b) =>
-                            new Date(a.creationinfo.creationtime) -
-                            new Date(b.creationinfo.creationtime)
-                    );
-
-                    const version = publishedRiskAssessments.findIndex(
-                        (item) => item._oid === info._oid
-                    );
-
-                    headerReportVersion.innerHTML =
-                        version >= 0
-                            ? `${i18next.t('version')} 1.${version}`
-                            : `${i18next.t('unpublished-version')}`;
-                })
-            );
-        } else {
-            headerReportVersion.innerHTML = `${i18next.t('version')} N/A`;
-        }
     }
 
     addOriginDescription(originId) {

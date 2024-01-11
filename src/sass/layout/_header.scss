@@ -19,7 +19,7 @@
 
         svg {
             max-height: 10rem;
-            width: 80%;
+            width: 40%;
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -27,38 +27,24 @@
         }
 
         img {
-            max-height: 85%;
-            max-width: 20%;
+            max-height: 65%;
+            max-width: 10%;
             border: white 3px solid;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 8%;
+            left: 4%;
         }
 
         div {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 30%;
+            left: 15%;
             line-height: 4.5rem;
             font-size: 4.5rem;
             font-weight: 600;
             color: white;
-        }   
-     
-    }
-
-    &__version {
-   
-        h3 {
-            position: relative;
-            top: 50%;
-            left: -20%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            font-weight: 600;
-            color : $color-blue; 
         }
     }
 
@@ -87,7 +73,7 @@
 
         &.scenario {
             background-color: $color-grey;
-        }       
+        }
     }
 
     &__title {

@@ -1,5 +1,5 @@
-{   
-    "headerbar" : {
+{
+    "headerbar": {
         "natural": "Stime rapide dei danni – data di pubblicazione:",
         "scenario": "Scenario sismico"
     },
@@ -43,10 +43,8 @@
     "footer-unterstuetzung": "Con il supporto di:",
     "footer-dowhat": "Che cosa fare dopo un terremoto? ",
     "footer-info": "Ulteriori informazioni al link",
-    "footer-link-home" : "http://www.seismo.ethz.ch/it/home",
-    "footer-link-home-href" : "http://www.seismo.ethz.ch/it/home",
-    "footer-link-what-to-do" : "http://www.seismo.ethz.ch/it/earthquakes/what-to-do",
-    "footer-link-what-to-do-href" : "http://www.seismo.ethz.ch/it/earthquakes/what-to-do",
-    "version": "Versione",
-    "unpublished-version" : "Versione non pubblicata"
+    "footer-link-home": "http://www.seismo.ethz.ch/it/home",
+    "footer-link-home-href": "http://www.seismo.ethz.ch/it/home",
+    "footer-link-what-to-do": "http://www.seismo.ethz.ch/it/earthquakes/what-to-do",
+    "footer-link-what-to-do-href": "http://www.seismo.ethz.ch/it/earthquakes/what-to-do"
 }
