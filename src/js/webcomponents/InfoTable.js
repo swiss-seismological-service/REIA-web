@@ -71,7 +71,7 @@ class InfoTable extends HTMLElement {
         this.origininfo.time = this.origininfo.time ? formatUTCTime(this.origininfo.time) : null;
 
         // prettier-ignore
-        this.origininfo.href = `http://seismo.ethz.ch/en/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(this.originid)}%27`; // eslint-disable-line
+        this.origininfo.href = `${process.env.SED_HOMEPAGE}/${i18next.language}/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(this.originid)}%27`; // eslint-disable-line
     };
 
     template = () =>
@@ -112,7 +112,9 @@ class InfoTable extends HTMLElement {
                 <tr>
                     <td>${i18next.t('report:ueberblick-weiter')}</td>
                     <td>
-                        <a id="info-meta" href="${this.origininfo?.href}" target="_blank">Link</a>
+                        <a id="info-meta" href="${this.origininfo?.href}" target="_blank"
+                            >${i18next.t('link')}</a
+                        >
                     </td>
                 </tr>
             </tbody>
