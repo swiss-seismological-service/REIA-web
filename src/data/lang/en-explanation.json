@@ -1,14 +1,13 @@
 {
     "title": "Explanations",
     "text": {
-        "main" : "The values given here regarding {{type}} are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23). The actual values may vary considerably under certain circumstances; therefore, all information is provided without warranty and is subject to change. The rapid impact assessments do not take into account actual observations from the field or damage caused by previous earthquakes.",
-        "type" : {
+        "main": "The values given here regarding {{type}} are automatically generated based on assumptions derived from the earthquake risk model of Switzerland (ERM-CH23) and do not reflect the actual situation. Consequently, the modelled values may vary considerably from the observed ones. Therefore, all information is provided without warranty and is subject to change.",
+        "type": {
             "natural": "the anticipated consequences of an earthquake",
             "scenario": "the earthquake scenario"
         }
     },
     "text-zusammenarbeit": "The earthquake risk model of Switzerland was developed by the Swiss Seismological Service (SED) at ETH Zurich in collaboration with the Federal Office for the Environment (FOEN) and the Federal Office for Civil Protection (FOCP).",
-    "text-version": "The first edition of a rapid impact assessment (RIA), version 1.0, is based on automatically processed information and measurement data. Subsequent manual analysis by a specialist may result in the earthquake parameters being modified slightly. In such cases, an updated version (version 1.1) of the first RIA is published. ",
     "ueberblick-mag": "'MLhc' and 'Mw' are types of magnitude and describe the energy released during an earthquake and its strength respectively.",
     "ueberblick-info": "The overview is a summary of key information about an earthquake and comprises standardised text elements that have been combined automatically.",
     "ueberblick-stufe": "Danger levels 1 to 5 were jointly defined by the federal agencies with responsibility for natural hazards.",
@@ -18,9 +17,9 @@
     "ueberblick-stufe-4": "Danger level 4: severe danger",
     "ueberblick-stufe-5": "Danger level 5: extreme danger",
     "ueberblick-stufe-weiter": "More information about danger levels is available here:",
-    "ueberblick-stufe-link" : "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
-    "ueberblick-stufe-link-href" : "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
-    "ueberblick-parameter": "This table summarises the most important earthquake parameters. Clicking on the link in the last row will take you to a page with more information about the earthquake in question on the website of the Swiss Seismological Service at ETH Zurich.",
+    "ueberblick-stufe-link": "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
+    "ueberblick-stufe-link-href": "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
+    "ueberblick-parameter": "This table summarises the most important earthquake parameters. Clicking on the link in the last row will take you to a page with more information about the earthquake in question on the website of the Swiss Seismological Service at ETH Zurich: www.seismo.ethz.ch/en",
     "national-intensitaet-1": "The map shows the expected effects of an earthquake described in intensities. The intensity describes the strength of an earthquake based on the extent of the impact and the subjective perception of a person.",
     "national-intensitaet-2": "An intensity map is automatically produced based on various data, including the peak ground accelerations and ground velocities recorded at the seismic stations, local site conditions, and empirical instrumental intensity models.",
     "national-tote-1": "The estimated number of fatalities is derived from the following values:",
@@ -34,7 +33,7 @@
     "national-schutz-2": "Estimated number of moderately to heavily damaged or destroyed buildings",
     "national-schutz-3": "Estimated occupancy of these buildings (regardless of the time of day or year).",
     "national-schutz-4": "Estimated proportion of buildings that are no longer habitable due to damage",
-    "national-schaden-1": "The estimated costs of building damage encompasses both structural and non-structural damage and are derived from the following values:",
+    "national-schaden-1": "The estimated costs of building damage encompass both structural and non-structural damage, and they are derived from the following values:",
     "national-schaden-2": "Estimated number of slightly, moderately and heavily damaged or destroyed buildings",
     "national-schaden-3": "The value of these buildings",
     "national-schaden-4": "Estimated proportional loss of building value due to the damage caused",
@@ -48,14 +47,14 @@
     "kantonal-verletzte-2": "Estimated number of moderately to heavily damaged or destroyed buildings",
     "kantonal-verletzte-3": "Estimated occupancy of these buildings (regardless of the time of day or year)",
     "kantonal-verletzte-4": "Estimated ratio of people injured in moderately to heavily damaged or destroyed buildings",
-    "kantonal-verletzte-5": "The estimated number of injured persons does <u>not</u> take into account the following values:",
+    "kantonal-verletzte-5": "The estimated number of injured people does <u>not</u> take into account the following values:",
     "kantonal-verletzte-6": "Injuries resulting from damage to infrastructure (e.g. bridges, roads)",
     "kantonal-verletzte-7": "Injuries resulting from the secondary effects of the earthquake (e.g. landslides, rockslides, fire)",
-    "kantonal-schaden-1": "Damage to buildings falls within one of five damage grades (SG):",
-    "kantonal-schaden-2": "Damage grade 1: Negligible to slight damage",
-    "kantonal-schaden-3": "Damage grade 2: Moderate damage",
-    "kantonal-schaden-4": "Damage grade 3: Substantial to heavy damage",
-    "kantonal-schaden-5": "Damage grade 4: Very heavy damage",
-    "kantonal-schaden-6": "Damage grade 5: Destruction",
-    "kantonal-schaden-7": "The estimated damage to buildings takes into account all buildings at damage grade 2 or above. The damage to a building depends heavily on its construction and the nature of the local subsoil."
+    "kantonal-schaden-1": "Damage to buildings falls within one of levels of damage (abbreviated to «DG»):",
+    "kantonal-schaden-2": "Damage level 1: Negligible to slight damage",
+    "kantonal-schaden-3": "Damage level 2: Moderate damage",
+    "kantonal-schaden-4": "Damage level 3: Substantial to heavy damage",
+    "kantonal-schaden-5": "Damage level 4: Very heavy damage",
+    "kantonal-schaden-6": "Damage level 5: Destruction",
+    "kantonal-schaden-7": "The estimated damage to buildings takes into account all buildings at damage level 2 or above. The damage to a building depends heavily on its construction and the nature of the local subsoil."
 }
