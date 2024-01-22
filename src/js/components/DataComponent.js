@@ -42,6 +42,7 @@ class DataComponent {
 
             this.addHeaderInfo(info, sheetType);
             this.addExplanationText(infoType);
+            this.addFooterInfo(sheetType);
 
             if (originId) {
                 this.addOriginInfo(originId, infoType);
@@ -247,6 +248,17 @@ class DataComponent {
             explanationText.innerHTML = mainText;
         } else {
             explanationText.innerHTML = '';
+        }
+    }
+
+    addFooterInfo(sheetType) {
+        let footerAnd = document.getElementById('footer-und');
+        let footerNazLink = document.getElementById('footer-naz-link');
+
+        if (sheetType !== 'CH') {
+            footerAnd.innerHTML = i18next.t('report:footer-und');
+            footerNazLink.innerHTML = 'https://lage.naz.ch';
+            footerNazLink.href = 'https://lage.naz.ch';
         }
     }
 }

@@ -19,7 +19,7 @@
     "ueberblick-stufe-weiter": "More information about danger levels is available here:",
     "ueberblick-stufe-link": "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
     "ueberblick-stufe-link-href": "https://www.natural-hazards.ch/home/dealing-with-natural-hazards/explanation-of-the-danger-levels.html",
-    "ueberblick-parameter": "This table summarises the most important earthquake parameters. Clicking on the link in the last row will take you to a page with more information about the earthquake in question on the website of the Swiss Seismological Service at ETH Zurich: www.seismo.ethz.ch/en",
+    "ueberblick-parameter": "This table summarises the most important earthquake parameters. Clicking on the link in the last row will take you to a page with more information about the earthquake in question on the website of the Swiss Seismological Service at ETH Zurich: www.seismo.ethz.ch",
     "national-intensitaet-1": "The map shows the expected effects of an earthquake described in intensities. The intensity describes the strength of an earthquake based on the extent of the impact and the subjective perception of a person.",
     "national-intensitaet-2": "An intensity map is automatically produced based on various data, including the peak ground accelerations and ground velocities recorded at the seismic stations, local site conditions, and empirical instrumental intensity models.",
     "national-tote-1": "The estimated number of fatalities is derived from the following values:",
