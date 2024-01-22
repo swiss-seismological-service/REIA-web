@@ -26,7 +26,7 @@
     "national-kanton": "in the canton of",
     "national-tote-title": "Number of fatalities",
     "national-tote-text": "The number of fatalities is very likely to fall within the coloured range.",
-    "national-schutz-title": "Number of people seeking protection",
+    "national-schutz-title": "Number of people {{sheet-type}} seeking protection",
     "national-schutz-text": "The number of people seeking protection is very likely to fall within the coloured range.",
     "national-gebaeude-title": "Costs of building damage",
     "national-gebaeude-text": "The costs of slight to destructive building damage are very likely to fall within the coloured range.",

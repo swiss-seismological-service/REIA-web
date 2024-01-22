@@ -25,7 +25,7 @@
     "national-kanton": "nel Canton",
     "national-tote-title": "Numero di vittime",
     "national-tote-text": "Molto probabilmente il numero di vittime si colloca nell’intervallo evidenziato.",
-    "national-schutz-title": "Numero di sfollati",
+    "national-schutz-title": "Numero di sfollati {{sheet-type}}",
     "national-schutz-text": "Molto probabilmente il numero di sfollati si colloca nell’intervallo evidenziato.",
     "national-gebaeude-title": "Costi dei danni agli edifici",
     "national-gebaeude-text": "Molto probabilmente i costi dei danni leggeri a distruttivi agli edifici si collocano nell’intervallo evidenziato.",

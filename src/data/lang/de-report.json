@@ -25,7 +25,7 @@
   "national-kanton": "im Kanton",
   "national-tote-title": "Anzahl Todesopfer",
   "national-tote-text": "Die Anzahl Todesopfer liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.",
-  "national-schutz-title": "Anzahl Schutzsuchende",
+  "national-schutz-title": "Anzahl Schutzsuchende {{sheet-type}}",
   "national-schutz-text": "Die Anzahl Schutzsuchende liegt mit grosser Wahrscheinlichkeit im eingefärbten Bereich.",
   "national-gebaeude-title": "Kosten für Gebäudeschäden",
   "national-gebaeude-text": "Die Kosten für leichte bis zerstörerische Gebäudeschäden liegen mit grosser Wahrscheinlichkeit im eingefärbten Bereich.",

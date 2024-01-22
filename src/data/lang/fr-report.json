@@ -25,7 +25,7 @@
   "national-kanton": "dans le canton",
   "national-tote-title": "Nombre de victimes",
   "national-tote-text": "Le nombre de décès se situe très probablement dans la zone colorée.",
-  "national-schutz-title": "Nombre de personnes recherchant un abri",
+  "national-schutz-title": "Nombre de personnes {{sheet-type}} recherchant un abri",
   "national-schutz-text": "Le nombre de personnes en quête d’un abri se situe très probablement dans la zone colorée.",
   "national-gebaeude-title": "Coûts des dégâts aux bâtiments",
   "national-gebaeude-text": "Les coûts des dégâts légers à destructeurs aux bâtiments se situent très probablement dans la zone colorée.",
