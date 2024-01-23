@@ -1,13 +1,13 @@
 {
     "title": "Erläuterungen",
     "text": {
-            "main" : "Bei den hier angegebenen Werten zu {{type}} handelt es sich um automatisch erzeugte Schätzungen. Sie beruhen auf Annahmen basierend auf dem Erdbebenrisikomodell der Schweiz (ERM-CH23). Die tatsächlichen Werte können unter Umständen stark davon abweichen. Daher sind alle Angaben ohne Gewähr und vorbehaltlich Änderungen. Die schnellen Schadensabschätzungen berücksichtigen keine tatsächlichen Beobachtungen aus dem Feld oder Schäden, die durch vorangehende Beben verursacht wurden.",
-            "type": {
-                "natural" : "den erwarteten Folgen des Bebens",
-                "scenario" : "diesem Erdbebenszenario"
-            }},
+        "main": "Bei den hier angegebenen Werten zu {{type}} handelt es sich um automatisch erzeugte Schätzungen. Sie beruhen auf Annahmen basierend auf dem Erdbebenrisikomodell der Schweiz (ERM-CH23) und bilden nicht die tatsächliche Lage ab. Die modellierten Werte können daher unter Umständen stark von den beobachteten abweichen. Alle Angaben sind somit ohne Gewähr und vorbehaltlich Änderungen.",
+        "type": {
+            "natural": "den erwarteten Folgen des Bebens",
+            "scenario": "diesem Erdbebenszenario"
+        }
+    },
     "text-zusammenarbeit": "Das Erdbebenrisikomodell der Schweiz wurde vom Schweizerischen Erdbebendienst (SED) an der ETH Zürich in Zusammenarbeit mit dem Bundesamt für Umwelt (BAFU) und dem Bundesamt für Bevölkerungsschutz (BABS) entwickelt.",
-    "text-version": "Die erste Ausgabe der schnellen Schadensabschätzung ist die Version 1.0. Sie basiert auf automatisch verarbeiteten Informationen und Messdaten. Eine anschliessende manuelle Auswertung durch eine Fachperson kann dazu führen, dass die Bebenparameter leicht angepasst werden. In solchen Fällen wird eine aktualisierte Version (Version 1.1) der ersten schnellen Schadensabschätzung veröffentlicht.",
     "ueberblick-mag": "MLhc und Mw sind Magnitudeneinheiten und geben Auskunft über die während eines Bebens freigesetzte Energie beziehungsweise dessen Stärke.",
     "ueberblick-info": "Der Überblick fasst die wichtigsten Informationen zum Beben zusammen. Dazu werden standardisierte Textelemente automatisch zusammengefügt.",
     "ueberblick-stufe": "Die Gefahrenstufen 1 bis 5 wurden gemeinsam von den Naturgefahrenfachstellen des Bundes festgelegt.",
@@ -17,9 +17,9 @@
     "ueberblick-stufe-4": "Gefahrenstufe 4: grosse Gefahr",
     "ueberblick-stufe-5": "Gefahrenstufe 5: sehr grosse Gefahr",
     "ueberblick-stufe-weiter": "Weitere Informationen zu den Gefahrenstufen:",
-    "ueberblick-stufe-link" : "https://www.naturgefahren.ch/home/umgang-mit-naturgefahren/erlaeuterung-der-gefahren.html",
-    "ueberblick-stufe-link-href" : "https://www.naturgefahren.ch/home/umgang-mit-naturgefahren/erlaeuterung-der-gefahren.html",
-    "ueberblick-parameter": "In dieser Tabelle sind die wichtigsten Erdbebenparameter aufgelistet. Die Verlinkung in der letzten Zeile führt zu weiteren Informationen zu diesem Beben auf der Webseite des Schweizerischen Erdbebendienstes an der ETH Zürich.",
+    "ueberblick-stufe-link": "https://www.naturgefahren.ch/home/umgang-mit-naturgefahren/erlaeuterung-der-gefahren.html",
+    "ueberblick-stufe-link-href": "https://www.naturgefahren.ch/home/umgang-mit-naturgefahren/erlaeuterung-der-gefahren.html",
+    "ueberblick-parameter": "In dieser Tabelle sind die wichtigsten Erdbebenparameter aufgelistet. Die Verlinkung in der letzten Zeile führt zu weiteren Informationen zu diesem Beben auf der Webseite des Schweizerischen Erdbebendienstes an der ETH Zürich: www.seismo.ethz.ch",
     "national-intensitaet-1": "Die Karte zeigt die zu erwartenden Auswirkungen des Bebens. Die geschätzten Auswirkungen werden in Intensitäten beschrieben. Die Intensität beschreibt die Stärke eines Erdbebens basierend auf dem Ausmass der Auswirkungen und der subjektiven Wahrnehmung von Personen.",
     "national-intensitaet-2": "Die Intensitätskarte wird auf Grundlage verschiedener Faktoren erstellt, wie den an den seismischen Stationen aufgezeichneten maximalen Bodenbeschleunigungen und -geschwindigkeiten, den lokalen Standortbedingungen und empirischen instrumentellen Intensitätsmodellen.",
     "national-tote-1": "Die geschätzte Anzahl Todesopfer leitet sich aus folgenden Werten ab:",
@@ -50,7 +50,7 @@
     "kantonal-verletzte-5": "<u>Nicht</u> berücksichtigt in der geschätzten Anzahl Verletzter sind die folgenden Werte:",
     "kantonal-verletzte-6": "Verletzte durch Schäden an der Infrastruktur (z. B. Brücken, Strassen)",
     "kantonal-verletzte-7": "Verletzte durch Sekundäreffekte des Bebens (z. B. Erdrutsche, Felsstürze, Feuer)",
-    "kantonal-schaden-1": "Es werden fünf verschiedene Schadensgrade (SG) an Gebäuden unterschieden:",
+    "kantonal-schaden-1": "Es werden fünf verschiedene Schadensgrade (abgekürzt «DG») an Gebäuden unterschieden:",
     "kantonal-schaden-2": "Schadensgrad 1: geringfügige bis leichte Schäden",
     "kantonal-schaden-3": "Schadensgrad 2: mässige Schäden",
     "kantonal-schaden-4": "Schadensgrad 3: kräftige bis starke Schäden",

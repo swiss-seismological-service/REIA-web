@@ -42,6 +42,7 @@ class DataComponent {
 
             this.addHeaderInfo(info, sheetType);
             this.addExplanationText(infoType);
+            this.addFooterInfo(sheetType);
 
             if (originId) {
                 this.addOriginInfo(originId, infoType);
@@ -87,6 +88,7 @@ class DataComponent {
         let structural = document.getElementById('loss-buildingcosts');
 
         let overviewPlaces = document.getElementsByClassName('overview-place');
+        let displacedTitle = document.getElementById('loss-displaced-title');
         let tag = sheetType === 'CH' ? null : sheetType;
         let sum = sheetType === 'CH';
 
@@ -99,6 +101,12 @@ class DataComponent {
         displaced.setAttribute('language', i18next.language);
         displaced.setAttribute('losscategory', 'displaced');
         let displacedPromise = getLoss(lossId, 'displaced', 'Canton', tag, sum);
+        displacedTitle.innerHTML = i18next.t('report:national-schutz-title', {
+            'sheet-type':
+                sheetType === 'CH'
+                    ? i18next.t('national-schweiz')
+                    : `${i18next.t('national-kanton')} ${sheetType}`,
+        });
         displaced.setData(displacedPromise);
         this.promises.push(displacedPromise);
 
@@ -247,6 +255,17 @@ class DataComponent {
             explanationText.innerHTML = mainText;
         } else {
             explanationText.innerHTML = '';
+        }
+    }
+
+    addFooterInfo(sheetType) {
+        let cantonalFurtherInfo = document.getElementsByClassName(
+            'footer__info__further__cantonal'
+        );
+        if (sheetType !== 'CH') {
+            Array.from(cantonalFurtherInfo).forEach((el) => {
+                el.style.display = 'inline-block';
+            });
         }
     }
 }
