@@ -50,11 +50,11 @@
     "kantonal-verletzte-5": "The estimated number of injured people does <u>not</u> take into account the following values:",
     "kantonal-verletzte-6": "Injuries resulting from damage to infrastructure (e.g. bridges, roads)",
     "kantonal-verletzte-7": "Injuries resulting from the secondary effects of the earthquake (e.g. landslides, rockslides, fire)",
-    "kantonal-schaden-1": "Damage to buildings falls within one of levels of damage (abbreviated to «DG»):",
-    "kantonal-schaden-2": "Damage level 1: Negligible to slight damage",
-    "kantonal-schaden-3": "Damage level 2: Moderate damage",
-    "kantonal-schaden-4": "Damage level 3: Substantial to heavy damage",
-    "kantonal-schaden-5": "Damage level 4: Very heavy damage",
-    "kantonal-schaden-6": "Damage level 5: Destruction",
-    "kantonal-schaden-7": "The estimated damage to buildings takes into account all buildings at damage level 2 or above. The damage to a building depends heavily on its construction and the nature of the local subsoil."
+    "kantonal-schaden-1": "Damage to buildings falls within one of grades of damage (abbreviated to «DG»):",
+    "kantonal-schaden-2": "Damage grade 1: Negligible to slight damage",
+    "kantonal-schaden-3": "Damage grade 2: Moderate damage",
+    "kantonal-schaden-4": "Damage grade 3: Substantial to heavy damage",
+    "kantonal-schaden-5": "Damage grade 4: Very heavy damage",
+    "kantonal-schaden-6": "Damage grade 5: Destruction",
+    "kantonal-schaden-7": "The estimated damage to buildings takes into account all buildings at damage grade 2 or above. The damage to a building depends heavily on its construction and the nature of the local subsoil."
 }
