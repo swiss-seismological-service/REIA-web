@@ -259,13 +259,13 @@ class DataComponent {
     }
 
     addFooterInfo(sheetType) {
-        let footerAnd = document.getElementById('footer-und');
-        let footerNazLink = document.getElementById('footer-naz-link');
-
+        let cantonalFurtherInfo = document.getElementsByClassName(
+            'footer__info__further__cantonal'
+        );
         if (sheetType !== 'CH') {
-            footerAnd.innerHTML = i18next.t('report:footer-und');
-            footerNazLink.innerHTML = 'https://lage.naz.ch';
-            footerNazLink.href = 'https://lage.naz.ch';
+            Array.from(cantonalFurtherInfo).forEach((el) => {
+                el.style.display = 'inline-block';
+            });
         }
     }
 }
