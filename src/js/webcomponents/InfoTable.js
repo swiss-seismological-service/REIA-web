@@ -4,9 +4,9 @@ import i18next from 'i18next';
 
 import {
     round,
-    parseUTCDate,
+    parseDate,
     formatDate,
-    formatUTCTime,
+    formatTime,
     b64encode,
     thousandsFormatter,
 } from '../utils/utilities';
@@ -66,9 +66,11 @@ class InfoTable extends HTMLElement {
             this.origininfo.latitude = round(this.origininfo.latitude, 0);
         } catch (e) {} // eslint-disable-line
 
-        this.origininfo.time = this.origininfo?.time ? parseUTCDate(this.origininfo.time) : null;
+        this.origininfo.time = this.origininfo?.time
+            ? parseDate(this.origininfo.time, 'CET')
+            : null;
         this.origininfo.date = this.origininfo.time ? formatDate(this.origininfo.time) : null;
-        this.origininfo.time = this.origininfo.time ? formatUTCTime(this.origininfo.time) : null;
+        this.origininfo.time = this.origininfo.time ? formatTime(this.origininfo.time) : null;
 
         // prettier-ignore
         this.origininfo.href = `${process.env.SED_HOMEPAGE}/${i18next.language}/earthquakes/switzerland/eventpage.html?originId=%27${b64encode(this.originid)}%27`; // eslint-disable-line
