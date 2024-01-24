@@ -65,8 +65,10 @@ export function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
 }
 
-export function parseUTCDate(dateString) {
-    // Parse a date string. If there is no timezone information,
+export function parseDate(dateString, targetTimeZone = 'CET') {
+    // Parse a date string and set timezone
+    // depending on targetTimeZone.
+    // If there is no timezone information in the dateString,
     // assume UTC
 
     if (typeof dateString !== 'string') return null;
@@ -76,25 +78,25 @@ export function parseUTCDate(dateString) {
     if (Number.isNaN(ts)) {
         ts = Date.parse(dateString);
     }
+
     let date = new Date(ts);
-    return date;
+    let supportedTimeZone = Intl.supportedValuesOf('timeZone').includes(targetTimeZone);
+
+    let timeZoneDate = supportedTimeZone
+        ? new Date(date.toLocaleString('en-US', { targetTimeZone }))
+        : new Date(date.toLocaleString('en-US', { timeZone: 'CET' }));
+    return timeZoneDate;
 }
 
 export function formatDate(date) {
-    // Format a date as DD.MM.YYYY
-
     return `${String(date.getDate()).padStart(2, 0)}.${String(date.getMonth() + 1).padStart(
         2,
         0
     )}.${date.getFullYear()}`;
 }
 
-export function formatUTCTime(date) {
-    // Format a date time as HH:MM
-    return `${String(date.getUTCHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(
-        2,
-        0
-    )}`;
+export function formatTime(date) {
+    return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
 }
 
 export async function injectSVG(path, element) {

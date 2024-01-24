@@ -9,9 +9,9 @@ import {
     getOriginDescription,
 } from '../utils/api';
 import {
-    parseUTCDate,
+    parseDate,
     formatDate,
-    formatUTCTime,
+    formatTime,
     b64encode,
     round,
     loadImage,
@@ -178,9 +178,8 @@ class DataComponent {
         }
 
         headerBox.forEach((box) => box.classList.add('natural'));
-
-        let date = parseUTCDate(info?.creationinfo?.creationtime);
-        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatUTCTime(date)} UTC` : '';
+        let date = parseDate(info?.creationinfo?.creationtime, 'CET');
+        headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatTime(date)} CET` : '';
     }
 
     addOriginDescription(originId) {
