@@ -89,6 +89,8 @@ export function parseUTCDate(dateString, targetTimeZone = 'Europe/Zurich') {
 }
 
 export function formatDate(date) {
+    // Format a date as DD.MM.YYYY
+
     return `${String(date.getDate()).padStart(2, 0)}.${String(date.getMonth() + 1).padStart(
         2,
         0
@@ -96,6 +98,7 @@ export function formatDate(date) {
 }
 
 export function formatTime(date) {
+    // Format a date time as HH:MM
     return `${String(date.getHours()).padStart(2, 0)}:${String(date.getMinutes()).padStart(2, 0)}`;
 }
 
