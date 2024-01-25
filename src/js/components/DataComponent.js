@@ -178,7 +178,7 @@ class DataComponent {
         }
 
         headerBox.forEach((box) => box.classList.add('natural'));
-        let date = parseDate(info?.creationinfo?.creationtime, 'CET');
+        let date = parseDate(info?.creationinfo?.creationtime, 'Europe/Zurich');
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatTime(date)} CET` : '';
     }
 

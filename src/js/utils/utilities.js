@@ -65,7 +65,7 @@ export function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
 }
 
-export function parseDate(dateString, targetTimeZone = 'CET') {
+export function parseDate(dateString, targetTimeZone = 'Europe/Zurich') {
     // Parse a date string and set timezone
     // depending on targetTimeZone.
     // If there is no timezone information in the dateString,
@@ -83,8 +83,8 @@ export function parseDate(dateString, targetTimeZone = 'CET') {
     let supportedTimeZone = Intl.supportedValuesOf('timeZone').includes(targetTimeZone);
 
     let timeZoneDate = supportedTimeZone
-        ? new Date(date.toLocaleString('en-US', { targetTimeZone }))
-        : new Date(date.toLocaleString('en-US', { timeZone: 'CET' }));
+        ? new Date(date.toLocaleString('en-US', { timeZone: targetTimeZone }))
+        : new Date(date.toLocaleString('en-US', { timeZone: 'Europe/Zurich' }));
     return timeZoneDate;
 }
 
