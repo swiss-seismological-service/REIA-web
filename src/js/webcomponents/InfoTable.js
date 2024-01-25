@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import {
     round,
-    parseDate,
+    parseUTCDate,
     formatDate,
     formatTime,
     b64encode,
@@ -67,7 +67,7 @@ class InfoTable extends HTMLElement {
         } catch (e) {} // eslint-disable-line
 
         this.origininfo.time = this.origininfo?.time
-            ? parseDate(this.origininfo.time, 'Europe/Zurich')
+            ? parseUTCDate(this.origininfo.time, 'Europe/Zurich')
             : null;
         this.origininfo.date = this.origininfo.time ? formatDate(this.origininfo.time) : null;
         this.origininfo.time = this.origininfo.time ? formatTime(this.origininfo.time) : null;
