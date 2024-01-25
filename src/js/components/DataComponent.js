@@ -9,7 +9,7 @@ import {
     getOriginDescription,
 } from '../utils/api';
 import {
-    parseDate,
+    parseUTCDate,
     formatDate,
     formatTime,
     b64encode,
@@ -178,7 +178,7 @@ class DataComponent {
         }
 
         headerBox.forEach((box) => box.classList.add('natural'));
-        let date = parseDate(info?.creationinfo?.creationtime, 'Europe/Zurich');
+        let date = parseUTCDate(info?.creationinfo?.creationtime, 'Europe/Zurich');
         headerDatetime.innerHTML = date ? `${formatDate(date)}, ${formatTime(date)} CET` : '';
     }
 

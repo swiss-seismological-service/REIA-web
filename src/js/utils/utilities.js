@@ -65,7 +65,7 @@ export function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
 }
 
-export function parseDate(dateString, targetTimeZone = 'Europe/Zurich') {
+export function parseUTCDate(dateString, targetTimeZone = 'Europe/Zurich') {
     // Parse a date string and set timezone
     // depending on targetTimeZone.
     // If there is no timezone information in the dateString,
