@@ -67,7 +67,7 @@ class InfoTable extends HTMLElement {
         } catch (e) {} // eslint-disable-line
 
         this.origininfo.time = this.origininfo?.time
-            ? parseDate(this.origininfo.time, 'CET')
+            ? parseDate(this.origininfo.time, 'Europe/Zurich')
             : null;
         this.origininfo.date = this.origininfo.time ? formatDate(this.origininfo.time) : null;
         this.origininfo.time = this.origininfo.time ? formatTime(this.origininfo.time) : null;
