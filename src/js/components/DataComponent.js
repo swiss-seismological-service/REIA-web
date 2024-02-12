@@ -136,15 +136,17 @@ class DataComponent {
                 infoTable.setAttribute('originInfo', JSON.stringify(originInfo));
 
                 overviewMagnitude.innerHTML = `${round(originInfo.magnitude, 1) || '-'} [${
-                    originInfo.magnitudetype || ''
+                    originInfo.magnitudetype || 'ml'
                 }]`;
 
-                let canton = originInfo.region.split(' ').pop();
-                // remove last occurrence of "canton" abbreviation and add it in brackets
-                originInfo.region = `${originInfo.region.replace(
-                    new RegExp(`${canton}$`),
-                    ''
-                )}(${canton})`;
+                if (originInfo.region) {
+                    let canton = originInfo.region?.split(' ').pop();
+                    // remove last occurrence of "canton" abbreviation and add it in brackets
+                    originInfo.region = `${originInfo.region.replace(
+                        new RegExp(`${canton}$`),
+                        ''
+                    )}(${canton})`;
+                }
 
                 headerTitle.innerHTML = i18next.t('preposition_title', {
                     name: originInfo.region || '-',
