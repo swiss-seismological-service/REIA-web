@@ -55,6 +55,19 @@ export function getAllRiskAssessments(limit = 20, offset = 0, originid = null, a
     return getData('/v1/riskassessment', apiAddress, queryParams);
 }
 
+export function getAllRiskAssessmentsForOrigin(
+    originid,
+    limit = 200,
+    offset = 0,
+    apiAddress = null
+) {
+    const queryParams = {
+        limit,
+        offset,
+    };
+    return getData(`/v1/origin/${originid}/riskassessment`, apiAddress, queryParams);
+}
+
 export function getAllRiskAssessmentsWithFlag(limit = 20, offset = 0, apiAddress = null) {
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {

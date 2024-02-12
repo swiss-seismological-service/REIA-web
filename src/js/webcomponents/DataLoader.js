@@ -1,8 +1,8 @@
 import {
-    getAllRiskAssessments,
     getLoss,
     getCantonalInjuries,
     getCantonalStructuralDamage,
+    getAllRiskAssessmentsForOrigin,
 } from '../utils/api';
 
 class DataLoader extends HTMLElement {
@@ -97,12 +97,13 @@ class DataLoader extends HTMLElement {
 
     async fetchRiskAssessmentData() {
         try {
-            const riskAssessments = await getAllRiskAssessments(
+            const riskAssessments = await getAllRiskAssessmentsForOrigin(
+                this.originid,
                 100,
                 0,
-                this.originid,
                 this.baseurl
             );
+
             const preferred = riskAssessments.items.filter(
                 (item) => item.preferred && item.published
             );
