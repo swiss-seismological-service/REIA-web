@@ -16,6 +16,10 @@ function getData(url, apiAddress, queryParams = null) {
     })
         .then((response) => {
             if (!response.ok) {
+                if (response.status === 404) {
+                    // don't raise an explicit error for 404s
+                    return {};
+                }
                 throw new Error('Network response was not OK');
             }
             return response.json();
@@ -79,8 +83,19 @@ export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAd
         ...(tag && { filter_tag_like: tag }),
         ...(sum && { sum: true }),
     };
-    let base = `/v1/damage/${oid}/${type}/${aggregation}/report`;
-    return getData(base, apiAddress, queryParams);
+    let base = `/v1/damage/${oid}/${type}/${aggregation}`;
+
+    let returnData = getData(base, apiAddress, queryParams).then((data) => {
+        data.forEach((elem) => {
+            elem.damage_mean = elem.dg2_mean + elem.dg3_mean + elem.dg4_mean + elem.dg5_mean;
+            elem.damage_pc10 = elem.dg2_pc10 + elem.dg3_pc10 + elem.dg4_pc10 + elem.dg5_pc10;
+            elem.damage_pc90 = elem.dg2_pc90 + elem.dg3_pc90 + elem.dg4_pc90 + elem.dg5_pc90;
+            elem.damage_percentage = (elem.damage_mean / elem.buildings) * 100;
+        });
+        return data;
+    });
+
+    return returnData;
 }
 
 export function getCantonalInjuries(oid, apiAddress = null) {
