@@ -31,13 +31,6 @@ export async function initI18next() {
             }
             return `de ${value}`;
         }
-        if (lng === 'it') {
-            let vocals = ['a', 'e', 'i', 'y', 'o', 'u'];
-            if (vocals.includes(value[0].toLowerCase())) {
-                return `ad ${value}`;
-            }
-            return `a ${value}`;
-        }
         return value;
     });
 }
