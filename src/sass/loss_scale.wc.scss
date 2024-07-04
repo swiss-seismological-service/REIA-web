@@ -77,14 +77,18 @@
         line-height: 1.2em;
         text-align: center;
 
-        &:first-of-type,
         &:last-of-type {
             width: 10%;
         }
 
+        &:first-of-type,
+        &:nth-child(2) {
+            width: 15%;
+        }
+
         &:first-of-type {
             position: relative;
-            left: -4%;
+            text-align: left;
         }
 
         &::after {
