@@ -66,10 +66,9 @@ class LossGraph extends HTMLElement {
             x: (d) => [d.loss_pc10, d.loss_mean, d.loss_pc90],
             y: (d) => d.tag,
             symlogConstant: 0.1,
-            xTickFormat: (d) => d === 0.5 ? '0'
-             : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+            xTickFormat: (d) => formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
             xDomain: [0.5, 50000],
-            xTickValues: [0.5, 5, 50, 500, 5000],
+            xTickValues: [0, 5, 50, 500, 5000],
             width: 600,
             height: 375,
             displayValue: false,
