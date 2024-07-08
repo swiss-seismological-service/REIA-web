@@ -59,14 +59,15 @@ class LossScale extends HTMLElement {
         });
     };
 
-    // get the text for the first tick in the correct language and depending on loss category
-    getZeroTick = (losscategory, lng) => {
+    // get the text for the first tick in the correct language
+    getZeroTick = (lng) => {
         const tick = {
-            fatalities: "0",
-            displaced: "≤ 5",
-            structural: `≤ ${numberToString(1000000, lng)} CHF`
+            de: 'keine',
+            fr: 'aucune',
+            it: 'nessuno',
+            en: 'none',
         };
-        return tick[losscategory];
+        return tick[lng];
     };
 
     // set the thresholds for the color scale and labels
@@ -164,9 +165,7 @@ class LossScale extends HTMLElement {
                               </div>
                           </div>
                           <div class="loss__icons-description">
-                              <div class="loss__legend">
-                                    ${this.getZeroTick(this.losscategory,this.language)}
-                              </div>
+                              <div class="loss__legend">${this.getZeroTick(this.language)}</div>
                               ${this.thresholds
                                   .slice(1, 5)
                                   .map(

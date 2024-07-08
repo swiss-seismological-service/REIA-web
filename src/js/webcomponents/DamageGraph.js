@@ -55,6 +55,16 @@ class DamageGraph extends HTMLElement {
         this.node = this._root.querySelector('div:first-of-type').firstChild;
     }
 
+    getZeroTick = (lng) => {
+        let tick = {
+            de: 'keine',
+            fr: 'aucune',
+            it: 'nessuno',
+            en: 'none',
+        };
+        return tick[lng];
+    };
+
     updateGraph = () => {
         const graphNode = CantonalGraph(this.data, 2, {
             marginLeft: 30,
@@ -65,7 +75,7 @@ class DamageGraph extends HTMLElement {
             symlogConstant: 5.5,
             xTickFormat: (d) =>
                 d === 1
-                    ? "≤ 5"
+                    ? this.getZeroTick(this.language)
                     : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
             xDomain: [1, 500000],
             xTickValues: [1, 50, 500, 5000, 50000],
