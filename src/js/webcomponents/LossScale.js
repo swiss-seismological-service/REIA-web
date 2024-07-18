@@ -60,10 +60,10 @@ class LossScale extends HTMLElement {
     };
 
     // get the text for the first tick in the correct language and depending on loss category
-    getZeroTick = (losscategory, lng) => {
+    getZeroTick = (losscategory, lng, value) => {
         const tick = {
-            fatalities: "0",
-            displaced: "≤ 5",
+            fatalities: value <= 1 ? Math.round(value) : '0',
+            displaced: `≤ 5`,
             structural: `≤ ${numberToString(1000000, lng)} CHF`
         };
         return tick[losscategory];
@@ -72,9 +72,9 @@ class LossScale extends HTMLElement {
     // set the thresholds for the color scale and labels
     setThresholds = () => {
         const thresh = {
-            fatalities: [0, 5, 50, 500, 5000, 50000],
-            displaced: [0, 50, 500, 5000, 50000, 500000],
-            structural: [0, 10000000, 100000000, 1000000000, 10000000000, 100000000000],
+            fatalities: [0.5, 5, 50, 500, 5000, 50000],
+            displaced: [5, 50, 500, 5000, 50000, 500000],
+            structural: [1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000],
         };
         this.thresholds = thresh[this.losscategory];
     };
@@ -94,12 +94,13 @@ class LossScale extends HTMLElement {
     // check whether a loss icon should be active
     setHighlightedIcon = (lossID) => {
         if (!this.thresholds || !this.losscategory) return '';
+        const lossMean = Math.max(this.data.loss_mean, this.thresholds[0]);  
         const isTrue =
-            (this.thresholds[lossID - 1] <= this.data.loss_mean &&
-                (this.thresholds[lossID] || this.data.loss_mean + 1) > this.data.loss_mean) ||
+            (this.thresholds[lossID - 1] <= lossMean &&
+                (this.thresholds[lossID] || lossMean + 1) > lossMean) ||
             (lossID === this.thresholds.length - 1 &&
-                this.data.loss_mean >= this.thresholds[this.thresholds.length - 1]);
-
+                lossMean >= this.thresholds[this.thresholds.length - 1]);
+    
         return isTrue ? `active-${this.losscategory}` : '';
     };
 
@@ -165,10 +166,12 @@ class LossScale extends HTMLElement {
                           </div>
                           <div class="loss__icons-description">
                               <div class="loss__legend">
-                                    ${this.getZeroTick(this.losscategory,this.language)}
+                            ${this.getZeroTick(this.losscategory,
+                                    this.language,
+                                    this.data.loss_mean)}
                               </div>
                               ${this.thresholds
-                                  .slice(1, 5)
+                                  .slice(1,5)
                                   .map(
                                       (step) =>
                                           html`<div class="loss__legend">
