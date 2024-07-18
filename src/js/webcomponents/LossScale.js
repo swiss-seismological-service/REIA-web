@@ -171,7 +171,7 @@ class LossScale extends HTMLElement {
                                     this.data.loss_mean)}
                               </div>
                               ${this.thresholds
-                                  .slice(1,5)
+                                  .slice(1, 5)
                                   .map(
                                       (step) =>
                                           html`<div class="loss__legend">
