@@ -60,9 +60,7 @@ class DamageGraph extends HTMLElement {
             marginLeft: 30,
             marginRight: 20,
             gutter: 40,
-            x: (d) => d.damage_pc90 >= 5 
-                        ? [d.damage_pc10, d.damage_mean, d.damage_pc90, d.damage_percentage]
-                        : [0, 0, 0, 0],
+            x: (d) => [d.damage_pc10, d.damage_mean, d.damage_pc90, d.damage_percentage],
             y: (d) => d.tag[0],
             symlogConstant: 0.1,
             xTickFormat: (d) =>
