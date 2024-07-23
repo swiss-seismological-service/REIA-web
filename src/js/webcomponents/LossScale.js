@@ -171,8 +171,7 @@ class LossScale extends HTMLElement {
                           <div class="loss__icons-description">
                               <div class="loss__legend">
                             ${this.getZeroTick(this.losscategory,
-                                    this.language,
-                                    this.data.loss_mean)}
+                                    this.language)}
                               </div>
                               ${this.thresholds
                                   .slice(1, 5)
