@@ -55,11 +55,6 @@ export function ColorScaleMarker(start, center, end, canvasElement) {
 
 export function getPercentage(value, thresholds) {
     
-    if (value <= thresholds[0]) {
-        return 0;
-    }
-
-
     let index = thresholds.findIndex((el) => el > value);
     if (index < 0) return 1;
     let [smaller, bigger] = thresholds.slice(index - 1, index + 1);

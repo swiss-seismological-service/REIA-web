@@ -60,9 +60,9 @@ class LossScale extends HTMLElement {
     };
 
     // get the text for the first tick in the correct language and depending on loss category
-    getZeroTick = (losscategory, lng, value) => {
+    getZeroTick = (losscategory, lng) => {
         const tick = {
-            fatalities: value <= 1 ? Math.round(value) : '0',
+            fatalities: '0',
             displaced: `≤ 5`,
             structural: `≤ ${numberToString(1000000, lng)} CHF`
         };
@@ -114,7 +114,11 @@ class LossScale extends HTMLElement {
             this.data.loss_mean,
             this.data.loss_pc10,
             this.data.loss_pc90,
-        ].map((v) => getPercentage(v, this.thresholds));
+        ].map((v) => {
+            if (v < Math.round(this.thresholds[0])) return 0; 
+            return getPercentage(v, this.thresholds)
+        }
+        );
 
         let rootStyleSelector = document.querySelector(':root').style;
 
