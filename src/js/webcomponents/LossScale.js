@@ -94,7 +94,8 @@ class LossScale extends HTMLElement {
     // check whether a loss icon should be active
     setHighlightedIcon = (lossID) => {
         if (!this.thresholds || !this.losscategory) return '';
-        const lossMean = Math.max(this.data.loss_mean, this.thresholds[0]);  
+        const lossMean = Math.max(this.data.loss_mean, this.thresholds[0]);
+
         const isTrue =
             (this.thresholds[lossID - 1] <= lossMean &&
                 (this.thresholds[lossID] || lossMean + 1) > lossMean) ||
@@ -110,15 +111,23 @@ class LossScale extends HTMLElement {
         this.colorscale = this._root.getElementById('colorscale');
         this.colorScaleContext = ColorScale(this.colorscale);
 
+        const minValue = Math.round(this.thresholds[0]);
+                               
+        const lossMean = this.data.loss_mean < minValue ?
+                         this.thresholds[0] : this.data.loss_mean;
+
+        const lossPc10 = this.data.loss_pc10 < minValue && 
+                         this.data.loss_mean < minValue ? 
+                         this.thresholds[0] : this.data.loss_pc10;
+
+        const lossPc90 = this.data.loss_pc90 < minValue ?
+                         this.thresholds[0] : this.data.loss_pc90;
+
         let [meanPct, p10Pct, p90Pct] = [
-            this.data.loss_mean,
-            this.data.loss_pc10,
-            this.data.loss_pc90,
-        ].map((v) => {
-            if (v < Math.round(this.thresholds[0])) return 0; 
-            return getPercentage(v, this.thresholds)
-        }
-        );
+            lossMean,
+            lossPc10,
+            lossPc90,
+        ].map((v) => getPercentage(v, this.thresholds));
 
         let rootStyleSelector = document.querySelector(':root').style;
 

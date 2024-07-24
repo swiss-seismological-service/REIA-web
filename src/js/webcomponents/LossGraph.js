@@ -63,7 +63,7 @@ class LossGraph extends HTMLElement {
             marginRight: 20,
             widthDamage: 0,
             gutter: 60,
-            x: (d) => [d.loss_pc10 < 1 ? 0 : d.loss_pc10,
+            x: (d) => [d.loss_pc10 < 1 && d.loss_mean < 1 ? 0 : d.loss_pc10,
                        d.loss_mean < 1 ? 0 : d.loss_mean,
                        d.loss_pc90 < 1 ? 0 : d.loss_pc90],
             y: (d) => d.tag,
