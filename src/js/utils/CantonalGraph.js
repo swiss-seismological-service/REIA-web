@@ -131,14 +131,15 @@ export default function CantonalGraph(
     if (displayValue) {
         // PERCENT BACKDROP
         svg.append('rect')
-            .attr('x', xScale(0) + dataWidth + widthDamage * paddingLeftDamage)
+            .attr('x', xScale(xDomain[0]) + dataWidth + widthDamage * paddingLeftDamage)
             .attr('y', yScale(Y[0]) - innerPadding / 2)
             .attr('width', widthDamage)
             .attr('height', dataHeight - outerPadding / 2)
             .style('fill', '#cbcbcb');
 
         svg.append('rect')
-            .attr('x', xScale(0) + rightColumnStart + dataWidth + widthDamage * paddingLeftDamage)
+            .attr('x', xScale(xDomain[0]) + 
+                        rightColumnStart + dataWidth + widthDamage * paddingLeftDamage)
             .attr('y', yScale(Y[0]) - innerPadding / 2)
             .attr('width', widthDamage)
             .attr('height', dataHeight - yScale.step() - outerPadding / 2)
@@ -168,7 +169,7 @@ export default function CantonalGraph(
                 .attr(
                     'x',
                     (n, i) =>
-                        xScale(0) +
+                        xScale(xDomain[0]) +
                         i * rightColumnStart +
                         dataWidth +
                         widthDamage * paddingLeftDamage +
@@ -190,7 +191,7 @@ export default function CantonalGraph(
             .attr(
                 'x',
                 (i) =>
-                    xScale(0) +
+                    xScale(xDomain[0]) +
                     dataWidth +
                     widthDamage * paddingLeftDamage +
                     widthDamage / 2 +
@@ -219,7 +220,9 @@ export default function CantonalGraph(
                 .append('stop')
                 .attr(
                     'offset',
-                    (i) => (xScale(X[i][0]) - xScale(0)) / (xScale(xDomain[1]) - xScale(0)) || 0
+                (i) => 
+                    (xScale(X[i][0]) - 
+                xScale(xDomain[0])) / (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
@@ -229,8 +232,8 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(X[i][0]) - xScale(0) + 0.7 * range1(i)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                        (xScale(X[i][0]) - xScale(xDomain[0]) + 0.7 * range1(i)) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.4');
@@ -240,8 +243,8 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(X[i][0]) - xScale(0) + 0.95 * range1(i)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                        (xScale(X[i][0]) - xScale(xDomain[0]) + 0.95 * range1(i)) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.85');
@@ -252,8 +255,8 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(max([X[i][1], xTickValues[0] + xTickValues[1] * 0.015])) -
-                            xScale(0)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                            xScale(xDomain[0])) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.98');
@@ -263,8 +266,8 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(X[i][2]) - xScale(0) - 0.95 * range2(i)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                        (xScale(X[i][2]) -xScale(xDomain[0]) - 0.95 * range2(i)) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.85');
@@ -274,8 +277,8 @@ export default function CantonalGraph(
                 .attr(
                     'offset',
                     (i) =>
-                        (xScale(X[i][2]) - xScale(0) - 0.7 * range2(i)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                        (xScale(X[i][2]) - xScale(xDomain[0]) - 0.7 * range2(i)) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0.4');
@@ -286,8 +289,8 @@ export default function CantonalGraph(
                     'offset',
                     (i) =>
                         (xScale(max([X[i][2], xTickValues[0] + xTickValues[1] * 0.05])) -
-                            xScale(0)) /
-                            (xScale(xDomain[1]) - xScale(0)) || 0
+                            xScale(xDomain[0])) /
+                            (xScale(xDomain[1]) - xScale(xDomain[0])) || 0
                 )
                 .attr('stop-color', 'white')
                 .attr('stop-opacity', '0');
@@ -299,7 +302,7 @@ export default function CantonalGraph(
         .data(I)
         .join('rect')
         .attr('fill', (i) => (Y[i] === 'CH' ? '#cbcbcb' : '#d3d3d3'))
-        .attr('x', (i) => xScale(0) + getHalf(i) * rightColumnStart)
+        .attr('x', (i) => xScale(xDomain[0]) + getHalf(i) * rightColumnStart)
         .attr('y', (i) => yScale(Y[i - getHalf(i) * half]))
         .attr('width', dataWidth)
         .attr('height', yScale.bandwidth());
@@ -310,14 +313,14 @@ export default function CantonalGraph(
         .selectAll('foo')
         .data(I)
         .join('rect')
-        .attr('x', (i) => xScale(0) + getHalf(i) * rightColumnStart)
+        .attr('x', (i) => xScale(xDomain[0]) + getHalf(i) * rightColumnStart)
         .attr('y', (i) => yScale(Y[i - getHalf(i) * half]))
         .attr('width', dataWidth)
         .attr('height', yScale.bandwidth())
         .attr('fill', (i) => `url(#mask-gradient-${unique}-${Y[i]})`);
 
     svg.append('rect')
-        .attr('x', xScale(0))
+        .attr('x', xScale(xDomain[0]))
         .attr('y', yScale(Y[0]) - outerPadding)
         .attr('width', dataWidth)
         .attr('height', height - yScale(Y[0]) - outerPadding)
@@ -325,7 +328,7 @@ export default function CantonalGraph(
         .attr('mask', `url(#data-mask-${unique})`);
 
     svg.append('rect')
-        .attr('x', xScale(0) + rightColumnStart)
+        .attr('x', xScale(xDomain[0]) + rightColumnStart)
         .attr('y', yScale(Y[0]) - outerPadding)
         .attr('width', dataWidth)
         .attr('height', height - yScale(Y[0]) - outerPadding)

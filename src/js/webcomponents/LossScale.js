@@ -59,23 +59,22 @@ class LossScale extends HTMLElement {
         });
     };
 
-    // get the text for the first tick in the correct language
-    getZeroTick = (lng) => {
+    // get the text for the first tick in the correct language and depending on loss category
+    getZeroTick = (losscategory, lng) => {
         const tick = {
-            de: 'keine',
-            fr: 'aucune',
-            it: 'nessuno',
-            en: 'none',
+            fatalities: '0',
+            displaced: `≤ 5`,
+            structural: `≤ ${numberToString(1000000, lng)} CHF`
         };
-        return tick[lng];
+        return tick[losscategory];
     };
 
     // set the thresholds for the color scale and labels
     setThresholds = () => {
         const thresh = {
-            fatalities: [0, 5, 50, 500, 5000, 50000],
-            displaced: [0, 50, 500, 5000, 50000, 500000],
-            structural: [0, 10000000, 100000000, 1000000000, 10000000000, 100000000000],
+            fatalities: [0.5, 5, 50, 500, 5000, 50000],
+            displaced: [5, 50, 500, 5000, 50000, 500000],
+            structural: [1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000],
         };
         this.thresholds = thresh[this.losscategory];
     };
@@ -95,12 +94,14 @@ class LossScale extends HTMLElement {
     // check whether a loss icon should be active
     setHighlightedIcon = (lossID) => {
         if (!this.thresholds || !this.losscategory) return '';
-        const isTrue =
-            (this.thresholds[lossID - 1] <= this.data.loss_mean &&
-                (this.thresholds[lossID] || this.data.loss_mean + 1) > this.data.loss_mean) ||
-            (lossID === this.thresholds.length - 1 &&
-                this.data.loss_mean >= this.thresholds[this.thresholds.length - 1]);
+        const lossMean = Math.max(this.data.loss_mean, this.thresholds[0]);
 
+        const isTrue =
+            (this.thresholds[lossID - 1] <= lossMean &&
+                (this.thresholds[lossID] || lossMean + 1) > lossMean) ||
+            (lossID === this.thresholds.length - 1 &&
+                lossMean >= this.thresholds[this.thresholds.length - 1]);
+    
         return isTrue ? `active-${this.losscategory}` : '';
     };
 
@@ -110,10 +111,22 @@ class LossScale extends HTMLElement {
         this.colorscale = this._root.getElementById('colorscale');
         this.colorScaleContext = ColorScale(this.colorscale);
 
+        const minValue = Math.ceil(this.thresholds[0]);
+        
+        const lossMean = this.data.loss_mean < minValue ?
+                         this.thresholds[0] : this.data.loss_mean;
+
+        const lossPc10 = this.data.loss_pc10 < minValue && 
+                         this.data.loss_mean < minValue ? 
+                         this.thresholds[0] : this.data.loss_pc10;
+
+        const lossPc90 = this.data.loss_pc90 < minValue ?
+                         this.thresholds[0] : this.data.loss_pc90;
+
         let [meanPct, p10Pct, p90Pct] = [
-            this.data.loss_mean,
-            this.data.loss_pc10,
-            this.data.loss_pc90,
+            lossMean,
+            lossPc10,
+            lossPc90,
         ].map((v) => getPercentage(v, this.thresholds));
 
         let rootStyleSelector = document.querySelector(':root').style;
@@ -165,7 +178,10 @@ class LossScale extends HTMLElement {
                               </div>
                           </div>
                           <div class="loss__icons-description">
-                              <div class="loss__legend">${this.getZeroTick(this.language)}</div>
+                              <div class="loss__legend">
+                            ${this.getZeroTick(this.losscategory,
+                                    this.language)}
+                              </div>
                               ${this.thresholds
                                   .slice(1, 5)
                                   .map(

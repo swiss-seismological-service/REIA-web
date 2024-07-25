@@ -56,17 +56,6 @@ class LossGraph extends HTMLElement {
         this.node = this._root.querySelector('div:first-of-type').firstChild;
     }
 
-    // get the text for the first tick in the correct language
-    getZeroTick = (lng) => {
-        let tick = {
-            de: 'keine',
-            fr: 'aucune',
-            it: 'nessuno',
-            en: 'none',
-        };
-        return tick[lng];
-    };
-
     // update the graph
     updateGraph = () => {
         const graphNode = CantonalGraph(this.data, 1, {
@@ -74,13 +63,13 @@ class LossGraph extends HTMLElement {
             marginRight: 20,
             widthDamage: 0,
             gutter: 60,
-            x: (d) => [d.loss_pc10, d.loss_mean, d.loss_pc90],
+            x: (d) => [d.loss_pc10 < 1 && d.loss_mean < 1 ? 0.5 : d.loss_pc10,
+                       d.loss_mean < 1 ? 0.5 : d.loss_mean,
+                       d.loss_pc90 < 1 ? 0.5 : d.loss_pc90],
             y: (d) => d.tag,
             symlogConstant: 0.1,
-            xTickFormat: (d) =>
-                d === 0.5
-                    ? this.getZeroTick(this.language)
-                    : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
+            xTickFormat: (d) => d === 0.5 ? '0'
+             : formatLocale({ thousands: "'", grouping: [3] }).format(',.0f')(d),
             xDomain: [0.5, 50000],
             xTickValues: [0.5, 5, 50, 500, 5000],
             width: 600,
