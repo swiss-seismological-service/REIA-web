@@ -111,8 +111,8 @@ class LossScale extends HTMLElement {
         this.colorscale = this._root.getElementById('colorscale');
         this.colorScaleContext = ColorScale(this.colorscale);
 
-        const minValue = Math.round(this.thresholds[0]);
-                               
+        const minValue = Math.ceil(this.thresholds[0]);
+        
         const lossMean = this.data.loss_mean < minValue ?
                          this.thresholds[0] : this.data.loss_mean;
 
