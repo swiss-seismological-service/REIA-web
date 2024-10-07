@@ -81,7 +81,7 @@ export function getAllRiskAssessmentsWithFlag(limit = 20, offset = 0, apiAddress
 export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
-        [secretKey]: secretValue,
+        ...(secretValue && { [secretKey]: secretValue }),
         ...(tag && { filter_tag_like: tag }),
         ...(sum && { sum: true }),
     };
@@ -92,7 +92,7 @@ export function getLoss(oid, type, aggregation, tag = null, sum = false, apiAddr
 export function getDamage(oid, type, aggregation, tag = null, sum = false, apiAddress = null) {
     const [secretKey, secretValue] = process.env.SECRET.split('=');
     const queryParams = {
-        [secretKey]: secretValue,
+        ...(secretValue && { [secretKey]: secretValue }),
         ...(tag && { filter_tag_like: tag }),
         ...(sum && { sum: true }),
     };
