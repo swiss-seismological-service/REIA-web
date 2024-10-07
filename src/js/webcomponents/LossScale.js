@@ -64,7 +64,7 @@ class LossScale extends HTMLElement {
         const tick = {
             fatalities: '0',
             displaced: `≤ 5`,
-            structural: `≤ ${numberToString(1000000, lng)} CHF`
+            structural: `≤ ${numberToString(1000000, lng)} CHF`,
         };
         return tick[losscategory];
     };
@@ -101,7 +101,7 @@ class LossScale extends HTMLElement {
                 (this.thresholds[lossID] || lossMean + 1) > lossMean) ||
             (lossID === this.thresholds.length - 1 &&
                 lossMean >= this.thresholds[this.thresholds.length - 1]);
-    
+
         return isTrue ? `active-${this.losscategory}` : '';
     };
 
@@ -111,23 +111,20 @@ class LossScale extends HTMLElement {
         this.colorscale = this._root.getElementById('colorscale');
         this.colorScaleContext = ColorScale(this.colorscale);
 
+        // round up values smaller than 1, this way the scale will only
+        // show some loss if the value is >= 1, even if the lowest threshold
+        // is smaller than 1
         const minValue = Math.ceil(this.thresholds[0]);
-        
-        const lossMean = this.data.loss_mean < minValue ?
-                         this.thresholds[0] : this.data.loss_mean;
 
-        const lossPc10 = this.data.loss_pc10 < minValue && 
-                         this.data.loss_mean < minValue ? 
-                         this.thresholds[0] : this.data.loss_pc10;
-
-        const lossPc90 = this.data.loss_pc90 < minValue ?
-                         this.thresholds[0] : this.data.loss_pc90;
-
+        // compare each value with minValue, not threshold[0]
+        // then get percentage for each value
         let [meanPct, p10Pct, p90Pct] = [
-            lossMean,
-            lossPc10,
-            lossPc90,
-        ].map((v) => getPercentage(v, this.thresholds));
+            this.data.loss_mean,
+            this.data.loss_pc10,
+            this.data.loss_pc90,
+        ]
+            .map((v) => (v < minValue ? this.thresholds[0] : v))
+            .map((v) => getPercentage(v, this.thresholds));
 
         let rootStyleSelector = document.querySelector(':root').style;
 
@@ -179,8 +176,7 @@ class LossScale extends HTMLElement {
                           </div>
                           <div class="loss__icons-description">
                               <div class="loss__legend">
-                            ${this.getZeroTick(this.losscategory,
-                                    this.language)}
+                                  ${this.getZeroTick(this.losscategory, this.language)}
                               </div>
                               ${this.thresholds
                                   .slice(1, 5)
